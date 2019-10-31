@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。合并训练集和测试集1data_all = pd.concat([train_data, test_data], ignore_index=True)">
+<meta name="keywords" content="数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas之数据处理">
+<meta property="og:url" content="http://yoursite.com/2019/10/31/pandas之数据处理/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。合并训练集和测试集1data_all = pd.concat([train_data, test_data], ignore_index=True)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-31T11:53:27.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pandas之数据处理">
+<meta name="twitter:description" content="一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。合并训练集和测试集1data_all = pd.concat([train_data, test_data], ignore_index=True)">
+  <link rel="canonical" href="http://yoursite.com/2019/10/31/pandas之数据处理/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>pandas之数据处理 | mqray's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mqray's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">no bb, show me the codes.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">1</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">1</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-top">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/pandas之数据处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            pandas之数据处理
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-31 18:54:49 / 修改时间：19:53:27" itemprop="dateCreated datePublished" datetime="2019-10-31T18:54:49+08:00">2019-10-31</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/10/31/pandas之数据处理/" class="post-meta-item leancloud_visitors" data-flag-title="pandas之数据处理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/31/pandas之数据处理/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/pandas之数据处理/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。</p><p>本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。</p><h4 id="合并训练集和测试集"><a href="#合并训练集和测试集" class="headerlink" title="合并训练集和测试集"></a>合并训练集和测试集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all = pd.concat([train_data, test_data], ignore_index=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<p>这里用到的方法是<code>pd.concat()</code>，下面介绍一下它的用法，官方API在此:<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html" target="_blank" rel="noopener">pandas.concat</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandas.concat(objs, axis=<span class="number">0</span>, join=<span class="string">'outer'</span>, join_axes=<span class="literal">None</span>, ignore_index=<span class="literal">False</span>, keys=<span class="literal">None</span>, levels=<span class="literal">None</span>, names=<span class="literal">None</span>, verify_integrity=<span class="literal">False</span>, sort=<span class="literal">None</span>, copy=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="修正异常值"><a href="#修正异常值" class="headerlink" title="修正异常值"></a>修正异常值</h4><h5 id="只有一种异常值"><a href="#只有一种异常值" class="headerlink" title="只有一种异常值"></a>只有一种异常值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'nationality'</span>] = data_all_copy[<span class="string">'nationality'</span>].replace(<span class="number">-8</span>, <span class="number">1</span>) <span class="comment"># 将民族字段以-8填充的修改为汉族1</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>Series.replace(a,b)</code>方法，用b替换<code>Series</code>中存在的b。</p>
+<h5 id="多种异常值"><a href="#多种异常值" class="headerlink" title="多种异常值"></a>多种异常值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'religion'</span>] &lt; <span class="number">0</span>, <span class="string">'religion'</span>] = <span class="number">1</span> <span class="comment">#religion字段中有三种类型的负值，用这种方式将其修改为1(不信教)</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>df.loc()</code>处理。</p>
+<h5 id="根据A列类别求列B的均值"><a href="#根据A列类别求列B的均值" class="headerlink" title="根据A列类别求列B的均值"></a>根据A列类别求列B的均值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据性别 求出男、女的平均身高</span></span><br><span class="line">women_height_mean = data_all_copy[(data_all_copy[<span class="string">'gender'</span>] == <span class="number">1</span>)][<span class="string">'height_cm'</span>].mean()</span><br></pre></td></tr></table></figure>
+
+<h5 id="联合列A和列B-修正列A字段"><a href="#联合列A和列B-修正列A字段" class="headerlink" title="联合列A和列B 修正列A字段"></a>联合列A和列B 修正列A字段</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy.loc[(data_all_copy[<span class="string">'weight_jin'</span>] &lt;= <span class="number">70</span>) &amp; (data_all_copy[<span class="string">'height_cm'</span>] &gt;= <span class="number">150</span>), <span class="string">'weight_jin'</span>] =  data_all_copy[<span class="string">'weight_jin'</span>] * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h4><h5 id="批量修改字段值"><a href="#批量修改字段值" class="headerlink" title="批量修改字段值"></a>批量修改字段值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'survey_type'</span>] = data_all_copy[<span class="string">'survey_type'</span>].map(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>map()</code>函数以及<code>lambda</code>隐式方法修改字段值</p>
+<h5 id="one-hot编码"><a href="#one-hot编码" class="headerlink" title="one-hot编码"></a>one-hot编码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">survey_type = pd.get_dummies(data_all_copy[<span class="string">'survey_type'</span>], prefix=<span class="string">'survey_type'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(survey_type)</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>pd.get_dummies()</code>生成新的哑变量特征，注意要使用<code>prefix</code>使生成的特征具有辨识性。</p>
+<p>另外使用<code>df.join()</code>方法合并特征。</p>
+<h5 id="单一连续特征离散化"><a href="#单一连续特征离散化" class="headerlink" title="单一连续特征离散化"></a>单一连续特征离散化</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'income_global_level'</span>] = data_all_copy.income.apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x &gt;= <span class="number">20167</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里的调用方式是 对<code>df.特征名</code>调用<code>apply()</code>方法.<code>apply()</code>中利用<code>lambda</code>对这个特征列中的任一元素进行<code>if...else...</code>操作。</p>
+<p>相应的，对单一特征的操作，也可以使用<code>map()</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'nationality_han'</span>] = data_all_copy[<span class="string">'nationality'</span>].map(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x == <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="根据多特征联合判断生成新特征"><a href="#根据多特征联合判断生成新特征" class="headerlink" title="根据多特征联合判断生成新特征"></a>根据多特征联合判断生成新特征</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 结合调查类型（城市、农村）和收入判断 相比 城市或农村 其 本地收入等级  注意 判断条件中的括号非加不可</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_local_level1</span><span class="params">(survey_type, income)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> (survey_type == <span class="number">0</span>) &amp; (income &gt;= <span class="number">28844</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 代表城市，且可支配收入大于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">0</span>) &amp; (income &lt; <span class="number">28844</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>  <span class="comment"># 代表城市，且可支配收入小于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">1</span>) &amp; (income &gt;= <span class="number">10489</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>  <span class="comment"># 代表农村，且可支配收入大于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">1</span>) &amp; (income &lt; <span class="number">10489</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>  <span class="comment"># 代表农村，且可支配收入小于于均值</span></span><br><span class="line">data_all_copy[<span class="string">'income_local_level'</span>] = data_all_copy.apply(<span class="keyword">lambda</span> x: income_local_level1(x.survey_type, x.income),axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里是对<code>dataframe</code>应用<code>apply()</code>方法，然后利用<code>lambda</code>对所有传入的<code>x.survey_time和x.income</code>值利用函数<code>income_local_level1</code>处理，要注意的是新生成的特征名不能与函数名相同。</p>
+<p>这里要注意的是，在函数中判断条件之间需要用括号扩住每个条件。</p>
+<h5 id="有多个省份，生成新列判断与省平均收入的大小"><a href="#有多个省份，生成新列判断与省平均收入的大小" class="headerlink" title="有多个省份，生成新列判断与省平均收入的大小"></a>有多个省份，生成新列判断与省平均收入的大小</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'income_province_mean'</span>] = data_all_copy.groupby([<span class="string">'province'</span>])[<span class="string">'income'</span>].transform(<span class="string">'mean'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_province_level</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"> data_all_copy[<span class="string">'income_province_level'</span>] = data_all_copy.apply(</span><br><span class="line">     <span class="keyword">lambda</span> x: income_province_level(x.income, x.income_province_mean), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里是使用<code>groupby()</code>方法根据<code>province</code>对整个<code>dataframe</code>进行分类，然后利用<code>transform(&#39;mean&#39;)</code>生成与其他特征维度一样的均值列，记录的是，如果是省份A，则在新生成的这一列上填充的是省份A的收入均值。</p>
+<p>然后利用<code>apply()</code>方法，生成是否该人收入是否高于省人均收入均值的新二值特征。要注意的是<code>axis=1</code>设置。</p>
+<h5 id="特征做减法生成新特征"><a href="#特征做减法生成新特征" class="headerlink" title="特征做减法生成新特征"></a>特征做减法生成新特征</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'age'</span>] = data_all_copy[<span class="string">'survey_time'</span>] - data_all_copy[<span class="string">'birth'</span>]</span><br></pre></td></tr></table></figure>
+
+<h5 id="连续特征离散化，分箱"><a href="#连续特征离散化，分箱" class="headerlink" title="连续特征离散化，分箱"></a>连续特征离散化，分箱</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bins = [<span class="number">17</span>, <span class="number">29</span>, <span class="number">41</span>, <span class="number">49</span>, <span class="number">56</span>, <span class="number">67</span>, <span class="number">73</span>, <span class="number">85</span>, <span class="number">120</span>]</span><br><span class="line">data_all_copy[<span class="string">'age_level'</span>] = pd.cut(data_all_copy[<span class="string">'age'</span>], bins, labels=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br></pre></td></tr></table></figure>
+
+<p>这里使用的是<code>pd.cut()</code>方法，注意到要指定<code>bins</code>,此外<code>labels</code>的长度=<code>bins</code>长度-1</p>
+<h5 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'income_index'</span>] = data_all_copy[<span class="string">'income'</span>].map(<span class="keyword">lambda</span> x: np.log10(x + <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这里是对收入取对数进行量化。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/31/天池新人赛 挖掘幸福感/" rel="next" title="天池新人赛 挖掘幸福感">
+                  <i class="fa fa-chevron-left"></i> 天池新人赛 挖掘幸福感
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#合并训练集和测试集"><span class="nav-number">1.</span> <span class="nav-text">合并训练集和测试集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修正异常值"><span class="nav-number">2.</span> <span class="nav-text">修正异常值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#只有一种异常值"><span class="nav-number">2.1.</span> <span class="nav-text">只有一种异常值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多种异常值"><span class="nav-number">2.2.</span> <span class="nav-text">多种异常值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据A列类别求列B的均值"><span class="nav-number">2.3.</span> <span class="nav-text">根据A列类别求列B的均值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#联合列A和列B-修正列A字段"><span class="nav-number">2.4.</span> <span class="nav-text">联合列A和列B 修正列A字段</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征处理"><span class="nav-number">3.</span> <span class="nav-text">特征处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#批量修改字段值"><span class="nav-number">3.1.</span> <span class="nav-text">批量修改字段值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#one-hot编码"><span class="nav-number">3.2.</span> <span class="nav-text">one-hot编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单一连续特征离散化"><span class="nav-number">3.3.</span> <span class="nav-text">单一连续特征离散化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据多特征联合判断生成新特征"><span class="nav-number">3.4.</span> <span class="nav-text">根据多特征联合判断生成新特征</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有多个省份，生成新列判断与省平均收入的大小"><span class="nav-number">3.5.</span> <span class="nav-text">有多个省份，生成新列判断与省平均收入的大小</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特征做减法生成新特征"><span class="nav-number">3.6.</span> <span class="nav-text">特征做减法生成新特征</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连续特征离散化，分箱"><span class="nav-number">3.7.</span> <span class="nav-text">连续特征离散化，分箱</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特征缩放"><span class="nav-number">3.8.</span> <span class="nav-text">特征缩放</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/imgs/head.jpg"
+      alt="mqray">
+  <p class="site-author-name" itemprop="name">mqray</p>
+  <div class="site-description" itemprop="description">当改变命运的时刻降临，犹豫就会败北！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/mqray" title="GitHub &rarr; https://github.com/mqray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:Slawenceray@163.com" title="E-Mail &rarr; mailto:Slawenceray@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">Github</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mqray</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">17k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">16 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zQNx38LJAan0fg2afyE1EPhC-gzGzoHsz',
+    appKey: 'IrndDroTPDNUVFcBOfJefP3h',
+    placeholder: '留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
