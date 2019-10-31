@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="mqray&#39;s blog">
 <meta property="og:description" content="思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里： 【新人赛】快来一起挖掘幸福感！ . 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-31T08:45:50.021Z">
+<meta property="og:updated_time" content="2019-10-31T08:59:05.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="&#39;数据分析&#39;">
 <meta name="twitter:description" content="思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里： 【新人赛】快来一起挖掘幸福感！ . 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。">
@@ -392,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2019-10-31 15:32:17 / 修改时间：16:45:50" itemprop="dateCreated datePublished" datetime="2019-10-31T15:32:17+08:00">2019-10-31</time>
+              <time title="创建时间：2019-10-31 15:32:17 / 修改时间：16:59:05" itemprop="dateCreated datePublished" datetime="2019-10-31T15:32:17+08:00">2019-10-31</time>
             </span>
           
             
@@ -479,16 +479,15 @@
 <hr>
 <h3 id="赛题介绍"><a href="#赛题介绍" class="headerlink" title="赛题介绍"></a>赛题介绍</h3><p> 幸福感是一个古老而深刻的话题，是人类世代追求的方向。与幸福感相关的因素成千上万、因人而异，大如国计民生，小如路边烤红薯，都会对幸福感产生影响。这些错综复杂的因素中，我们能找到其中的共性，一窥幸福感的要义吗？ </p>
 <p>天池官方提供了七个文件</p>
-<p><code>happiness_index.xlsx``happiness_submit.csv``happiness_survey_cgss2015.pdf</code>, <code>happiness_test_abbr.csv``happiness_test_complete.csv``happiness_train_abbr.csv</code>, <code>happiness_train_complete.csv</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">happiness_index.xlsx</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_submit.csv</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_survey_cgss2015.pdf</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_test_abbr.csv</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_test_complete.csv</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_train_abbr.csv</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_train_complete.csv</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
 <p>其中：</p>
-<p> <code>happiness_index.xlsx</code>是每个变量对应的问卷的题目</p>
-<p><code>happiness_survey_cgss2015.pdf</code>是原始调查问卷</p>
-<p><code>happiness_submit.csv</code>则是提交结果示例，包含2968条记录。</p>
-<p><code>abbr</code>和<code>complete</code>则分别对应简略版的数据集和详细的数据集。</p>
-<p>前者 连同<code>happiness</code>字段在内共计42个特征，后者则包含140个字段。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"> happiness_index.xlsx是每个变量对应的问卷的题目</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_survey_cgss2015.pdf是原始调查问卷</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">happiness_submit.csv则是提交结果示例，包含2968条记录。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">abbr和complete则分别对应简略版的数据集和详细的数据集。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">前者 连同`happiness`字段在内共计42个特征，后者则包含140个字段。</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
 <hr>
 <h3 id="探索性数据分析"><a href="#探索性数据分析" class="headerlink" title="探索性数据分析"></a>探索性数据分析</h3><h4 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h4><p>首先读取训练数据：</p>
-<p><code>train_data_abbr = pd.read_csv(&#39;/home/sage/Desktop/mqray/datalab/happiness/happiness_train_abbr.csv&#39;)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_data_abbr = pd.read_csv(<span class="string">'/home/sage/Desktop/mqray/datalab/happiness/happiness_train_abbr.csv'</span>)</span><br></pre></td></tr></table></figure>
+
 <h4 id="检查数据"><a href="#检查数据" class="headerlink" title="检查数据"></a>检查数据</h4><p>检查数据是否有缺失值、异常值、样本是否均衡、变量是否需要进行转化等</p>
 <p>这里常用的基础命令有：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">train_data_abbr.info()<span class="comment">#检查数据的基本信息，包括数据类型、缺失值等</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.head()<span class="comment">#查看前5条记录（默认5条），当然也可以使用`tail()`查看最后五条</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.describe()<span class="comment">#查看数值型变量的均值、标准差、四分位点等统计信息。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意到字段`survey_time`是时间类型数据，在读取时，应该加入`parse_dates=['survey_time']`，</span></span><br><span class="line"><span class="comment">#然后对`survey_time`字段的数据进行相应的处理。</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.columns<span class="comment">#查看所有特征列</span></span><br><span class="line"></span><br><span class="line">plt.scatter(train_data_abbr[<span class="string">'id'</span>],train_data_abbr[<span class="string">'survey_type'</span>])<span class="comment">#绘制散点图查看样本分布状况。这里做的数据探索非常多，不方便一一描述。</span></span><br></pre></td></tr></table></figure>
