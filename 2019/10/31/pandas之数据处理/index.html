@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="mqray&#39;s blog">
 <meta property="og:description" content="一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。合并训练集和测试集1data_all = pd.concat([train_data, test_data], ignore_index=True)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-31T11:53:27.482Z">
+<meta property="og:updated_time" content="2019-10-31T11:56:52.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pandas之数据处理">
 <meta name="twitter:description" content="一直以来记性都不大好，以前记得的操作，长时间不用容易忘记，开始持之以恒的记录。本博客主要是对上一篇博客进行说明和补充，前面的博客只是贴出了源码，尽管我的注释写的很详细，但是其中有些操作我当时可能记得住，一段时间不用就容易忘。合并训练集和测试集1data_all = pd.concat([train_data, test_data], ignore_index=True)">
@@ -392,7 +392,7 @@
                 
               
 
-              <time title="创建时间：2019-10-31 18:54:49 / 修改时间：19:53:27" itemprop="dateCreated datePublished" datetime="2019-10-31T18:54:49+08:00">2019-10-31</time>
+              <time title="创建时间：2019-10-31 18:54:49 / 修改时间：19:56:52" itemprop="dateCreated datePublished" datetime="2019-10-31T18:54:49+08:00">2019-10-31</time>
             </span>
           
             
@@ -450,7 +450,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3k</span>
+              <span>3.1k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -492,7 +492,8 @@
 
 <h4 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h4><h5 id="批量修改字段值"><a href="#批量修改字段值" class="headerlink" title="批量修改字段值"></a>批量修改字段值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_all_copy[<span class="string">'survey_type'</span>] = data_all_copy[<span class="string">'survey_type'</span>].map(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>使用<code>map()</code>函数以及<code>lambda</code>隐式方法修改字段值</p>
+<p>使用<code>map()</code>函数以及<code>lambda</code>隐式方法修改字段值。</p>
+<p>一般而言，对于离散特征，如果有大小含义，我们使用<code>map()</code>函数；而对颜色这种离散值，直接进行one-hot编码。</p>
 <h5 id="one-hot编码"><a href="#one-hot编码" class="headerlink" title="one-hot编码"></a>one-hot编码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">survey_type = pd.get_dummies(data_all_copy[<span class="string">'survey_type'</span>], prefix=<span class="string">'survey_type'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(survey_type)</span><br></pre></td></tr></table></figure>
 
 <p>使用<code>pd.get_dummies()</code>生成新的哑变量特征，注意要使用<code>prefix</code>使生成的特征具有辨识性。</p>
