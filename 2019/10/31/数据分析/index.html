@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里： 【新人赛】快来一起挖掘幸福感！ . 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。">
+<meta name="keywords" content="数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;数据分析&#39;">
+<meta property="og:url" content="http://yoursite.com/2019/10/31/数据分析/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里： 【新人赛】快来一起挖掘幸福感！ . 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-31T08:45:50.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&#39;数据分析&#39;">
+<meta name="twitter:description" content="思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里： 【新人赛】快来一起挖掘幸福感！ . 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。">
+  <link rel="canonical" href="http://yoursite.com/2019/10/31/数据分析/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>'数据分析' | mqray's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mqray's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">no bb, show me the codes.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">1</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">1</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">3</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-top">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/数据分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            '数据分析'
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-31 15:32:17 / 修改时间：16:45:50" itemprop="dateCreated datePublished" datetime="2019-10-31T15:32:17+08:00">2019-10-31</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/10/31/数据分析/" class="post-meta-item leancloud_visitors" data-flag-title="'数据分析'" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/31/数据分析/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/数据分析/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>14k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>13 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>思来想去，还是偏算法更符合我的实际，重开个人博客，记录我的成长。</p><p>建站的目的是为了更好地记录自己成长过程，也希望自己这一次能坚持下来。</p><p>第一篇博客，写什么好呢？就写数据挖掘入门级项目吧！这是一个相对入门简单的数据挖掘竞赛，竞赛链接在这里：<a href="https://tianchi.aliyun.com/competition/entrance/231702/introduction" target="_blank" rel="noopener"> 【新人赛】快来一起挖掘幸福感！ </a>. 整个比赛过程一次博客应该没法记录，应该会划分为多篇文章记录。</p><a id="more"></a>
+
+
+<hr>
+<h3 id="赛题介绍"><a href="#赛题介绍" class="headerlink" title="赛题介绍"></a>赛题介绍</h3><p> 幸福感是一个古老而深刻的话题，是人类世代追求的方向。与幸福感相关的因素成千上万、因人而异，大如国计民生，小如路边烤红薯，都会对幸福感产生影响。这些错综复杂的因素中，我们能找到其中的共性，一窥幸福感的要义吗？ </p>
+<p>天池官方提供了七个文件</p>
+<p><code>happiness_index.xlsx``happiness_submit.csv``happiness_survey_cgss2015.pdf</code>, <code>happiness_test_abbr.csv``happiness_test_complete.csv``happiness_train_abbr.csv</code>, <code>happiness_train_complete.csv</code></p>
+<p>其中：</p>
+<p> <code>happiness_index.xlsx</code>是每个变量对应的问卷的题目</p>
+<p><code>happiness_survey_cgss2015.pdf</code>是原始调查问卷</p>
+<p><code>happiness_submit.csv</code>则是提交结果示例，包含2968条记录。</p>
+<p><code>abbr</code>和<code>complete</code>则分别对应简略版的数据集和详细的数据集。</p>
+<p>前者 连同<code>happiness</code>字段在内共计42个特征，后者则包含140个字段。</p>
+<hr>
+<h3 id="探索性数据分析"><a href="#探索性数据分析" class="headerlink" title="探索性数据分析"></a>探索性数据分析</h3><h4 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h4><p>首先读取训练数据：</p>
+<p><code>train_data_abbr = pd.read_csv(&#39;/home/sage/Desktop/mqray/datalab/happiness/happiness_train_abbr.csv&#39;)</code></p>
+<h4 id="检查数据"><a href="#检查数据" class="headerlink" title="检查数据"></a>检查数据</h4><p>检查数据是否有缺失值、异常值、样本是否均衡、变量是否需要进行转化等</p>
+<p>这里常用的基础命令有：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">train_data_abbr.info()<span class="comment">#检查数据的基本信息，包括数据类型、缺失值等</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.head()<span class="comment">#查看前5条记录（默认5条），当然也可以使用`tail()`查看最后五条</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.describe()<span class="comment">#查看数值型变量的均值、标准差、四分位点等统计信息。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注意到字段`survey_time`是时间类型数据，在读取时，应该加入`parse_dates=['survey_time']`，</span></span><br><span class="line"><span class="comment">#然后对`survey_time`字段的数据进行相应的处理。</span></span><br><span class="line"></span><br><span class="line">train_data_abbr.columns<span class="comment">#查看所有特征列</span></span><br><span class="line"></span><br><span class="line">plt.scatter(train_data_abbr[<span class="string">'id'</span>],train_data_abbr[<span class="string">'survey_type'</span>])<span class="comment">#绘制散点图查看样本分布状况。这里做的数据探索非常多，不方便一一描述。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="单变量分析"><a href="#单变量分析" class="headerlink" title="单变量分析"></a>单变量分析</h4><p>除上述基础的命令外，还可以使用如下命令，可视化数据分布。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hap = train_data_abbr[<span class="string">'happiness'</span>].value_counts()</span><br><span class="line">f,ax = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize=(<span class="number">14</span>,<span class="number">6</span>))</span><br><span class="line">explode = (<span class="number">0.05</span>,<span class="number">0.05</span>,<span class="number">0.02</span>,<span class="number">0.01</span>,<span class="number">0</span>)</span><br><span class="line">hap.plot.pie(autopct=<span class="string">'%1.1f%%'</span>,ax=ax[<span class="number">0</span>],shadow=<span class="literal">True</span>,explode=explode)</span><br><span class="line">sns.countplot(<span class="string">'edu'</span>,data=train_data_abbr,ax=ax[<span class="number">1</span>])</span><br><span class="line">ax[<span class="number">1</span>].set_title(<span class="string">'edu describe'</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_xlabel(<span class="string">'edu level'</span>)</span><br><span class="line">ax[<span class="number">1</span>].set_ylabel(<span class="string">'counts'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>或者是如下方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">f,[ax1,ax2] = plt.subplots(<span class="number">1</span>,<span class="number">2</span>,figsize=(<span class="number">14</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">sns.countplot(<span class="string">'age'</span>,data= train_data_abbr,ax=ax1)</span><br><span class="line">ax1.set_title(<span class="string">'age describe'</span>)</span><br><span class="line">ax1.set_xlabel(<span class="string">'age level'</span>)</span><br><span class="line">ax1.set_ylabel(<span class="string">'counts'</span>)</span><br><span class="line"></span><br><span class="line">sns.countplot(<span class="string">'nationality'</span>,data=train_data_abbr,ax=ax2)</span><br><span class="line">ax2.set_title(<span class="string">'nationality describe'</span>)</span><br><span class="line">ax2.set_xlabel(<span class="string">'natinality class'</span>)</span><br><span class="line">ax2.set_ylabel(<span class="string">'counts'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="多变量分析"><a href="#多变量分析" class="headerlink" title="多变量分析"></a>多变量分析</h4><p>单变量分析之外，还可以查看特征与目标特征之间的关系：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">selected_features = [<span class="string">'happiness'</span>,<span class="string">'edu'</span>,<span class="string">'birth'</span>,<span class="string">'religion'</span>,<span class="string">'political'</span>,<span class="string">'height_cm'</span>,</span><br><span class="line">                    <span class="string">'weight_jin'</span>,<span class="string">'health'</span>,<span class="string">'health_problem'</span>,<span class="string">'depression'</span>,<span class="string">'marital'</span>,</span><br><span class="line">                    <span class="string">'floor_area'</span>,<span class="string">'hukou'</span>,<span class="string">'equity'</span>,<span class="string">'class'</span>,<span class="string">'work_exper'</span>,<span class="string">'income'</span>,<span class="string">'family_status'</span>,</span><br><span class="line">                    <span class="string">'house'</span>,<span class="string">'car'</span>,<span class="string">'status_peer'</span>,<span class="string">'status_3_before'</span>,<span class="string">'inc_ability'</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这里使用热力图描述所选特征与<code>happiness</code>特征之间的关系。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.heatmap(train_data_abbr[selected_features].corr(),annot=<span class="literal">True</span>,cmap=<span class="string">'RdYlGn'</span>,linewidths=<span class="number">0.2</span>)</span><br><span class="line">fig = plt.gcf()</span><br><span class="line">fig.set_size_inches(<span class="number">20</span>,<span class="number">15</span>)</span><br><span class="line">plt.title(<span class="string">'the correlation between features by heatmap'</span>,fontsize=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h3><p>对数据有一定的了解之后，对数据进行更细致的处理，包括缺失值的填充、连续数据离散化、one-hot编码、分箱等操作。这里给出<code>train_abbr</code>文件中的基本信息：</p>
+<h4 id="数据预览"><a href="#数据预览" class="headerlink" title="数据预览"></a>数据预览</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"> <span class="string">'''9 id 数据编号</span></span><br><span class="line"><span class="string">10 happiness 预测指标</span></span><br><span class="line"><span class="string">11 survey_type 调查类别 1或2  类别项</span></span><br><span class="line"><span class="string">12 province 省份 31类 类别值</span></span><br><span class="line"><span class="string">13 city 城市 类别值</span></span><br><span class="line"><span class="string">14 county 县 类别值</span></span><br><span class="line"><span class="string">15 survey_time 时间</span></span><br><span class="line"><span class="string">16 gender 性别 类别值</span></span><br><span class="line"><span class="string">17 birth 出生年 连续值</span></span><br><span class="line"><span class="string">18 nationality 民族 类别值 -8 有18人</span></span><br><span class="line"><span class="string">19 religion 宗教信仰 类别值-8 108人</span></span><br><span class="line"><span class="string">20 religion_freq 宗教活动频率 类别值或连续值-8 15人</span></span><br><span class="line"><span class="string">21 edu 学历 类别值-8 11人</span></span><br><span class="line"><span class="string">22 income 本人收入 连续值 可以离散化 327种 可绘图</span></span><br><span class="line"><span class="string">23 political 政治面貌 类别值-8 41人</span></span><br><span class="line"><span class="string">24 floor_area 住宅面积 连续值 398种</span></span><br><span class="line"><span class="string">25 height_cm 连续值</span></span><br><span class="line"><span class="string">26 weight_jin 连续值</span></span><br><span class="line"><span class="string">27 health 自认健康状况 类别值 -8 有5人</span></span><br><span class="line"><span class="string">28 health_problem 由于健康状况影响日常 类别值 -8 有43人</span></span><br><span class="line"><span class="string">29 depression 沮丧度 类别值 -8 有16人</span></span><br><span class="line"><span class="string">30 hukou 户口登记地 类别值</span></span><br><span class="line"><span class="string">31 socialize 社交频次 类别值 -8 有6人</span></span><br><span class="line"><span class="string">32 relax 休息放松频次 类别值 -8有17人</span></span><br><span class="line"><span class="string">33 learn 学习充电频次 类别值 -8有21人</span></span><br><span class="line"><span class="string">34 equity 认为社会是否公平 类别值 -8有42人</span></span><br><span class="line"><span class="string">35 class 自认所处等级 类别值 -8 有81人</span></span><br><span class="line"><span class="string">36 work_exper 工作经历 类别值</span></span><br><span class="line"><span class="string">37 work_status 工作状况 类比值 -8有25人    缺失值 5049</span></span><br><span class="line"><span class="string">38 work_yr 工作年数 类别值 -1 -2 -3 均有 缺失 5049</span></span><br><span class="line"><span class="string">39 work_type 工作性质 类别值 -8 有 68 缺失 5049</span></span><br><span class="line"><span class="string">40 work_manage 工作管理活动情况 类别值 -8 有59人 缺失 5049</span></span><br><span class="line"><span class="string">41 family_income 家庭年总收入 连续值  缺失值 1</span></span><br><span class="line"><span class="string">42 family_m 家庭人口数 连续值 -3 -1 -2均有</span></span><br><span class="line"><span class="string">43 family_status  经济状况等级 类别值 -8 有 46人</span></span><br><span class="line"><span class="string">44 house 几处房产 连续值 -3 -1 -2 均有</span></span><br><span class="line"><span class="string">45 car 是否有车 类别值 -8 有 10 人</span></span><br><span class="line"><span class="string">46 marital 婚姻状况 类别值</span></span><br><span class="line"><span class="string">47 status_peer 与同龄人相比经济状况  类别值 -8 有 49人</span></span><br><span class="line"><span class="string">48 status_3_before 与三年前相比经济状况 类别值 -8 有 48人</span></span><br><span class="line"><span class="string">49 view 与大众看法一致情况 类别值 -8 有 208人</span></span><br><span class="line"><span class="string">50 inc_ability 目前收入是否合理 类别值 -8 有965 人</span></span><br><span class="line"><span class="string">51 </span></span><br><span class="line"><span class="string">52 work_status     work_yr work_type       work_manage     family_income 五个字</span></span><br><span class="line"><span class="string">   段存在缺失值</span></span><br><span class="line"><span class="string">53 异常值</span></span><br><span class="line"><span class="string">54 nationality religion religion_freq edu political health health_problem depre    ssion</span></span><br><span class="line"><span class="string">55 socialize relax learn equaity class work_status work_year work_type  work_ma    nage</span></span><br><span class="line"><span class="string">56 family_m family_status house car status_peer  status_3_before view inc_abili    ty等字段存在缺失值</span></span><br><span class="line"><span class="string">57 其中 类别值字段存在异常值</span></span><br><span class="line"><span class="string">58 work_yr  family_m house'''</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">happiness = train_data[<span class="string">'happiness'</span>]</span><br><span class="line">happiness = happiness.replace(<span class="number">-8</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">del train_data[<span class="string">'happiness'</span>]</span><br><span class="line"></span><br><span class="line">data_all = pd.concat([train_data, test_data], ignore_index=<span class="keyword">True</span>)</span><br><span class="line">data_all_copy = data_all.<span class="keyword">copy</span>()</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'nationality'</span>] = data_all_copy[<span class="string">'nationality'</span>].replace(<span class="number">-8</span>, <span class="number">1</span>) # 将民族字段以<span class="number">-8</span>填充的修改为汉族<span class="number">1</span></span><br><span class="line"></span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'religion'</span>] &lt; <span class="number">0</span>, <span class="string">'religion'</span>] = <span class="number">1</span> #religion字段中有三种类型的负值，用这种方式将其修改为<span class="number">1</span>(不信教)</span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'religion_freq'</span>] &lt; <span class="number">0</span>, <span class="string">'religion_freq'</span>] = <span class="number">1</span> # 以<span class="number">1</span>填充代表从未参加宗教活动</span><br><span class="line"></span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'edu'</span>] &lt; <span class="number">0</span>, <span class="string">'edu'</span>] = <span class="number">0</span> #edu字段<span class="number">-8</span>的修正为<span class="number">0</span>（可以修正为平均值）</span><br><span class="line"></span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'income'</span>] &lt; <span class="number">0</span>, <span class="string">'income'</span>] = <span class="number">0</span> # 将income=<span class="number">-8</span>的修正为<span class="number">0</span>（平均值会不会更好）</span><br><span class="line"></span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'political'</span>] &lt; <span class="number">0</span>, <span class="string">'political'</span>] = <span class="number">1</span> # 修改政治面貌 <span class="number">-8</span><span class="comment">--&gt; 1 群众</span></span><br><span class="line"></span><br><span class="line"># house=<span class="number">0</span> 的有<span class="number">705</span>人 但其中<span class="number">704</span>人有住宅面积 其中<span class="number">1</span>人无住宅面积</span><br><span class="line"># 这里填充这个住宅面积=<span class="number">0</span>的人 用<span class="number">704</span>人的平均住宅面积代替==<span class="number">74.8</span></span><br><span class="line">data_all_copy[<span class="string">'floor_area'</span>] = data_all_copy[<span class="string">'floor_area'</span>].replace(<span class="number">0</span>, <span class="number">74.8</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"># 检查女性身高均值  将女性身高为1的错误数据修正为均值（身高中所有为1的全是女性）</span></span><br><span class="line"><span class="string"># 对应的 有47名女性的体重也为1，修正为女性体重的均值</span></span><br><span class="line"><span class="string"># 对于身高高于150但体重少于70斤的字段 将其从公斤转为斤 注意到联合判断时需要对每个条件加上（）</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">women_height_mean = data_all_copy[(data_all_copy[<span class="string">'gender'</span>] == <span class="number">1</span>)][<span class="string">'height_cm'</span>].mean()</span><br><span class="line">data_all_copy[<span class="string">'height_cm'</span>] = data_all_copy[<span class="string">'height_cm'</span>].replace(<span class="number">1</span>, women_height_mean)</span><br><span class="line"></span><br><span class="line">women_weight_mean = data_all_copy[data_all_copy[<span class="string">'gender'</span>] == <span class="number">1</span>][<span class="string">'weight_jin'</span>].mean()</span><br><span class="line">data_all_copy[<span class="string">'weight_jin'</span>] = data_all_copy[<span class="string">'weight_jin'</span>].replace(<span class="number">1</span>, women_weight_mean)</span><br><span class="line">data_all_copy.loc[(data_all_copy[<span class="string">'weight_jin'</span>] &lt;= <span class="number">70</span>) &amp; (data_all_copy[<span class="string">'height_cm'</span>] &gt;= <span class="number">150</span>), <span class="string">'weight_jin'</span>] = \</span><br><span class="line">data_all_copy[<span class="string">'weight_jin'</span>] * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'health'</span>] = data_all_copy[<span class="string">'health'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)# 对<span class="number">-8</span>填充的缺失health字段以<span class="number">3</span>填充</span><br><span class="line">data_all_copy[<span class="string">'health_problem'</span>] = data_all_copy[<span class="string">'health_problem'</span>].replace(<span class="number">-8</span>, <span class="number">4</span>)# 对health_problem=<span class="number">-8</span>的以众数填充</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'depression'</span>] = data_all_copy[<span class="string">'depression'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)# 感到沮丧程度 <span class="number">-8</span> 用<span class="number">3</span>修正</span><br><span class="line"></span><br><span class="line"># 修正以<span class="number">-8</span>填充的字段</span><br><span class="line">data_all_copy[<span class="string">'socialize'</span>] = data_all_copy[<span class="string">'socialize'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)</span><br><span class="line">data_all_copy[<span class="string">'relax'</span>] = data_all_copy[<span class="string">'relax'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)</span><br><span class="line">data_all_copy[<span class="string">'learn'</span>] = data_all_copy[<span class="string">'learn'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)</span><br><span class="line">data_all_copy[<span class="string">'equity'</span>] = data_all_copy[<span class="string">'equity'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)# 社会态度</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'class'</span>] = data_all_copy[<span class="string">'class'</span>].replace(<span class="number">-8</span>, <span class="number">5</span>)# 阶级认同</span><br><span class="line"></span><br><span class="line"># 用<span class="number">1</span>填充人数为负数的字段，将家庭人数为<span class="number">50</span>的修改为平均值</span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'family_m'</span>] &lt; <span class="number">0</span>, <span class="string">'family_m'</span>] = <span class="number">1</span></span><br><span class="line">data_all_copy[<span class="string">'family_m'</span>] = data_all_copy[<span class="string">'family_m'</span>].replace(<span class="number">50</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"># 划分是否有车 <span class="number">0</span>、<span class="number">1</span>标记，并生成one-hot变量</span><br><span class="line">data_all_copy[<span class="string">'car'</span>] = data_all_copy[<span class="string">'car'</span>].replace(<span class="number">-8</span>, <span class="number">2</span>)</span><br><span class="line">data_all_copy[<span class="string">'status_peer'</span>] = data_all_copy[<span class="string">'status_peer'</span>].replace(<span class="number">-8</span>, <span class="number">2</span>)</span><br><span class="line">data_all_copy[<span class="string">'status_3_before'</span>] = data_all_copy[<span class="string">'status_3_before'</span>].replace(<span class="number">-8</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'view'</span>] = data_all_copy[<span class="string">'view'</span>].replace(<span class="number">-8</span>, <span class="number">3</span>)# 社会认知</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'inc_ability'</span>] = data_all_copy[<span class="string">'inc_ability'</span>].replace(<span class="number">-8</span>, <span class="number">2</span>)# 收入是否合理</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'work_status'</span>] = data_all_copy[<span class="string">'work_status'</span>].replace(np.<span class="keyword">nan</span>, <span class="number">-8</span>)</span><br><span class="line">data_all_copy[<span class="string">'work_manage'</span>] = data_all_copy[<span class="string">'work_manage'</span>].replace(np.<span class="keyword">nan</span>, <span class="number">-8</span>)</span><br><span class="line">data_all_copy[<span class="string">'work_type'</span>] = data_all_copy[<span class="string">'work_type'</span>].replace(np.<span class="keyword">nan</span>, <span class="number">-8</span>)</span><br><span class="line">data_all_copy[<span class="string">'work_yr'</span>] = data_all_copy[<span class="string">'work_type'</span>].replace(np.<span class="keyword">nan</span>, <span class="number">-8</span>)</span><br><span class="line"></span><br><span class="line"># 这里的缺失值可以补全</span><br><span class="line"># del data_all_copy[<span class="string">'work_manage'</span>]</span><br><span class="line"># del data_all_copy[<span class="string">'work_status'</span>]</span><br><span class="line"># del data_all_copy[<span class="string">'work_type'</span>]</span><br><span class="line"># del data_all_copy[<span class="string">'work_yr'</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将调查类型改为0、1，然后进行one-hot编码</span></span><br><span class="line">data_all_copy[<span class="string">'survey_type'</span>] = data_all_copy[<span class="string">'survey_type'</span>].map(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br><span class="line">survey_type = pd.get_dummies(data_all_copy[<span class="string">'survey_type'</span>], prefix=<span class="string">'survey_type'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(survey_type)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据2015年人均可支配收入划分所处的全国收入等级</span></span><br><span class="line">data_all_copy[<span class="string">'income_global_level'</span>] = data_all_copy.income.apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x &gt;= <span class="number">20167</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结合调查类型（城市、农村）和收入判断 相比 城市或农村 其 本地收入等级  注意 判断条件中的括号非加不可</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_local_level1</span><span class="params">(survey_type, income)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> (survey_type == <span class="number">0</span>) &amp; (income &gt;= <span class="number">28844</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 代表城市，且可支配收入大于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">0</span>) &amp; (income &lt; <span class="number">28844</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>  <span class="comment"># 代表城市，且可支配收入小于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">1</span>) &amp; (income &gt;= <span class="number">10489</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>  <span class="comment"># 代表农村，且可支配收入大于均值</span></span><br><span class="line">    <span class="keyword">elif</span> (survey_type == <span class="number">1</span>) &amp; (income &lt; <span class="number">10489</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>  <span class="comment"># 代表农村，且可支配收入小于于均值</span></span><br><span class="line">data_all_copy[<span class="string">'income_local_level'</span>] = data_all_copy.apply(<span class="keyword">lambda</span> x: income_local_level1(x.survey_type, x.income),</span><br><span class="line">                                                          axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 个人收入 与 省平均收入、市平均收入、县收入 相比 高或低 不加这三个0.69 加了之后0.753 0.4758 --0.4759</span></span><br><span class="line">data_all_copy[<span class="string">'income_province_mean'</span>] = data_all_copy.groupby([<span class="string">'province'</span>])[<span class="string">'income'</span>].transform(<span class="string">'mean'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_province_level</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">data_all_copy[<span class="string">'income_province_level'</span>] = data_all_copy.apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: income_province_level(x.income, x.income_province_mean), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'income_city_mean'</span>] = data_all_copy.groupby([<span class="string">'city'</span>])[<span class="string">'income'</span>].transform(<span class="string">'mean'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_city_level</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">data_all_copy[<span class="string">'income_city_level'</span>] = data_all_copy.apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: income_city_level(x.income, x.income_province_mean), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">data_all_copy[<span class="string">'income_county_mean'</span>] = data_all_copy.groupby([<span class="string">'county'</span>])[<span class="string">'income'</span>].transform(<span class="string">'mean'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">income_county_level</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">data_all_copy[<span class="string">'income_county_level'</span>] = data_all_copy.apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: income_county_level(x.income, x.income_province_mean), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先将性别转化为0、1 再进行one-hot编码，get-dummies时要加上prefix</span></span><br><span class="line">data_all_copy[<span class="string">'gender'</span>] = data_all_copy[<span class="string">'gender'</span>].map(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br><span class="line">gender = pd.get_dummies(data_all_copy[<span class="string">'gender'</span>], prefix=<span class="string">'gender'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(gender)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 截取调查时间中的年份作为这个字段的新值</span></span><br><span class="line">data_all_copy[<span class="string">'survey_time'</span>] = data_all_copy[<span class="string">'survey_time'</span>].dt.year</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据调查时间及出生时间 生成新的特征列age，然后根据年龄划分年龄等级，这里使用的是pd.cut()方法，不用写丑陋的if ..else判断</span></span><br><span class="line">data_all_copy[<span class="string">'age'</span>] = data_all_copy[<span class="string">'survey_time'</span>] - data_all_copy[<span class="string">'birth'</span>]</span><br><span class="line"></span><br><span class="line">bins = [<span class="number">17</span>, <span class="number">29</span>, <span class="number">41</span>, <span class="number">49</span>, <span class="number">56</span>, <span class="number">67</span>, <span class="number">73</span>, <span class="number">85</span>, <span class="number">120</span>]</span><br><span class="line">data_all_copy[<span class="string">'age_level'</span>] = pd.cut(data_all_copy[<span class="string">'age'</span>], bins, labels=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加新的字段 表示是否汉族 0代表是；1为否</span></span><br><span class="line">data_all_copy[<span class="string">'nationality_han'</span>] = data_all_copy[<span class="string">'nationality'</span>].map(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x == <span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分文化水平 根据2010年人口普查调查报告</span></span><br><span class="line">edu_bins = [<span class="number">-1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">13</span>, <span class="number">20</span>]  <span class="comment"># 为上过学、小学、初中、高中、大学、研究生及以上</span></span><br><span class="line">data_all_copy[<span class="string">'edu_level'</span>] = pd.cut(data_all_copy[<span class="string">'edu'</span>], edu_bins, labels=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对收入取以10为底的对数 增加新的特征列 （但是感觉划分为等级会更好）</span></span><br><span class="line">data_all_copy[<span class="string">'income_index'</span>] = data_all_copy[<span class="string">'income'</span>].map(<span class="keyword">lambda</span> x: np.log10(x + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将gender修正为0和1，</span></span><br><span class="line">data_all_copy[<span class="string">'gender'</span>] = data_all_copy[<span class="string">'gender'</span>].map(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以考虑添加 是否遭受健康状况影响，这个可能比前面的health更加真实(4、5代表不怎么受到影响)  0代表健康、1代表不健康</span></span><br><span class="line">data_all_copy[<span class="string">'real_health'</span>] = data_all_copy[<span class="string">'health_problem'</span>].apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x &gt;= <span class="number">4</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增空闲时间的充实程度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free_time_degree_func</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a + b + c &gt;= <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 代表充实</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">data_all_copy[<span class="string">'free_time_degree'</span>] = data_all_copy.apply(<span class="keyword">lambda</span> x:</span><br><span class="line">                                                        free_time_degree_func(x.socialize, x.relax, x.learn), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 社会保障 先将负值、缺失值以均值填充</span></span><br><span class="line">family_income_mean = data_all_copy[<span class="string">'family_income'</span>].mean()</span><br><span class="line">data_all_copy.loc[data_all_copy[<span class="string">'family_income'</span>] &lt;= <span class="number">0</span>, <span class="string">'family_income'</span>] = family_income_mean</span><br><span class="line">data_all_copy[<span class="string">'family_income'</span>] = data_all_copy[<span class="string">'family_income'</span>].fillna(family_income_mean)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加家庭收入等级特征列 https://wenku.baidu.com/view/910bf15a6137ee06eff918a5.html?re=view</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">family_income_level_func</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &gt; <span class="number">1000000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">7</span>  <span class="comment"># 富人</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">300000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">6</span>  <span class="comment"># 有钱人</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">200000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span>  <span class="comment"># 高级小康</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">120000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">4</span>  <span class="comment"># 中级小康</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">80000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>  <span class="comment"># 初级小康</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">30000</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>  <span class="comment"># 低收入</span></span><br><span class="line">    <span class="keyword">elif</span> a &gt; <span class="number">2800</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>  <span class="comment"># 穷人</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 贫困人口</span></span><br><span class="line">data_all_copy[<span class="string">'family_income_level'</span>] = data_all_copy.apply(<span class="keyword">lambda</span> x:</span><br><span class="line">                                                           family_income_level_func(x.family_income), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对收入值取对数量化</span></span><br><span class="line">data_all_copy[<span class="string">'family_income_index'</span>] = data_all_copy[<span class="string">'family_income'</span>].apply(<span class="keyword">lambda</span> x: np.log10(x + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 个人年收入与家庭年收入差异 特征列 无缺失，但有负数值</span></span><br><span class="line">data_all_copy[<span class="string">'income_diff'</span>] = data_all_copy[<span class="string">'family_income'</span>] - data_all_copy[<span class="string">'income'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于负数值 说明家庭可能存在负债等状况</span></span><br><span class="line">data_all_copy[<span class="string">'income_normal'</span>] = data_all_copy[<span class="string">'income_diff'</span>].apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br><span class="line"><span class="comment"># 这里可以根据family_income比较所在城市、省份的经济等级状况  2015年各省人均GDP排名   http://www.sohu.com/a/122823269_255439</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 个人收入占比家庭收入的比重，以及经济压力特征列 ，如果超过0.8则说明个人经济负担较重</span></span><br><span class="line">data_all_copy[<span class="string">'income_percent'</span>] = data_all_copy[<span class="string">'income'</span>] / data_all_copy[<span class="string">'family_income'</span>]</span><br><span class="line">data_all_copy[<span class="string">'much_stress'</span>] = data_all_copy[<span class="string">'income_percent'</span>].apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x &gt;= <span class="number">0.80</span> <span class="keyword">else</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增人均收入 以及 量化人均收入 特征列</span></span><br><span class="line">data_all_copy[<span class="string">'income_per'</span>] = data_all_copy[<span class="string">'family_income'</span>] / data_all_copy[<span class="string">'family_m'</span>]</span><br><span class="line">data_all_copy[<span class="string">'income_per_index'</span>] = data_all_copy[<span class="string">'income_per'</span>].apply(<span class="keyword">lambda</span> x: np.log10(x + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增人均住房面积 有一个为0的，由于floor_area=0造成的，做法应该是 在前面将floor_area=0的用均值填充</span></span><br><span class="line">data_all_copy[<span class="string">'area_per'</span>] = data_all_copy[<span class="string">'floor_area'</span>] / data_all_copy[<span class="string">'family_m'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增人均住房面积列 进行分箱操作 #根据2010年人口普查划分</span></span><br><span class="line">area_bins = [<span class="number">-1</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">29</span>, <span class="number">39</span>, <span class="number">49</span>, <span class="number">59</span>, <span class="number">69</span>, <span class="number">2000</span>]</span><br><span class="line">data_all_copy[<span class="string">'area_per_index'</span>] = pd.cut(data_all_copy[<span class="string">'area_per'</span>], area_bins,</span><br><span class="line">                                         labels=list(np.arange(len(area_bins) - <span class="number">1</span>)))</span><br><span class="line"></span><br><span class="line"><span class="comment">#二值先转化为0、1，再one-hot</span></span><br><span class="line">data_all_copy[<span class="string">'car'</span>] = data_all_copy[<span class="string">'car'</span>].apply(<span class="keyword">lambda</span> x: x - <span class="number">1</span>)</span><br><span class="line">car = pd.get_dummies(data_all_copy[<span class="string">'car'</span>], prefix=<span class="string">'car'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(car)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增亲密关系</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">imitate_func</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> a <span class="keyword">in</span> [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">data_all_copy[<span class="string">'marital'</span>] = data_all_copy.apply(<span class="keyword">lambda</span> x: imitate_func(x.marital), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># marital = pd.get_dummies(data_all_copy['marital'],prefix='marital')</span></span><br><span class="line"><span class="comment"># data_all_copy = data_all_copy.join(marital)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将同辈地位离散化</span></span><br><span class="line">status_peer = pd.get_dummies(data_all_copy[<span class="string">'status_peer'</span>], prefix=<span class="string">'status_peer'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(status_peer)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 与三年前相比如何变化离散化</span></span><br><span class="line">status_3_before = pd.get_dummies(data_all_copy[<span class="string">'status_3_before'</span>], prefix=<span class="string">'status_3_before'</span>)</span><br><span class="line">data_all_copy = data_all_copy.join(status_3_before)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将这个值离散化 新增字段</span></span><br><span class="line">data_all_copy[<span class="string">'view_common'</span>] = data_all_copy[<span class="string">'view'</span>].apply(<span class="keyword">lambda</span> x: <span class="number">0</span> <span class="keyword">if</span> x <span class="keyword">in</span> [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>] <span class="keyword">else</span> <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据建模"><a href="#数据建模" class="headerlink" title="数据建模"></a>数据建模</h3><h4 id="数据划分"><a href="#数据划分" class="headerlink" title="数据划分"></a>数据划分</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">train_data = data_all_copy.iloc[<span class="number">0</span>:<span class="number">8000</span>, :].values</span><br><span class="line">res_id = data_all_copy.iloc[<span class="number">8000</span>:, :][<span class="string">'id'</span>]</span><br><span class="line">test_data =  data_all_copy.iloc[<span class="number">8000</span>:, :].values</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">X_train, X_val, y_train, y_val = train_test_split(train_data, happiness, test_size=<span class="number">0.3</span>, random_state=<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rfc = RandomForestClassifier()</span><br><span class="line">rfc.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证模型表现"><a href="#验证模型表现" class="headerlink" title="验证模型表现"></a>验证模型表现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_val_pred = rfc.predict(X_val)</span><br><span class="line">score = mean_squared_error(y_val_pred, y_val)</span><br><span class="line">print(score)</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成预测结果并写入csv文件"><a href="#生成预测结果并写入csv文件" class="headerlink" title="生成预测结果并写入csv文件"></a>生成预测结果并写入csv文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y_pred = rfc.predict(test_data)</span><br><span class="line">res_df = pd.DataFrame(&#123;<span class="string">'id'</span>: res_id, <span class="string">'happiness'</span>: y_pred&#125;)</span><br><span class="line">res_df.to_csv(<span class="string">'10_28_third_simple_pred.csv'</span>,index=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/14/mqray/" rel="next" title="mqray">
+                  <i class="fa fa-chevron-left"></i> mqray
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#赛题介绍"><span class="nav-number">1.</span> <span class="nav-text">赛题介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索性数据分析"><span class="nav-number">2.</span> <span class="nav-text">探索性数据分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取数据"><span class="nav-number">2.1.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检查数据"><span class="nav-number">2.2.</span> <span class="nav-text">检查数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单变量分析"><span class="nav-number">2.3.</span> <span class="nav-text">单变量分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多变量分析"><span class="nav-number">2.4.</span> <span class="nav-text">多变量分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征工程"><span class="nav-number">3.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据预览"><span class="nav-number">3.1.</span> <span class="nav-text">数据预览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺失值处理"><span class="nav-number">3.2.</span> <span class="nav-text">缺失值处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特征处理"><span class="nav-number">3.3.</span> <span class="nav-text">特征处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据建模"><span class="nav-number">4.</span> <span class="nav-text">数据建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据划分"><span class="nav-number">4.1.</span> <span class="nav-text">数据划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#训练模型"><span class="nav-number">4.2.</span> <span class="nav-text">训练模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证模型表现"><span class="nav-number">4.3.</span> <span class="nav-text">验证模型表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成预测结果并写入csv文件"><span class="nav-number">4.4.</span> <span class="nav-text">生成预测结果并写入csv文件</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/imgs/head.jpg"
+      alt="mqray">
+  <p class="site-author-name" itemprop="name">mqray</p>
+  <div class="site-description" itemprop="description">当改变命运的时刻降临，犹豫就会败北！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/mqray" title="GitHub &rarr; https://github.com/mqray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:Slawenceray@163.com" title="E-Mail &rarr; mailto:Slawenceray@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">Github</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mqray</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">14k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">13 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zQNx38LJAan0fg2afyE1EPhC-gzGzoHsz',
+    appKey: 'IrndDroTPDNUVFcBOfJefP3h',
+    placeholder: '留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
