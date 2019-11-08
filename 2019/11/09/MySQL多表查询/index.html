@@ -55,18 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="当改变命运的时刻降临，犹豫就会败北！">
+  <meta name="description" content="2. 显式内连接：         * 语法： select 字段列表 from 表名1 [inner] join 表名2 on 条件         * 例如：             * SELECT * FROM emp INNER JOIN dept ON emp.`dept_id` = dept.`id`;                 * SELECT * FROM emp">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mqray">
-<meta property="og:url" content="http://yoursite.com/2019/10/14/mqray/index.html">
+<meta property="og:title" content="MySQL多表查询">
+<meta property="og:url" content="http://yoursite.com/2019/11/09/MySQL多表查询/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="当改变命运的时刻降临，犹豫就会败北！">
+<meta property="og:description" content="2. 显式内连接：         * 语法： select 字段列表 from 表名1 [inner] join 表名2 on 条件         * 例如：             * SELECT * FROM emp INNER JOIN dept ON emp.`dept_id` = dept.`id`;                 * SELECT * FROM emp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T10:08:58.960Z">
+<meta property="og:updated_time" content="2019-11-08T17:00:16.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mqray">
-<meta name="twitter:description" content="当改变命运的时刻降临，犹豫就会败北！">
-  <link rel="canonical" href="http://yoursite.com/2019/10/14/mqray/">
+<meta name="twitter:title" content="MySQL多表查询">
+<meta name="twitter:description" content="2. 显式内连接：         * 语法： select 字段列表 from 表名1 [inner] join 表名2 on 条件         * 例如：             * SELECT * FROM emp INNER JOIN dept ON emp.`dept_id` = dept.`id`;                 * SELECT * FROM emp">
+  <link rel="canonical" href="http://yoursite.com/2019/11/09/MySQL多表查询/">
 
 
 <script id="page-configurations">
@@ -80,7 +81,7 @@
   };
 </script>
 
-  <title>mqray | mqray's blog</title>
+  <title>MySQL多表查询 | mqray's blog</title>
   
 
 
@@ -360,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/mqray/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/MySQL多表查询/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -374,7 +375,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            mqray
+            MySQL多表查询
             
 
           
@@ -391,12 +392,12 @@
                 
               
 
-              <time title="创建时间：2019-10-14 18:08:58" itemprop="dateCreated datePublished" datetime="2019-10-14T18:08:58+08:00">2019-10-14</time>
+              <time title="创建时间：2019-11-09 00:39:05" itemprop="dateCreated datePublished" datetime="2019-11-09T00:39:05+08:00">2019-11-09</time>
             </span>
           
 
           
-            <span id="/2019/10/14/mqray/" class="post-meta-item leancloud_visitors" data-flag-title="mqray" title="阅读次数">
+            <span id="/2019/11/09/MySQL多表查询/" class="post-meta-item leancloud_visitors" data-flag-title="MySQL多表查询" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -414,8 +415,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/14/mqray/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/14/mqray/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/09/MySQL多表查询/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/09/MySQL多表查询/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -428,7 +429,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>0</span>
+              <span>1.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -438,7 +439,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
           
 
@@ -451,7 +452,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <pre><code>    2. 显式内连接：
+        * 语法： select 字段列表 from 表名1 [inner] join 表名2 on 条件
+        * 例如：
+            * SELECT * FROM emp INNER JOIN dept ON emp.`dept_id` = dept.`id`;    
+            * SELECT * FROM emp JOIN dept ON emp.`dept_id` = dept.`id`;    
+
+    3. 内连接查询：
+        1. 从哪些表中查询数据
+        2. 条件是什么
+        3. 查询哪些字段
+2. 外链接查询：
+    1. 左外连接：
+        * 语法：select 字段列表 from 表1 left [outer] join 表2 on 条件；
+        * 查询的是左表所有数据以及其交集部分。
+        * 例子：
+            -- 查询所有员工信息，如果员工有部门，则查询部门名称，没有部门，则不显示部门名称
+            SELECT     t1.*,t2.`name` FROM emp t1 LEFT JOIN dept t2 ON t1.`dept_id` = t2.`id`;
+    2. 右外连接：
+        * 语法：select 字段列表 from 表1 right [outer] join 表2 on 条件；
+        * 查询的是右表所有数据以及其交集部分。
+        * 例子：
+            SELECT     * FROM dept t2 RIGHT JOIN emp t1 ON t1.`dept_id` = t2.`id`;
+3. 子查询：
+    * 概念：查询中嵌套查询，称嵌套查询为子查询。
+        -- 查询工资最高的员工信息
+        -- 1 查询最高的工资是多少 9000
+        SELECT MAX(salary) FROM emp;
+
+        -- 2 查询员工信息，并且工资等于9000的
+        SELECT * FROM emp WHERE emp.`salary` = 9000;
+
+        -- 一条sql就完成这个操作。子查询
+        SELECT * FROM emp WHERE emp.`salary` = (SELECT MAX(salary) FROM emp);
+
+    * 子查询不同情况
+        1. 子查询的结果是单行单列的：
+            * 子查询可以作为条件，使用运算符去判断。 运算符： &gt; &gt;= &lt; &lt;= =
+            * 
+            -- 查询员工工资小于平均工资的人
+            SELECT * FROM emp WHERE emp.salary &lt; (SELECT AVG(salary) FROM emp);
+        2. 子查询的结果是多行单列的：
+            * 子查询可以作为条件，使用运算符in来判断
+            -- 查询&apos;财务部&apos;和&apos;市场部&apos;所有的员工信息
+            SELECT id FROM dept WHERE NAME = &apos;财务部&apos; OR NAME = &apos;市场部&apos;;
+            SELECT * FROM emp WHERE dept_id = 3 OR dept_id = 2;
+            -- 子查询
+            SELECT * FROM emp WHERE dept_id IN (SELECT id FROM dept WHERE NAME = &apos;财务部&apos; OR NAME = &apos;市场部&apos;);
+
+        3. 子查询的结果是多行多列的：
+            * 子查询可以作为一张虚拟表参与查询
+            -- 查询员工入职日期是2011-11-11日之后的员工信息和部门信息
+            -- 子查询
+            SELECT * FROM dept t1 ,(SELECT * FROM emp WHERE emp.`join_date` &gt; &apos;2011-11-11&apos;) t2
+            WHERE t1.id = t2.dept_id;
+
+            -- 普通内连接
+            SELECT * FROM emp t1,dept t2 WHERE t1.`dept_id` = t2.`id` AND t1.`join_date` &gt;  &apos;2011-11-11&apos;
+
+* 多表查询练习
+
+        -- 部门表
+        CREATE TABLE dept (
+          id INT PRIMARY KEY PRIMARY KEY, -- 部门id
+          dname VARCHAR(50), -- 部门名称
+          loc VARCHAR(50) -- 部门所在地
+        );
+
+        -- 添加4个部门
+        INSERT INTO dept(id,dname,loc) VALUES 
+        (10,&apos;教研部&apos;,&apos;北京&apos;),
+        (20,&apos;学工部&apos;,&apos;上海&apos;),
+        (30,&apos;销售部&apos;,&apos;广州&apos;),
+        (40,&apos;财务部&apos;,&apos;深圳&apos;);</code></pre>
     </div>
 
     
@@ -463,6 +536,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+            
+          </div>
+        
 
         
   <div class="post-widgets">
@@ -475,8 +557,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/14/hello-world/" rel="next" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/2019/11/07/MySQL约束/" rel="next" title="MySQL约束">
+                  <i class="fa fa-chevron-left"></i> MySQL约束
                 </a>
               
             </div>
@@ -484,10 +566,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/10/31/天池新人赛 挖掘幸福感/" rel="prev" title="天池新人赛 挖掘幸福感">
-                  天池新人赛 挖掘幸福感 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
