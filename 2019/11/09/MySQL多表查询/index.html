@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="mqray&#39;s blog">
 <meta property="og:description" content="内容1. 多表查询  2. 事务  3. DCL多表查询：* 查询语法：     select         列名列表     from         表名列表     where.... * 准备sql     # 创建部门表     CREATE TABLE dept(         id INT PRIMARY KEY AUTO_INCREMENT,         NAME VARC">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-08T17:02:24.673Z">
+<meta property="og:updated_time" content="2019-11-09T04:26:25.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL多表查询">
 <meta name="twitter:description" content="内容1. 多表查询  2. 事务  3. DCL多表查询：* 查询语法：     select         列名列表     from         表名列表     where.... * 准备sql     # 创建部门表     CREATE TABLE dept(         id INT PRIMARY KEY AUTO_INCREMENT,         NAME VARC">
@@ -392,8 +392,12 @@
                 
               
 
-              <time title="创建时间：2019-11-09 00:39:05" itemprop="dateCreated datePublished" datetime="2019-11-09T00:39:05+08:00">2019-11-09</time>
+              <time title="创建时间：2019-11-09 00:39:05 / 修改时间：12:26:25" itemprop="dateCreated datePublished" datetime="2019-11-09T00:39:05+08:00">2019-11-09</time>
             </span>
+          
+            
+
+            
           
 
           
@@ -429,7 +433,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>9.8k</span>
+              <span>10k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -807,11 +811,11 @@ ON t1.`mgr` = t2.`id`;</code></pre><h2 id="事务"><a href="#事务" class="head
             * 修改默认提交方式： set @@autocommit = 0;
 
 
-2. 事务的四大特征：
-    1. 原子性：是不可分割的最小操作单位，要么同时成功，要么同时失败。
-    2. 持久性：当事务提交或回滚后，数据库会持久化的保存数据。
-    3. 隔离性：多个事务之间。相互独立。
-    4. 一致性：事务操作前后，数据总量不变
+2. 事务的四大特征ACID：
+    1. 原子性Atomicity：是不可分割的最小操作单位，要么同时成功，要么同时失败。
+    2. 一致性Consistency：事务操作前后，数据总量不变,事务前后数据的完整性必须保持一致.
+    3. 隔离性Isolation：事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。
+    4. 持久性Durability：持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来即使数据库发生故障也不应该对其有任何影响
 3. 事务的隔离级别（了解）
     * 概念：多个事务之间隔离的，相互独立的。但是如果多个事务操作同一批数据，则会引发一些问题，设置不同的隔离级别就可以解决这些问题。
     * 存在问题：
@@ -1108,7 +1112,7 @@ ON t1.`mgr` = t2.`id`;</code></pre><h2 id="事务"><a href="#事务" class="head
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">41k</span>
+    <span title="站点总字数">42k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
