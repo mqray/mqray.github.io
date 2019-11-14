@@ -55,18 +55,22 @@
   };
 </script>
 
-  <meta name="description" content="当改变命运的时刻降临，犹豫就会败北！">
+  <meta name="description" content="在介绍网络编程前，先要了解计算机网络的基础架构。OSI七层模型和TCP/IP五层模型什么是socket？ socket是应用层与TCP/IP协议簇通信的中间软件抽象层，它是一组接口。在设计模式中，他就是一个门面模式，它把复杂的TCP/IP协议簇隐藏在SOCKET接口后，对用户而言，它就是一组简单的接口，用户在编写程序时，无需深入理解TCP/IP协议(SOCKET已经为我们封装好了)【当然深入理解更">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python网络编程">
 <meta property="og:url" content="http://yoursite.com/2019/11/14/python网络编程/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="当改变命运的时刻降临，犹豫就会败北！">
+<meta property="og:description" content="在介绍网络编程前，先要了解计算机网络的基础架构。OSI七层模型和TCP/IP五层模型什么是socket？ socket是应用层与TCP/IP协议簇通信的中间软件抽象层，它是一组接口。在设计模式中，他就是一个门面模式，它把复杂的TCP/IP协议簇隐藏在SOCKET接口后，对用户而言，它就是一组简单的接口，用户在编写程序时，无需深入理解TCP/IP协议(SOCKET已经为我们封装好了)【当然深入理解更">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-14T11:36:35.137Z">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1214487/spkvartiba.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1214487/pq9r71zjlx.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-1214487/g44r5q17oj.png?imageView2/2/w/1620">
+<meta property="og:updated_time" content="2019-11-14T15:46:31.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python网络编程">
-<meta name="twitter:description" content="当改变命运的时刻降临，犹豫就会败北！">
+<meta name="twitter:description" content="在介绍网络编程前，先要了解计算机网络的基础架构。OSI七层模型和TCP/IP五层模型什么是socket？ socket是应用层与TCP/IP协议簇通信的中间软件抽象层，它是一组接口。在设计模式中，他就是一个门面模式，它把复杂的TCP/IP协议簇隐藏在SOCKET接口后，对用户而言，它就是一组简单的接口，用户在编写程序时，无需深入理解TCP/IP协议(SOCKET已经为我们封装好了)【当然深入理解更">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-1214487/spkvartiba.png?imageView2/2/w/1620">
   <link rel="canonical" href="http://yoursite.com/2019/11/14/python网络编程/">
 
 
@@ -392,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2019-11-14 19:34:00 / 修改时间：19:36:35" itemprop="dateCreated datePublished" datetime="2019-11-14T19:34:00+08:00">2019-11-14</time>
+              <time title="创建时间：2019-11-14 19:34:00 / 修改时间：23:46:31" itemprop="dateCreated datePublished" datetime="2019-11-14T19:34:00+08:00">2019-11-14</time>
             </span>
           
             
@@ -433,7 +437,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>0</span>
+              <span>3k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -443,7 +447,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
           
 
@@ -456,7 +460,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>在介绍网络编程前，先要了解计算机网络的基础架构。</p><h3 id="OSI七层模型和TCP-IP五层模型"><a href="#OSI七层模型和TCP-IP五层模型" class="headerlink" title="OSI七层模型和TCP/IP五层模型"></a>OSI七层模型和TCP/IP五层模型</h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-1214487/spkvartiba.png?imageView2/2/w/1620" alt="TCP/IP"></p><h3 id="什么是socket？"><a href="#什么是socket？" class="headerlink" title="什么是socket？"></a>什么是socket？</h3><blockquote>
+<p>socket是应用层与TCP/IP协议簇通信的中间软件抽象层，它是一组接口。在设计模式中，他就是一个门面模式，它把复杂的TCP/IP协议簇隐藏在SOCKET接口后，对用户而言，它就是一组简单的接口，用户在编写程序时，无需深入理解TCP/IP协议(SOCKET已经为我们封装好了)【当然深入理解更好】，只需遵循SOCKET的规定编程即可。</p>
+</blockquote><a id="more"></a>
+
+
+<p>下图清晰地展示了，SOCKET作为一组接口，存在于应用层和传输层之间。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-1214487/pq9r71zjlx.jpeg?imageView2/2/w/1620" alt="SOCKET接口"></p>
+<p>网络层用IP地址标识互联网上的主机，而在传输层则使用端口号描述计算机上的某个应用程序，所以有人将SOCKET说成IP+PORT。</p>
+<h4 id="SOCKET的工作流程"><a href="#SOCKET的工作流程" class="headerlink" title="SOCKET的工作流程"></a>SOCKET的工作流程</h4><p><img src="https://ask.qcloudimg.com/http-save/yehe-1214487/g44r5q17oj.png?imageView2/2/w/1620" alt="SOCKET工作流程"></p>
+<h4 id="基于TCP的套接字"><a href="#基于TCP的套接字" class="headerlink" title="基于TCP的套接字"></a>基于TCP的套接字</h4><p>tcp面向连接，必须先启动服务器端，再启动客户端。</p>
+<h5 id="TCP服务端"><a href="#TCP服务端" class="headerlink" title="TCP服务端"></a>TCP服务端</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tcp_server = socket.socket()<span class="comment">#创建服务器套接字</span></span><br><span class="line">tcp_server.bind()<span class="comment">#绑定ip+端口</span></span><br><span class="line">top_server.listen()<span class="comment">#监听连接</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#服务器无限循环</span></span><br><span class="line">	conn,addr = tcp_server()<span class="comment">#接收客户端连接</span></span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#通讯循环</span></span><br><span class="line">		tcp_server.send()/tcp_server.recv()</span><br><span class="line">	conn.close()<span class="comment">#关闭客户端套接字</span></span><br><span class="line">top_server.close() <span class="comment">#关闭服务端套接字</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8000</span>)</span><br><span class="line">backlog = <span class="number">5</span></span><br><span class="line">buffersize = <span class="number">1024</span></span><br><span class="line">server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"><span class="comment"># server.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)</span></span><br><span class="line">server.bind(ip_port)<span class="comment">#监听ip地址</span></span><br><span class="line">server.listen(backlog)<span class="comment">#半连接池，backlog挂起连接请求【存放尚未完成三次握手连接的所有请求】</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'----server testing----'</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#服务器一直监听</span></span><br><span class="line">    conn,addr = server.accept()<span class="comment">#接收客户端连接</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#通讯循环</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            msg = conn.recv(buffersize)</span><br><span class="line">            print(datetime.datetime.now(),<span class="string">'服务器收到客户端消息'</span>,msg.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">            send_msg = input(<span class="string">'&gt;&gt;:'</span>.strip())</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span>  send_msg:</span><br><span class="line">                <span class="keyword">continue</span>    <span class="comment">#不允许什么都不发送</span></span><br><span class="line">            conn.send(send_msg.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">        <span class="keyword">except</span> ConnectionResetError <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'某个通话中断'</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    conn.close()<span class="comment">#关闭客户端套接字</span></span><br><span class="line"></span><br><span class="line">server.close()<span class="comment">#关闭服务端套接字</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="TCP客户端"><a href="#TCP客户端" class="headerlink" title="TCP客户端"></a>TCP客户端</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tcp_client = socket.socket()<span class="comment">#创建客户端套接字</span></span><br><span class="line">tcp_server.connect()<span class="comment">#尝试连接服务器</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#通讯循环</span></span><br><span class="line">	tcp_server.send()/tcp_server.recv()</span><br><span class="line">tcp_server.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">ip_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8000</span>)</span><br><span class="line">buffersize= <span class="number">1024</span></span><br><span class="line">client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">client.connect(ip_port)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    msg = input(<span class="string">'&gt;&gt;:'</span>.strip())</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> msg:</span><br><span class="line">        <span class="keyword">continue</span> <span class="comment">#避免发送空字符【直接按回车】，无意义</span></span><br><span class="line">    client.send(msg.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">    client_recv_data = client.recv(buffersize)</span><br><span class="line"></span><br><span class="line">    print(datetime.datetime.now(),<span class="string">'客户端收到服务器消息'</span>,client_recv_data.decode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line">client.close()</span><br></pre></td></tr></table></figure>
+
+<h4 id="基于UDP的套接字"><a href="#基于UDP的套接字" class="headerlink" title="基于UDP的套接字"></a>基于UDP的套接字</h4><p>udp面向无连接，客户端可以在服务端为开启的前提下，自行发送数据，但并不保证数据安全，也不在乎数据是否被接收。</p>
+<h5 id="UDP服务器端"><a href="#UDP服务器端" class="headerlink" title="UDP服务器端"></a>UDP服务器端</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">udp_server = socket.socket()<span class="comment">#创建服务器端套接字</span></span><br><span class="line">udp_server.bind()<span class="comment">#绑定ip_端口</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:<span class="comment">#通讯循环</span></span><br><span class="line">	udp_server.sendto()/udp_server.recvfrom()</span><br><span class="line">udp_server.close()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  socket</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">id_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>)</span><br><span class="line">buffersize = <span class="number">1024</span></span><br><span class="line">udp_server = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)<span class="comment">#数据报式的套接字</span></span><br><span class="line">udp_server.bind(id_port)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    server_receive_data,addr = udp_server.recvfrom(buffersize)</span><br><span class="line">    <span class="comment">#(b'hello', ('127.0.0.1', 64375))</span></span><br><span class="line">    print(datetime.datetime.now(),<span class="string">'服务器收到&#123;&#125;的消息:&#123;&#125;：'</span>.format(addr,server_receive_data.decode(<span class="string">'utf-8'</span>)))</span><br><span class="line">    msg = input(<span class="string">'&gt;&gt;:'</span>)</span><br><span class="line">    udp_server.sendto(msg.encode(<span class="string">'utf-8'</span>),addr)</span><br></pre></td></tr></table></figure>
+
+<h4 id="UDP客户端"><a href="#UDP客户端" class="headerlink" title="UDP客户端"></a>UDP客户端</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">udp_client = socket.socket() <span class="comment">#创建客户端套接字</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>：<span class="comment">#通讯循环</span></span><br><span class="line">	udp_client.sendto()/udp_client.recvfrom()</span><br><span class="line">udp_client.close()<span class="comment">#关闭客户端套接字</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  socket</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">id_port = (<span class="string">'127.0.0.1'</span>,<span class="number">8080</span>)</span><br><span class="line">buffersize = <span class="number">1024</span></span><br><span class="line">udp_client = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    msg = input(<span class="string">'&gt;&gt;:'</span>)</span><br><span class="line">    udp_client.sendto(msg.encode(<span class="string">'utf-8'</span>),id_port)</span><br><span class="line">    received_data,addr = udp_client.recvfrom(buffersize)</span><br><span class="line">    print(datetime.datetime.now(),<span class="string">'客户端收到&#123;&#125;的消息:&#123;&#125;'</span>.format(addr,received_data.decode(<span class="string">'utf-8'</span>)))</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -550,6 +591,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI七层模型和TCP-IP五层模型"><span class="nav-number">1.</span> <span class="nav-text">OSI七层模型和TCP/IP五层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是socket？"><span class="nav-number">2.</span> <span class="nav-text">什么是socket？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SOCKET的工作流程"><span class="nav-number">2.1.</span> <span class="nav-text">SOCKET的工作流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于TCP的套接字"><span class="nav-number">2.2.</span> <span class="nav-text">基于TCP的套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP服务端"><span class="nav-number">2.2.1.</span> <span class="nav-text">TCP服务端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP客户端"><span class="nav-number">2.2.2.</span> <span class="nav-text">TCP客户端</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于UDP的套接字"><span class="nav-number">2.3.</span> <span class="nav-text">基于UDP的套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UDP服务器端"><span class="nav-number">2.3.1.</span> <span class="nav-text">UDP服务器端</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP客户端"><span class="nav-number">2.4.</span> <span class="nav-text">UDP客户端</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -670,14 +713,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">60k</span>
+    <span title="站点总字数">63k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">55 分钟</span>
+    <span title="站点阅读时长">58 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
