@@ -64,7 +64,7 @@
 <meta property="og:description" content="本文内容包括django环境配置django安装django的安装方式和其他库一样，直接pip安装即可。12C:\Users\Administrator&amp;gt;pip install django安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191117005612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhd2VuY2VSYXk=,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-16T16:59:59.502Z">
+<meta property="og:updated_time" content="2019-11-16T17:04:54.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="django_学生管理平台搭建">
 <meta name="twitter:description" content="本文内容包括django环境配置django安装django的安装方式和其他库一样，直接pip安装即可。12C:\Users\Administrator&amp;gt;pip install django安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目">
@@ -405,7 +405,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 00:59:59" itemprop="dateModified" datetime="2019-11-17T00:59:59+08:00">2019-11-17</time>
+                <time title="修改时间：2019-11-17 01:04:54" itemprop="dateModified" datetime="2019-11-17T01:04:54+08:00">2019-11-17</time>
               </span>
             
           
@@ -521,7 +521,10 @@
 
 <p>最后就是<code>show_class.html</code>静态页面</p>
 <p><img src="https://img-blog.csdnimg.cn/20191117005612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhd2VuY2VSYXk=,size_16,color_FFFFFF,t_70" alt="html中写循环语句"></p>
-<p>要注意<code>show_class.html</code>中有这样的代码, <strong>两对大括号</strong>包裹的部分是待替换的部分，<strong>一对大括号里一对百分号中间写上循环条件</strong>则是<code>html</code>中的循环写法，中间填上<code>endfor</code>则循环结束。        </p>
+<p>要注意<code>show_class.html</code>中有这样的代码,  &#123;&#123;&#125;&#125; 包裹的部分是待替换的部分，<strong>一对大括号里一对百分号中间写上循环条件</strong>则是<code>html</code>中的循环写法，中间填上<code>endfor</code>则循环结束。</p>
+<blockquote>
+<p>上述代码中的字符不好描述，所以用了图片来展示，【尽管可以用转义码+html消除hexo中不能编译通过的情况，但是非常麻烦】    </p>
+</blockquote>
 <p>上述代码中，有几点需要说明，首先定义的函数至少需要一个参数，此处的<code>request</code>是请求后返回的所有信息。对它的处理方式有三种，如下。</p>
 <h4 id="返回模板的三种方式"><a href="#返回模板的三种方式" class="headerlink" title="返回模板的三种方式"></a>返回模板的三种方式</h4><h5 id="HttpResponse-给页面返回一个字符串"><a href="#HttpResponse-给页面返回一个字符串" class="headerlink" title="HttpResponse  给页面返回一个字符串"></a>HttpResponse  给页面返回一个字符串</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> HttpResponse(<span class="string">'hello world'</span>) <span class="comment">#HttpResponse后面只需加一个字符串</span></span><br></pre></td></tr></table></figure>
 
