@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="本文内容包括django环境配置django安装django的安装方式和其他库一样，直接pip安装即可。12C:\Users\Administrator&amp;gt;pip install django安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目">
+<meta name="keywords" content="django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="django_学生管理平台搭建">
+<meta property="og:url" content="http://yoursite.com/2019/11/16/django-学生管理平台搭建/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="本文内容包括django环境配置django安装django的安装方式和其他库一样，直接pip安装即可。12C:\Users\Administrator&amp;gt;pip install django安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191117005612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhd2VuY2VSYXk=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-11-16T16:59:59.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="django_学生管理平台搭建">
+<meta name="twitter:description" content="本文内容包括django环境配置django安装django的安装方式和其他库一样，直接pip安装即可。12C:\Users\Administrator&amp;gt;pip install django安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191117005612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhd2VuY2VSYXk=,size_16,color_FFFFFF,t_70">
+  <link rel="canonical" href="http://yoursite.com/2019/11/16/django-学生管理平台搭建/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>django_学生管理平台搭建 | mqray's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mqray's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">no bb, show me the codes.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">9</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-top">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/django-学生管理平台搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            django_学生管理平台搭建
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-16 22:47:53" itemprop="dateCreated datePublished" datetime="2019-11-16T22:47:53+08:00">2019-11-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-17 00:59:59" itemprop="dateModified" datetime="2019-11-17T00:59:59+08:00">2019-11-17</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/11/16/django-学生管理平台搭建/" class="post-meta-item leancloud_visitors" data-flag-title="django_学生管理平台搭建" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/16/django-学生管理平台搭建/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/16/django-学生管理平台搭建/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5.3k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>5 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文内容包括<code>django</code>环境配置</p><h3 id="django安装"><a href="#django安装" class="headerlink" title="django安装"></a>django安装</h3><p><code>django</code>的安装方式和其他库一样，直接<code>pip</code>安装即可。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator&gt;pip install django</span><br><span class="line">安装完毕之后，能够在默认的python路径下D:\Anaconda3\Scripts\找到一个名为django-admin.exe的可执行文件，可以用程序创建新的django项目</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<h4 id="命令行创建django项目"><a href="#命令行创建django项目" class="headerlink" title="命令行创建django项目"></a>命令行创建django项目</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入某个目录，创建django项目</span></span><br><span class="line">C:\Users\Administrator&gt;d:</span><br><span class="line"><span class="meta">#</span><span class="bash">使用如下命令创建django项目</span></span><br><span class="line">D:\&gt;django-admin startproject [项目名]</span><br><span class="line">得到的文件结构如下：</span><br><span class="line">mysite/</span><br><span class="line">    manage.py #用各种方式管理 Django 项目的命令行工具</span><br><span class="line">    mysite/</span><br><span class="line">        __init__.py</span><br><span class="line">        settings.py #Django 项目的配置文件</span><br><span class="line">        urls.py #Django 项目的 URL 声明</span><br><span class="line">        wsgi.py #作为你的项目的运行在 WSGI 兼容的Web服务器上的入口</span><br><span class="line"><span class="meta">#</span><span class="bash">切换到mysite目录，输入以下命令启动django项目【后面可以指定ip和端口，默认为127.0.0.1:8000】</span></span><br><span class="line">D:\mysite\&gt;python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+<h4 id="pycharm创建django项目"><a href="#pycharm创建django项目" class="headerlink" title="pycharm创建django项目"></a>pycharm创建django项目</h4><p>在<code>pycharm</code>中，新建<code>django</code>项目即可，可以得到和上述一样的结构。</p>
+<p>我们需要关注一下几点：</p>
+<h5 id="在setting-py中配置静态文件路径"><a href="#在setting-py中配置静态文件路径" class="headerlink" title="在setting.py中配置静态文件路径"></a>在<code>setting.py</code>中配置静态文件路径</h5><p>​        找到文件末尾，加入如下内容：【注意末尾有一个逗号】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATICFILES_DIRS = (    os.path.join(BASE_DIR,<span class="string">'static'</span>),)</span><br></pre></td></tr></table></figure>
+
+<p>​    注释掉<code>MIDDLEWARE</code>中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 'django.middleware.csrf.CsrfViewMiddleware',</span></span><br></pre></td></tr></table></figure>
+
+<p>​    在<code>TEMPALTES</code>中检查是否有如下内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'DIRS'</span>: [os.path.join(BASE_DIR, <span class="string">'templates'</span>)]</span><br></pre></td></tr></table></figure>
+
+<h5 id="在urls-py文件中添加路由信息"><a href="#在urls-py文件中添加路由信息" class="headerlink" title="在urls.py文件中添加路由信息"></a>在<code>urls.py</code>文件中添加路由信息</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path('admin/', admin.site.urls),</span></span><br><span class="line">    path(<span class="string">'show_class/'</span>,views.show_class), <span class="comment">#前面的 show_class/是在浏览器端访问时访问的文件[对应着templates中的show_class.html]，后面的show_class是创建的函数</span></span><br><span class="line">    path(<span class="string">'add_class/'</span>,views.add_class),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用pymsql连接数据库"><a href="#使用pymsql连接数据库" class="headerlink" title="使用pymsql连接数据库"></a>使用pymsql连接数据库</h5><p><code>pymysql</code>是<code>python3.x</code>版本用于连接<code>MySQL</code>服务器的一个库，它遵循<code>python</code>数据库API V2.0版本，并包含了<code>pure-python MySQL</code>客户端库。</p>
+<p>首先使用<code>pip install pymysql</code>安装<code>pymysql</code>，在使用<code>pymysql</code>之前，请确保电脑上的<code>Sql</code>服务已开启。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">开启mysql服务</span></span><br><span class="line">C:\Users\Administrator&gt;net start mysql57</span><br><span class="line"><span class="meta">#</span><span class="bash">关闭mysql服务</span></span><br><span class="line">C:\Users\Administrator&gt;net end mysql57</span><br></pre></td></tr></table></figure>
+
+<h5 id="连接MySQL"><a href="#连接MySQL" class="headerlink" title="连接MySQL"></a>连接MySQL</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment"># 创建连接</span></span><br><span class="line">conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>,</span><br><span class="line">                           user=<span class="string">'root'</span>,</span><br><span class="line">                           password=<span class="string">'1234'</span>,</span><br><span class="line">                           database=<span class="string">'stu_manage'</span>) <span class="comment">#这里要事先创建此数据库</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意的是<strong>port默认为3306</strong>，另外由于版本不同，这里的<code>database</code>不能写作<code>db</code>,<code>password</code>也不能写作<code>passwd</code></p>
+<p>不然真的后面项目报错时，错在哪你都不知道！！！</p>
+<h5 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建游标</span></span><br><span class="line">cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)<span class="comment">#设置游标类型为字典</span></span><br><span class="line"><span class="comment"># 执行SQL，并返回收影响行数</span></span><br><span class="line">cursor.execute(<span class="string">"select id,title from class"</span>) <span class="comment">#执行单条SQL语句</span></span><br><span class="line"><span class="comment">#INSERT、UPDATE、DELETE 等修改数据的语句需手动执行connection.commit()完成对数据修改的提交。</span></span><br><span class="line"></span><br><span class="line">class_list = cursor.fetchall() <span class="comment">#获取所有数据</span></span><br><span class="line">print(class_list)</span><br><span class="line"><span class="comment"># 关闭游标</span></span><br><span class="line">cursor.close()</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="学生管理系统之展示所有班级信息"><a href="#学生管理系统之展示所有班级信息" class="headerlink" title="学生管理系统之展示所有班级信息"></a>学生管理系统之展示所有班级信息</h3><p>一般而言，<code>urls.py</code>中存放的是路由信息，也就是文件的对应关系，我们一般不会直接将业务逻辑直接写在<code>urls.py</code>中，所以一般是另行创建文件夹存放业务逻辑代码。</p>
+<p>首先，在项目下新建文件夹app01，然后创建<code>views.py</code>文件，文件中，我们定义一个函数<code>show_class</code>来连接数据库<code>stu_manage</code>中的<code>class</code>班级信息表。然后将班级信息用一个<code>html</code>页面展示。这个<code>html</code>文件称作模板【template】，所以需要放在<code>templates</code>文件夹下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render,redirect</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_class</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> pymysql</span><br><span class="line">    <span class="comment"># 创建连接</span></span><br><span class="line">    conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>,</span><br><span class="line">                           user=<span class="string">'root'</span>,</span><br><span class="line">                           password=<span class="string">'1234'</span>,</span><br><span class="line">                           database=<span class="string">'stu_manage'</span>)</span><br><span class="line">    <span class="comment"># 创建游标</span></span><br><span class="line">    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)<span class="comment">#</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 执行SQL，并返回收影响行数</span></span><br><span class="line">    cursor.execute(<span class="string">"select id,title from class"</span>)</span><br><span class="line">    class_list = cursor.fetchall()</span><br><span class="line">    print(class_list)</span><br><span class="line">    <span class="comment"># 关闭游标</span></span><br><span class="line">    cursor.close()</span><br><span class="line">    <span class="comment"># 关闭连接</span></span><br><span class="line">    conn.close()</span><br><span class="line">    <span class="keyword">return</span>  render(request, <span class="string">'show_class.html'</span>, &#123;<span class="string">'class_list'</span>:class_list&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>然后修改<code>urls.py</code>中的路由信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># path('admin/', admin.site.urls),</span></span><br><span class="line">    path(<span class="string">'show_class/'</span>,views.show_class),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>最后就是<code>show_class.html</code>静态页面</p>
+<p><img src="https://img-blog.csdnimg.cn/20191117005612983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xhd2VuY2VSYXk=,size_16,color_FFFFFF,t_70" alt="html中写循环语句"></p>
+<p>要注意<code>show_class.html</code>中有这样的代码, <strong>两对大括号</strong>包裹的部分是待替换的部分，<strong>一对大括号里一对百分号中间写上循环条件</strong>则是<code>html</code>中的循环写法，中间填上<code>endfor</code>则循环结束。        </p>
+<p>上述代码中，有几点需要说明，首先定义的函数至少需要一个参数，此处的<code>request</code>是请求后返回的所有信息。对它的处理方式有三种，如下。</p>
+<h4 id="返回模板的三种方式"><a href="#返回模板的三种方式" class="headerlink" title="返回模板的三种方式"></a>返回模板的三种方式</h4><h5 id="HttpResponse-给页面返回一个字符串"><a href="#HttpResponse-给页面返回一个字符串" class="headerlink" title="HttpResponse  给页面返回一个字符串"></a>HttpResponse  给页面返回一个字符串</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> HttpResponse(<span class="string">'hello world'</span>) <span class="comment">#HttpResponse后面只需加一个字符串</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="render"><a href="#render" class="headerlink" title="render"></a>render</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"><span class="keyword">return</span>  render(request, <span class="string">'show_class.html'</span>, &#123;<span class="string">'class_list'</span>:class_list&#125;)</span><br><span class="line"><span class="comment"># render包含三个参数，第一个是request，第二个是需要返回给浏览器的html页面，第三个参数是模板渲染的参数，在html页面提交给浏览器之前将html页面中需要替换的字符串进行替换</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的<code>show_class.html</code>中的由 &#123;&#123;&#125;&#125; 包裹的row.id  就是等待替换的字段，注意到在html中，这些需要替换的字段需要用 &#123;&#123;&#125;&#125; 包裹。</p>
+<h5 id="redirect-重定向"><a href="#redirect-重定向" class="headerlink" title="redirect 重定向"></a>redirect 重定向</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> redirect <span class="comment">#导入redirect方法 </span></span><br><span class="line">redirect(<span class="string">'show_class/'</span>) <span class="comment">#将show_class/路径返回给浏览器</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="学生管理系统之添加班级信息"><a href="#学生管理系统之添加班级信息" class="headerlink" title="学生管理系统之添加班级信息"></a>学生管理系统之添加班级信息</h4><p>在刚才的展示界面，添加一个按钮，能够像数据库传入我们在网页上填入的值。那么，首先，我们需要在<code>show_class.html</code>上加一个按钮，使之能够跳转到新增班级信息的界面【或者直接在这个界面传值】。对于信息提交界面<code>add_class.html</code>，提交数据时HTTP传输方式应该是<code>POST</code>，对于传入的值，执行对应的<code>sql</code>，最后的结果继续展示在<code>show_class.html</code>中。整个流程说完了，下面来开内容。</p>
+<h5 id="添加路由映射"><a href="#添加路由映射" class="headerlink" title="添加路由映射"></a>添加路由映射</h5><p>在<code>urls.py</code>中的<code>urlpatterns</code>加入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(<span class="string">'add_class/'</span>,views.add_class),</span><br></pre></td></tr></table></figure>
+
+<h5 id="增加跳转链接到提交界面"><a href="#增加跳转链接到提交界面" class="headerlink" title="增加跳转链接到提交界面"></a>增加跳转链接到提交界面</h5><p>在<code>show_class.html</code>中添加以下信息：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>班级列表<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/add_class/"</span>&gt;</span>添加<span class="tag">&lt;/<span class="name">a</span>&gt;</span> #这里的href直接就进行跳转了 </span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="新建提交界面"><a href="#新建提交界面" class="headerlink" title="新建提交界面"></a>新建提交界面</h5><p>提交界面需要有输入框，简单的实现如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>添加班级<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">"/add_class/"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>班级名称：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"title"</span>/&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交 "</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意到，我们提交表单时是<code>POST</code>方式，<strong>action=”/add_class/“</strong>实际上是将这个<code>POST</code>的结果传给<code>urls.py</code>中定义的<code>path(&#39;add_class/&#39;,views.add_class),</code>而真正处理这个<code>POST</code>内容的是<code>views.py</code>中的<code>add_class()</code>函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_class</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> render(request, <span class="string">'add_class.html'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(request.method)</span><br><span class="line">        value = request.POST.get(<span class="string">'title'</span>) <span class="comment">#取到提交的值，html中input标签的name要为title</span></span><br><span class="line">        print(value)</span><br><span class="line">        <span class="keyword">import</span> pymysql</span><br><span class="line">        <span class="comment"># 创建连接</span></span><br><span class="line">        conn = pymysql.connect(host=<span class="string">'127.0.0.1'</span>, user=<span class="string">'root'</span>, password=<span class="string">'1234'</span>, database=<span class="string">'stu_manage'</span>)</span><br><span class="line">        <span class="comment"># 创建游标</span></span><br><span class="line">        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)</span><br><span class="line">        cursor.execute(<span class="string">'insert into class(title) values(%s)'</span>,[value,])</span><br><span class="line">        conn.commit()<span class="comment">#将这个值提交到数据库</span></span><br><span class="line">        cursor.close()</span><br><span class="line">        conn.close()</span><br><span class="line">        <span class="keyword">return</span>  redirect(<span class="string">'/show_class/'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>前面的<code>request.method == &#39;GET&#39;</code>是以<code>GET</code>方式访问<code>add_class.html</code>，而当是表单提交时，则进行数据库的增加，之后则是<strong>使用上面介绍到的返回模板的方式</strong>重定向到<code>show_class/</code>,然后又调用<code>show_class()</code>方法展示处理后的结果。</p>
+<blockquote>
+<p>INSERT、UPDATE、DELETE 等修改数据的语句需手动执行connection.commit()完成对数据修改的提交。</p>
+</blockquote>
+<hr>
+<p>参考链接：</p>
+<p>1.<a href="https://www.bilibili.com/video/av22606568?p=17" target="_blank" rel="noopener">Python全栈（老男孩4期）Django框架入门到应用P17</a></p>
+<p>2.<a href="https://shockerli.net/post/python3-pymysql/" target="_blank" rel="noopener">Python 3 进阶 —— 使用 PyMySQL 操作 MySQL</a></p>
+<p>3.<a href="https://www.runoob.com/python3/python3-mysql.html" target="_blank" rel="noopener">Python3 MySQL 数据库连接 - PyMySQL 驱动</a></p>
+<p>4.<a href="https://www.cnblogs.com/zhufanyu/p/11662729.html" target="_blank" rel="noopener">django中的几种返回模版的方式</a></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/django/" rel="tag"># django</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/16/leetcode-移除元素/" rel="next" title="leetcode_移除元素">
+                  <i class="fa fa-chevron-left"></i> leetcode_移除元素
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#django安装"><span class="nav-number">1.</span> <span class="nav-text">django安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令行创建django项目"><span class="nav-number">1.1.</span> <span class="nav-text">命令行创建django项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pycharm创建django项目"><span class="nav-number">1.2.</span> <span class="nav-text">pycharm创建django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在setting-py中配置静态文件路径"><span class="nav-number">1.2.1.</span> <span class="nav-text">在setting.py中配置静态文件路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在urls-py文件中添加路由信息"><span class="nav-number">1.2.2.</span> <span class="nav-text">在urls.py文件中添加路由信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用pymsql连接数据库"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用pymsql连接数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接MySQL"><span class="nav-number">1.2.4.</span> <span class="nav-text">连接MySQL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查询数据"><span class="nav-number">1.2.5.</span> <span class="nav-text">查询数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学生管理系统之展示所有班级信息"><span class="nav-number">2.</span> <span class="nav-text">学生管理系统之展示所有班级信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#返回模板的三种方式"><span class="nav-number">2.1.</span> <span class="nav-text">返回模板的三种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HttpResponse-给页面返回一个字符串"><span class="nav-number">2.1.1.</span> <span class="nav-text">HttpResponse  给页面返回一个字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#render"><span class="nav-number">2.1.2.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redirect-重定向"><span class="nav-number">2.1.3.</span> <span class="nav-text">redirect 重定向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学生管理系统之添加班级信息"><span class="nav-number">2.2.</span> <span class="nav-text">学生管理系统之添加班级信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加路由映射"><span class="nav-number">2.2.1.</span> <span class="nav-text">添加路由映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增加跳转链接到提交界面"><span class="nav-number">2.2.2.</span> <span class="nav-text">增加跳转链接到提交界面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#新建提交界面"><span class="nav-number">2.2.3.</span> <span class="nav-text">新建提交界面</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/imgs/head.jpg"
+      alt="mqray">
+  <p class="site-author-name" itemprop="name">mqray</p>
+  <div class="site-description" itemprop="description">当改变命运的时刻降临，犹豫就会败北！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/mqray" title="GitHub &rarr; https://github.com/mqray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:Slawenceray@163.com" title="E-Mail &rarr; mailto:Slawenceray@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">Github</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mqray</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">72k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  </div>
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("10/01/2019 15:13:14");//修改为自己的blog建站时间
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zQNx38LJAan0fg2afyE1EPhC-gzGzoHsz',
+    appKey: 'IrndDroTPDNUVFcBOfJefP3h',
+    placeholder: '留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
