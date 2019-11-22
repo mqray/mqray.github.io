@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="最接近的三数之和给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。 例如，给定数组 nums = [-1，2，1，-4], 和 target = 1. 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).">
+  <meta name="description" content="给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。示例1：12输入: [1,3,5,6], 5输出: 2示例2：12输入: [1,3,5,6], 2输出: 1示例3：12输入: [1,3,5,6], 7输出: 4">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode_最接近的三数之和">
-<meta property="og:url" content="http://yoursite.com/2019/11/13/leetcode-最接近的三数之和/index.html">
+<meta property="og:title" content="leetcode_搜索插入位置">
+<meta property="og:url" content="http://yoursite.com/2019/11/22/leetcode-搜索插入位置/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="最接近的三数之和给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。 例如，给定数组 nums = [-1，2，1，-4], 和 target = 1. 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).">
+<meta property="og:description" content="给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。示例1：12输入: [1,3,5,6], 5输出: 2示例2：12输入: [1,3,5,6], 2输出: 1示例3：12输入: [1,3,5,6], 7输出: 4">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-13T15:28:55.892Z">
+<meta property="og:updated_time" content="2019-11-22T11:51:38.226Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode_最接近的三数之和">
-<meta name="twitter:description" content="最接近的三数之和给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。 例如，给定数组 nums = [-1，2，1，-4], 和 target = 1. 与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).">
-  <link rel="canonical" href="http://yoursite.com/2019/11/13/leetcode-最接近的三数之和/">
+<meta name="twitter:title" content="leetcode_搜索插入位置">
+<meta name="twitter:description" content="给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。示例1：12输入: [1,3,5,6], 5输出: 2示例2：12输入: [1,3,5,6], 2输出: 1示例3：12输入: [1,3,5,6], 7输出: 4">
+  <link rel="canonical" href="http://yoursite.com/2019/11/22/leetcode-搜索插入位置/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>leetcode_最接近的三数之和 | mqray's blog</title>
+  <title>leetcode_搜索插入位置 | mqray's blog</title>
   
 
 
@@ -361,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/leetcode-最接近的三数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/22/leetcode-搜索插入位置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +375,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            leetcode_最接近的三数之和
+            leetcode_搜索插入位置
             
 
           
@@ -392,16 +392,33 @@
                 
               
 
-              <time title="创建时间：2019-11-13 23:08:49 / 修改时间：23:28:55" itemprop="dateCreated datePublished" datetime="2019-11-13T23:08:49+08:00">2019-11-13</time>
+              <time title="创建时间：2019-11-22 19:36:47 / 修改时间：19:51:38" itemprop="dateCreated datePublished" datetime="2019-11-22T19:36:47+08:00">2019-11-22</time>
             </span>
           
             
 
             
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
-            <span id="/2019/11/13/leetcode-最接近的三数之和/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_最接近的三数之和" title="阅读次数">
+            <span id="/2019/11/22/leetcode-搜索插入位置/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_搜索插入位置" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -419,8 +436,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/13/leetcode-最接近的三数之和/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/13/leetcode-最接近的三数之和/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/22/leetcode-搜索插入位置/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/22/leetcode-搜索插入位置/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -433,7 +450,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.1k</span>
+              <span>1.2k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -456,26 +473,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="最接近的三数之和"><a href="#最接近的三数之和" class="headerlink" title="最接近的三数之和"></a>最接近的三数之和</h4><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。<strong>返回这三个数的和</strong>。假定每组输入只存在唯一答案。</p><blockquote>
-<p>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.</p>
-<p>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).</p>
-</blockquote><a id="more"></a>
+        <p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p><p>你可以假设数组中无重复元素。</p><p>示例1：</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">5</span></span><br><span class="line">输出: <span class="number">2</span></span><br></pre></td></tr></table></figure><p>示例2：</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">2</span></span><br><span class="line">输出: <span class="number">1</span></span><br></pre></td></tr></table></figure><p>示例3：</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">7</span></span><br><span class="line">输出: <span class="number">4</span></span><br></pre></td></tr></table></figure><a id="more"></a>
 
-<h4 id="双指针对撞"><a href="#双指针对撞" class="headerlink" title="双指针对撞"></a>双指针对撞</h4><p>和上一题的思路很像，差别在于之前的target为0，而现在的target需要指定。那么在判别时应注意哪些问题呢？</p>
-<p>这里沿用之前的表达，用<code>limit = nums[i]+nums[left]+nums[right]</code>迭代和对撞指针过程中产生组合数的和。</p>
-<ol>
-<li>首先，这个target与limit之间的差值是变动的，它可能会有一个从正到负的变化，也可能会有从负到正的变化，而我们只关注差值的最小值</li>
-<li>在双指针对撞的过程中，我们应该关注每一次对撞得到的limit的值与target差值的绝对值，并实时更新这个差值【取绝对值最小的差值】</li>
-<li>同时，对于产生的绝对值最小的差值，我们应当记录下此刻的limit的结果，因为题目要求返回的是这三个数的和，而不是对应的数字组合。</li>
-</ol>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threeSumClosest</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        nums.sort()</span><br><span class="line">        diff = float(<span class="string">'inf'</span>)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            left,right = i+<span class="number">1</span>,len(nums)<span class="number">-1</span></span><br><span class="line">            <span class="keyword">while</span> left&lt;right:</span><br><span class="line">                limit  = nums[i] + nums[left] + nums[right]</span><br><span class="line">                <span class="keyword">if</span> abs(limit-target) &lt; diff:</span><br><span class="line">                    diff = abs(limit-target)<span class="comment">#这里这用每次暂存待比较的差值，保证差值越来越小就行</span></span><br><span class="line">                    res = limit<span class="comment">#保存最后需要返回的结果</span></span><br><span class="line">                <span class="keyword">if</span> limit &lt; target:</span><br><span class="line">                    left = left + <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> limit&gt; target:</span><br><span class="line">                    right = right - <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">nums = [<span class="number">-1</span>,<span class="number">2</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">-4</span>]</span><br><span class="line">target = <span class="number">1</span></span><br><span class="line">s = Solution()</span><br><span class="line">res = s.threeSumClosest(nums,target)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
 
-<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>时空复杂度几乎和<strong>三数之和</strong>一样，只是这里多用了两个内存空间而已。</p>
+
+
+
+
+
+
+
+
+<p>示例4：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">0</span></span><br><span class="line">输出: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h4><h5 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h5><p>从题目上看，和普通的二分操作几乎没有差别，但是要注意边界问题，循环条件与<code>if</code>判断后的操作应该相对应起来，这里我使用我自己最常用的写法，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2019/11/22 19:21</span></span><br><span class="line"><span class="comment"># @Author  : mqray</span></span><br><span class="line"><span class="comment"># @File    : 搜索插入位置.py</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">searchInsert</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        left,right = <span class="number">0</span>,len(nums)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;=right :</span><br><span class="line">            mid = (left+right)&gt;&gt;<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid]==target:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">            <span class="keyword">elif</span> nums[mid]&gt;target:</span><br><span class="line">                right = mid - <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span>  left</span><br><span class="line"></span><br><span class="line">s = Solution()</span><br><span class="line">nums = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">target = <span class="number">4</span></span><br><span class="line">res = s.searchInsert(nums,target)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
+
+<h5 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h5><p>上述过程就是常见的二分操作过程，时间复杂度为<code>O(logN)</code>，空间复杂度为<code>O(1)</code>，具体的时间开销如下：【这个测试耗时并不能说明问题，重复提交测试通过的时间并不一致】</p>
 <blockquote>
-<p>时间开销在于 对列表的先排序以及遍历列表以及指针对撞两部分，对应的：</p>
-<p>时间复杂度：排序：O(NlogN) + 第一层遍历列表O(N)*第二层指针对撞遍历O(N) = O(N^2)</p>
-<p>空间开销在于用来存储最终结果的列表</p>
-<p>空间复杂度：O(1)</p>
+<p>执行用时 :36 ms, 在所有 python 提交中击败了93.60%的用户</p>
+<p>内存消耗 :12.2 MB, 在所有 python 提交中击败了36.72%的用户</p>
+</blockquote>
+<h4 id="高级遍历"><a href="#高级遍历" class="headerlink" title="高级遍历"></a>高级遍历</h4><p>为什么说高级遍历呢，因为这段代码用列表生成式，只用了一行代码，赏心悦目，就很赞。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">searchInsert</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> len([arg <span class="keyword">for</span> arg <span class="keyword">in</span> nums <span class="keyword">if</span> arg &lt; target])</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度仍然是<code>O(N)</code>，空间复杂度为<code>O(N)</code>.</p>
+<blockquote>
+<p>执行用时 :44 ms, 在所有 python 提交中击败了63.37%的用户</p>
+<p>内存消耗 :12.2 MB, 在所有 python 提交中击败了31.84%的用户</p>
 </blockquote>
 
     </div>
@@ -510,8 +536,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/13/flask环境配置/" rel="next" title="flask环境配置">
-                  <i class="fa fa-chevron-left"></i> flask环境配置
+                <a href="/2019/11/21/leetcode-排序数组中首尾位置/" rel="next" title="leetcode_排序数组中首尾位置">
+                  <i class="fa fa-chevron-left"></i> leetcode_排序数组中首尾位置
                 </a>
               
             </div>
@@ -519,10 +545,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/11/14/日记/" rel="prev" title="随笔集">
-                  随笔集 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -571,7 +593,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#最接近的三数之和"><span class="nav-number">1.</span> <span class="nav-text">最接近的三数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双指针对撞"><span class="nav-number">2.</span> <span class="nav-text">双指针对撞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.</span> <span class="nav-text">复杂度分析</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分法"><span class="nav-number">1.</span> <span class="nav-text">二分法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解题思路"><span class="nav-number">1.1.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.2.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级遍历"><span class="nav-number">2.</span> <span class="nav-text">高级遍历</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
