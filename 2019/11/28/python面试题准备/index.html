@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python面试题准备">
+<meta property="og:url" content="http://yoursite.com/2019/11/28/python面试题准备/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-27T17:09:51.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python面试题准备">
+<meta name="twitter:description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/python面试题准备/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python面试题准备 | mqray's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mqray's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">no bb, show me the codes.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">10</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-top">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/python面试题准备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            python面试题准备
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-28 01:09:17 / 修改时间：01:09:51" itemprop="dateCreated datePublished" datetime="2019-11-28T01:09:17+08:00">2019-11-28</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/11/28/python面试题准备/" class="post-meta-item leancloud_visitors" data-flag-title="python面试题准备" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/28/python面试题准备/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/28/python面试题准备/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.3k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>4 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="python中的可变对象和不可变对象？"><a href="#python中的可变对象和不可变对象？" class="headerlink" title="python中的可变对象和不可变对象？"></a>python中的可变对象和不可变对象？</h4><p>抽象数据类型的操作一般分为三类：</p><ol>
+<li><p>构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户  </p>
+</li>
+<li><p>解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额   </p>
+</li>
+<li><p>变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作</p>
+</li>
+</ol><a id="more"></a>
+
+<p>如果一个类型，具只具有1和2两种操作，也就说只具有构造和解析操作，那么这个类型就是不可变类型，这个类型的对象就是不可变对象<br>如果一个类型，具有1、2、3三种操作，这个类型就是可变类型，这个类型的对象就是可变对象。</p>
+<h5 id="不可变对象"><a href="#不可变对象" class="headerlink" title="不可变对象"></a>不可变对象</h5><blockquote>
+<p>对象所指向的内存中的值不能被改变，当改变这个变量的时候，原来指向的内存中的值不变，变量不再指向原来的值，而是开辟一块新的内存，变量指向新的内存。 </p>
+</blockquote>
+<p>python中的不可变对象有<code>数字int、float</code>，<code>字符串str</code>，<code>元组tuple</code>以及<code>布尔类型boolean</code></p>
+<p><strong>但是要注意整数中的最小整数池【-6,255】</strong></p>
+<h6 id="小整数对象池"><a href="#小整数对象池" class="headerlink" title="小整数对象池"></a>小整数对象池</h6><p>整数在程序中的使用非常广泛，Python为了优化速度，使用了小整数对象池， 避免为整数频繁申请和销毁内存空间。</p>
+<p>Python 对小整数的定义是 [-5, 257) 这些整数对象是提前建立好的，不会被垃圾回收。在一个 Python 的程序中，无论这个整数处于LEGB中的哪个位置，</p>
+<h5 id="可变对象"><a href="#可变对象" class="headerlink" title="可变对象"></a>可变对象</h5><blockquote>
+<p>对象指向的内存中的值会改变，当更改这个变量的时候，还是指向原来内存中的值，并且在原来的内存值进行原地修改，并没有开辟新的内存。 </p>
+</blockquote>
+<p>python中的可变对象有<code>集合set</code>，<code>字典dict</code>，<code>列表list</code></p>
+<p><strong>字典的键值中的key必须是不可变类型</strong>，如数字，字符串，元组，而列表、元组、字典是可变类型 </p>
+<h5 id="100亿以内的质数个数455052511"><a href="#100亿以内的质数个数455052511" class="headerlink" title="100亿以内的质数个数455052511"></a>100亿以内的质数个数<code>455052511</code></h5><h4 id="python中的魔术方法"><a href="#python中的魔术方法" class="headerlink" title="python中的魔术方法"></a>python中的魔术方法</h4><blockquote>
+<p>python中以__双下划线包起来的方法均称作魔法方法。主要包含以下几类：</p>
+</blockquote>
+<ul>
+<li>构造和初始化 <code>__init__()</code>,<code>__new__()</code>,两者共同构成构造函数，<code>__del__()</code>，后者可以理解为构析函数</li>
+<li>控住属性访问 <code>__getattr__(self,name)</code>,<code>__setattr__(self,name,val)</code>,<code>__delattr__()</code>,<code>__getattribute__(self,name)</code></li>
+<li>创建自定义容器<code>__getitem__</code>,<code>__setitem__</code>,<code>__delitem__</code>等</li>
+<li>用于比较、数值计算、类型转化的方法</li>
+<li>复制对象<code>__copy__</code></li>
+<li>调用对象<code>__call__</code></li>
+</ul>
+<h4 id="python中实现只读属性？"><a href="#python中实现只读属性？" class="headerlink" title="python中实现只读属性？"></a>python中实现只读属性？</h4><h5 id="通过property装饰器以及私有属性"><a href="#通过property装饰器以及私有属性" class="headerlink" title="通过property装饰器以及私有属性"></a>通过<code>property</code>装饰器以及私有属性</h5><p>使用双下线表示私有变量，使用<code>@property</code><strong>将类中的方法绑定为实例属性，之后访问就像是在访问实例属性一样</strong>，引用方式是<code>obj.方法名</code>;要注意的是，绑定的这个方法只能有<code>self</code>这个实例。调用时，无需括号；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(object)</span>:</span></span><br><span class="line">	    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span><span class="comment"># 实例属性</span></span><br><span class="line">        	self.__age =name <span class="comment">#私有变量，在类外面访问是obj._类名__变量名</span></span><br><span class="line">            </span><br><span class="line"><span class="meta">        @property </span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">get_ge</span><span class="params">(self)</span>:</span><span class="comment">#公有方法，普通类方法</span></span><br><span class="line">        	<span class="keyword">return</span> self.__age</span><br><span class="line">p1 = Person() </span><br><span class="line">p1.age = <span class="number">2</span> <span class="comment">#AttributeError: can't set attribute</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="魔法方法-setattr-设置逻辑阻止赋值"><a href="#魔法方法-setattr-设置逻辑阻止赋值" class="headerlink" title="魔法方法__setattr__设置逻辑阻止赋值"></a>魔法方法<code>__setattr__</code>设置逻辑阻止赋值</h5><blockquote>
+<p>由于每次对变量的修改，都会调用<code>__setattr__</code>方法，所以在<code>__setattr__</code>时，判断是否可以修改该变量的的值，如改变量被设置为只读属性，则不允许修改</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span><span class="params">(object)</span>:</span></span><br><span class="line">    task_property = <span class="string">'read'</span><span class="comment">#类属性，所有对象均可访问，与对象无关</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># self.name = 'mqray'</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> key == <span class="string">"task_property"</span>:<span class="comment">#如果只读，则抛出异常</span></span><br><span class="line">            <span class="keyword">raise</span> AttributeError(<span class="string">'file property is readonly, so you can not modify it.'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            super(Task, self).__setattr__(key,value)</span><br><span class="line">            <span class="comment"># self.__dict__[key] = value</span></span><br><span class="line"></span><br><span class="line">task = Task()</span><br><span class="line">print(task.task_property)</span><br><span class="line">task.task_property = <span class="number">10</span></span><br><span class="line">print(task.task_property)</span><br><span class="line"><span class="comment"># AttributeError: file property is readonly, so you can not modify it.</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="谈谈你对面向对象的理解"><a href="#谈谈你对面向对象的理解" class="headerlink" title="谈谈你对面向对象的理解"></a>谈谈你对面向对象的理解</h4><p>首先针对<code>python</code>，我们常说<code>python万物皆对象</code>，为什么呢？在<code>python</code>环境中输入没有声明的变量<code>a</code>，报错信息是<code>NameError: name &#39;a&#39; is not defined</code>，而不是<code>Variable</code>，因为在<code>python</code>中将所有的函数名、变量名，类型名等标识符都称作名字，在<strong>名字空间中总有一个对象与之相关联</strong>，所以说<strong>万物皆对象</strong>。</p>
+<blockquote>
+<p>python中的对象叫<code>PyObject</code>，并基于此，定义了两种类型的变量，定长变量【如float】和变长变量，后者在<code>PyObject</code>的基础上封装定义为<code>PyVarObject</code></p>
+</blockquote>
+<p>针对面向对象，有</p>
+<ul>
+<li>面向对象是基于万物皆对象这个哲学观点. 把一个对象抽象成类,具体上就是把一个对象的静态特征和动态特征抽象成属性和方法,也就是把一类事物的算法和数据结构封装在一个类之中,程序就是多个对象和互相之间的通信组成的 </li>
+<li>面向对象三大特征：封装、继承、多态</li>
+<li>封装，将一类事物的属性和行为抽象为一个类，使其属性私有化，行为公开化，提高了数据隐秘性的同时，代码模块化。使得代码的复用性更高</li>
+<li>继承：将一类事物的共有属性和行为抽象为一个高层类，称作父类，每一个子类继承父类方法、属性的同时，可以扩展自己的特有属性和方法。</li>
+<li>多态：封装继承实现了代码复用，多态则实现了接口的重用，子类可以对父类中的属性或方法重写，降低了父类和子类之间的耦合程度。</li>
+</ul>
+<h4 id="对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><a href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器" class="headerlink" title="对装饰器的理解并写一个计时器记录方法执行性能的装饰器"></a>对装饰器的理解并写一个计时器记录方法执行性能的装饰器</h4><p>不需要对原始代码做修改就能增加额外的功能【参见<a href="[http://mqrayblog.cn/2019/11/27/%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8/](http://mqrayblog.cn/2019/11/27/闭包与装饰器/)">闭包与装饰器</a>】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">func2</span><span class="params">()</span>:</span></span><br><span class="line">        start_time = time.process_time()</span><br><span class="line">        func()</span><br><span class="line">        end_time = time.process_time()</span><br><span class="line">        print(<span class="string">'running time:'</span>,end_time-start_time)</span><br><span class="line">        <span class="keyword">return</span> func()</span><br><span class="line">    <span class="keyword">return</span> func2</span><br><span class="line"></span><br><span class="line"><span class="meta">@func1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testfunc</span><span class="params">()</span>:</span></span><br><span class="line">    x = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000</span>) ]</span><br><span class="line"></span><br><span class="line">testfunc()</span><br></pre></td></tr></table></figure>
+
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><h4 id="对设计模式的理解，简述你了解的设计模式"><a href="#对设计模式的理解，简述你了解的设计模式" class="headerlink" title="对设计模式的理解，简述你了解的设计模式"></a>对设计模式的理解，简述你了解的设计模式</h4><p>设计模式Design Pattern: 是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。</p>
+<h5 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h5><ol>
+<li><strong>开放封闭原则 Open Close Principle</strong> ： <strong>对扩展开放，对修改关闭</strong> </li>
+<li><strong>里氏替换原则 Liskov Substitution Principle,LSP</strong>； 任何基类可以出现的地方，子类一定可以出现 。 LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为 。</li>
+<li><strong>依赖倒转原则 Dependence Inversion Principle</strong>： 是对接口编程，依赖于抽象而不依赖于具体。 </li>
+<li><strong>接口隔离原则 Interface Segregation Principle</strong>： 使用多个隔离的接口，比使用单个接口要好。 【 降低类之间的耦合度 】</li>
+<li><strong>迪米特法则 Demeter Principle</strong> ： 又称<strong>最少知道原则</strong>， 一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立 。</li>
+<li><strong>合成复用原则 Composite Reuse Principle</strong> ： 尽量使用合成/聚合的方式，而不是使用继承 </li>
+</ol>
+<p><strong>在《设计模式》一书中共有23中设计模式，分作创建型、结构型和行为三大类。</strong></p>
+<h5 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h5><blockquote>
+<p>因为对象的创建会消耗掉系统的很多资源，所以单独对对象的创建进行研究，从而能够高效地创建对象就是创建型模式要探讨的问题 </p>
+</blockquote>
+<ul>
+<li>简单工厂模式 Simple Factory </li>
+<li>工厂方法 Factory Method </li>
+<li>抽象工厂 Abstract Factory </li>
+<li>创建者模式 Builder </li>
+<li>原型模式 Prototype </li>
+<li>单例模式 Singleton </li>
+</ul>
+<h5 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h5><blockquote>
+<p> 解决了对象的创建问题之后 ，如何设计对象的结构、继承和依赖关系会影响到后续程序的维护性、代码的健壮性、耦合性等 </p>
+</blockquote>
+<ul>
+<li>外观模式 Facade </li>
+<li>适配器模式 Adapter </li>
+<li>代理模式 Proxy </li>
+<li>装饰模式 Decorator </li>
+<li>桥模式 Bridge </li>
+<li>组合模式 Composite </li>
+<li>享元模式 Flyweight </li>
+</ul>
+<h5 id="行为型模式"><a href="#行为型模式" class="headerlink" title="行为型模式"></a>行为型模式</h5><blockquote>
+<p>在对象的结构和对象的创建问题都解决了之后，就剩下对象的行为问题了，如果对象的行为设计的好，那么对象的行为就会更清晰，它们之间的协作效率就会提高 </p>
+</blockquote>
+<ul>
+<li>模板方法  Template Method </li>
+<li>状态模式   State </li>
+<li>观察者模式 Observer </li>
+<li>策略模式   Strategy </li>
+<li>职责链模式  Chain of Responsibility </li>
+<li>访问者模式  Visitor </li>
+<li>命令模式  Command </li>
+<li>调停者模式  Mediator </li>
+<li>备忘录模式  Memento </li>
+<li>迭代器模式  Iterator </li>
+<li>解释器模式  Interpreter </li>
+</ul>
+<p>由于<strong>单例模式 Singleton</strong>代码最短，最有可能考到</p>
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><blockquote>
+<p>保证一个类仅有一个实例，并提供一个访问它的全局访问点</p>
+<p>当类只能有一个实例而客户可以从一个周知的访问点访问它当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能适用一个扩展的实例时。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, *args, **kwargs)</span>:</span></span><br><span class="line">        <span class="comment">#new方法是在构造方法__init__之前执行的</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span>  hasattr(cls,<span class="string">'_instance'</span>):</span><br><span class="line">            orig = super(Singleton, cls)</span><br><span class="line">            cls._instance = orig.__new__(cls)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cls._instance</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span><span class="params">(Singleton)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">a = MyClass(<span class="string">'RAY'</span>)</span><br><span class="line"><span class="comment"># b = MyClass('Jack')</span></span><br><span class="line"></span><br><span class="line">print(a.name)</span><br><span class="line"><span class="comment"># print(b.name)</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/面试/" rel="tag"># 面试</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/27/生成器和迭代器/" rel="next" title="生成器和迭代器">
+                  <i class="fa fa-chevron-left"></i> 生成器和迭代器
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的可变对象和不可变对象？"><span class="nav-number">1.</span> <span class="nav-text">python中的可变对象和不可变对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.1.</span> <span class="nav-text">不可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#小整数对象池"><span class="nav-number">1.1.1.</span> <span class="nav-text">小整数对象池</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变对象"><span class="nav-number">1.2.</span> <span class="nav-text">可变对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#100亿以内的质数个数455052511"><span class="nav-number">1.3.</span> <span class="nav-text">100亿以内的质数个数455052511</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的魔术方法"><span class="nav-number">2.</span> <span class="nav-text">python中的魔术方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中实现只读属性？"><span class="nav-number">3.</span> <span class="nav-text">python中实现只读属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过property装饰器以及私有属性"><span class="nav-number">3.1.</span> <span class="nav-text">通过property装饰器以及私有属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#魔法方法-setattr-设置逻辑阻止赋值"><span class="nav-number">3.2.</span> <span class="nav-text">魔法方法__setattr__设置逻辑阻止赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谈谈你对面向对象的理解"><span class="nav-number">4.</span> <span class="nav-text">谈谈你对面向对象的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><span class="nav-number">5.</span> <span class="nav-text">对装饰器的理解并写一个计时器记录方法执行性能的装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number"></span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对设计模式的理解，简述你了解的设计模式"><span class="nav-number">1.</span> <span class="nav-text">对设计模式的理解，简述你了解的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">1.1.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建型"><span class="nav-number">1.2.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.3.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.4.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">2.</span> <span class="nav-text">单例模式</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/imgs/head.jpg"
+      alt="mqray">
+  <p class="site-author-name" itemprop="name">mqray</p>
+  <div class="site-description" itemprop="description">当改变命运的时刻降临，犹豫就会败北！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/mqray" title="GitHub &rarr; https://github.com/mqray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:Slawenceray@163.com" title="E-Mail &rarr; mailto:Slawenceray@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">Github</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mqray</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">107k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">1:37</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  </div>
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("10/01/2019 15:13:14");//修改为自己的blog建站时间
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zQNx38LJAan0fg2afyE1EPhC-gzGzoHsz',
+    appKey: 'IrndDroTPDNUVFcBOfJefP3h',
+    placeholder: '留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
