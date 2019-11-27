@@ -55,19 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。示例： 给定 1-&amp;gt;2-&amp;gt;3-&amp;gt;4, 你应该返回 2-&amp;gt;1-&amp;gt;4-&amp;gt;3. 递归思路显然，对于存在的链表节点数为0或者为1，直接返回单链表头指针。而对于长度大于2的链表，一次两两交换不能完成操作，所以需要继续进行交换。这个过程比较容易理解。递归过">
-<meta name="keywords" content="leetcode">
+  <meta name="description" content="开篇之前，先给一张图神清气爽一下：容器容器指用来存储多个元素的数据结构，python中的容器有list,tuple,dict,set,str等 容器中所有元素可以通过跌打获取 容器中所有元素存储在内存中 常见的容器list,tuple,dict,set,str都可以通过迭代获取，它们是可迭代对象Iterable 但并不是所有容器都是可迭代对象Iterable">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode_两两交换链表中的节点">
-<meta property="og:url" content="http://yoursite.com/2019/11/27/leetcode-两两交换链表中的节点/index.html">
+<meta property="og:title" content="生成器和迭代器">
+<meta property="og:url" content="http://yoursite.com/2019/11/27/生成器和迭代器/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。示例： 给定 1-&amp;gt;2-&amp;gt;3-&amp;gt;4, 你应该返回 2-&amp;gt;1-&amp;gt;4-&amp;gt;3. 递归思路显然，对于存在的链表节点数为0或者为1，直接返回单链表头指针。而对于长度大于2的链表，一次两两交换不能完成操作，所以需要继续进行交换。这个过程比较容易理解。递归过">
+<meta property="og:description" content="开篇之前，先给一张图神清气爽一下：容器容器指用来存储多个元素的数据结构，python中的容器有list,tuple,dict,set,str等 容器中所有元素可以通过跌打获取 容器中所有元素存储在内存中 常见的容器list,tuple,dict,set,str都可以通过迭代获取，它们是可迭代对象Iterable 但并不是所有容器都是可迭代对象Iterable">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-27T06:29:02.029Z">
+<meta property="og:image" content="https://nvie.com/img/relationships.png">
+<meta property="og:updated_time" content="2019-11-27T12:44:13.589Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode_两两交换链表中的节点">
-<meta name="twitter:description" content="给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。示例： 给定 1-&amp;gt;2-&amp;gt;3-&amp;gt;4, 你应该返回 2-&amp;gt;1-&amp;gt;4-&amp;gt;3. 递归思路显然，对于存在的链表节点数为0或者为1，直接返回单链表头指针。而对于长度大于2的链表，一次两两交换不能完成操作，所以需要继续进行交换。这个过程比较容易理解。递归过">
-  <link rel="canonical" href="http://yoursite.com/2019/11/27/leetcode-两两交换链表中的节点/">
+<meta name="twitter:title" content="生成器和迭代器">
+<meta name="twitter:description" content="开篇之前，先给一张图神清气爽一下：容器容器指用来存储多个元素的数据结构，python中的容器有list,tuple,dict,set,str等 容器中所有元素可以通过跌打获取 容器中所有元素存储在内存中 常见的容器list,tuple,dict,set,str都可以通过迭代获取，它们是可迭代对象Iterable 但并不是所有容器都是可迭代对象Iterable">
+<meta name="twitter:image" content="https://nvie.com/img/relationships.png">
+  <link rel="canonical" href="http://yoursite.com/2019/11/27/生成器和迭代器/">
 
 
 <script id="page-configurations">
@@ -81,7 +83,7 @@
   };
 </script>
 
-  <title>leetcode_两两交换链表中的节点 | mqray's blog</title>
+  <title>生成器和迭代器 | mqray's blog</title>
   
 
 
@@ -361,7 +363,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/leetcode-两两交换链表中的节点/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/生成器和迭代器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +377,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            leetcode_两两交换链表中的节点
+            生成器和迭代器
             
 
           
@@ -392,33 +394,16 @@
                 
               
 
-              <time title="创建时间：2019-11-27 13:57:34 / 修改时间：14:29:02" itemprop="dateCreated datePublished" datetime="2019-11-27T13:57:34+08:00">2019-11-27</time>
+              <time title="创建时间：2019-11-27 19:30:04 / 修改时间：20:44:13" itemprop="dateCreated datePublished" datetime="2019-11-27T19:30:04+08:00">2019-11-27</time>
             </span>
           
             
 
             
           
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/链表/" itemprop="url" rel="index">
-                    <span itemprop="name">链表</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
-            <span id="/2019/11/27/leetcode-两两交换链表中的节点/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_两两交换链表中的节点" title="阅读次数">
+            <span id="/2019/11/27/生成器和迭代器/" class="post-meta-item leancloud_visitors" data-flag-title="生成器和迭代器" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -436,8 +421,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/27/leetcode-两两交换链表中的节点/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/27/leetcode-两两交换链表中的节点/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/27/生成器和迭代器/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/27/生成器和迭代器/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -450,7 +435,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.4k</span>
+              <span>1.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -473,29 +458,89 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p><p><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际的进行节点交换。</p><p>示例：</p><blockquote>
-<p>给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3.</p>
-</blockquote><h4 id="递归思路"><a href="#递归思路" class="headerlink" title="递归思路"></a>递归思路</h4><p>显然，对于存在的链表节点数为0或者为1，直接返回单链表头指针。而对于长度大于2的链表，一次两两交换不能完成操作，所以需要继续进行交换。这个过程比较容易理解。<strong>递归过程中需要连接后续的递归操作</strong>，在<code>递归版本</code>中不需要使用<code>phead=head</code>保存头结点，因为程序总是递归进行，无法记录<code>phead</code>值。</p><a id="more"></a>
+        <p>开篇之前，先给一张图神清气爽一下：</p><p><img src="https://nvie.com/img/relationships.png" alt="迭代器与生成器"></p><h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><p>容器指用来存储多个元素的数据结构，<code>python</code>中的容器有<code>list,tuple,dict,set,str</code>等</p><ul>
+<li>容器中所有元素可以通过跌打获取</li>
+<li>容器中所有元素存储在内存中</li>
+<li>常见的容器<code>list,tuple,dict,set,str</code>都可以通过迭代获取，它们是可迭代对象<code>Iterable</code></li>
+<li>但并不是所有容器都是可迭代对象<code>Iterable</code></li>
+</ul><a id="more"></a>
 
 
 
+<h4 id="可迭代对象"><a href="#可迭代对象" class="headerlink" title="可迭代对象"></a>可迭代对象</h4><p>可迭代对象<code>Iterable</code>：可以被迭代获取的对象，它定义了可返回迭代器的<code>__iter__()</code>方法。</p>
+<ul>
+<li>通常<code>容器</code>一般是可迭代对象。</li>
+</ul>
+<p>凡可作用于<code>for</code>循环的对象都是可迭代对象<code>Iterable</code>，常见的可迭代对象有<code>list,tuple,dict,set,str</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> x:</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">swapPairs2</span><span class="params">(self, head: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">    <span class="comment">#递归方案</span></span><br><span class="line">    <span class="comment"># phead = head 这里写了没用，每次递归调用都没法保留最原始的head值，所以相应的在返回时也不应当返回head</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head.next:</span><br><span class="line">        <span class="keyword">return</span>  head</span><br><span class="line">    <span class="keyword">if</span> head <span class="keyword">and</span> head.next:<span class="comment">#还剩大于三个节点</span></span><br><span class="line">        tmp = head.next</span><br><span class="line">        head.next = self.swapPairs2(tmp.next)<span class="comment"># 先连接后续节点</span></span><br><span class="line">        tmp.next = head<span class="comment">#交换后得到新的头节点tmp</span></span><br><span class="line">    <span class="keyword">return</span> tmp<span class="comment">#最后返回的tmp是第一次交换产生的新的头结点</span></span><br></pre></td></tr></table></figure>
+<p>列表<code>x</code>在<code>for</code>循环中经过<code>iter()</code>方法变为迭代器，遍历<code>x</code>的过程实际上是内部调用<code>elem=next(x)</code>.</p>
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>迭代器<code>Iterator</code>是一个带状态的对象，其内部持有一个状态用于记录当前迭代所在的位置，以方便下次取值时能获取到正确元素，可以通过<code>next()</code>方法迭代获取下一个值。</p>
+<ul>
+<li><p><code>Iterator()</code>实现了<code>__iter__()</code>和<code>__next__()</code>方法。</p>
+</li>
+<li><p>迭代器不会一次性把所有元素加载到内存，而只在需要的时候才生成返回结果。</p>
+</li>
+</ul>
+<h5 id="可迭代对象和迭代器的差异："><a href="#可迭代对象和迭代器的差异：" class="headerlink" title="可迭代对象和迭代器的差异："></a>可迭代对象和迭代器的差异：</h5><p>可迭代对象并没有实现<code>__next__()</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterator,Iterable</span><br><span class="line">nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>] <span class="comment">#列表是一个可迭代对象</span></span><br><span class="line">isinstance(nums,Iterable)</span><br><span class="line"><span class="comment"># nums.__next__()#'list' object has no attribute '__next__'</span></span><br><span class="line"><span class="comment"># next(nums)#'list' object is not an iterator</span></span><br><span class="line">ite = iter(nums)<span class="comment">#list_iterator</span></span><br><span class="line">print(ite.__next__())<span class="comment">#1</span></span><br><span class="line">print(next(ite))<span class="comment">#2</span></span><br></pre></td></tr></table></figure>
 
-<p>空间复杂度为<code>O(N/2)</code>，时间复杂度也为<code>O(N/2)</code>，测试开销为：</p>
+<h5 id="为什么list等可迭代对象不是迭代器？"><a href="#为什么list等可迭代对象不是迭代器？" class="headerlink" title="为什么list等可迭代对象不是迭代器？"></a>为什么list等可迭代对象不是迭代器？</h5><p>迭代器表示的是<code>数据流</code>，它能被<code>next()</code>函数调用并不断返回下一个数据，只到没有数据时产生<code>StopIteration</code>错误。这个数据流可以表示任意一个无限大的数据流，但是这个数据流永远无法被<code>list</code>等可迭代对象(容器)存储。</p>
+<h4 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h4><p>生成器<code>generator</code>是迭代器的一种，但<strong>只能遍历一次</strong>.<strong>【生成器都是迭代器 generator is always an iterator】</strong></p>
+<ul>
+<li><p>它拥有迭代器迭代产生数据的能力，使用<code>yield</code>关键字替换生成器<code>Iterator</code>中的<code>__next__()</code>方法实现，拥有<code>yield</code>关键紫的函数就是生成器函数；</p>
+</li>
+<li><p>生成器和迭代器一样，不会一次将所有元素加载到内存，而是在调用时才生成返回结果【容器是直接加载到内存中】</p>
+</li>
+<li><p>迭代器可以传入数据进行计算，并根据变量内容计算结果并返回</p>
+</li>
+<li><p>可以通过<code>for</code>循环进行迭代，但只能被遍历一次。</p>
+</li>
+</ul>
+<h5 id="生成器函数-generator-function"><a href="#生成器函数-generator-function" class="headerlink" title="生成器函数 generator function"></a>生成器函数 generator function</h5><p>含有<code>yield</code>关键字的函数就是生成器函数</p>
+<h5 id="生成器表达式-generator-expression"><a href="#生成器表达式-generator-expression" class="headerlink" title="生成器表达式 generator expression"></a>生成器表达式 generator expression</h5><p>生成器表达式是列表生成式的生成器版本，是将列表生成式中的<code>[]</code>修改为<code>()</code>即可产生一个生成器<code>generator</code>。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li><p>凡可被<code>next()</code>函数调用且不断返回下一个值的对象都是迭代器对象<code>Iterator</code></p>
+</li>
+<li><p>生成器<code>generator</code>是迭代器<code>Iterator</code>的一种，只能被遍历一次</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对象类别</th>
+<th align="center">特点</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>container</td>
+<td align="center">容器中所有元素可以通过迭代获取;容器内所有元素都被存储在内存中</td>
+<td align="center">—</td>
+</tr>
+<tr>
+<td>Iterable</td>
+<td align="center">实现了<code>__iter__()</code>方法</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>Iterator</td>
+<td align="center">- 实现了<code>__iter__()</code>和<code>__next__()</code>方法； -  数据在需要时存入内存</td>
+<td align="center">逐个产生数据</td>
+</tr>
+<tr>
+<td>generator</td>
+<td align="center">使用<code>yield</code>替换迭代器中的方法，并具有中断功能；数据在需要时存入内存</td>
+<td align="center">逐个传出/入数据</td>
+</tr>
+</tbody></table>
+<p>参考链接：</p>
 <blockquote>
-<p>执行用时 :24 ms, 在所有 python 提交中击败了47.76%的用户</p>
-<p>内存消耗 :11.9 MB, 在所有 python 提交中击败了13.67%的用户</p>
+<ol>
+<li><a href="https://nvie.com/posts/iterators-vs-generators/" target="_blank" rel="noopener">Iterables vs. Iterators vs. Generators</a></li>
+<li><a href="https://blog.csdn.net/SL_World/article/details/86507872" target="_blank" rel="noopener"></a></li>
+</ol>
 </blockquote>
-<h4 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h4><p>非递归实现中，其实思路和递归版本一致，只是递归版本中使用在递归过程中使用<code>栈</code>保存了最后返回的头结点<code>tmp</code>，而在非递归版本中，需要显示的记录初始的头结点，用于程序最后的返回。另外，在遍历规程中，需要不断移动指针以定位下次处理的节点，所以还需额外的一个指针<code>tmp</code>，后续操作，就是正常的节点交换过程。但是<strong>一定要注意节点交换时，谁在前，谁在后</strong>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">swapPairs1</span><span class="params">(self, head)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    非递归实现</span></span><br><span class="line"><span class="string">    :param head:</span></span><br><span class="line"><span class="string">    :return:头结点</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    phead = ListNode(<span class="number">-1</span>)</span><br><span class="line">    phead.next = head</span><br><span class="line">    tmp = phead</span><br><span class="line">    <span class="keyword">while</span> (tmp.next <span class="keyword">and</span> tmp.next.next):</span><br><span class="line">        start = tmp.next</span><br><span class="line">        end = tmp.next.next</span><br><span class="line">        tmp.next = end</span><br><span class="line">        start.next = end.next <span class="comment">#这两句先后顺序要想清楚</span></span><br><span class="line">        end.next = start</span><br><span class="line">        tmp = start <span class="comment"># 已处理两个节点，将tmp指针往右移两个节点</span></span><br><span class="line">    <span class="keyword">return</span> phead.next <span class="comment">#涵盖了特殊情况也包含了正常情况</span></span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度为<code>O(N/2)</code>，空间复杂度为<code>O(1)</code>，测试开销如下：</p>
-<blockquote>
-<p>执行用时 :28 ms, 在所有 python 提交中击败了25.45%的用户</p>
-<p>内存消耗 :11.8 MB, 在所有 python 提交中击败了24.03%的用户</p>
-</blockquote>
-<h4 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h4><p>链表问题中，常常会用到<code>prehead = ListNode()</code>，方便后续处理，在这一题的非递归解法中，也不需要提前考虑<code>head.next head.next.next</code>是否存在，增加的虚节点很好地解决了这个问题。</p>
 
     </div>
 
@@ -513,7 +558,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/python/" rel="tag"># python</a>
             
           </div>
         
@@ -529,8 +574,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/26/python记录/" rel="next" title="python记录">
-                  <i class="fa fa-chevron-left"></i> python记录
+                <a href="/2019/11/27/闭包与装饰器/" rel="next" title="闭包与装饰器">
+                  <i class="fa fa-chevron-left"></i> 闭包与装饰器
                 </a>
               
             </div>
@@ -538,10 +583,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/11/27/闭包与装饰器/" rel="prev" title="闭包与装饰器">
-                  闭包与装饰器 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -590,7 +631,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#递归思路"><span class="nav-number">1.</span> <span class="nav-text">递归思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归实现"><span class="nav-number">2.</span> <span class="nav-text">非递归实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#体会"><span class="nav-number">3.</span> <span class="nav-text">体会</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器"><span class="nav-number">1.</span> <span class="nav-text">容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可迭代对象"><span class="nav-number">2.</span> <span class="nav-text">可迭代对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#迭代器"><span class="nav-number">3.</span> <span class="nav-text">迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可迭代对象和迭代器的差异："><span class="nav-number">3.1.</span> <span class="nav-text">可迭代对象和迭代器的差异：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么list等可迭代对象不是迭代器？"><span class="nav-number">3.2.</span> <span class="nav-text">为什么list等可迭代对象不是迭代器？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器"><span class="nav-number">4.</span> <span class="nav-text">生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成器函数-generator-function"><span class="nav-number">4.1.</span> <span class="nav-text">生成器函数 generator function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成器表达式-generator-expression"><span class="nav-number">4.2.</span> <span class="nav-text">生成器表达式 generator expression</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
