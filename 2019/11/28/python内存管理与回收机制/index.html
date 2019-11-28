@@ -55,17 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="当改变命运的时刻降临，犹豫就会败北！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mqray&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/python/index.html">
+  <meta name="description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
+<meta name="keywords" content="python基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python内存管理与回收机制">
+<meta property="og:url" content="http://yoursite.com/2019/11/28/python内存管理与回收机制/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="当改变命运的时刻降临，犹豫就会败北！">
+<meta property="og:description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-28T16:09:42.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mqray&#39;s blog">
-<meta name="twitter:description" content="当改变命运的时刻降临，犹豫就会败北！">
-  <link rel="canonical" href="http://yoursite.com/categories/python/">
+<meta name="twitter:title" content="python内存管理与回收机制">
+<meta name="twitter:description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/python内存管理与回收机制/">
 
 
 <script id="page-configurations">
@@ -73,13 +75,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: python | mqray's blog</title>
+  <title>python内存管理与回收机制 | mqray's blog</title>
   
 
 
@@ -316,24 +318,6 @@
 
     
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -372,152 +356,237 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">python
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/python内存管理与回收机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            python内存管理与回收机制
+            
+
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-28 23:11:53" itemprop="dateCreated datePublished" datetime="2019-11-28T23:11:53+08:00">2019-11-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-29 00:09:42" itemprop="dateModified" datetime="2019-11-29T00:09:42+08:00">2019-11-29</time>
+              </span>
+            
+          
+
+          
+            <span id="/2019/11/28/python内存管理与回收机制/" class="post-meta-item leancloud_visitors" data-flag-title="python内存管理与回收机制" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/28/python内存管理与回收机制/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/28/python内存管理与回收机制/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <h4 id="python中的数据存储"><a href="#python中的数据存储" class="headerlink" title="python中的数据存储"></a>python中的数据存储</h4><ul>
+<li>python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它 </li>
+<li>对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间 </li>
+<li>容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身 </li>
+</ul><a id="more"></a>
+<h5 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h5><ul>
+<li>一个对象会记录着引用自己的对象的个数，每增加一个引用，个数加一，每减少一个引用，个数减一 </li>
+<li>查看引用对象个数的方法：导入<code>sys</code>模块，使用模块中的<code>getrefcount(obj)</code>方法 </li>
+<li>增加引用个数的情况：<ol>
+<li>对象被创建，+1；</li>
+<li>对象被引用，+1；</li>
+<li>对象被当作参数传入函数，+2，原因是函数中有两个属性在引用该对象；</li>
+<li>对象存储到容器对象中，+1 </li>
+</ol>
+</li>
+<li>减少引用个数的情况：<ol>
+<li>对象的别名被销毁del p，-1；</li>
+<li>对象的别名被赋予其他对象，-1；</li>
+<li>对象离开自己的作用域，如<code>getrefcount(obj)</code>方法，每次用完后，其对对象的那个引用就会被销毁，-1；</li>
+<li>对象从容器对象中删除，或者容器对象被销毁，-1 </li>
+</ol>
+</li>
+</ul>
+<h3 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h3><blockquote>
+<p>python中的内存回收由<code>引用计数+标记-清除+分代回收共同完成</code></p>
+</blockquote>
+<h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>*<em>利用引用计数器方法，在检测到对象引用个数为0时，对普通的对象进行释放内存的机制 *</em></p>
+<h5 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h5><p>*<em>循环引用即对象之间进行相互引用，出现循环引用后，利用引用计数机制无法对循环引用中的对象进行释放空间 *</em>，【循环引用只针对于容器对象，其他对象不会产生循环引用】</p>
+<h5 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h5><p>从经过引用计数器机制后还没有内存还没有被释放掉的对象中，找到循环引用对象，并释放所占用的内存。</p>
+<p>垃圾回收流程：</p>
+<ul>
+<li>任何找到循环引用并释放内存 <ul>
+<li>收集所有容器对象，使用双向链表对这些对象进行引用</li>
+<li>针对每一个容器对象，使用<code>gc_refs</code>记录当前对应的引用个数</li>
+<li>对于每个容器对象，找到其正在引用的其他容器对象，将这个被引用的容器对象的引用计数减掉1</li>
+<li>通过以上三步，检查所有容器对象的引用计数，若为0，则证明该容器对象是由于循环引用存活下来的，对其进行销毁。【<code>del obj</code>】</li>
+</ul>
+</li>
+</ul>
+<p>由上述过程可知，循环引用查找和销毁过程非常繁琐，需要分别处理每一个容器对象，所以<code>python</code>使用其他改善性能的方法，即<strong>标记-清除 Mark–Sweep</strong>和*<em>分代回收  generation *</em></p>
+<h4 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h4><p>标记清除<code>Mark-Sweep</code>算法是一种基于追踪回收<code>tracing GC</code>技术实现的垃圾回收算法。它分作两个阶段：</p>
+<ul>
+<li>一阶段是标记阶段，<code>GC</code>将所有活动对象打上标记</li>
+<li>第二阶段，将那些没有标记的非活动对象进行回收</li>
+</ul>
+<blockquote>
+<p>对象之间通过引用连在一起，构成一个有向图，对象作为有向图的节点，引用关系作为有向图的边。从跟对象<code>root object</code>出发，沿着有向边遍历对象，可达对象<code>reachable</code>标记为活动对象，不可达的就是要被清除的非活动对象</p>
+</blockquote>
+<p>缺点：清除非活动对象前，必须顺序的扫描整个<strong>堆内存</strong>，哪怕只剩下少数活动对象也要扫描所有对象。</p>
+<h4 id="分代回收"><a href="#分代回收" class="headerlink" title="分代回收"></a>分代回收</h4><blockquote>
+<p>基本假设是，存活时间越久的对象，越不可能在后面的程序中变成垃圾。 【典型的空间换时间技术】</p>
+</blockquote>
+<p> Python将所有的对象分为0，1，2三代。所有的新建对象都是0代对象。</p>
+<p>当某一代对象经历过垃圾回收，依然存活，那么它就被归入下一代对象。</p>
+<p>垃圾回收启动时，一定会扫描所有的0代对象。如果0代经过一定<font color="#DC143C">次数A</font>垃圾回收，那么就启动对0代和1代的扫描清理。</p>
+<p>当1代也经历了一定<font color="#DC143C">次数B</font>的垃圾回收后，那么会启动对0，1，2，即对所有对象进行扫描。 </p>
+<p>这里的次数A和次数B可以引用<code>import gc</code>后使用<code>gc.set_threshold()</code>来调整。默认值可以通过<code>gc.get_threshold()</code>查看。【默认是(700,10,10)】</p>
+<p>参考:</p>
+<ol>
+<li><a href="https://blog.csdn.net/sinat_36246371/article/details/52998505" target="_blank" rel="noopener">垃圾回收算法之分代回收算法</a></li>
+<li><a href="https://www.jianshu.com/p/1e375fb40506" target="_blank" rel="noopener">Python垃圾回收机制</a></li>
+</ol>
 
-  
-  
+    </div>
 
-  
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/python基础/" rel="tag"># python基础</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-28T01:09:17+08:00"
-              content="2019-11-28">
-          11-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/28/python面试题准备/" itemprop="url">
-            <span itemprop="name">python面试题准备</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-14T19:34:00+08:00"
-              content="2019-11-14">
-          11-14
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/14/python网络编程/" itemprop="url">
-            <span itemprop="name">python网络编程</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-31T18:54:49+08:00"
-              content="2019-10-31">
-          10-31
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/31/pandas之数据处理/" itemprop="url">
-            <span itemprop="name">pandas之数据处理</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-31T15:32:17+08:00"
-              content="2019-10-31">
-          10-31
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/10/31/天池新人赛 挖掘幸福感/" itemprop="url">
-            <span itemprop="name">天池新人赛 挖掘幸福感</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-    </div>
   </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/28/leetcode-旋转链表/" rel="next" title="leetcode_旋转链表">
+                  <i class="fa fa-chevron-left"></i> leetcode_旋转链表
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
   
   
   
 
-  
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -530,6 +599,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -542,6 +616,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的数据存储"><span class="nav-number">1.</span> <span class="nav-text">python中的数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#计数器"><span class="nav-number">1.1.</span> <span class="nav-text">计数器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收"><span class="nav-number"></span> <span class="nav-text">内存回收</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数"><span class="nav-number">1.</span> <span class="nav-text">引用计数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#循环引用"><span class="nav-number">1.1.</span> <span class="nav-text">循环引用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收"><span class="nav-number">1.2.</span> <span class="nav-text">垃圾回收</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除"><span class="nav-number">2.</span> <span class="nav-text">标记清除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分代回收"><span class="nav-number">3.</span> <span class="nav-text">分代回收</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
