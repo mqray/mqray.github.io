@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+  <meta name="description" content="python高级元类类属性、实例属性的区别类方法、类实例方法、静态方法的区别python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python面试题准备">
 <meta property="og:url" content="http://yoursite.com/2019/11/28/python面试题准备/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+<meta property="og:description" content="python高级元类类属性、实例属性的区别类方法、类实例方法、静态方法的区别python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-27T17:09:51.662Z">
+<meta property="og:updated_time" content="2019-11-28T10:43:11.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python面试题准备">
-<meta name="twitter:description" content="python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内部的信息和状态。比如一个银行账户进行转账操作">
+<meta name="twitter:description" content="python高级元类类属性、实例属性的区别类方法、类实例方法、静态方法的区别python中的可变对象和不可变对象？抽象数据类型的操作一般分为三类： 构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户    解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额     变化操作 ：这类操作是修改对象内">
   <link rel="canonical" href="http://yoursite.com/2019/11/28/python面试题准备/">
 
 
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
 
   </li>
       
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
 
   </li>
       
@@ -392,12 +392,29 @@
                 
               
 
-              <time title="创建时间：2019-11-28 01:09:17 / 修改时间：01:09:51" itemprop="dateCreated datePublished" datetime="2019-11-28T01:09:17+08:00">2019-11-28</time>
+              <time title="创建时间：2019-11-28 01:09:17 / 修改时间：18:43:11" itemprop="dateCreated datePublished" datetime="2019-11-28T01:09:17+08:00">2019-11-28</time>
             </span>
           
             
 
             
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -433,7 +450,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.3k</span>
+              <span>4.4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -456,7 +473,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="python中的可变对象和不可变对象？"><a href="#python中的可变对象和不可变对象？" class="headerlink" title="python中的可变对象和不可变对象？"></a>python中的可变对象和不可变对象？</h4><p>抽象数据类型的操作一般分为三类：</p><ol>
+        <h2 id="python高级"><a href="#python高级" class="headerlink" title="python高级"></a>python高级</h2><h3 id="元类"><a href="#元类" class="headerlink" title="元类"></a>元类</h3><h4 id="类属性、实例属性的区别"><a href="#类属性、实例属性的区别" class="headerlink" title="类属性、实例属性的区别"></a>类属性、实例属性的区别</h4><h4 id="类方法、类实例方法、静态方法的区别"><a href="#类方法、类实例方法、静态方法的区别" class="headerlink" title="类方法、类实例方法、静态方法的区别"></a>类方法、类实例方法、静态方法的区别</h4><h4 id="python中的可变对象和不可变对象？"><a href="#python中的可变对象和不可变对象？" class="headerlink" title="python中的可变对象和不可变对象？"></a>python中的可变对象和不可变对象？</h4><p>抽象数据类型的操作一般分为三类：</p><ol>
 <li><p>构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户  </p>
 </li>
 <li><p>解析操作：这类操作是获取对象的一些有用信息，其结果反应了对象的一些特征，但返回的不是对象本身。类似银行查询账户余额   </p>
@@ -611,6 +628,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2019/11/28/leetcode-旋转链表/" rel="prev" title="leetcode_旋转链表">
+                  leetcode_旋转链表 <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -658,7 +679,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的可变对象和不可变对象？"><span class="nav-number">1.</span> <span class="nav-text">python中的可变对象和不可变对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.1.</span> <span class="nav-text">不可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#小整数对象池"><span class="nav-number">1.1.1.</span> <span class="nav-text">小整数对象池</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变对象"><span class="nav-number">1.2.</span> <span class="nav-text">可变对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#100亿以内的质数个数455052511"><span class="nav-number">1.3.</span> <span class="nav-text">100亿以内的质数个数455052511</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的魔术方法"><span class="nav-number">2.</span> <span class="nav-text">python中的魔术方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中实现只读属性？"><span class="nav-number">3.</span> <span class="nav-text">python中实现只读属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过property装饰器以及私有属性"><span class="nav-number">3.1.</span> <span class="nav-text">通过property装饰器以及私有属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#魔法方法-setattr-设置逻辑阻止赋值"><span class="nav-number">3.2.</span> <span class="nav-text">魔法方法__setattr__设置逻辑阻止赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谈谈你对面向对象的理解"><span class="nav-number">4.</span> <span class="nav-text">谈谈你对面向对象的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><span class="nav-number">5.</span> <span class="nav-text">对装饰器的理解并写一个计时器记录方法执行性能的装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number"></span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对设计模式的理解，简述你了解的设计模式"><span class="nav-number">1.</span> <span class="nav-text">对设计模式的理解，简述你了解的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">1.1.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建型"><span class="nav-number">1.2.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.3.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.4.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">2.</span> <span class="nav-text">单例模式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python高级"><span class="nav-number">1.</span> <span class="nav-text">python高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元类"><span class="nav-number">1.1.</span> <span class="nav-text">元类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类属性、实例属性的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">类属性、实例属性的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法、类实例方法、静态方法的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">类方法、类实例方法、静态方法的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的可变对象和不可变对象？"><span class="nav-number">1.1.3.</span> <span class="nav-text">python中的可变对象和不可变对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">不可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#小整数对象池"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">小整数对象池</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变对象"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">可变对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#100亿以内的质数个数455052511"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">100亿以内的质数个数455052511</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的魔术方法"><span class="nav-number">1.1.4.</span> <span class="nav-text">python中的魔术方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中实现只读属性？"><span class="nav-number">1.1.5.</span> <span class="nav-text">python中实现只读属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过property装饰器以及私有属性"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">通过property装饰器以及私有属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#魔法方法-setattr-设置逻辑阻止赋值"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">魔法方法__setattr__设置逻辑阻止赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谈谈你对面向对象的理解"><span class="nav-number">1.1.6.</span> <span class="nav-text">谈谈你对面向对象的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><span class="nav-number">1.1.7.</span> <span class="nav-text">对装饰器的理解并写一个计时器记录方法执行性能的装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">1.2.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对设计模式的理解，简述你了解的设计模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">对设计模式的理解，简述你了解的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建型"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">1.2.2.</span> <span class="nav-text">单例模式</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -677,7 +698,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -703,7 +724,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -780,14 +801,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">107k</span>
+    <span title="站点总字数">108k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:37</span>
+    <span title="站点阅读时长">1:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
