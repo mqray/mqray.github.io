@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
-<meta name="keywords" content="python基础">
+  <meta name="description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如：123输入前序遍历序列&amp;#123;1,2,4,7,3,5,6,8&amp;#125;中序遍历序列&amp;#123;4,7,2,1,5,3,8,6&amp;#125;返回重建的二叉树的根节点。使用递归的方式，直管逻辑。">
+<meta name="keywords" content="二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python内存管理与回收机制">
-<meta property="og:url" content="http://yoursite.com/2019/11/28/python内存管理与回收机制/index.html">
+<meta property="og:title" content="剑指offer_重建二叉树">
+<meta property="og:url" content="http://yoursite.com/2019/11/30/剑指offer-重建二叉树/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
+<meta property="og:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如：123输入前序遍历序列&amp;#123;1,2,4,7,3,5,6,8&amp;#125;中序遍历序列&amp;#123;4,7,2,1,5,3,8,6&amp;#125;返回重建的二叉树的根节点。使用递归的方式，直管逻辑。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T16:22:20.421Z">
+<meta property="og:updated_time" content="2019-11-29T17:05:25.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python内存管理与回收机制">
-<meta name="twitter:description" content="python中的数据存储 python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它  对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间  容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身">
-  <link rel="canonical" href="http://yoursite.com/2019/11/28/python内存管理与回收机制/">
+<meta name="twitter:title" content="剑指offer_重建二叉树">
+<meta name="twitter:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如：123输入前序遍历序列&amp;#123;1,2,4,7,3,5,6,8&amp;#125;中序遍历序列&amp;#123;4,7,2,1,5,3,8,6&amp;#125;返回重建的二叉树的根节点。使用递归的方式，直管逻辑。">
+  <link rel="canonical" href="http://yoursite.com/2019/11/30/剑指offer-重建二叉树/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>python内存管理与回收机制 | mqray's blog</title>
+  <title>剑指offer_重建二叉树 | mqray's blog</title>
   
 
 
@@ -361,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/28/python内存管理与回收机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/剑指offer-重建二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +375,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            python内存管理与回收机制
+            剑指offer_重建二叉树
             
 
           
@@ -392,24 +392,33 @@
                 
               
 
-              <time title="创建时间：2019-11-28 23:11:53" itemprop="dateCreated datePublished" datetime="2019-11-28T23:11:53+08:00">2019-11-28</time>
+              <time title="创建时间：2019-11-30 00:52:38 / 修改时间：01:05:25" itemprop="dateCreated datePublished" datetime="2019-11-30T00:52:38+08:00">2019-11-30</time>
             </span>
           
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 00:22:20" itemprop="dateModified" datetime="2019-11-29T00:22:20+08:00">2019-11-29</time>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
-            
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
-            <span id="/2019/11/28/python内存管理与回收机制/" class="post-meta-item leancloud_visitors" data-flag-title="python内存管理与回收机制" title="阅读次数">
+            <span id="/2019/11/30/剑指offer-重建二叉树/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_重建二叉树" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -427,8 +436,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/28/python内存管理与回收机制/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/28/python内存管理与回收机制/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/30/剑指offer-重建二叉树/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/30/剑指offer-重建二叉树/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -441,7 +450,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.9k</span>
+              <span>533</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -451,7 +460,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
           
 
@@ -464,91 +473,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="python中的数据存储"><a href="#python中的数据存储" class="headerlink" title="python中的数据存储"></a>python中的数据存储</h4><ul>
-<li>python中万物皆对象，所以python的存储问题是对象的存储问题，并且对于每个对象，python会分配一块内存空间去存储它 </li>
-<li>对于整数和短小的字符等，python会执行缓存机制，即将这些对象进行缓存，不会为相同的对象分配多个内存空间 </li>
-<li>容器对象，如列表、元组、字典等，存储的其他对象，仅仅是其他对象的引用，即地址，并不是这些对象本身 </li>
-</ul><a id="more"></a>
-<h5 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h5><ul>
-<li>一个对象会记录着引用自己的对象的个数，每增加一个引用，个数加一，每减少一个引用，个数减一 </li>
-<li>查看引用对象个数的方法：导入<code>sys</code>模块，使用模块中的<code>getrefcount(obj)</code>方法 </li>
-<li>增加引用个数的情况：<ol>
-<li>对象被创建，+1；</li>
-<li>对象被引用，+1；</li>
-<li>对象被当作参数传入函数，+2，原因是函数中有两个属性在引用该对象；</li>
-<li>对象存储到容器对象中，+1 </li>
-</ol>
-</li>
-<li>减少引用个数的情况：<ol>
-<li>对象的别名被销毁del p，-1；</li>
-<li>对象的别名被赋予其他对象，-1；</li>
-<li>对象离开自己的作用域，如<code>getrefcount(obj)</code>方法，每次用完后，其对对象的那个引用就会被销毁，-1；</li>
-<li>对象从容器对象中删除，或者容器对象被销毁，-1 </li>
-</ol>
-</li>
-</ul>
-<h3 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h3><blockquote>
-<p>python中的内存回收由<code>引用计数+标记-清除+分代回收共同完成</code></p>
-</blockquote>
-<h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>*<em>利用引用计数器方法，在检测到对象引用个数为0时，对普通的对象进行释放内存的机制 *</em></p>
-<h5 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h5><p>*<em>循环引用即对象之间进行相互引用，出现循环引用后，利用引用计数机制无法对循环引用中的对象进行释放空间 *</em>，【循环引用只针对于容器对象，其他对象不会产生循环引用】</p>
-<h5 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h5><p>从经过引用计数器机制后还没有内存还没有被释放掉的对象中，找到循环引用对象，并释放所占用的内存。</p>
-<p>垃圾回收流程：</p>
-<ul>
-<li>任何找到循环引用并释放内存 <ul>
-<li>收集所有容器对象，使用双向链表对这些对象进行引用</li>
-<li>针对每一个容器对象，使用<code>gc_refs</code>记录当前对应的引用个数</li>
-<li>对于每个容器对象，找到其正在引用的其他容器对象，将这个被引用的容器对象的引用计数减掉1</li>
-<li>通过以上三步，检查所有容器对象的引用计数，若为0，则证明该容器对象是由于循环引用存活下来的，对其进行销毁。【<code>del obj</code>】</li>
-</ul>
-</li>
-</ul>
-<p>由上述过程可知，循环引用查找和销毁过程非常繁琐，需要分别处理每一个容器对象，所以<code>python</code>使用其他改善性能的方法，即<strong>标记-清除 Mark–Sweep</strong>和*<em>分代回收  generation *</em></p>
-<h4 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h4><p>标记清除<code>Mark-Sweep</code>算法是一种基于追踪回收<code>tracing GC</code>技术实现的垃圾回收算法。它分作两个阶段：</p>
-<ul>
-<li>一阶段是标记阶段，<code>GC</code>将所有活动对象打上标记</li>
-<li>第二阶段，将那些没有标记的非活动对象进行回收</li>
-</ul>
-<blockquote>
-<p>对象之间通过引用连在一起，构成一个有向图，对象作为有向图的节点，引用关系作为有向图的边。从跟对象<code>root object</code>出发，沿着有向边遍历对象，可达对象<code>reachable</code>标记为活动对象，不可达的就是要被清除的非活动对象</p>
-</blockquote>
-<p>缺点：清除非活动对象前，必须顺序的扫描整个<strong>堆内存</strong>，哪怕只剩下少数活动对象也要扫描所有对象。</p>
-<h4 id="分代回收"><a href="#分代回收" class="headerlink" title="分代回收"></a>分代回收</h4><blockquote>
-<p>基本假设是，存活时间越久的对象，越不可能在后面的程序中变成垃圾。 【典型的空间换时间技术】</p>
-</blockquote>
-<p> Python将所有的对象分为0，1，2三代。所有的新建对象都是0代对象。</p>
-<p>当某一代对象经历过垃圾回收，依然存活，那么它就被归入下一代对象。</p>
-<p>垃圾回收启动时，一定会扫描所有的0代对象。如果0代经过一定<font color="#DC143C">次数A</font>垃圾回收，那么就启动对0代和1代的扫描清理。</p>
-<p>当1代也经历了一定<font color="#DC143C">次数B</font>的垃圾回收后，那么会启动对0，1，2，即对所有对象进行扫描。 </p>
-<p>这里的次数A和次数B可以引用<code>import gc</code>后使用<code>gc.set_threshold()</code>来调整。默认值可以通过<code>gc.get_threshold()</code>查看。【默认是(700,10,10)】</p>
-<h4 id="内存泄漏-memory-leak"><a href="#内存泄漏-memory-leak" class="headerlink" title="内存泄漏 memory leak"></a>内存泄漏 memory leak</h4><ul>
-<li>内存泄漏是指程序中已动态分配的堆内存由于某种原因未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统奔溃等严重后果 </li>
-<li>一次内存泄漏似乎不会有大的影响，但内存泄漏后堆积的结果就是内存溢出 </li>
-<li>内存泄漏具有隐蔽性，积累性的特征，比其他内存非法访问错误更难检测。这是因为内存泄漏产生的原因是内存块未被释放，属于遗漏型缺陷而不是过错型缺陷。此外，内存泄漏不会直接产生可观察的错误，而是逐渐积累，降低系统的整体性性能。 </li>
-</ul>
-<h5 id="内存泄漏的分类"><a href="#内存泄漏的分类" class="headerlink" title="内存泄漏的分类"></a>内存泄漏的分类</h5><ul>
-<li>常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。 </li>
-<li>偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以测试环境和测试方法对检测内存泄漏至关重要。 </li>
-<li>一次性内存泄漏。发生内存泄漏的代码只会被执行一次，或者由于算法上的缺陷，导致总会有一块仅且一块内存发生泄漏。比如，在类的构造函数中分配内存，在析构函数中却没有释放该内存，所以内存泄漏只会发生一次。 </li>
-<li>隐式内存泄漏。程序在运行过程中不停的分配内存，但是直到结束的时候才释放内存。严格的说这里并没有发生内存泄漏，因为最终程序释放了所有申请的内存。但是对于一个服务器程序，需要运行几天，几周甚至几个月，不及时释放内存也可能导致最终耗尽系统的所有内存。所以，我们称这类内存泄漏为隐式内存泄漏。</li>
-</ul>
-<h5 id="内存泄漏的解决方式"><a href="#内存泄漏的解决方式" class="headerlink" title="内存泄漏的解决方式"></a>内存泄漏的解决方式</h5><ul>
-<li>内存泄漏也许是因为活动已经被使用完毕，但是仍然在其他地方被引用，导致无法对其进行回收。我们只需要给对活动进行引用的类独立出来或者将其变为静态类，该类随着活动的结束而结束，也就没有了当活动结束但仍然还被其他类引用的情况。 </li>
-<li>资源性对象在不使用的时候，应该调用它的<code>close()</code>函数将其关闭掉。 </li>
-<li>集合容器中的内存泄露 ，我们通常把一些对象的引用加入到了集合容器（比如<code>ArrayList</code>）中，当我们不需要该对象时，并没有把它的引用从集合中清理掉，这样这个集合就会越来越大。如果这个集合是static的话，那情况就更严重了。需要在退出程序之前，将集合里的东西clear，然后置为null，再退出程序。</li>
-<li>WebView造成的泄露，当我们不使用WebView对象时，应该调用它的<code>destory()</code>函数来销毁它，并释放其占用的内存，否则其长期占用的内存也不能被回收，从而造成内存泄露。<br>我们应该为WebView另外开启一个进程，通过AIDL与主线程进行通信，WebView所在的进程可以根据业务的需要选择合适的时机进行销毁，从而达到内存的完整释放。</li>
-</ul>
-<h4 id="内存溢出的原因及方法"><a href="#内存溢出的原因及方法" class="headerlink" title="内存溢出的原因及方法"></a>内存溢出的原因及方法</h4><h5 id="内存溢出原因"><a href="#内存溢出原因" class="headerlink" title="内存溢出原因"></a>内存溢出原因</h5><p> 1.内存中加载的数据量过于庞大，如一次从数据库取出过多数据；<br>2.集合类中有对对象的引用，使用完后未清空，产生了堆积，使得JVM不能回收；<br>3.代码中存在死循环或循环产生过多重复的对象实体；<br>4.使用的第三方软件中的BUG；<br>5.启动参数内存值设定的过小 </p>
-<h5 id="内存溢出的解决方案"><a href="#内存溢出的解决方案" class="headerlink" title="内存溢出的解决方案"></a>内存溢出的解决方案</h5><p>第一步，修改JVM启动参数，直接增加内存。(-Xms，-Xmx参数一定不要忘记加。)</p>
-<p>第二步，检查错误日志，查看“OutOfMemory”错误前是否有其 它异常或错误。</p>
-<p>第三步，对代码进行走查和分析，找出可能发生内存溢出的位置。</p>
-<p>参考:</p>
-<ol>
-<li><a href="https://blog.csdn.net/sinat_36246371/article/details/52998505" target="_blank" rel="noopener">垃圾回收算法之分代回收算法</a></li>
-<li><a href="https://www.jianshu.com/p/1e375fb40506" target="_blank" rel="noopener">Python垃圾回收机制</a></li>
-<li><a href="https://blog.csdn.net/jie1175623465/article/details/81121548" target="_blank" rel="noopener">内存泄漏和内存溢出的区别与解决方式</a></li>
-</ol>
+        <p> 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。</p><p>假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p><p>例如：</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入前序遍历序列&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;</span><br><span class="line">中序遍历序列&#123;<span class="number">4</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">6</span>&#125;</span><br><span class="line">返回重建的二叉树的根节点。</span><br></pre></td></tr></table></figure><p>使用递归的方式，直管逻辑。</p><a id="more"></a>
 
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.left = <span class="literal">None</span></span><br><span class="line">        self.right = <span class="literal">None</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># 返回构造的TreeNode根节点</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reConstructBinaryTree</span><span class="params">(self, pre, tin)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pre <span class="keyword">or</span> <span class="keyword">not</span> tin:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        root = TreeNode(pre[<span class="number">0</span>])</span><br><span class="line">        index = tin.index(root.val)</span><br><span class="line">        root.left = self.reConstructBinaryTree(pre[<span class="number">1</span>:index+<span class="number">1</span>],tin[:index])</span><br><span class="line">        root.right = self.reConstructBinaryTree(pre[index+<span class="number">1</span>:],tin[index+<span class="number">1</span>:])</span><br><span class="line">        <span class="keyword">return</span>  root</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -565,7 +496,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/python基础/" rel="tag"># python基础</a>
+              <a href="/tags/二叉树/" rel="tag"># 二叉树</a>
             
           </div>
         
@@ -581,8 +512,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/28/leetcode-旋转链表/" rel="next" title="leetcode_旋转链表">
-                  <i class="fa fa-chevron-left"></i> leetcode_旋转链表
+                <a href="/2019/11/29/leetcode-删除排序链表中的重复元素/" rel="next" title="leetcode_删除排序链表中的重复元素">
+                  <i class="fa fa-chevron-left"></i> leetcode_删除排序链表中的重复元素
                 </a>
               
             </div>
@@ -590,10 +521,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/11/29/leetcode-删除排序链表中的重复元素/" rel="prev" title="leetcode_删除排序链表中的重复元素">
-                  leetcode_删除排序链表中的重复元素 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -642,8 +569,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的数据存储"><span class="nav-number">1.</span> <span class="nav-text">python中的数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#计数器"><span class="nav-number">1.1.</span> <span class="nav-text">计数器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收"><span class="nav-number"></span> <span class="nav-text">内存回收</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数"><span class="nav-number">1.</span> <span class="nav-text">引用计数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#循环引用"><span class="nav-number">1.1.</span> <span class="nav-text">循环引用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收"><span class="nav-number">1.2.</span> <span class="nav-text">垃圾回收</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除"><span class="nav-number">2.</span> <span class="nav-text">标记清除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分代回收"><span class="nav-number">3.</span> <span class="nav-text">分代回收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存泄漏-memory-leak"><span class="nav-number">4.</span> <span class="nav-text">内存泄漏 memory leak</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内存泄漏的分类"><span class="nav-number">4.1.</span> <span class="nav-text">内存泄漏的分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内存泄漏的解决方式"><span class="nav-number">4.2.</span> <span class="nav-text">内存泄漏的解决方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存溢出的原因及方法"><span class="nav-number">5.</span> <span class="nav-text">内存溢出的原因及方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内存溢出原因"><span class="nav-number">5.1.</span> <span class="nav-text">内存溢出原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内存溢出的解决方案"><span class="nav-number">5.2.</span> <span class="nav-text">内存溢出的解决方案</span></a></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
