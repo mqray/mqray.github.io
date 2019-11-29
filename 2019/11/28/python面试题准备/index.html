@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="mqray&#39;s blog">
 <meta property="og:description" content="python高级元类类属性、实例属性的区别1234class Person(object):    member = 19 #类属性，在init外初始化    def __init__(self,name):# 实例属性        self.__name =name #私有变量、私有方法以两个下划线开始">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T16:05:31.343Z">
+<meta property="og:updated_time" content="2019-11-29T07:58:05.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python面试题准备">
 <meta name="twitter:description" content="python高级元类类属性、实例属性的区别1234class Person(object):    member = 19 #类属性，在init外初始化    def __init__(self,name):# 实例属性        self.__name =name #私有变量、私有方法以两个下划线开始">
@@ -281,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">41</span></a>
 
   </li>
       
@@ -403,7 +403,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-29 00:05:31" itemprop="dateModified" datetime="2019-11-29T00:05:31+08:00">2019-11-29</time>
+                <time title="修改时间：2019-11-29 15:58:05" itemprop="dateModified" datetime="2019-11-29T15:58:05+08:00">2019-11-29</time>
               </span>
             
           
@@ -458,7 +458,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>5.5k</span>
+              <span>6.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -468,7 +468,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>5 分钟</span>
+              <span>6 分钟</span>
             </span>
           
 
@@ -495,7 +495,37 @@
 <h4 id="遍历一个object的所有属性，并打印每一个属性名？"><a href="#遍历一个object的所有属性，并打印每一个属性名？" class="headerlink" title="遍历一个object的所有属性，并打印每一个属性名？"></a>遍历一个object的所有属性，并打印每一个属性名？</h4><p>可以使用两个方法：<code>obj.__dict__()</code>,<code>dir(obj)</code></p>
 <p>前者一般是字典或其他映射对象，用来存储一个对象的属性。但是<code>内建类型对象不存在这个属性</code>；并且它只返回当<code>基类</code>【这里是基类而不是父类因为可以通过接口实现多重继承】的属性字典，并不会返回其父类的属性。</p>
 <p>而<code>dir(obj)</code>会返回当前类以及它的所有基类的类属性名，即当前类及所有基类的<code>__dict__</code>键值。</p>
-<h4 id="描述抽象类和接口类之间的区别和联系"><a href="#描述抽象类和接口类之间的区别和联系" class="headerlink" title="描述抽象类和接口类之间的区别和联系"></a>描述抽象类和接口类之间的区别和联系</h4><h4 id="python中的内存管理与回收机制"><a href="#python中的内存管理与回收机制" class="headerlink" title="python中的内存管理与回收机制"></a>python中的内存管理与回收机制</h4><h4 id="python中的可变对象和不可变对象？"><a href="#python中的可变对象和不可变对象？" class="headerlink" title="python中的可变对象和不可变对象？"></a>python中的可变对象和不可变对象？</h4><p>抽象数据类型的操作一般分为三类：</p>
+<h4 id="描述抽象类和接口类之间的区别和联系"><a href="#描述抽象类和接口类之间的区别和联系" class="headerlink" title="描述抽象类和接口类之间的区别和联系"></a>描述抽象类和接口类之间的区别和联系</h4><h4 id="python中的内存管理与回收机制"><a href="#python中的内存管理与回收机制" class="headerlink" title="python中的内存管理与回收机制"></a>python中的内存管理与回收机制</h4><p><a href="[http://mqrayblog.cn/2019/11/28/python%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E4%B8%8E%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/](http://mqrayblog.cn/2019/11/28/python内存管理与回收机制/)">python内存管理与回收机制</a></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><hr>
+<h4 id="map-和reduce-函数"><a href="#map-和reduce-函数" class="headerlink" title="map()和reduce()函数"></a>map()和reduce()函数</h4><p><code>map()</code>函数，格式如下：<code>map(func,seq1[,seq2...])</code></p>
+<p>其作用是将<code>func</code>作用于<code>seq</code>的所有元素，并返回一个<code>map</code>对象</p>
+<ul>
+<li><p>如果<code>func</code>为<code>None</code>，作用同<code>zip()</code></p>
+</li>
+<li><p>当只有一个<code>seq</code>时，其效果等同于列表推导式</p>
+</li>
+<li><p>当有多个<code>seq</code>时，<code>map()</code>能够并行处理多个<code>seq</code>【此时函数就需要传入多个参数】，但是要保证这些<code>seq</code>的长度一致。否则会抛出类型异常。</p>
+</li>
+</ul>
+<p><code>reduce()</code>函数，格式如下：<code>reduce(func,seq[,int])</code></p>
+<ul>
+<li><code>zip()</code>函数将多个可迭代对象<code>Iterable</code>组合为一个元组<code>tuple</code>序列的迭代器<code>Iterator</code>。</li>
+<li><code>zip(*)</code>是<code>zip()</code>的逆过程。</li>
+</ul>
+<p>作用是化简，将上次的迭代结果与下一个元素一同执行一个二元<code>func</code>函数。参考<a href="http://www.pythoner.com/46.html" target="_blank" rel="noopener"> <strong>Python函数式编程——map()、reduce()</strong> </a></p>
+<ul>
+<li>如果指定<code>int</code>值，则第一次迭代时使用该元素；如不指定，则使用<code>seq</code>的第一个元素</li>
+<li>使用<code>reduce()</code>实现阶乘</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span>  reduce<span class="comment">#python将reduce从全局命名空间移除了</span></span><br><span class="line">reduce(<span class="keyword">lambda</span> x,y:x*y,range(<span class="number">1</span>,<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="python中常见的列表推导式"><a href="#python中常见的列表推导式" class="headerlink" title="python中常见的列表推导式"></a>python中常见的列表推导式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#列表计算等</span></span><br><span class="line">x = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)] </span><br><span class="line"><span class="comment">#数值计算+判断</span></span><br><span class="line">res= [x <span class="keyword">if</span> x&gt;<span class="number">5</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>) ] </span><br><span class="line"><span class="comment">#筛选目录下合乎条件的文件</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">file_list = [filename <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(<span class="string">'.'</span>) <span class="keyword">if</span> filename.endswith(<span class="string">'.py'</span>)]</span><br><span class="line"><span class="comment">#组合任意元组</span></span><br><span class="line">tuple_list = [(x,y) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>) <span class="keyword">for</span> y <span class="keyword">in</span> [<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>]]</span><br><span class="line"><span class="comment">#按序组合元组</span></span><br><span class="line">tuple_list2 = list(zip(range(<span class="number">4</span>),[<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>]))</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么是hash？"><a href="#什么是hash？" class="headerlink" title="什么是hash？"></a>什么是hash？</h4><p> 哈希表（Hash table，也叫散列表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。 </p>
+<p> python在散列的过程中，会根据当前表的疏松程度进行空间的再申请。当使用量超过总槽数的2/3，就会申请不少于当前活动槽数4倍的新空间 </p>
+<p>可参考<a href="https://www.cnblogs.com/williamjie/p/9099141.html" target="_blank" rel="noopener">HashTable和HashMap的区别详解</a>、<a href="https://blog.csdn.net/ns_code/article/details/36034955" target="_blank" rel="noopener">【Java集合源码剖析】HashMap源码剖析</a>、<a href="https://runestone.academy/runestone/books/published/pythonds/SortSearch/Hashing.html" target="_blank" rel="noopener">Hashing</a></p>
+<hr>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h4 id="python中的可变对象和不可变对象？"><a href="#python中的可变对象和不可变对象？" class="headerlink" title="python中的可变对象和不可变对象？"></a>python中的可变对象和不可变对象？</h4><p>抽象数据类型的操作一般分为三类：</p>
 <ol>
 <li><p>构造操作:  这类操作主要是基于一些已知信息，产生这个类的实例对象。类似银行进行开通账户  </p>
 </li>
@@ -516,7 +546,7 @@
 <p>对象指向的内存中的值会改变，当更改这个变量的时候，还是指向原来内存中的值，并且在原来的内存值进行原地修改，并没有开辟新的内存。 </p>
 </blockquote>
 <p>python中的可变对象有<code>集合set</code>，<code>字典dict</code>，<code>列表list</code></p>
-<p><strong>字典的键值中的key必须是不可变类型</strong>，如数字，字符串，元组，而列表、元组、字典是可变类型 </p>
+<p><font color="red">字典的键值中的key必须是不可变类型</font>，如数字，字符串，元组，而列表、元组、字典是可变类型 </p>
 <h5 id="100亿以内的质数个数455052511"><a href="#100亿以内的质数个数455052511" class="headerlink" title="100亿以内的质数个数455052511"></a>100亿以内的质数个数<code>455052511</code></h5><h4 id="python中的魔术方法"><a href="#python中的魔术方法" class="headerlink" title="python中的魔术方法"></a>python中的魔术方法</h4><blockquote>
 <p>python中以__双下划线包起来的方法均称作魔法方法。主要包含以下几类：</p>
 </blockquote>
@@ -703,7 +733,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python高级"><span class="nav-number">1.</span> <span class="nav-text">python高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元类"><span class="nav-number">1.1.</span> <span class="nav-text">元类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类属性、实例属性的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">类属性、实例属性的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法、实例方法、静态方法的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">类方法、实例方法、静态方法的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类方法"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态方法"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">静态方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例方法【一般方法】"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">实例方法【一般方法】</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写一个类，尽可能多的支持操作符"><span class="nav-number">1.1.3.</span> <span class="nav-text">写一个类，尽可能多的支持操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历一个object的所有属性，并打印每一个属性名？"><span class="nav-number">1.1.4.</span> <span class="nav-text">遍历一个object的所有属性，并打印每一个属性名？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述抽象类和接口类之间的区别和联系"><span class="nav-number">1.1.5.</span> <span class="nav-text">描述抽象类和接口类之间的区别和联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的内存管理与回收机制"><span class="nav-number">1.1.6.</span> <span class="nav-text">python中的内存管理与回收机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的可变对象和不可变对象？"><span class="nav-number">1.1.7.</span> <span class="nav-text">python中的可变对象和不可变对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">不可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#小整数对象池"><span class="nav-number">1.1.7.1.1.</span> <span class="nav-text">小整数对象池</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变对象"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">可变对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#100亿以内的质数个数455052511"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">100亿以内的质数个数455052511</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的魔术方法"><span class="nav-number">1.1.8.</span> <span class="nav-text">python中的魔术方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中实现只读属性？"><span class="nav-number">1.1.9.</span> <span class="nav-text">python中实现只读属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过property装饰器以及私有属性"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">通过property装饰器以及私有属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#魔法方法-setattr-设置逻辑阻止赋值"><span class="nav-number">1.1.9.2.</span> <span class="nav-text">魔法方法__setattr__设置逻辑阻止赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谈谈你对面向对象的理解"><span class="nav-number">1.1.10.</span> <span class="nav-text">谈谈你对面向对象的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><span class="nav-number">1.1.11.</span> <span class="nav-text">对装饰器的理解并写一个计时器记录方法执行性能的装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">1.2.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对设计模式的理解，简述你了解的设计模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">对设计模式的理解，简述你了解的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建型"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">1.2.2.</span> <span class="nav-text">单例模式</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#python高级"><span class="nav-number">1.</span> <span class="nav-text">python高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元类"><span class="nav-number">1.1.</span> <span class="nav-text">元类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类属性、实例属性的区别"><span class="nav-number">1.1.1.</span> <span class="nav-text">类属性、实例属性的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类方法、实例方法、静态方法的区别"><span class="nav-number">1.1.2.</span> <span class="nav-text">类方法、实例方法、静态方法的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类方法"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态方法"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">静态方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实例方法【一般方法】"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">实例方法【一般方法】</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写一个类，尽可能多的支持操作符"><span class="nav-number">1.1.3.</span> <span class="nav-text">写一个类，尽可能多的支持操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历一个object的所有属性，并打印每一个属性名？"><span class="nav-number">1.1.4.</span> <span class="nav-text">遍历一个object的所有属性，并打印每一个属性名？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#描述抽象类和接口类之间的区别和联系"><span class="nav-number">1.1.5.</span> <span class="nav-text">描述抽象类和接口类之间的区别和联系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的内存管理与回收机制"><span class="nav-number">1.1.6.</span> <span class="nav-text">python中的内存管理与回收机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">1.2.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#map-和reduce-函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">map()和reduce()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中常见的列表推导式"><span class="nav-number">1.2.2.</span> <span class="nav-text">python中常见的列表推导式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是hash？"><span class="nav-number">1.2.3.</span> <span class="nav-text">什么是hash？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">1.3.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的可变对象和不可变对象？"><span class="nav-number">1.3.1.</span> <span class="nav-text">python中的可变对象和不可变对象？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不可变对象"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">不可变对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#小整数对象池"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">小整数对象池</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可变对象"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">可变对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#100亿以内的质数个数455052511"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">100亿以内的质数个数455052511</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中的魔术方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">python中的魔术方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python中实现只读属性？"><span class="nav-number">1.3.3.</span> <span class="nav-text">python中实现只读属性？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过property装饰器以及私有属性"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">通过property装饰器以及私有属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#魔法方法-setattr-设置逻辑阻止赋值"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">魔法方法__setattr__设置逻辑阻止赋值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#谈谈你对面向对象的理解"><span class="nav-number">1.3.4.</span> <span class="nav-text">谈谈你对面向对象的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对装饰器的理解并写一个计时器记录方法执行性能的装饰器"><span class="nav-number">1.3.5.</span> <span class="nav-text">对装饰器的理解并写一个计时器记录方法执行性能的装饰器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">1.4.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对设计模式的理解，简述你了解的设计模式"><span class="nav-number">1.4.1.</span> <span class="nav-text">对设计模式的理解，简述你了解的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建型"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">创建型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结构型模式"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">结构型模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行为型模式"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">行为型模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">1.4.2.</span> <span class="nav-text">单例模式</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -722,7 +752,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -836,14 +866,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">112k</span>
+    <span title="站点总字数">114k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:42</span>
+    <span title="站点阅读时长">1:44</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
