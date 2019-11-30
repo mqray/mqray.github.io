@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="Flask  Flask是一个使用 Python 编写的轻量级 Web 应用框架。其 WSGI 工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。Flask使用 BSD 授权。  具有如下特点： 自带开发用服务器和debugger 集成单元测试 (unit testing) RESTful request dispatching 使用Jinja2（英语：Jinja (template">
-<meta name="keywords" content="Flask">
+  <meta name="description" content="什么是GIL？Global Interpreter Lock, GIL，即全局解释锁，它是python解释器CPython引入的概念，而并不是python的特性。python解释器很多，但是由于CPython功能最全，所以人们大多数用的都是CPython。全局解释锁GIL的定义是：参考 Understanding the Python GIL">
+<meta name="keywords" content="python基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flask环境配置">
-<meta property="og:url" content="http://yoursite.com/2019/11/13/flask环境配置/index.html">
+<meta property="og:title" content="python全局解释锁">
+<meta property="og:url" content="http://yoursite.com/2019/11/30/python全局解释锁/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="Flask  Flask是一个使用 Python 编写的轻量级 Web 应用框架。其 WSGI 工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。Flask使用 BSD 授权。  具有如下特点： 自带开发用服务器和debugger 集成单元测试 (unit testing) RESTful request dispatching 使用Jinja2（英语：Jinja (template">
+<meta property="og:description" content="什么是GIL？Global Interpreter Lock, GIL，即全局解释锁，它是python解释器CPython引入的概念，而并不是python的特性。python解释器很多，但是由于CPython功能最全，所以人们大多数用的都是CPython。全局解释锁GIL的定义是：参考 Understanding the Python GIL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T10:53:55.782Z">
+<meta property="og:updated_time" content="2019-11-30T08:05:14.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flask环境配置">
-<meta name="twitter:description" content="Flask  Flask是一个使用 Python 编写的轻量级 Web 应用框架。其 WSGI 工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。Flask使用 BSD 授权。  具有如下特点： 自带开发用服务器和debugger 集成单元测试 (unit testing) RESTful request dispatching 使用Jinja2（英语：Jinja (template">
-  <link rel="canonical" href="http://yoursite.com/2019/11/13/flask环境配置/">
+<meta name="twitter:title" content="python全局解释锁">
+<meta name="twitter:description" content="什么是GIL？Global Interpreter Lock, GIL，即全局解释锁，它是python解释器CPython引入的概念，而并不是python的特性。python解释器很多，但是由于CPython功能最全，所以人们大多数用的都是CPython。全局解释锁GIL的定义是：参考 Understanding the Python GIL">
+  <link rel="canonical" href="http://yoursite.com/2019/11/30/python全局解释锁/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>flask环境配置 | mqray's blog</title>
+  <title>python全局解释锁 | mqray's blog</title>
   
 
 
@@ -361,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/flask环境配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/python全局解释锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +375,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            flask环境配置
+            python全局解释锁
             
 
           
@@ -392,41 +392,16 @@
                 
               
 
-              <time title="创建时间：2019-11-13 18:27:13" itemprop="dateCreated datePublished" datetime="2019-11-13T18:27:13+08:00">2019-11-13</time>
+              <time title="创建时间：2019-11-30 13:53:49 / 修改时间：16:05:14" itemprop="dateCreated datePublished" datetime="2019-11-30T13:53:49+08:00">2019-11-30</time>
             </span>
           
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 18:53:55" itemprop="dateModified" datetime="2019-11-28T18:53:55+08:00">2019-11-28</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
-            <span id="/2019/11/13/flask环境配置/" class="post-meta-item leancloud_visitors" data-flag-title="flask环境配置" title="阅读次数">
+            <span id="/2019/11/30/python全局解释锁/" class="post-meta-item leancloud_visitors" data-flag-title="python全局解释锁" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -444,8 +419,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/13/flask环境配置/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/13/flask环境配置/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/30/python全局解释锁/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/30/python全局解释锁/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -458,7 +433,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>863</span>
+              <span>3k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -468,7 +443,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
           
 
@@ -481,31 +456,78 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><blockquote>
-<p> Flask是一个使用 <a href="https://baike.baidu.com/item/Python" target="_blank" rel="noopener">Python</a> 编写的轻量级 Web 应用框架。其 <a href="https://baike.baidu.com/item/WSGI" target="_blank" rel="noopener">WSGI</a> 工具箱采用 Werkzeug ，<a href="https://baike.baidu.com/item/模板引擎/907667" target="_blank" rel="noopener">模板引擎</a>则使用 Jinja2 。Flask使用 BSD 授权。 </p>
-</blockquote><p>具有如下特点：</p><ul>
-<li>自带开发用服务器和debugger</li>
-<li>集成单元测试 (unit testing)</li>
-<li>RESTful request dispatching</li>
-<li>使用<a href="https://baike.baidu.com/item/Jinja2" target="_blank" rel="noopener">Jinja2</a>（英语：Jinja (template engine)） 模板引擎</li>
-<li>支持 secure cookies (client side sessions)</li>
-<li>100% WSGI 1.0 兼容</li>
-<li>Unicode based</li>
-<li>详细的文件、教学</li>
-<li>[Google App Engine](<a href="https://baike.baidu.com/item/Google" target="_blank" rel="noopener">https://baike.baidu.com/item/Google</a> App Engine)兼容</li>
-<li>可用 Extensions 增加其他功能</li>
-</ul><a id="more"></a>
+        <h4 id="什么是GIL？"><a href="#什么是GIL？" class="headerlink" title="什么是GIL？"></a>什么是GIL？</h4><p><code>Global Interpreter Lock, GIL</code>，即全局解释锁，它是<code>python</code>解释器<code>CPython</code>引入的概念，而并不是<code>python</code>的特性。<code>python</code>解释器很多，但是由于<code>CPython</code>功能最全，所以人们大多数用的都是<code>CPython</code>。</p><p><code>全局解释锁GIL</code>的定义是：参考<a href="http://www.dabeaz.com/python/UnderstandingGIL.pdf" target="_blank" rel="noopener"> Understanding the Python GIL </a></p><a id="more"></a>
 
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In CPython, the global interpreter <span class="keyword">lock</span>, <span class="keyword">or</span> GIL, <span class="keyword">is</span> a <span class="keyword">mutex</span> that prevents multiple <span class="keyword">native</span> threads <span class="keyword">from</span> executing Python bytecodes <span class="keyword">at</span> once. This <span class="keyword">lock</span> <span class="keyword">is</span> necessary mainly because CPython’s <span class="keyword">memory</span> <span class="keyword">management</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">thread</span>-safe. (However, since the GIL <span class="keyword">exists</span>, other features have grown <span class="keyword">to</span> depend <span class="keyword">on</span> the guarantees that it enforces.)</span><br></pre></td></tr></table></figure>
 
-<h4 id="flask环境配置"><a href="#flask环境配置" class="headerlink" title="flask环境配置"></a>flask环境配置</h4><p>在使用flask尽可能的将环境隔离出来，如下新建虚拟环境。</p>
-<h5 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.C:\Users\Administrator&gt;d:</span><br><span class="line"><span class="number">2</span>.D:\&gt;cd test</span><br><span class="line"><span class="number">3</span>.D:\test&gt;mkdir myproject</span><br><span class="line"><span class="number">4</span>.D:\test\myproject&gt;python -m venv venv  [创建名为venv的虚拟环境]</span><br></pre></td></tr></table></figure>
+<p>翻译为中文，即<code>全局解释锁是一个互斥体，防止本机线程同时执行python字节码，这个锁是必要的，主要是因为CPython的内存管理不是线程安全的，但自从GIL存在，它已经成为其他库开发的依赖</code></p>
+<hr>
+<h4 id="为什么会有GIL？"><a href="#为什么会有GIL？" class="headerlink" title="为什么会有GIL？"></a>为什么会有GIL？</h4><p>由于<code>CPython</code>实现的内存管理不是线程安全的，所以在多线程中，为了保证多线程之间数据的完整性和状态同步，最简单的方式是加锁。</p>
+<p><code>CPython</code>为什么不是线程安全的？这一点主要是因为Python的垃圾回收机制【引用计数、标记-清除、分代回收】</p>
+<blockquote>
+<p><code>Guido van Rossum(吉多·范罗苏姆)</code>在创建<code>python</code>时就<code>只考虑到单核CPU</code>，<code>CPython诞生于1991年，而多核系统诞生于2004年，当时不需要考虑多核效率问题</code>，使用<code>GIL</code>锁足够简单，保证了同一时刻只有一个线程对共享资源进行存取，这样也使得<code>python</code>无法实现多核多线程，随着<code>多核时代</code>的来领，<code>GIL</code>暴露出其先天不足。</p>
+</blockquote>
+<p><code>CPython</code>通过设置<code>GIL</code>保证了：在多线程下，同一时刻只有<code>拥有GIL</code>的线程能执行<code>python字节码</code>；</p>
+<p><code>GIL</code>保证<code>CPython</code>的线程内存管理的线程安全，但是由于<code>GIL</code>的存在，也导致<code>CPython</code>解释器无法使用多线程实现并行，也无法使用多个CPU核心带来的优势，即<code>一个采用多线程技术的计算密集型应用只能在一个CPU上运行</code>，但对于<code>I/O</code> 密集型应用而言<code>GIL</code>的影响基本可以忽略。<strong>之所以采用<code>CPython</code>是因为大量的应用程序都是I/O密集型的，另外它可以无缝对接各种<code>C</code>语言实现的库</strong></p>
+<hr>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><p>线程安全是在多线程的环境下，能够保证多个线程同时执行时程序依旧运行正确, 而且要保证对于共享的数据可以由多个线程存取，但是同一时刻只能有一个线程进行存取。多线程环境下解决资源竞争问题的办法是加锁来保证存取操作的唯一性。</p>
+<p>通常加锁也有2种不同的粒度的锁：</p>
+<ol>
+<li>fine-grained(细粒度)，程序员需要自行加/解锁来保证线程安全</li>
+<li>coarse-grained(粗粒度)，语言层面本身维护着一个全局的锁机制用来保证线程安全<br>前一种方式比较典型的是 Java, Jython 等, 后一种方式比较典型的是 CPython (即Python)。</li>
+</ol>
+<hr>
+<h4 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h4><p>并行是指，多个CPU同时执行多个任务，就好像两个程序，这两个程序是同时在两个<code>CPU</code>中执行。</p>
+<p>并发是指，<code>CPU</code>交替处理多个任务，两个程序，只有一个<code>CPU</code>，它会交替的处理这两个程序。</p>
+<p>并发和并行的目的是提高<code>CPU</code>的效率，要注意的是<code>单CPU</code>永远不可能实现并行。</p>
+<hr>
+<h4 id="如何规避GIL带来的限制？"><a href="#如何规避GIL带来的限制？" class="headerlink" title="如何规避GIL带来的限制？"></a>如何规避<code>GIL</code>带来的限制？</h4><ol>
+<li>使用<code>JPython</code>或<code>IronPython</code>替换<code>CPython</code>，但不建议。</li>
+<li>对于计算密集型任务而言，使用多进程完成多线程任务。</li>
+<li>将计算密集型任务转移到C语言中，使其独立于<code>Python</code>，使得在代码中<code>GIL</code>能够释放。</li>
+</ol>
+<p>针对第3点，有如下解释：</p>
+<blockquote>
+<p>对于I/O密集型的线程，每当阻塞等待I/O操作时，解释器都会释放GIL。对于不执行任何I/O操作的CPU密集型线程，<code>Python</code>解释器会在执行了一定数量的字节码后释放<code>GIL</code>，以便其它线程得到执行的机会。但是<code>C</code>语言扩展模块不同，调用<code>C</code>函数时<code>GIL</code>会被锁定，知道它返回为止。而在这段时间内，不会执行任何<code>Python</code>字节码，因此解释器没法释放<code>GIL</code>，如果编写的<code>C</code>扩展程序不小心，调用了其他会阻塞的<code>C</code>函数、执行耗时的操作，那么必须等待<code>C</code>函数返回才会释放<code>GIL</code>.</p>
+</blockquote>
+<hr>
+<h4 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h4><p> 进程是资源（CPU、内存等）分配的基本单位，它是程序执行时的一个实例。程序运行时系统就会创建一个进程，并为它分配资源，然后把该进程放入进程就绪队列，进程调度器选中它的时候就会为它分配CPU时间，程序开始真正运行。</p>
+<p> 线程是程序执行时的最小单位，它是进程的一个执行流，是CPU调度和分派的基本单位，一个进程可以由很多个线程组成，线程间共享进程的所有资源，每个线程有自己的堆栈和局部变量。线程由CPU独立调度执行，在多CPU环境下就允许多个线程同时运行。同样多线程也可以实现并发操作，每个请求分配一个线程来处理。  </p>
+<p>两者的差异体现在：</p>
+<ul>
+<li>进程是资源分配的最小单位，线程是程序执行的最小单位。 </li>
+<li>进程有自己的独立地址空间，每启动一个进程，系统就会为它分配地址空间，建立数据表来维护代码段、堆栈段和数据段，这种操作非常昂贵。而线程是共享进程中的数据的，使用相同的地址空间，因此CPU切换一个线程的花费远比进程要小很多，同时创建一个线程的开销也比进程要小很多 。</li>
+<li>线程之间的通信更方便，同一进程下的线程共享全局变量、静态变量等数据，而进程之间的通信需要以通信的方式（IPC)进行。不过如何处理好同步与互斥是编写多线程程序的难点。 </li>
+<li>但是多进程程序更健壮，多线程程序只要有一个线程死掉，整个进程也死掉了，而一个进程死掉并不会对另外一个进程造成影响，因为进程有自己独立的地址空间 </li>
+</ul>
+<hr>
+<h4 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h4><p> 协程，英文名是 Coroutine， 又称为微线程，是一种用户态的轻量级线程。协程不像线程和进程那样，需要进行系统内核上的上下文切换，协程的上下文切换是由程序员决定的。 </p>
+<h5 id="协程相对于多线程的优点"><a href="#协程相对于多线程的优点" class="headerlink" title="协程相对于多线程的优点"></a>协程相对于多线程的优点</h5><p> 多线程编程是比较困难的， 因为调度程序任何时候都能中断线程， 必须记住保留锁， 去保护程序中重要部分， 防止多线程在执行的过程中断。  多线程编程是比较困难的， 因为调度程序任何时候都能中断线程， 必须记住保留锁， 去保护程序中重要部分， 防止多线程在执行的过程中断。 </p>
+<ul>
+<li>无需系统内核的上下文切换，减小开销； </li>
+<li>无需原子操作锁定及同步的开销，不用担心资源共享的问题； </li>
+<li>单线程即可实现高并发，单核 CPU 即便支持上万的协程都不是问题，所以很适合用于高并发处理，尤其是在应用在网络爬虫中。 </li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>无法使用 CPU 的多核 </p>
+<ul>
+<li><blockquote>
+<p>协程的本质是个单线程，它不能同时用上单个 CPU 的多个核，协程需要和进程配合才能运行在多 CPU上。当然我们日常所编写的绝大部分应用都没有这个必要，就比如网络爬虫来说，限制爬虫的速度还有其他的因素，比如网站并发量、网速等问题都会是爬虫速度限制的因素。除非做一些密集型应用，这个时候才可能会用到多进程和协程。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>处处都要使用非阻塞代码 </p>
+<ul>
+<li><blockquote>
+<p>写协程就意味着你要一值写一些非阻塞的代码，使用各种异步版本的库，比如后面的异步爬虫教程中用的 aiohttp 就是一个异步版本的request库等。 不过这些缺点并不能影响到使用协程的优势。 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
 
-<p>此时可以查看<code>D:\test\myproject\venv\Scripts</code>文件夹下有名为<code>activate</code>的可执行文件。</p>
-<h5 id="激活环境"><a href="#激活环境" class="headerlink" title="激活环境"></a>激活环境</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">将刚才找到的文件放入cmd可执行窗口界面，回车，此时 命令行开头变为如下<span class="number">2</span>，如果想要退出此虚拟环境，参考<span class="number">3</span>,</span><br><span class="line"><span class="number">1</span>.D:\test\myproject&gt;D:\test\myproject\venv\Scripts\activate</span><br><span class="line"><span class="number">2</span>.venv) D:\test\myproject&gt; </span><br><span class="line"><span class="number">3</span>.(venv) D:\test\myproject&gt;deactivate</span><br></pre></td></tr></table></figure>
-
-<h5 id="安装flask"><a href="#安装flask" class="headerlink" title="安装flask"></a>安装flask</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
-
-<h5 id="验证flask"><a href="#验证flask" class="headerlink" title="验证flask"></a>验证flask</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>(venv) D:\test\myproject&gt;python </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> flask</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -522,7 +544,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/Flask/" rel="tag"># Flask</a>
+              <a href="/tags/python基础/" rel="tag"># python基础</a>
             
           </div>
         
@@ -538,8 +560,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/12/leetcode-三数之和/" rel="next" title="leetcode_三数之和">
-                  <i class="fa fa-chevron-left"></i> leetcode_三数之和
+                <a href="/2019/11/30/剑指offer-重建二叉树/" rel="next" title="剑指offer_重建二叉树">
+                  <i class="fa fa-chevron-left"></i> 剑指offer_重建二叉树
                 </a>
               
             </div>
@@ -548,8 +570,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/13/leetcode-最接近的三数之和/" rel="prev" title="leetcode_最接近的三数之和">
-                  leetcode_最接近的三数之和 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/30/python-super的原理/" rel="prev" title="python_super的原理">
+                  python_super的原理 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -599,7 +621,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flask"><span class="nav-number">1.</span> <span class="nav-text">Flask</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flask环境配置"><span class="nav-number">1.1.</span> <span class="nav-text">flask环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建虚拟环境"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建虚拟环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#激活环境"><span class="nav-number">1.1.2.</span> <span class="nav-text">激活环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装flask"><span class="nav-number">1.1.3.</span> <span class="nav-text">安装flask</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#验证flask"><span class="nav-number">1.1.4.</span> <span class="nav-text">验证flask</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是GIL？"><span class="nav-number">1.</span> <span class="nav-text">什么是GIL？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会有GIL？"><span class="nav-number">2.</span> <span class="nav-text">为什么会有GIL？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程安全"><span class="nav-number">3.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发与并行"><span class="nav-number">4.</span> <span class="nav-text">并发与并行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何规避GIL带来的限制？"><span class="nav-number">5.</span> <span class="nav-text">如何规避GIL带来的限制？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和线程"><span class="nav-number">6.</span> <span class="nav-text">进程和线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协程"><span class="nav-number">7.</span> <span class="nav-text">协程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#协程相对于多线程的优点"><span class="nav-number">7.1.</span> <span class="nav-text">协程相对于多线程的优点</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
