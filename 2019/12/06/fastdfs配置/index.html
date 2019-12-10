@@ -64,7 +64,7 @@
 <meta property="og:description" content="一、安装Git1root@yons-Super-Server:/home/sage# apt-get install git二、安装libfastcommon下载1root@yons-Super-Server:/home/sage# git clone https://github.com/happyfish100/libfastcommon.git">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191211013813524.png">
-<meta property="og:updated_time" content="2019-12-10T17:41:59.229Z">
+<meta property="og:updated_time" content="2019-12-10T17:51:51.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fastDFS配置">
 <meta name="twitter:description" content="一、安装Git1root@yons-Super-Server:/home/sage# apt-get install git二、安装libfastcommon下载1root@yons-Super-Server:/home/sage# git clone https://github.com/happyfish100/libfastcommon.git">
@@ -405,7 +405,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-11 01:41:59" itemprop="dateModified" datetime="2019-12-11T01:41:59+08:00">2019-12-11</time>
+                <time title="修改时间：2019-12-11 01:51:51" itemprop="dateModified" datetime="2019-12-11T01:51:51+08:00">2019-12-11</time>
               </span>
             
           
@@ -453,7 +453,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>16 分钟</span>
+              <span>17 分钟</span>
             </span>
           
 
@@ -575,6 +575,16 @@
 
 <p>如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/20191211013813524.png" alt="成功访问"></p>
+<p>如果还存在一些问题，可以尝试：</p>
+<p>将你的<code>FastDFS</code>安装目录<code>/Desktop/mqray/FastDFSETC/</code>中的<code>mime.types、nginx.conf、http.conf</code>拷贝到系统路径<code>/etc/fdfs</code>中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sage@yons-Super-Server:~/Desktop/mqray/FastDFSETC/fastdfs-5.08/conf$ ls</span><br><span class="line">anti-steal.jpg  http.conf   storage.conf      tracker.conf</span><br><span class="line">client.conf     mime.types  storage_ids.conf</span><br><span class="line">sage@yons-Super-Server:~/Desktop/mqray/FastDFSETC/fastdfs-5.08/conf$ cp http.conf mime.types /etc/fdfs</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://blog.csdn.net/hy245120020/article/details/78658081" target="_blank" rel="noopener">ubuntu16.04+fastdfs+nginx分布式文件系统</a></li>
+<li><a href="https://www.cnblogs.com/justuntil/p/5538346.html" target="_blank" rel="noopener"> nginx集群报错“upstream”directive is not allow here 错误 </a></li>
+</ol>
 
     </div>
 
@@ -809,7 +819,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:13</span>
+    <span title="站点阅读时长">2:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
