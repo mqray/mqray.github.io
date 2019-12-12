@@ -55,19 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="删除重复字（保留一个） 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。  示例 1: 12输入: 1-&amp;gt;1-&amp;gt;2输出: 1-&amp;gt;2 示例 2: 12输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3输出: 1-&amp;gt;2-&amp;gt;3这个思路比较简单，不表。123456789101112131415161718192021class Solution(obje">
-<meta name="keywords" content="链表">
+  <meta name="description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode_删除排序链表中的重复元素">
-<meta property="og:url" content="http://yoursite.com/2019/11/29/leetcode-删除排序链表中的重复元素/index.html">
+<meta property="og:title" content="剑指offer_数组中出现次数超过一半的数">
+<meta property="og:url" content="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="删除重复字（保留一个） 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。  示例 1: 12输入: 1-&amp;gt;1-&amp;gt;2输出: 1-&amp;gt;2 示例 2: 12输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3输出: 1-&amp;gt;2-&amp;gt;3这个思路比较简单，不表。123456789101112131415161718192021class Solution(obje">
+<meta property="og:description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-29T13:18:26.569Z">
+<meta property="og:updated_time" content="2019-12-12T13:46:12.541Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode_删除排序链表中的重复元素">
-<meta name="twitter:description" content="删除重复字（保留一个） 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。  示例 1: 12输入: 1-&amp;gt;1-&amp;gt;2输出: 1-&amp;gt;2 示例 2: 12输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3输出: 1-&amp;gt;2-&amp;gt;3这个思路比较简单，不表。123456789101112131415161718192021class Solution(obje">
-  <link rel="canonical" href="http://yoursite.com/2019/11/29/leetcode-删除排序链表中的重复元素/">
+<meta name="twitter:title" content="剑指offer_数组中出现次数超过一半的数">
+<meta name="twitter:description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
+  <link rel="canonical" href="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/">
 
 
 <script id="page-configurations">
@@ -81,7 +80,7 @@
   };
 </script>
 
-  <title>leetcode_删除排序链表中的重复元素 | mqray's blog</title>
+  <title>剑指offer_数组中出现次数超过一半的数 | mqray's blog</title>
   
 
 
@@ -361,7 +360,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/29/leetcode-删除排序链表中的重复元素/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +374,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            leetcode_删除排序链表中的重复元素
+            剑指offer_数组中出现次数超过一半的数
             
 
           
@@ -392,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-11-29 17:05:08 / 修改时间：21:18:26" itemprop="dateCreated datePublished" datetime="2019-11-29T17:05:08+08:00">2019-11-29</time>
+              <time title="创建时间：2019-12-12 21:34:01 / 修改时间：21:46:12" itemprop="dateCreated datePublished" datetime="2019-12-12T21:34:01+08:00">2019-12-12</time>
             </span>
           
             
@@ -406,8 +405,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
                   </a>
                 </span>
 
@@ -418,7 +417,7 @@
           
 
           
-            <span id="/2019/11/29/leetcode-删除排序链表中的重复元素/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_删除排序链表中的重复元素" title="阅读次数">
+            <span id="/2019/12/12/剑指offer-数组中出现次数超过一半的数/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_数组中出现次数超过一半的数" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -436,8 +435,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/29/leetcode-删除排序链表中的重复元素/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/29/leetcode-删除排序链表中的重复元素/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/12/12/剑指offer-数组中出现次数超过一半的数/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/12/剑指offer-数组中出现次数超过一半的数/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -450,7 +449,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.4k</span>
+              <span>1.3k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -473,35 +472,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="删除重复字（保留一个）"><a href="#删除重复字（保留一个）" class="headerlink" title="删除重复字（保留一个）"></a>删除重复字（保留一个）</h4><p> 给定一个排序链表，删除所有重复的元素，<strong>使得每个元素只出现一次。</strong> </p><p> <strong>示例 1:</strong> </p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="number">1</span>-&gt;<span class="number">1</span>-&gt;<span class="number">2</span></span><br><span class="line">输出: <span class="number">1</span>-&gt;<span class="number">2</span></span><br></pre></td></tr></table></figure><p> <strong>示例 2:</strong> </p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="number">1</span>-&gt;<span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">3</span></span><br><span class="line">输出: <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></span><br></pre></td></tr></table></figure><p>这个思路比较简单，不表。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(self, head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span>  <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head.next:</span><br><span class="line">            <span class="keyword">return</span>  head</span><br><span class="line">        phead = head</span><br><span class="line">        <span class="keyword">while</span> head.next:</span><br><span class="line">            here = head.val</span><br><span class="line">            next = head.next.val</span><br><span class="line">            <span class="keyword">if</span> head.val == head.next.val <span class="keyword">and</span> head.next.next :</span><br><span class="line">                head.next = head.next.next</span><br><span class="line">            <span class="keyword">elif</span> head.val == head.next.val <span class="keyword">and</span> <span class="keyword">not</span> head.next.next:</span><br><span class="line">                head.next = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                head = head.next</span><br><span class="line">        <span class="keyword">return</span> phead</span><br></pre></td></tr></table></figure><a id="more"></a>
+        <blockquote>
+<p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。 </p>
+</blockquote><p>方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。</p><h4 id="借用字典"><a href="#借用字典" class="headerlink" title="借用字典"></a>借用字典</h4><p>遍历过程中，使用字典记录该字符出现的次数，以该字符为<code>key</code>，出现次数为<code>value</code>，时间复杂度是<code>O(N)</code>，空间复杂度是<code>O(N)</code></p><a id="more"></a>
 
 
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionI</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">        dict = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> dict.get(num):</span><br><span class="line">                dict[num] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[num] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> dict[num] &gt; len(numbers)//<span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> num</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="代码量最少"><a href="#代码量最少" class="headerlink" title="代码量最少"></a>代码量最少</h4><p>代码量最少的思路就是每次遍历数组时，都检查它在数组中出现的次数。时间复杂度是<code>O(N^2)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionII</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    temp = [num <span class="keyword">for</span> num <span class="keyword">in</span> numbers <span class="keyword">if</span> numbers.count(num) &gt; len(numbers) / <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> temp[<span class="number">0</span>] <span class="keyword">if</span> temp <span class="keyword">else</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="最高效"><a href="#最高效" class="headerlink" title="最高效"></a>最高效</h4><p>最高效的做法是借用思想<code>假设符合条件的数值存在，则该数值出现的次数一定比其他所有数出现的次数总和还要多</code>；具体实现时，我们采用<code>攻守阵地</code>的思想。时间复杂度是<code>O(N)</code>，空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionIII</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    cur,count = numbers[<span class="number">0</span>],<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(numbers)):</span><br><span class="line">        <span class="keyword">if</span> count&lt;=<span class="number">0</span>:</span><br><span class="line">            cur = numbers[i]</span><br><span class="line">        <span class="keyword">if</span> numbers[i]!= cur:</span><br><span class="line">            count = count - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = count + <span class="number">1</span></span><br><span class="line">    count2 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">if</span> num == cur:</span><br><span class="line">            count2 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> count2&gt;len(numbers)//<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> cur</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="comment"># tmp = [1 for num in numbers if num == cur]</span></span><br><span class="line">    <span class="comment"># if len(tmp) &gt; len(numbers)//2:</span></span><br><span class="line">    <span class="comment">#     return cur</span></span><br><span class="line">    <span class="comment"># else:</span></span><br><span class="line">    <span class="comment">#     return 0</span></span><br></pre></td></tr></table></figure>
 
-
-
-
-
-<blockquote>
-<p>执行用时 :32 ms, 在所有 python 提交中击败了67.18%的用户</p>
-<p>内存消耗 :11.9 MB, 在所有 python 提交中击败了22.28%的用户</p>
-</blockquote>
-<hr>
-<h4 id="删除所有重复数字"><a href="#删除所有重复数字" class="headerlink" title="删除所有重复数字"></a>删除所有重复数字</h4><p>给定一个排序链表，<strong>删除所有含有重复数字的节点</strong>，只保留原始链表中 <em>没有重复出现</em> 的数字。 </p>
-<p> <strong>示例 1:</strong> </p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">3</span>-&gt;<span class="number">4</span>-&gt;<span class="number">4</span>-&gt;<span class="number">5</span></span><br><span class="line">输出: <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<p> <strong>示例 2:</strong> </p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="number">1</span>-&gt;<span class="number">1</span>-&gt;<span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span></span><br><span class="line">输出: <span class="number">2</span>-&gt;<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.next = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicatesII</span><span class="params">(self, head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head.next:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        phead = ListNode(<span class="number">-1</span>)</span><br><span class="line">        phead.next = head</span><br><span class="line">        cur = phead</span><br><span class="line">        <span class="keyword">while</span> cur.next <span class="keyword">and</span> cur.next.next:</span><br><span class="line">            <span class="keyword">if</span> cur.next.val != cur.next.next.val:<span class="comment">#如果前后两个数值不相等，则直接向后移动</span></span><br><span class="line">                cur = cur.next <span class="comment">#指向一组相同数之前的那个不相同的数</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tmp = cur.next</span><br><span class="line">                <span class="keyword">while</span> tmp.next <span class="keyword">and</span> tmp.val == tmp.next.val:<span class="comment">#排除可能存在的多个重复值，最后tmp指针指向最后一个重复数</span></span><br><span class="line">                    tmp = tmp.next</span><br><span class="line">                cur.next = tmp.next<span class="comment">#横贯由一组重复数分隔两个不同数</span></span><br><span class="line">        <span class="keyword">return</span> phead.next</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>执行用时 :28 ms, 在所有 python 提交中击败了83.06%的用户</p>
-<p>内存消耗 :11.8 MB, 在所有 python 提交中击败了25.35%的用户</p>
-</blockquote>
-
+<h4 id="借用排序"><a href="#借用排序" class="headerlink" title="借用排序"></a>借用排序</h4><p>这种思路是，先对数组进行排序，如果有符合条件的数值，则它一定在数组中间出现。统计数组出现次数，大于数组长度的一半即说明其符合条件。时间复杂度是<code>O(NlogN)</code>,空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionIV</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    numbers.sort()</span><br><span class="line">    aim = numbers[len(numbers)//<span class="number">2</span>]</span><br><span class="line">    tmp = [<span class="number">1</span> <span class="keyword">for</span> num <span class="keyword">in</span> numbers <span class="keyword">if</span> num == aim]</span><br><span class="line">    <span class="keyword">if</span> len(tmp) &gt; len(numbers)//<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> aim</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -513,15 +498,6 @@
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/链表/" rel="tag"># 链表</a>
-            
-          </div>
-        
 
         
   <div class="post-widgets">
@@ -534,8 +510,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/28/python内存管理与回收机制/" rel="next" title="python内存管理与回收机制">
-                  <i class="fa fa-chevron-left"></i> python内存管理与回收机制
+                <a href="/2019/12/12/剑指offer-字符串的字典序全排列/" rel="next" title="剑指offer_字符串的字典序全排列">
+                  <i class="fa fa-chevron-left"></i> 剑指offer_字符串的字典序全排列
                 </a>
               
             </div>
@@ -543,10 +519,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/11/30/剑指offer-重建二叉树/" rel="prev" title="剑指offer_重建二叉树">
-                  剑指offer_重建二叉树 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -595,7 +567,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#删除重复字（保留一个）"><span class="nav-number">1.</span> <span class="nav-text">删除重复字（保留一个）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除所有重复数字"><span class="nav-number">2.</span> <span class="nav-text">删除所有重复数字</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#借用字典"><span class="nav-number">1.</span> <span class="nav-text">借用字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码量最少"><span class="nav-number">2.</span> <span class="nav-text">代码量最少</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高效"><span class="nav-number">3.</span> <span class="nav-text">最高效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#借用排序"><span class="nav-number">4.</span> <span class="nav-text">借用排序</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

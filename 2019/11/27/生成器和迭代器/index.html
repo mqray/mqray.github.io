@@ -64,7 +64,7 @@
 <meta property="og:description" content="开篇之前，先给一张图神清气爽一下：容器容器指用来存储多个元素的数据结构，python中的容器有list,tuple,dict,set,str等 容器中所有元素可以通过跌打获取 容器中所有元素存储在内存中 常见的容器list,tuple,dict,set,str都可以通过迭代获取，它们是可迭代对象Iterable 但并不是所有容器都是可迭代对象Iterable">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://nvie.com/img/relationships.png">
-<meta property="og:updated_time" content="2019-11-28T10:47:45.090Z">
+<meta property="og:updated_time" content="2019-12-11T02:59:56.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生成器和迭代器">
 <meta name="twitter:description" content="开篇之前，先给一张图神清气爽一下：容器容器指用来存储多个元素的数据结构，python中的容器有list,tuple,dict,set,str等 容器中所有元素可以通过跌打获取 容器中所有元素存储在内存中 常见的容器list,tuple,dict,set,str都可以通过迭代获取，它们是可迭代对象Iterable 但并不是所有容器都是可迭代对象Iterable">
@@ -283,7 +283,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">51</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">53</span></a>
 
   </li>
       
@@ -405,7 +405,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 18:47:45" itemprop="dateModified" datetime="2019-11-28T18:47:45+08:00">2019-11-28</time>
+                <time title="修改时间：2019-12-11 10:59:56" itemprop="dateModified" datetime="2019-12-11T10:59:56+08:00">2019-12-11</time>
               </span>
             
           
@@ -496,7 +496,7 @@
 <h5 id="为什么list等可迭代对象不是迭代器？"><a href="#为什么list等可迭代对象不是迭代器？" class="headerlink" title="为什么list等可迭代对象不是迭代器？"></a>为什么list等可迭代对象不是迭代器？</h5><p>迭代器表示的是<code>数据流</code>，它能被<code>next()</code>函数调用并不断返回下一个数据，只到没有数据时产生<code>StopIteration</code>错误。这个数据流可以表示任意一个无限大的数据流，但是这个数据流永远无法被<code>list</code>等可迭代对象(容器)存储。</p>
 <h4 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h4><p>生成器<code>generator</code>是迭代器的一种，但<strong>只能遍历一次</strong>.<strong>【生成器都是迭代器 generator is always an iterator】</strong></p>
 <ul>
-<li><p>它拥有迭代器迭代产生数据的能力，使用<code>yield</code>关键字替换生成器<code>Iterator</code>中的<code>__next__()</code>方法实现，拥有<code>yield</code>关键紫的函数就是生成器函数；</p>
+<li><p>它拥有迭代器迭代产生数据的能力，使用<code>yield</code>关键字替换生成器<code>Iterator</code>中的<code>__next__()</code>方法实现，拥有<code>yield</code>关键词的函数就是生成器函数；</p>
 </li>
 <li><p>生成器和迭代器一样，不会一次将所有元素加载到内存，而是在调用时才生成返回结果【容器是直接加载到内存中】</p>
 </li>
@@ -662,7 +662,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -776,14 +776,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">147k</span>
+    <span title="站点总字数">149k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:14</span>
+    <span title="站点阅读时长">2:16</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
