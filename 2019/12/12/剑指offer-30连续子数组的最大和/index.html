@@ -55,18 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
+  <meta name="description" content="HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你">
+<meta name="keywords" content="-动态规划DP -数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer_数组中出现次数超过一半的数">
-<meta property="og:url" content="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/index.html">
+<meta property="og:title" content="剑指offer_连续子数组的最大和">
+<meta property="og:url" content="http://yoursite.com/2019/12/12/剑指offer-30连续子数组的最大和/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
+<meta property="og:description" content="HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-12T13:46:12.541Z">
+<meta property="og:updated_time" content="2019-12-13T08:38:22.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer_数组中出现次数超过一半的数">
-<meta name="twitter:description" content="数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。  方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。借用字典遍历过程中，使用字典记录该字符出现的次数，以该字符为key，出现次数为value，时间复杂度是O(N)，空间复">
-  <link rel="canonical" href="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/">
+<meta name="twitter:title" content="剑指offer_连续子数组的最大和">
+<meta name="twitter:description" content="HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你">
+  <link rel="canonical" href="http://yoursite.com/2019/12/12/剑指offer-30连续子数组的最大和/">
 
 
 <script id="page-configurations">
@@ -80,7 +81,7 @@
   };
 </script>
 
-  <title>剑指offer_数组中出现次数超过一半的数 | mqray's blog</title>
+  <title>剑指offer_连续子数组的最大和 | mqray's blog</title>
   
 
 
@@ -280,7 +281,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">56</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">58</span></a>
 
   </li>
       
@@ -360,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/剑指offer-数组中出现次数超过一半的数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/剑指offer-30连续子数组的最大和/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -374,7 +375,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            剑指offer_数组中出现次数超过一半的数
+            剑指offer_连续子数组的最大和
             
 
           
@@ -391,11 +392,19 @@
                 
               
 
-              <time title="创建时间：2019-12-12 21:34:01 / 修改时间：21:46:12" itemprop="dateCreated datePublished" datetime="2019-12-12T21:34:01+08:00">2019-12-12</time>
+              <time title="创建时间：2019-12-12 22:20:04" itemprop="dateCreated datePublished" datetime="2019-12-12T22:20:04+08:00">2019-12-12</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-13 16:38:22" itemprop="dateModified" datetime="2019-12-13T16:38:22+08:00">2019-12-13</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -417,7 +426,7 @@
           
 
           
-            <span id="/2019/12/12/剑指offer-数组中出现次数超过一半的数/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_数组中出现次数超过一半的数" title="阅读次数">
+            <span id="/2019/12/12/剑指offer-30连续子数组的最大和/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_连续子数组的最大和" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -435,8 +444,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/12/剑指offer-数组中出现次数超过一半的数/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/12/剑指offer-数组中出现次数超过一半的数/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/12/12/剑指offer-30连续子数组的最大和/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/12/剑指offer-30连续子数组的最大和/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -449,7 +458,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.3k</span>
+              <span>895</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -473,20 +482,16 @@
 
       
         <blockquote>
-<p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。 </p>
-</blockquote><p>方法比较多，这里给出四种，主要就是记录一下自己做过的题，方便查阅。</p><h4 id="借用字典"><a href="#借用字典" class="headerlink" title="借用字典"></a>借用字典</h4><p>遍历过程中，使用字典记录该字符出现的次数，以该字符为<code>key</code>，出现次数为<code>value</code>，时间复杂度是<code>O(N)</code>，空间复杂度是<code>O(N)</code></p><a id="more"></a>
+<p>HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？例如:{6,-3,-2,7,-15,1,2,2},连续子向量的最大和为8(从第0个开始,到第3个为止)。给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1) </p>
+</blockquote><a id="more"></a>
+<h4 id="动态规划算法"><a href="#动态规划算法" class="headerlink" title="动态规划算法"></a>动态规划算法</h4><p>假设<code>F(i)</code>是以<code>i</code>为末尾下标的子数组的和的最大值，</p>
+<p>则它满足：<code>F(i)=max(F(i-1)+nums[i],nums[i])</code></p>
+<p>以<code>res</code>记录全局子数组和的最大值，所以需要动态的更新<code>res</code>的值，具体的：</p>
+<p><code>res=max(res,F(i))</code>，下面的写法时间复杂度为<code>O(N)</code>，空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment">#动态规划，以i为末尾元素的子数组的和的最大值F(i)</span></span><br><span class="line">    <span class="comment">#F(i) = max(F(i-1)+nums[i],nums[i]))</span></span><br><span class="line">    <span class="comment">#res用以记录所有子数组和的最大值</span></span><br><span class="line">    <span class="comment">#res=max(res,F(i))</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        res= nums[<span class="number">0</span>]</span><br><span class="line">        f_max = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums[<span class="number">1</span>:]:</span><br><span class="line">            f_max = max(f_max + num, num)</span><br><span class="line">            res = max(res,f_max)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionI</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">        dict = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> dict.get(num):</span><br><span class="line">                dict[num] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[num] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> dict[num] &gt; len(numbers)//<span class="number">2</span>:</span><br><span class="line">                <span class="keyword">return</span> num</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="代码量最少"><a href="#代码量最少" class="headerlink" title="代码量最少"></a>代码量最少</h4><p>代码量最少的思路就是每次遍历数组时，都检查它在数组中出现的次数。时间复杂度是<code>O(N^2)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionII</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    temp = [num <span class="keyword">for</span> num <span class="keyword">in</span> numbers <span class="keyword">if</span> numbers.count(num) &gt; len(numbers) / <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> temp[<span class="number">0</span>] <span class="keyword">if</span> temp <span class="keyword">else</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="最高效"><a href="#最高效" class="headerlink" title="最高效"></a>最高效</h4><p>最高效的做法是借用思想<code>假设符合条件的数值存在，则该数值出现的次数一定比其他所有数出现的次数总和还要多</code>；具体实现时，我们采用<code>攻守阵地</code>的思想。时间复杂度是<code>O(N)</code>，空间复杂度为<code>O(1)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionIII</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    cur,count = numbers[<span class="number">0</span>],<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(numbers)):</span><br><span class="line">        <span class="keyword">if</span> count&lt;=<span class="number">0</span>:</span><br><span class="line">            cur = numbers[i]</span><br><span class="line">        <span class="keyword">if</span> numbers[i]!= cur:</span><br><span class="line">            count = count - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = count + <span class="number">1</span></span><br><span class="line">    count2 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">if</span> num == cur:</span><br><span class="line">            count2 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> count2&gt;len(numbers)//<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> cur</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="comment"># tmp = [1 for num in numbers if num == cur]</span></span><br><span class="line">    <span class="comment"># if len(tmp) &gt; len(numbers)//2:</span></span><br><span class="line">    <span class="comment">#     return cur</span></span><br><span class="line">    <span class="comment"># else:</span></span><br><span class="line">    <span class="comment">#     return 0</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="借用排序"><a href="#借用排序" class="headerlink" title="借用排序"></a>借用排序</h4><p>这种思路是，先对数组进行排序，如果有符合条件的数值，则它一定在数组中间出现。统计数组出现次数，大于数组长度的一半即说明其符合条件。时间复杂度是<code>O(NlogN)</code>,空间复杂度为<code>O(1)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">MoreThanHalfNum_SolutionIV</span><span class="params">(self, numbers)</span>:</span></span><br><span class="line">    numbers.sort()</span><br><span class="line">    aim = numbers[len(numbers)//<span class="number">2</span>]</span><br><span class="line">    tmp = [<span class="number">1</span> <span class="keyword">for</span> num <span class="keyword">in</span> numbers <span class="keyword">if</span> num == aim]</span><br><span class="line">    <span class="keyword">if</span> len(tmp) &gt; len(numbers)//<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> aim</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><p>思想是，在遍历的过程中记录前面子数组和是否有价值，也即<code>如果前面子数组的和小于0，那么在后面的计算中就不再考虑之前出现的子数组了</code>，时间复杂度是<code>O(N)</code>，空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">FindGreatestSumOfSubArrayII</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">    res,cur = nums[<span class="number">0</span>],nums[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums[<span class="number">1</span>:]:</span><br><span class="line">        cur = cur + num</span><br><span class="line">        res = max(cur,res)<span class="comment">#记录当前的最大子数组的和</span></span><br><span class="line">        <span class="keyword">if</span> cur &lt; <span class="number">0</span>:</span><br><span class="line">            cur = <span class="number">0</span><span class="comment">#如果某次累加后cur为0说明前面的子数组的和没有价值</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -498,6 +503,15 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/动态规划DP-数组/" rel="tag"># -动态规划DP -数组</a>
+            
+          </div>
+        
 
         
   <div class="post-widgets">
@@ -510,8 +524,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/12/12/剑指offer-字符串的字典序全排列/" rel="next" title="剑指offer_字符串的字典序全排列">
-                  <i class="fa fa-chevron-left"></i> 剑指offer_字符串的字典序全排列
+                <a href="/2019/12/12/剑指offer-28数组中出现次数超过一半的数/" rel="next" title="剑指offer_数组中出现次数超过一半的数">
+                  <i class="fa fa-chevron-left"></i> 剑指offer_数组中出现次数超过一半的数
                 </a>
               
             </div>
@@ -520,8 +534,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/12/12/剑指offer-连续子数组的最大和/" rel="prev" title="剑指offer_连续子数组的最大和">
-                  剑指offer_连续子数组的最大和 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/12/13/剑指offer-29最小的K个数/" rel="prev" title="剑指offer_29最小的K个数">
+                  剑指offer_29最小的K个数 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -571,7 +585,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#借用字典"><span class="nav-number">1.</span> <span class="nav-text">借用字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码量最少"><span class="nav-number">2.</span> <span class="nav-text">代码量最少</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最高效"><span class="nav-number">3.</span> <span class="nav-text">最高效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#借用排序"><span class="nav-number">4.</span> <span class="nav-text">借用排序</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态规划算法"><span class="nav-number">1.</span> <span class="nav-text">动态规划算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历"><span class="nav-number">2.</span> <span class="nav-text">遍历</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -590,7 +604,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -704,14 +718,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">154k</span>
+    <span title="站点总字数">155k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:20</span>
+    <span title="站点阅读时长">2:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
