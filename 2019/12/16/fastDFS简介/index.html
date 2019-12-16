@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="fastDFS是一个开源的高性能分布式文件系统DFS。主要功能包括：文件存储、文件同步、文件访问以及高容量和复杂均衡。解决了海量数据存储问题，特别适合中小文件4KB-500MB为载体的在线服务。主要包含三个模块：client客户端：上传和下载数据的服务器，也即我们项目部署位置。tracker server跟踪服务器：可以有多台，所以不存在单点故障主要做调度工作，起到负载均衡的作用。在内存中记录所有">
+<meta name="keywords" content="fastdfs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fastDFS简介">
+<meta property="og:url" content="http://yoursite.com/2019/12/16/fastDFS简介/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="fastDFS是一个开源的高性能分布式文件系统DFS。主要功能包括：文件存储、文件同步、文件访问以及高容量和复杂均衡。解决了海量数据存储问题，特别适合中小文件4KB-500MB为载体的在线服务。主要包含三个模块：client客户端：上传和下载数据的服务器，也即我们项目部署位置。tracker server跟踪服务器：可以有多台，所以不存在单点故障主要做调度工作，起到负载均衡的作用。在内存中记录所有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516113227670?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516113258902?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516113332205?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-12-16T11:13:34.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fastDFS简介">
+<meta name="twitter:description" content="fastDFS是一个开源的高性能分布式文件系统DFS。主要功能包括：文件存储、文件同步、文件访问以及高容量和复杂均衡。解决了海量数据存储问题，特别适合中小文件4KB-500MB为载体的在线服务。主要包含三个模块：client客户端：上传和下载数据的服务器，也即我们项目部署位置。tracker server跟踪服务器：可以有多台，所以不存在单点故障主要做调度工作，起到负载均衡的作用。在内存中记录所有">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180516113227670?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  <link rel="canonical" href="http://yoursite.com/2019/12/16/fastDFS简介/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>fastDFS简介 | mqray's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">mqray's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">no bb, show me the codes.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+        
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">15</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">66</span></a>
+
+  </li>
+      
+    
+      
+      
+        
+        
+        <li class="menu-item menu-item-top">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/top/" rel="section"><i class="fa fa-fw fa-signal"></i>热门</a>
+
+  </li>
+      
+    
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+          <i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/fastDFS简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            fastDFS简介
+            
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-16 18:29:41 / 修改时间：19:13:34" itemprop="dateCreated datePublished" datetime="2019-12-16T18:29:41+08:00">2019-12-16</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span id="/2019/12/16/fastDFS简介/" class="post-meta-item leancloud_visitors" data-flag-title="fastDFS简介" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/16/fastDFS简介/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/16/fastDFS简介/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>fastDFS</code>是一个开源的高性能分布式文件系统<code>DFS</code>。主要功能包括：文件存储、文件同步、文件访问以及高容量和复杂均衡。解决了海量数据存储问题，特别适合中小文件<code>4KB-500MB</code>为载体的在线服务。</p><p>主要包含三个模块：</p><p><code>client</code>客户端：上传和下载数据的服务器，也即我们项目部署位置。</p><p><code>tracker server</code>跟踪服务器：可以有多台，所以不存在单点故障主要做调度工作，起到负载均衡的作用。在内存中记录所有<code>group</code>和<code>storage server</code>的状态信息，是客户端和数据服务器交互的窗口。</p><a id="more"></a>
+
+
+
+<p><code>storage server</code>存储服务器：以<code>group</code>为单位，每个<code>group</code>中可以有多个<code>strorage server</code>，其数据互为备份。保存文件和文件属性<code>meta data</code>，它直接利用操作系统的文件系统调用文件管理。</p>
+<p>除此之外，还有两个概念：</p>
+<ul>
+<li><p><code>group</code>：称作组或卷。同组内的<code>storage server</code>是对等的，其文件是完全相同的。</p>
+</li>
+<li><p><code>meta data</code>：以键值对的方式记录文件相关属性</p>
+<p><img src="https://img-blog.csdn.net/20180516113227670?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"> </p>
+</li>
+</ul>
+<h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><ol>
+<li><p><code>client</code>以轮询方式向<code>tracker server</code>发送<strong>上传连接请求</strong>，</p>
+</li>
+<li><p><code>tracker server</code>查询可用的<code>storage server</code>，然后返回<code>storage server</code>的<code>ip+port</code>给<code>client</code></p>
+</li>
+<li><p><code>client</code>上传文件<code>file content</code>和<code>meta data</code>，</p>
+</li>
+<li><p><code>storage server</code>生成<code>file_id</code>，</p>
+</li>
+<li><p>然后将上传内容写入磁盘，</p>
+</li>
+<li><p>将<code>file_id</code>以及文件路径等信息返回给<code>client</code>；</p>
+</li>
+<li><p>客户端以此访问文件。</p>
+<p>另外要注意到<code>storage server</code>会定期向<code>tracker server</code>上传其状态信息。当存在多个<code>tracker server</code>时，客户端可以选择任意<code>tracker</code></p>
+</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20180516113258902?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"> </p>
+<p>其中，<code>file_id</code>格式如下：</p>
+<p>包含<code>组信息+虚拟磁盘路径+数据两级目录+文件名</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group1/M00/00/00/CicbK13qPAKADfzXAAAD4Wa37wo5616.py</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件同步"><a href="#文件同步" class="headerlink" title="文件同步"></a>文件同步</h4><p>客户端将文件写入<code>storage server</code>后，得到返回的<code>file_id</code>即认为文件上传成功；此时，假设上传文件所在的<code>group</code>中存在多个<code>storage server</code>时，刚才上传的文件需要在本组<code>storage server</code>中进行同步。这部分由后台线程完成。每个<code>storage</code>写入文件时，同时会写入<code>binlog</code>，其中不包含文件数据，只包含文件名等<code>meta data</code>，该<code>binlog</code>将用于后台同步，<code>storage</code>会记录向<code>group</code>内其他<code>storage</code>同步的进度，以便重启后能按上次的进度继续同步；进度以时间戳的方式记录，所以最好能保证集群内<code>server</code>时钟同步。</p>
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><p>客户端根据<code>file_id</code>进行访问。</p>
+<ol>
+<li><p><code>client</code>发送<strong>下载连接请求</strong>，</p>
+</li>
+<li><p><code>tracker server</code>查询可用的<code>storage server</code>，</p>
+</li>
+<li><p>将<code>storage server</code>的<code>ip+port</code>返回；</p>
+</li>
+<li><p><code>client</code>根据<code>file_id</code>访问<code>storage</code></p>
+</li>
+<li><p>，<code>storage</code>查找文件，</p>
+</li>
+<li><p>返回<code>file content</code>给<code>client</code></p>
+<p><img src="https://img-blog.csdn.net/20180516113332205?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0thbVJvc2VMZWU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"> </p>
+</li>
+</ol>
+<h4 id="文件系统对比"><a href="#文件系统对比" class="headerlink" title="文件系统对比"></a>文件系统对比</h4><table>
+<thead>
+<tr>
+<th align="center">指标</th>
+<th align="center">适合类型</th>
+<th align="left">文件分布</th>
+<th>系统性能</th>
+<th align="center">复杂度</th>
+<th align="center">FUSE</th>
+<th align="center">POSIX</th>
+<th align="right">备份机制</th>
+<th>通讯协议接口</th>
+<th align="left">开发语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">FastDFS</td>
+<td align="center">4KB~500MB</td>
+<td align="left">小文件合并存储不分片处理</td>
+<td>很高</td>
+<td align="center">简单</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="right">组内冗余备份</td>
+<td>Api HTTP</td>
+<td align="left">C语言</td>
+</tr>
+<tr>
+<td align="center">TFS</td>
+<td align="center">所有文件</td>
+<td align="left">小文件合并，以block组织分片</td>
+<td></td>
+<td align="center">复杂</td>
+<td align="center">不支持</td>
+<td align="center"></td>
+<td align="right">Block存储多份,主辅灾备</td>
+<td>API http</td>
+<td align="left">C++</td>
+</tr>
+<tr>
+<td align="center">MFS</td>
+<td align="center">大于64K</td>
+<td align="left">分片存储</td>
+<td>Master占内存多</td>
+<td align="center"></td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="right">多点备份动态冗余</td>
+<td>使用fuse挂在</td>
+<td align="left">Perl</td>
+</tr>
+<tr>
+<td align="center">HDFS</td>
+<td align="center">大文件</td>
+<td align="left">大文件分片分块存储</td>
+<td></td>
+<td align="center">简单</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="right">多副本</td>
+<td>原生api</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="center">Ceph</td>
+<td align="center">对象文件块</td>
+<td align="left">OSD一主多从</td>
+<td></td>
+<td align="center">复杂</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="right">多副本</td>
+<td>原生api</td>
+<td align="left">C++</td>
+</tr>
+<tr>
+<td align="center">MogileFS</td>
+<td align="center">海量小图片</td>
+<td align="left"></td>
+<td>高</td>
+<td align="center">复杂</td>
+<td align="center">可以支持</td>
+<td align="center">不支持</td>
+<td align="right">动态冗余</td>
+<td>原生api</td>
+<td align="left">Perl</td>
+</tr>
+<tr>
+<td align="center">ClusterFS</td>
+<td align="center">大文件</td>
+<td align="left"></td>
+<td></td>
+<td align="center">简单</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+<td align="right"></td>
+<td></td>
+<td align="left">C</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/fastdfs/" rel="tag"># fastdfs</a>
+            
+          </div>
+        
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/16/剑指offer-35数组中的逆序对/" rel="next" title="剑指offer_数组中的逆序对">
+                  <i class="fa fa-chevron-left"></i> 剑指offer_数组中的逆序对
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件上传"><span class="nav-number">1.</span> <span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件同步"><span class="nav-number">2.</span> <span class="nav-text">文件同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件下载"><span class="nav-number">3.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统对比"><span class="nav-number">4.</span> <span class="nav-text">文件系统对比</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/imgs/head.jpg"
+      alt="mqray">
+  <p class="site-author-name" itemprop="name">mqray</p>
+  <div class="site-description" itemprop="description">当改变命运的时刻降临，犹豫就会败北！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/mqray" title="GitHub &rarr; https://github.com/mqray" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:Slawenceray@163.com" title="E-Mail &rarr; mailto:Slawenceray@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/LawenceRay" title="CSDN &rarr; https://blog.csdn.net/LawenceRay" rel="noopener" target="_blank"><i class="fa fa-fw fa-blog"></i>CSDN</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://bestzuo.cn/" title="https://bestzuo.cn/" rel="noopener" target="_blank">Sanarous</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://github.com" title="http://github.com" rel="noopener" target="_blank">Github</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mqray</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">175k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">2:39</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">
+      
+    主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.1
+  </div>
+<div id="days"></div>
+<script>
+function show_date_time(){
+    window.setTimeout("show_date_time()", 1000);
+    BirthDay=new Date("10/01/2019 15:13:14");//修改为自己的blog建站时间
+    today=new Date();
+    timeold=(today.getTime()-BirthDay.getTime());
+    sectimeold=timeold/1000
+    secondsold=Math.floor(sectimeold);
+    msPerDay=24*60*60*1000
+    e_daysold=timeold/msPerDay
+    daysold=Math.floor(e_daysold);
+    e_hrsold=(e_daysold-daysold)*24;
+    hrsold=setzero(Math.floor(e_hrsold));
+    e_minsold=(e_hrsold-hrsold)*60;
+    minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+    seconds=setzero(Math.floor((e_minsold-minsold)*60));
+    document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+    if (i<10)
+    {i="0" + i};
+    return i;
+}
+show_date_time();
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zQNx38LJAan0fg2afyE1EPhC-gzGzoHsz',
+    appKey: 'IrndDroTPDNUVFcBOfJefP3h',
+    placeholder: '留下邮箱，有回复时你将收到提醒，邮箱不会被公开。',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
