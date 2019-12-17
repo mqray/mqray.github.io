@@ -55,19 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
-<meta name="keywords" content="数组">
+  <meta name="description" content="统计一个数字在排序数组中出现的次数。  借助字典这个里的做法和之前求字符串中第一个出现次数为1的字符一样。刚开始提交的时候一直没能通过，后来把预先开辟的数组长度加大后就能通过了。时间复杂度为O(N)，空间复杂度为O(N)123456class Solution:    def GetNumberOfKI(self, nums, k):        res =[0]*2**16        f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode_两数之和">
-<meta property="og:url" content="http://yoursite.com/2019/10/31/leetcode-两数之和/index.html">
+<meta property="og:title" content="剑指offer_37数字在排序数组中出现的次数">
+<meta property="og:url" content="http://yoursite.com/2019/12/17/剑指offer-37数字在排序数组中出现的次数/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
+<meta property="og:description" content="统计一个数字在排序数组中出现的次数。  借助字典这个里的做法和之前求字符串中第一个出现次数为1的字符一样。刚开始提交的时候一直没能通过，后来把预先开辟的数组长度加大后就能通过了。时间复杂度为O(N)，空间复杂度为O(N)123456class Solution:    def GetNumberOfKI(self, nums, k):        res =[0]*2**16        f">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T10:39:18.704Z">
+<meta property="og:updated_time" content="2019-12-17T08:42:17.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode_两数之和">
-<meta name="twitter:description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
-  <link rel="canonical" href="http://yoursite.com/2019/10/31/leetcode-两数之和/">
+<meta name="twitter:title" content="剑指offer_37数字在排序数组中出现的次数">
+<meta name="twitter:description" content="统计一个数字在排序数组中出现的次数。  借助字典这个里的做法和之前求字符串中第一个出现次数为1的字符一样。刚开始提交的时候一直没能通过，后来把预先开辟的数组长度加大后就能通过了。时间复杂度为O(N)，空间复杂度为O(N)123456class Solution:    def GetNumberOfKI(self, nums, k):        res =[0]*2**16        f">
+  <link rel="canonical" href="http://yoursite.com/2019/12/17/剑指offer-37数字在排序数组中出现的次数/">
 
 
 <script id="page-configurations">
@@ -81,7 +80,7 @@
   };
 </script>
 
-  <title>leetcode_两数之和 | mqray's blog</title>
+  <title>剑指offer_37数字在排序数组中出现的次数 | mqray's blog</title>
   
 
 
@@ -361,7 +360,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/leetcode-两数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/17/剑指offer-37数字在排序数组中出现的次数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +374,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            leetcode_两数之和
+            剑指offer_37数字在排序数组中出现的次数
             
 
           
@@ -392,19 +391,11 @@
                 
               
 
-              <time title="创建时间：2019-10-31 21:38:37" itemprop="dateCreated datePublished" datetime="2019-10-31T21:38:37+08:00">2019-10-31</time>
+              <time title="创建时间：2019-12-17 16:21:09 / 修改时间：16:42:17" itemprop="dateCreated datePublished" datetime="2019-12-17T16:21:09+08:00">2019-12-17</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 18:39:18" itemprop="dateModified" datetime="2019-11-28T18:39:18+08:00">2019-11-28</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -414,8 +405,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
                   </a>
                 </span>
 
@@ -426,7 +417,7 @@
           
 
           
-            <span id="/2019/10/31/leetcode-两数之和/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_两数之和" title="阅读次数">
+            <span id="/2019/12/17/剑指offer-37数字在排序数组中出现的次数/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_37数字在排序数组中出现的次数" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -444,8 +435,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/31/leetcode-两数之和/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/leetcode-两数之和/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/12/17/剑指offer-37数字在排序数组中出现的次数/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/17/剑指offer-37数字在排序数组中出现的次数/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -481,34 +472,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p><blockquote>
-<p>给定 nums = [2, 7, 11, 15], target = 9</p>
-<p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
-</blockquote><a id="more"></a>
+        <blockquote>
+<p>统计一个数字在排序数组中出现的次数。 </p>
+</blockquote><h4 id="借助字典"><a href="#借助字典" class="headerlink" title="借助字典"></a>借助字典</h4><p>这个里的做法和之前求字符串中第一个出现次数为1的字符一样。刚开始提交的时候一直没能通过，后来把预先开辟的数组长度加大后就能通过了。时间复杂度为<code>O(N)</code>，空间复杂度为<code>O(N)</code></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetNumberOfKI</span><span class="params">(self, nums, k)</span>:</span></span><br><span class="line">        res =[<span class="number">0</span>]*<span class="number">2</span>**<span class="number">16</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            res[num] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res[k]</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            tmp = target - nums[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">                <span class="keyword">if</span> tmp == nums[j] <span class="keyword">and</span> i!=j:</span><br><span class="line">                    <span class="keyword">return</span> [i,j]</span><br></pre></td></tr></table></figure>
 
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :3836 ms, 在所有 python 提交中击败了25.75%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :12.7 MB, 在所有 python 提交中击败了24.98%的用户</span></span><br></pre></td></tr></table></figure>
+<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetNumberOfKII</span><span class="params">(self, nums, k)</span>:</span></span><br><span class="line">    <span class="keyword">return</span>  nums.count(k)</span><br></pre></td></tr></table></figure>
 
-<p>改进一</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)): </span><br><span class="line">            tmp = target - nums.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> tmp <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">return</span> [i,nums.index(tmp)+i+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="遍历一次"><a href="#遍历一次" class="headerlink" title="遍历一次"></a>遍历一次</h4><p>在第一种做法中，我们不仅仅存储了数字<code>k</code>出现的次数，还存储了其他数字出现的次数，对本题而言，是不必要的，所以，这里仅仅记录数字<code>K</code>出现的次数，时间复杂度仍然为<code>O(N)</code>，空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetNumberOfKIII</span><span class="params">(self, nums, k)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(nums) &lt;= <span class="number">0</span> <span class="keyword">or</span> nums[<span class="number">0</span>] &gt; k:<span class="comment">#这个if判断减少运行时间</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="keyword">if</span> num==k:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>
 
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行用时 :<span class="number">548</span> ms, 在所有 python 提交中击败了<span class="number">51.33</span>%的用户</span><br><span class="line">内存消耗 :<span class="number">12.5</span> MB, 在所有 python 提交中击败了<span class="number">33.94</span>%的用户</span><br></pre></td></tr></table></figure>
-
-<p>改进二</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        keys = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> target - nums[i] <span class="keyword">in</span> keys:</span><br><span class="line">                <span class="keyword">return</span> [keys[target - nums[i]], i]</span><br><span class="line">            <span class="keyword">if</span> nums[i] <span class="keyword">not</span> <span class="keyword">in</span> keys:</span><br><span class="line">                keys[nums[i]] = i</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :48 ms, 在所有 python 提交中击败了77.18%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :13.1 MB, 在所有 python 提交中击败了12.41%的用户</span></span><br></pre></td></tr></table></figure>
-
-<p>改进三</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        dict = &#123;nums[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            tmp = target - nums[i]</span><br><span class="line">            j = dict.get(tmp)</span><br><span class="line">            <span class="keyword">if</span> j!= <span class="literal">None</span> <span class="keyword">and</span> j!=i:</span><br><span class="line">                <span class="keyword">return</span> [i,j]</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :64 ms, 在所有 python 提交中击败了63.26%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :13.3 MB, 在所有 python 提交中击败了5.01%的用户</span></span><br></pre></td></tr></table></figure>
+<h4 id="二分法求解"><a href="#二分法求解" class="headerlink" title="二分法求解"></a>二分法求解</h4><p>由于这是一个排序数组，容易联想到二分法，那这里应该如何使用二分法求解呢？</p>
+<p>我们知道，这是一个有序数组，我们可以利用两次二分操作，找到第一个出现的<code>K</code>，和最后一个出现的<code>K</code>，然后根据这两个索引值求解出现次数。时间复杂度是<code>O(logN)</code>，空间复杂度为<code>O(1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFirstK</span><span class="params">(self, nums, k)</span>:</span></span><br><span class="line">    left ,right = <span class="number">0</span>,len(nums)<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> left&lt;= right:</span><br><span class="line">        mid = (left+right)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> nums[mid]&lt; k :</span><br><span class="line">            left = left + <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid]&gt;k:</span><br><span class="line">            right = right - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:<span class="comment">#nums[mid]=k</span></span><br><span class="line">            <span class="keyword">if</span> mid == left <span class="keyword">or</span> nums[mid<span class="number">-1</span>]!=k:<span class="comment">#先判断当前数是不是第一个K值</span></span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right = mid - <span class="number">1</span><span class="comment">#如果不是第一K值，那么第一个k值只能出现在left-&gt;mid-1范围</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetLastK</span><span class="params">(self,nums,k)</span>:</span></span><br><span class="line">    left, right = <span class="number">0</span>, len(nums) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> nums[mid] &lt; k:</span><br><span class="line">            left = left + <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; k:</span><br><span class="line">            right = right - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># nums[mid]=k</span></span><br><span class="line">            <span class="keyword">if</span> mid == right <span class="keyword">or</span> nums[mid+<span class="number">1</span>] !=k:<span class="comment">#找到最右边的K值</span></span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetNumberOfKIV</span><span class="params">(self,nums,k)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> self.GetFirstK(nums,k) == <span class="number">-1</span> <span class="keyword">and</span> self.GetLastK(nums,k) == <span class="number">-1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> self.GetLastK(nums,k) - self.GetFirstK(nums,k) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -522,15 +499,6 @@
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/数组/" rel="tag"># 数组</a>
-            
-          </div>
-        
 
         
   <div class="post-widgets">
@@ -543,8 +511,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/31/pandas之数据处理/" rel="next" title="pandas之数据处理">
-                  <i class="fa fa-chevron-left"></i> pandas之数据处理
+                <a href="/2019/12/17/常见调度算法总结/" rel="next" title="常见调度算法总结">
+                  <i class="fa fa-chevron-left"></i> 常见调度算法总结
                 </a>
               
             </div>
@@ -553,8 +521,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/05/Linux/" rel="prev" title="Linux常用操作">
-                  Linux常用操作 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/12/17/剑指offer-38二叉树的深度/" rel="prev" title="剑指offer_38二叉树的深度">
+                  剑指offer_38二叉树的深度 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -604,6 +572,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#借助字典"><span class="nav-number">1.</span> <span class="nav-text">借助字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内置函数"><span class="nav-number">2.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历一次"><span class="nav-number">3.</span> <span class="nav-text">遍历一次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分法求解"><span class="nav-number">4.</span> <span class="nav-text">二分法求解</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 

@@ -55,19 +55,20 @@
   };
 </script>
 
-  <meta name="description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
-<meta name="keywords" content="数组">
+  <meta name="description" content="引子在 Web2.0 后的时代，社交网站、搜索引擎的的迅猛发展对 Web 服务的后台管理系统提出了更高的需求。考虑几个常见的使用场景： 社交网站的用户在其主页发布了一组新的照片，这条新鲜事需要适时地推送至该用户的所有好友。该网站的活跃用户有千万级别，在同一时刻会有非常多的“新鲜事推送”任务需要处理，并且每个用户的好友数会达到 1000+的级别。出于用户体验的考虑，用户发布照片的这个操作需要在较短时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode_两数之和">
-<meta property="og:url" content="http://yoursite.com/2019/10/31/leetcode-两数之和/index.html">
+<meta property="og:title" content="celery分布式任务调度模块">
+<meta property="og:url" content="http://yoursite.com/2019/12/17/celery分布式任务调度模块/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
+<meta property="og:description" content="引子在 Web2.0 后的时代，社交网站、搜索引擎的的迅猛发展对 Web 服务的后台管理系统提出了更高的需求。考虑几个常见的使用场景： 社交网站的用户在其主页发布了一组新的照片，这条新鲜事需要适时地推送至该用户的所有好友。该网站的活跃用户有千万级别，在同一时刻会有非常多的“新鲜事推送”任务需要处理，并且每个用户的好友数会达到 1000+的级别。出于用户体验的考虑，用户发布照片的这个操作需要在较短时">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-28T10:39:18.704Z">
+<meta property="og:image" content="https://www.ibm.com/developerworks/cn/opensource/os-cn-celery-web-service/img001.png">
+<meta property="og:updated_time" content="2019-12-17T00:42:26.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode_两数之和">
-<meta name="twitter:description" content="给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]">
-  <link rel="canonical" href="http://yoursite.com/2019/10/31/leetcode-两数之和/">
+<meta name="twitter:title" content="celery分布式任务调度模块">
+<meta name="twitter:description" content="引子在 Web2.0 后的时代，社交网站、搜索引擎的的迅猛发展对 Web 服务的后台管理系统提出了更高的需求。考虑几个常见的使用场景： 社交网站的用户在其主页发布了一组新的照片，这条新鲜事需要适时地推送至该用户的所有好友。该网站的活跃用户有千万级别，在同一时刻会有非常多的“新鲜事推送”任务需要处理，并且每个用户的好友数会达到 1000+的级别。出于用户体验的考虑，用户发布照片的这个操作需要在较短时">
+<meta name="twitter:image" content="https://www.ibm.com/developerworks/cn/opensource/os-cn-celery-web-service/img001.png">
+  <link rel="canonical" href="http://yoursite.com/2019/12/17/celery分布式任务调度模块/">
 
 
 <script id="page-configurations">
@@ -81,7 +82,7 @@
   };
 </script>
 
-  <title>leetcode_两数之和 | mqray's blog</title>
+  <title>celery分布式任务调度模块 | mqray's blog</title>
   
 
 
@@ -361,7 +362,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/leetcode-两数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/17/celery分布式任务调度模块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="mqray">
@@ -375,7 +376,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            leetcode_两数之和
+            celery分布式任务调度模块
             
 
           
@@ -392,41 +393,16 @@
                 
               
 
-              <time title="创建时间：2019-10-31 21:38:37" itemprop="dateCreated datePublished" datetime="2019-10-31T21:38:37+08:00">2019-10-31</time>
+              <time title="创建时间：2019-12-17 08:01:28 / 修改时间：08:42:26" itemprop="dateCreated datePublished" datetime="2019-12-17T08:01:28+08:00">2019-12-17</time>
             </span>
           
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 18:39:18" itemprop="dateModified" datetime="2019-11-28T18:39:18+08:00">2019-11-28</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
-            <span id="/2019/10/31/leetcode-两数之和/" class="post-meta-item leancloud_visitors" data-flag-title="leetcode_两数之和" title="阅读次数">
+            <span id="/2019/12/17/celery分布式任务调度模块/" class="post-meta-item leancloud_visitors" data-flag-title="celery分布式任务调度模块" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -444,8 +420,8 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/31/leetcode-两数之和/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/leetcode-两数之和/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/12/17/celery分布式任务调度模块/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/17/celery分布式任务调度模块/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -458,7 +434,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.4k</span>
+              <span>2k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -468,7 +444,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
           
 
@@ -481,35 +457,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p><blockquote>
-<p>给定 nums = [2, 7, 11, 15], target = 9</p>
-<p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
-</blockquote><a id="more"></a>
+        <h4 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h4><p>在 Web2.0 后的时代，社交网站、搜索引擎的的迅猛发展对 Web 服务的后台管理系统提出了更高的需求。考虑几个常见的使用场景：</p><ol>
+<li>社交网站的用户在其主页发布了一组新的照片，这条新鲜事需要适时地推送至该用户的所有好友。该网站的活跃用户有千万级别，在同一时刻会有非常多的“新鲜事推送”任务需要处理，并且每个用户的好友数会达到 1000+的级别。出于用户体验的考虑，用户发布照片的这个操作需要在较短时间内得到反馈。</li>
+<li>在文献搜索系统的主页，用户可以查到当前一小时内最热门的十大文献，并且能够直接访问该文献。该文献管理系统所管理的文献数量非常多，达到 PB 的级别。处于用户体验的考虑，用户获得十大热门文献这个动作需要在较短时间内获得反馈。</li>
+</ol><a id="more"></a>
 
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            tmp = target - nums[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">                <span class="keyword">if</span> tmp == nums[j] <span class="keyword">and</span> i!=j:</span><br><span class="line">                    <span class="keyword">return</span> [i,j]</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :3836 ms, 在所有 python 提交中击败了25.75%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :12.7 MB, 在所有 python 提交中击败了24.98%的用户</span></span><br></pre></td></tr></table></figure>
-
-<p>改进一</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)): </span><br><span class="line">            tmp = target - nums.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> tmp <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">return</span> [i,nums.index(tmp)+i+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">执行用时 :<span class="number">548</span> ms, 在所有 python 提交中击败了<span class="number">51.33</span>%的用户</span><br><span class="line">内存消耗 :<span class="number">12.5</span> MB, 在所有 python 提交中击败了<span class="number">33.94</span>%的用户</span><br></pre></td></tr></table></figure>
-
-<p>改进二</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        keys = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> target - nums[i] <span class="keyword">in</span> keys:</span><br><span class="line">                <span class="keyword">return</span> [keys[target - nums[i]], i]</span><br><span class="line">            <span class="keyword">if</span> nums[i] <span class="keyword">not</span> <span class="keyword">in</span> keys:</span><br><span class="line">                keys[nums[i]] = i</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :48 ms, 在所有 python 提交中击败了77.18%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :13.1 MB, 在所有 python 提交中击败了12.41%的用户</span></span><br></pre></td></tr></table></figure>
-
-<p>改进三</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        dict = &#123;nums[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            tmp = target - nums[i]</span><br><span class="line">            j = dict.get(tmp)</span><br><span class="line">            <span class="keyword">if</span> j!= <span class="literal">None</span> <span class="keyword">and</span> j!=i:</span><br><span class="line">                <span class="keyword">return</span> [i,j]</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#执行用时 :64 ms, 在所有 python 提交中击败了63.26%的用户</span></span><br><span class="line"><span class="comment">#内存消耗 :13.3 MB, 在所有 python 提交中击败了5.01%的用户</span></span><br></pre></td></tr></table></figure>
-
+<p>考虑对于高并发大用户量的 Web 服务系统，对于场景一和场景二中的需求，如果在请求处理周期内完成这些任务，然后再返回结果，这种传统的做法会导致用户等待的时间过长。同时 Web 服务管理后台对任务处理能力也缺乏扩展性。</p>
+<p>在这种场景下，任务队列是有效的解决方案。在一个任务队列系统中，“将新鲜事推送至用户 A 的所有好友”或者“查询当前最热门的十大文献”这种查询或者计算工作可以被当成一个“任务”。在任务队列系统中，一般有任务生产者、任务处理中间方以及任务消费者三方。其中任务生产者负责生产任务，比如“将新鲜事推送至用户 A 的所有好友”这一任务的发起方就可以称作任务生产者。任务处理中间方负责接收任务生产者的任务处理请求，对任务进行调度，最后将任务分发给任务消费者来进行处理。任务消费者就是执行任务的一方，它负责接收任务处理中间方发来的任务处理请求，完成这些任务，并且返回任务处理的结果。在生产方、消费者和任务处理中间方之间一般使用消息传递的方式来进行通信。</p>
+<p>在任务队列系统框架中，任务消费者可以跨越不同的服务节点，可以动态地增加节点来增加系统的任务处理能力，非常适合高并发、需要横向扩展的 Web 服务后台。</p>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Celery是由Python开发、简单、灵活、可靠的分布式任务队列，其本质是生产者消费者模型，生产者发送任务到消息队列，消费者负责处理任务。【** 异步任务队列/基于分布式消息传递的作业队列 **】Celery侧重于实时操作，但对调度支持也很好，其每天可以处理数以百万计的任务。特点：</p>
+<ul>
+<li>简单：熟悉celery的工作流程后，配置使用简单</li>
+<li>高可用：当任务执行失败或执行过程中发生连接中断，celery会自动尝试重新执行任务</li>
+<li>快速：一个单进程的celery每分钟可处理上百万个任务</li>
+<li>灵活：几乎celery的各个组件都可以被扩展及自定制</li>
+</ul>
+<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><ul>
+<li>web应用：当用户在网站进行某个操作需要很长时间完成时，我们可以将这种操作交给Celery执行，直接返回给用户，等到Celery执行完成以后通知用户，大大提好网站的并发以及用户的体验感。 </li>
+</ul>
+<h4 id="系统构架"><a href="#系统构架" class="headerlink" title="系统构架"></a>系统构架</h4><p> Celery 是一个用 Python 编写的分布式的任务调度模块，它有着简明的 API，并且有丰富的扩展性，适合用于构建分布式的 Web 服务 </p>
+<p> <img src="https://www.ibm.com/developerworks/cn/opensource/os-cn-celery-web-service/img001.png" alt="图 1. Celery 的模块架构"></p>
+<ul>
+<li>任务模块<code>Task</code>包含异步任务和定时任务。其中，异步任务通常在业务逻辑中被触发并发往消息队列，而定时任务由<code>Celery Beat</code>进程周期性地将任务发往消息队列； </li>
+<li>任务执行单元<code>Worker</code>实时监视消息队列获取队列中的任务执行； </li>
+<li><code>Woker</code>执行完任务后将结果保存在<code>Backend</code>中; </li>
+</ul>
+<h5 id="任务生产者"><a href="#任务生产者" class="headerlink" title="任务生产者"></a>任务生产者</h5><p> 任务生产者<code>(task producer)</code> 负责产生计算任务，交给任务队列去处理。在 <code>Celery</code>里，一段独立的 Python 代码、一段嵌入在 <code>Django Web</code>服务里的一段请求处理逻辑，只要是调用了<code>Celery</code>提供的 <code>API</code>，产生任务并交给任务队列处理的，我们都可以称之为任务生产者。 【一般是业务中的异步请求】</p>
+<h5 id="任务调度器"><a href="#任务调度器" class="headerlink" title="任务调度器"></a>任务调度器</h5><p><code>Celery beat</code> 是一个任务调度器，它以独立进程的形式存在。<code>Celery beat</code> 进程会读取配置文件的内容，周期性地将执行任务的请求发送给任务队列。<code>Celery beat</code>是 <code>Celery</code>系统自带的任务生产者。系统管理员可以选择关闭或者开启 <code>Celery beat</code>。同时在一个 <code>Celery</code> 系统中，只能存在一个 <code>Celery beat</code> 调度器 </p>
+<h5 id="任务消费者"><a href="#任务消费者" class="headerlink" title="任务消费者"></a>任务消费者</h5><p> <code>Celery worker</code>就是执行任务的一方，它负责接收任务处理中间方发来的任务处理请求，完成这些任务，并且返回任务处理的结果。<code>Celery worker</code> 对应的就是操作系统中的一个进程。<code>Celery</code>支持分布式部署和横向扩展，我们可以在多个节点增加<code>Celery worker</code> 的数量来增加系统的高可用性。在分布式系统中，我们也可以在不同节点上分配执行不同任务的<code>Celery worker</code>来达到模块化的目的。 </p>
+<h5 id="结果存储backend"><a href="#结果存储backend" class="headerlink" title="结果存储backend"></a>结果存储backend</h5><p> Backend结果存储官方也提供了诸多的存储方式支持：<code>RabbitMQ</code>、 <code>Redis</code>、<code>Memcached</code>,<code>SQLAlchemy</code>, <code>Django ORM</code>、<code>Apache Cassandra</code>、<code>Elasticsearch</code>。 </p>
 
     </div>
 
@@ -522,15 +498,6 @@
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/数组/" rel="tag"># 数组</a>
-            
-          </div>
-        
 
         
   <div class="post-widgets">
@@ -543,8 +510,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/31/pandas之数据处理/" rel="next" title="pandas之数据处理">
-                  <i class="fa fa-chevron-left"></i> pandas之数据处理
+                <a href="/2019/12/16/fastDFS简介/" rel="next" title="fastDFS简介">
+                  <i class="fa fa-chevron-left"></i> fastDFS简介
                 </a>
               
             </div>
@@ -553,8 +520,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/05/Linux/" rel="prev" title="Linux常用操作">
-                  Linux常用操作 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/12/17/常见调度算法总结/" rel="prev" title="常见调度算法总结">
+                  常见调度算法总结 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -604,6 +571,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景"><span class="nav-number">2.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统构架"><span class="nav-number">3.</span> <span class="nav-text">系统构架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#任务生产者"><span class="nav-number">3.1.</span> <span class="nav-text">任务生产者</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#任务调度器"><span class="nav-number">3.2.</span> <span class="nav-text">任务调度器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#任务消费者"><span class="nav-number">3.3.</span> <span class="nav-text">任务消费者</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结果存储backend"><span class="nav-number">3.4.</span> <span class="nav-text">结果存储backend</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
