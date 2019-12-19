@@ -55,17 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="当改变命运的时刻降临，犹豫就会败北！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mqray&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/leetcode/page/2/index.html">
+  <meta name="description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。   对应每个测试案例，输出两个数，小的先输出 这个题拿到的时候就感觉和leetcode中的盛水最多的容器有点类似。可以先举一个栗子，排序数组[1,2,3,4,5,6,7,8],K=9，稍微分析一下，[1,8]这俩像个最远的乘积是最大的，所以我们设置两个指针，判断其和是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer_42和为S的两个数字">
+<meta property="og:url" content="http://yoursite.com/2019/12/19/剑指offer-42和为S的两个数字/index.html">
 <meta property="og:site_name" content="mqray&#39;s blog">
-<meta property="og:description" content="当改变命运的时刻降临，犹豫就会败北！">
+<meta property="og:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。   对应每个测试案例，输出两个数，小的先输出 这个题拿到的时候就感觉和leetcode中的盛水最多的容器有点类似。可以先举一个栗子，排序数组[1,2,3,4,5,6,7,8],K=9，稍微分析一下，[1,8]这俩像个最远的乘积是最大的，所以我们设置两个指针，判断其和是">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-19T14:21:34.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mqray&#39;s blog">
-<meta name="twitter:description" content="当改变命运的时刻降临，犹豫就会败北！">
-  <link rel="canonical" href="http://yoursite.com/categories/leetcode/page/2/">
+<meta name="twitter:title" content="剑指offer_42和为S的两个数字">
+<meta name="twitter:description" content="输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。   对应每个测试案例，输出两个数，小的先输出 这个题拿到的时候就感觉和leetcode中的盛水最多的容器有点类似。可以先举一个栗子，排序数组[1,2,3,4,5,6,7,8],K=9，稍微分析一下，[1,8]这俩像个最远的乘积是最大的，所以我们设置两个指针，判断其和是">
+  <link rel="canonical" href="http://yoursite.com/2019/12/19/剑指offer-42和为S的两个数字/">
 
 
 <script id="page-configurations">
@@ -73,13 +74,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: leetcode | mqray's blog</title>
+  <title>剑指offer_42和为S的两个数字 | mqray's blog</title>
   
 
 
@@ -316,24 +317,6 @@
 
     
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -372,329 +355,186 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">leetcode
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/19/剑指offer-42和为S的两个数字/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mqray">
+      <meta itemprop="description" content="当改变命运的时刻降临，犹豫就会败北！">
+      <meta itemprop="image" content="/imgs/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mqray's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            剑指offer_42和为S的两个数字
+            
+
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-19 21:10:06 / 修改时间：22:21:34" itemprop="dateCreated datePublished" datetime="2019-12-19T21:10:06+08:00">2019-12-19</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/12/19/剑指offer-42和为S的两个数字/" class="post-meta-item leancloud_visitors" data-flag-title="剑指offer_42和为S的两个数字" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/19/剑指offer-42和为S的两个数字/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/19/剑指offer-42和为S的两个数字/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <blockquote>
+<p>输入一个递增排序的数组和一个数字S，在数组中查找两个数，使得他们的和正好是S，如果有多对数字的和等于S，输出两个数的乘积最小的。 </p>
+</blockquote><blockquote>
+<p>对应每个测试案例，输出两个数，小的先输出</p>
+</blockquote><p>这个题拿到的时候就感觉和<code>leetcode</code>中的盛水最多的容器有点类似。</p><p>可以先举一个栗子，排序数组<code>[1,2,3,4,5,6,7,8]</code>,<code>K=9</code>，稍微分析一下，<code>[1,8]</code>这俩像个最远的乘积是最大的，所以我们设置两个指针，判断其和是否为<code>k</code>，若大于<code>K</code>，则右指针左移；如小于<code>K</code>值，则左指针向右移动，相等时，计算其乘积，记录和为<code>K</code>的列表及其对应的乘积值。最后判断是否存在等于<code>K</code>值的组合，如果不存在，则返回<code>[]</code>，否则就返回<code>res[0]</code></p><a id="more"></a>
 
-  
-  
 
-  
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindNumbersWithSumI</span><span class="params">(self, nums, tsum)</span>:</span></span><br><span class="line">        left,right = <span class="number">0</span>,len(nums)<span class="number">-1</span></span><br><span class="line">        res,mul_list = [],[]</span><br><span class="line">        <span class="keyword">while</span> left &lt;= right :</span><br><span class="line">            tmp = nums[left] + nums[right]</span><br><span class="line">            <span class="keyword">if</span> tmp &lt; tsum:</span><br><span class="line">                left = left + <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> tmp &gt; tsum:</span><br><span class="line">                right = right - <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                tmp_list = []</span><br><span class="line">                tmp_list.append(nums[left])</span><br><span class="line">                tmp_list.append(nums[right])</span><br><span class="line">                mul = nums[left] * nums[right]</span><br><span class="line">                mul_list.append(mul)</span><br><span class="line">                res.append(tmp_list)</span><br><span class="line">                left = left + <span class="number">1</span></span><br><span class="line">                right = right - <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> len(res) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>上述过程已经分析了，满足两个值的和为K时，这两个相隔最远的数值的乘积最小</strong>，那就没有要判断后续的符合条件的组合了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">FindNumbersWithSumII</span><span class="params">(self, nums, tsum)</span>:</span></span><br><span class="line">    left, right = <span class="number">0</span>, len(nums) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        tmp = nums[left] + nums[right]</span><br><span class="line">        <span class="keyword">if</span> tmp &lt; tsum:</span><br><span class="line">            left = left + <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> tmp &gt; tsum:</span><br><span class="line">            right = right - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            tmp_list = []</span><br><span class="line">            tmp_list.append(nums[left])</span><br><span class="line">            tmp_list.append(nums[right])</span><br><span class="line">            <span class="comment"># mul = nums[left] * nums[right]</span></span><br><span class="line">            <span class="keyword">return</span> tmp_list</span><br><span class="line">    <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+    </div>
+
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+    
+    
+      
+
+        
+      
+
+      <footer class="post-footer">
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-21T01:52:13+08:00"
-              content="2019-11-21">
-          11-21
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/21/leetcode-排序数组中首尾位置/" itemprop="url">
-            <span itemprop="name">leetcode_排序数组中首尾位置</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-20T12:54:13+08:00"
-              content="2019-11-20">
-          11-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/20/leetcode-搜索旋转排序数组/" itemprop="url">
-            <span itemprop="name">leetcode_搜索旋转排序数组</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-17T22:30:30+08:00"
-              content="2019-11-17">
-          11-17
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/17/leetcode-下一个字典序排列/" itemprop="url">
-            <span itemprop="name">leetcode_下一个字典序排列</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-16T21:39:26+08:00"
-              content="2019-11-16">
-          11-16
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/16/leetcode-移除元素/" itemprop="url">
-            <span itemprop="name">leetcode_移除元素</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-16T09:11:07+08:00"
-              content="2019-11-16">
-          11-16
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/16/leetcode_删除重复值/" itemprop="url">
-            <span itemprop="name">leetcode_删除重复值</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-14T20:26:29+08:00"
-              content="2019-11-14">
-          11-14
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/14/leetcode四数之和/" itemprop="url">
-            <span itemprop="name">leetcode四数之和</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-13T23:08:49+08:00"
-              content="2019-11-13">
-          11-13
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/13/leetcode-最接近的三数之和/" itemprop="url">
-            <span itemprop="name">leetcode_最接近的三数之和</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-12T20:30:20+08:00"
-              content="2019-11-12">
-          11-12
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/12/leetcode-三数之和/" itemprop="url">
-            <span itemprop="name">leetcode_三数之和</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-11T21:39:29+08:00"
-              content="2019-11-11">
-          11-11
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/11/leetcode-盛水最多的容器/" itemprop="url">
-            <span itemprop="name">leetcode_盛水最多的容器</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-  
-  
-
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-09T22:25:00+08:00"
-              content="2019-11-09">
-          11-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/11/09/leetcode-寻找两个有序数组的中位数/" itemprop="url">
-            <span itemprop="name">leetcode_寻找两个有序数组的中位数</span>
-          </a>
-        
-      </h2>
-
-    </header>
-  </article>
-
-
-
-    </div>
   </div>
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/12/19/剑指offer41-和为S的连续正数序列/" rel="next" title="剑指offer41_和为S的连续正数序列">
+                  <i class="fa fa-chevron-left"></i> 剑指offer41_和为S的连续正数序列
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
   
   
   
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/leetcode/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/leetcode/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/leetcode/page/3/">3</a><a class="extend next" rel="next" href="/categories/leetcode/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -707,6 +547,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
