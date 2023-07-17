@@ -1,2 +1,2 @@
-http://example.com/2023/07/15/hello-world/
-http://example.com/
+https://mqrayblog.cn/2023/07/15/hello-world/
+https://mqrayblog.cn/
