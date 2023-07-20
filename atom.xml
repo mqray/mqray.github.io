@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-07-20T17:24:07.511Z</updated>
+  <updated>2023-07-20T17:27:36.817Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis之特殊数据类型</title>
+    <link href="https://mqrayblog.cn/2023/07/21/redis%E4%B9%8B%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>https://mqrayblog.cn/2023/07/21/redis%E4%B9%8B%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</id>
+    <published>2023-07-20T17:26:45.000Z</published>
+    <updated>2023-07-20T17:27:36.817Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h3><h3 id="hyperloglog"><a href="#hyperloglog" class="headerlink" title="hyperloglog"></a>hyperloglog</h3><h3 id="geo"><a href="#geo" class="headerlink" title="geo"></a>geo</h3><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;bitmap&quot;&gt;&lt;a href=&quot;#bitmap&quot; class=&quot;headerlink&quot; title=&quot;bitmap&quot;&gt;&lt;/a&gt;bitmap&lt;/h3&gt;&lt;h3 id=&quot;hyperloglog&quot;&gt;&lt;a href=&quot;#hyperloglog&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>redis之基础数据类型</title>
