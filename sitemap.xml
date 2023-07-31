@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mqrayblog.cn/2023/07/31/redis%E4%B9%8B%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</loc>
+    
+    <lastmod>2023-07-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mqrayblog.cn/2023/07/27/c%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
+    
+    <lastmod>2023-07-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://mqrayblog.cn/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     
     <lastmod>2023-07-27</lastmod>
@@ -11,16 +29,7 @@
   </url>
   
   <url>
-    <loc>https://mqrayblog.cn/2023/07/27/c%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/</loc>
-    
-    <lastmod>2023-07-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://mqrayblog.cn/2023/07/27/redis%E4%B9%8B%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</loc>
+    <loc>https://mqrayblog.cn/2023/07/27/redis%E4%B9%8Bio/</loc>
     
     <lastmod>2023-07-27</lastmod>
     
@@ -76,7 +85,7 @@
 
   <url>
     <loc>https://mqrayblog.cn/</loc>
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-07-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -84,14 +93,14 @@
   
   <url>
     <loc>https://mqrayblog.cn/tags/redis/</loc>
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mqrayblog.cn/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -100,7 +109,7 @@
   
   <url>
     <loc>https://mqrayblog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2023-07-27</lastmod>
+    <lastmod>2023-07-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
