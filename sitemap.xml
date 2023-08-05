@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mqrayblog.cn/2023/07/23/redis%E4%B9%8B%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
+    
+    <lastmod>2023-08-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://mqrayblog.cn/2023/07/31/redis%E4%B9%8B%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</loc>
     
-    <lastmod>2023-08-01</lastmod>
+    <lastmod>2023-08-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -65,15 +74,6 @@
   </url>
   
   <url>
-    <loc>https://mqrayblog.cn/2023/07/23/redis%E4%B9%8B%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
-    
-    <lastmod>2023-07-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://mqrayblog.cn/2023/07/15/hello-world/</loc>
     
     <lastmod>2023-07-23</lastmod>
@@ -103,7 +103,7 @@
 
   <url>
     <loc>https://mqrayblog.cn/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -111,14 +111,14 @@
   
   <url>
     <loc>https://mqrayblog.cn/tags/redis/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mqrayblog.cn/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -127,7 +127,7 @@
   
   <url>
     <loc>https://mqrayblog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2023-08-03</lastmod>
+    <lastmod>2023-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
