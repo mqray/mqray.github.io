@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-08-05T10:13:59.615Z</updated>
+  <updated>2023-08-07T15:57:13.913Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis之主从复制</title>
+    <link href="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    <id>https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</id>
+    <published>2023-08-07T15:13:18.000Z</published>
+    <updated>2023-08-07T15:57:13.913Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h2><p>主从结构是常用的计算机系统架构，通常被用于分布式系统中，其中一个节点<code>master</code>拥有最新的数据，其他节点<code>slave</code>复制并同步主节点的数据。  </p><p>主从结构中，主节点负责写入数据，并将这些数据同步到从节点中；从节点只能读取数据。主从节点键通过网络连接，完成数据同步。  </p><p>主从模式也常被用于数据库系统中，提供高可用能力。当主节点发生故障或者失效时，从节点可以被选举为新的主节点，保证系统的可用性。 </p><img src="/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis_master_slave_arch.png">  <h3 id="主从模式的优点"><a href="#主从模式的优点" class="headerlink" title="主从模式的优点"></a>主从模式的优点</h3><ol><li>负载均衡：读写分离：提高服务器的性能。</li><li>数据冗余：主从复制实现了数据的热备份，是持久化之外的数据冗余手段。</li><li>高可用基石：主从模式是哨兵模式和集群模式的基础。</li></ol><h3 id="主从模式的缺点？"><a href="#主从模式的缺点？" class="headerlink" title="主从模式的缺点？"></a>主从模式的缺点？</h3><ol><li>主从模式不具备自动容错和恢复功能，主节点故障，集群无法工作，可用性较低。从节点升为主节点需要人工手动干预。</li></ol><h3 id="什么是主从模式？"><a href="#什么是主从模式？" class="headerlink" title="什么是主从模式？"></a>什么是主从模式？</h3><h3 id="为什么redis要使用主从模式？"><a href="#为什么redis要使用主从模式？" class="headerlink" title="为什么redis要使用主从模式？"></a>为什么redis要使用主从模式？</h3><h3 id="主从模式的优缺点？"><a href="#主从模式的优缺点？" class="headerlink" title="主从模式的优缺点？"></a>主从模式的优缺点？</h3><h3 id="如何使用主从复制？"><a href="#如何使用主从复制？" class="headerlink" title="如何使用主从复制？"></a>如何使用主从复制？</h3><p>slave of ip port<br>该命令的作用？</p><h2 id="复制过程？"><a href="#复制过程？" class="headerlink" title="复制过程？"></a>复制过程？</h2><h3 id="旧版本复制功能的实现？"><a href="#旧版本复制功能的实现？" class="headerlink" title="旧版本复制功能的实现？"></a>旧版本复制功能的实现？</h3><h4 id="同步"><a href="#同步" class="headerlink" title="同步?"></a>同步?</h4><h4 id="命令传播？"><a href="#命令传播？" class="headerlink" title="命令传播？"></a>命令传播？</h4><h4 id="全量复制过程？"><a href="#全量复制过程？" class="headerlink" title="全量复制过程？"></a>全量复制过程？</h4><p>redis 2.8之前?</p><p>sync</p><h4 id="旧版本复制的缺陷？"><a href="#旧版本复制的缺陷？" class="headerlink" title="旧版本复制的缺陷？"></a>旧版本复制的缺陷？</h4><h3 id="新版本复制功能的实现？"><a href="#新版本复制功能的实现？" class="headerlink" title="新版本复制功能的实现？"></a>新版本复制功能的实现？</h3><p>2.8之后</p><h3 id="全量复制-增量复制？"><a href="#全量复制-增量复制？" class="headerlink" title="全量复制 + 增量复制？"></a>全量复制 + 增量复制？</h3><p>psync</p><h4 id="部分重同步的实现原理？"><a href="#部分重同步的实现原理？" class="headerlink" title="部分重同步的实现原理？"></a>部分重同步的实现原理？</h4><h5 id="复制偏移量"><a href="#复制偏移量" class="headerlink" title="复制偏移量"></a>复制偏移量</h5><h5 id="复制积压缓冲区"><a href="#复制积压缓冲区" class="headerlink" title="复制积压缓冲区"></a>复制积压缓冲区</h5><h5 id="服务器运行id"><a href="#服务器运行id" class="headerlink" title="服务器运行id"></a>服务器运行id</h5><h3 id="增量复制过程？"><a href="#增量复制过程？" class="headerlink" title="增量复制过程？"></a>增量复制过程？</h3><p>绘制数据流图</p><h4 id="心跳检测"><a href="#心跳检测" class="headerlink" title="心跳检测"></a>心跳检测</h4><h4 id="redis是使用于CAP原理？"><a href="#redis是使用于CAP原理？" class="headerlink" title="redis是使用于CAP原理？"></a>redis是使用于CAP原理？</h4><h3 id="redis-主从模式如何选主？"><a href="#redis-主从模式如何选主？" class="headerlink" title="redis 主从模式如何选主？"></a>redis 主从模式如何选主？</h3><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://pdai.tech/md/db/nosql-redis/db-redis-x-copy.html">1. redis复制</a><br><a href="https://www.cnblogs.com/better-farther-world2099/articles/16159844.html">2. 详解Redis 主从复制原理</a><br><a href="https://www.51cto.com/article/640170.html">3. </a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;主从模式&quot;&gt;&lt;a href=&quot;#主从模式&quot; class=&quot;headerlink&quot; title=&quot;主从模式&quot;&gt;&lt;/a&gt;主从模式&lt;/h2&gt;&lt;p&gt;主从结构是常用的计算机系统架构，通常被用于分布式系统中，其中一个节点&lt;code&gt;master&lt;/code&gt;拥有最新的数据，其</summary>
+      
+    
+    
+    
+    <category term="数据库" scheme="https://mqrayblog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="redis" scheme="https://mqrayblog.cn/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>redis之客户端</title>
@@ -235,9 +259,9 @@
     <link href="https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
     <id>https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/</id>
     <published>2023-05-01T02:06:37.000Z</published>
-    <updated>2023-08-01T16:23:56.401Z</updated>
+    <updated>2023-08-07T07:31:48.369Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.modb.pro/db/158733">1. 一文了解拦截器与拦截器链的实现</a><br><a href="https://juejin.cn/post/7026150413036421127#heading-15">2. 自定义注解实现方式解析</a>  </p>]]></content>
+    <content type="html"><![CDATA[<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.modb.pro/db/158733">1. 一文了解拦截器与拦截器链的实现</a><br><a href="https://juejin.cn/post/7026150413036421127#heading-15">2. 自定义注解实现方式解析</a><br><a href="https://www.cnblogs.com/yihuihui/p/15121300.html">3. 拦截器原理</a>  </p>]]></content>
     
     
       
