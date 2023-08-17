@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-08-15T23:55:49.997Z</updated>
+  <updated>2023-08-17T01:00:38.916Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis之哨兵机制</title>
+    <link href="https://mqrayblog.cn/2023/08/17/redis%E4%B9%8B%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/"/>
+    <id>https://mqrayblog.cn/2023/08/17/redis%E4%B9%8B%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/</id>
+    <published>2023-08-16T23:44:03.000Z</published>
+    <updated>2023-08-17T01:00:38.916Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>前文<a href="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">redis之主从复制</a>中，在讲述<code>redis</code>主从模式时，提及主从模式在主节点故障时，无法自主恢复，需要人工干预才能恢复。那么有没有什么方法可以使集群能够自动进行故障恢复呢？当然有，那就是<code>哨兵模式</code>。</p><h3 id="哨兵机制"><a href="#哨兵机制" class="headerlink" title="哨兵机制"></a>哨兵机制</h3><p>哨兵机制是<code>redis高可用</code>的解决方案： 由一个或者多个<code>sentinel</code>实例组成的<code>sentinel</code>系统监控任意多个主服务器，同时监控这些主服务器下的从服务器。在所监视的主服务器下线时，自动完成故障恢复：包括新选主、剩从切换新主、旧主变新从。故障恢复后，由新主处理命令请求。</p><blockquote><p>第一次看到这里有疑惑，哨兵机制是对 主从做的改进， 那为什么 哨兵机制能够监控多个主服务器呢？此时的redis架构是多个 <code>主从=主从-主从</code> 模式么？</p></blockquote><p>综上所述，<code>哨兵机制需要提供如下服务</code>：</p><ol><li>感知 主服务器故障 </li><li>拥有故障恢复能力  [选主过程由谁落实，有哪些条件？]<ul><li>选取 leader sentinel  </li><li>选取新的主服务器</li><li>剩从切换新主</li><li>旧主变新从<br>那么<code>redis</code> 是如何为它提供如此能力的呢？</li></ul></li></ol><h4 id="如何理解哨兵？"><a href="#如何理解哨兵？" class="headerlink" title="如何理解哨兵？"></a>如何理解哨兵？</h4><p>目前可以先这样理解： <code>sentinel</code>是功能特殊的<code>redis</code>服务器，它能执行的命令不同于主从服务器。</p><h4 id="如何感知主服务器故障？"><a href="#如何感知主服务器故障？" class="headerlink" title="如何感知主服务器故障？"></a>如何感知主服务器故障？</h4><p>简单的概括是： 主观下线 + 客观下线</p><h5 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h5><p>在<code>sentinel.conf</code>中有如下配置，指定了<code>sentinel</code>判断主观下线的策略。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</span><br></pre></td></tr></table></figure><p>在默认情况下,<code>sentinel</code>会以每秒一次的频率向所有与它创建了命令连接的实例(包含主、从、sentinel)发送<code>ping</code>命令。通过实例的返回判断实例是否在线。<br>实例对<code>ping</code>命令的返回有两种：</p><ol><li>有效回复：实例返回<code>+PONG| -LOADING | -MASTERDOWN</code>三种回复中的一种。 </li><li>无效回复：上述三种外的回复，或者在指定时限内没有任何回复。<br>如果超出<code>down-after-milliseconds</code>未有有效回复，则<code>sentinel</code>会将该实例的<code>flags</code>状态修改为<code>SRI_S_DOWN</code>。</li></ol><p>上述配置不仅仅是<code>sentinel</code>判断主服务器的标准，同样是判断从服务器、其他<code>sentinel</code>是否主观下线的标准。</p><p>另外，要注意的是：对于监控同一个主服务器的多个<code>sentienl</code>而言，每个<code>sentinel</code>所设置的<code>down-after-milliseconds</code>可能不同，即不同<code>sentinel</code>判断主观下线的时长可能不同。</p><h5 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h5><p>当<code>sentinel</code>判断某个主服务器主观下线后，会确认是否这个主服务器真的下线了。于是，它会向其他监视该主服务器的其他<code>sentinel</code>发送请求，检查是否其他<code>sentinel</code>也认为该主服务器是否主观下线了。如果认为主服务器主观下线的<code>sentinel</code>数量超过配置值，则将进行后续的故障恢复操作。</p><p>判断客观下线的配置值是在<code>sentinel</code>启动时指定的：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</span><br></pre></td></tr></table></figure><p>由于每个<code>sentinel</code>启动配置并不一致，所以会导致由不同的<code>sentinel</code>判断某主服务器主观下线的判断条件是不同的。</p><h4 id="如何进行故障恢复"><a href="#如何进行故障恢复" class="headerlink" title="如何进行故障恢复"></a>如何进行故障恢复</h4><p>当一个主服务器被标记为<code>客观下线</code>之后，监控该主服务器的各个<code>sentinel</code>会进行协商，选出一个 <code>leader sentinel</code>，由它完成下线主服务器的故障转移操作。</p><h5 id="如何选取leader-sentinel"><a href="#如何选取leader-sentinel" class="headerlink" title="如何选取leader sentinel"></a>如何选取leader sentinel</h5><p>所有<code>sentinel</code>都有可能成为领头<code>sentinel</code>。每次进行<code>leader sentinel</code>选举后，不论是否成功，所有<code>sentinel</code>的配置纪元<code>configuration epoch</code>的值都会自增。</p><h5 id="选取新的主服务器"><a href="#选取新的主服务器" class="headerlink" title="选取新的主服务器"></a>选取新的主服务器</h5><h5 id="剩从切换新主"><a href="#剩从切换新主" class="headerlink" title="剩从切换新主"></a>剩从切换新主</h5><h5 id="旧主变新从"><a href="#旧主变新从" class="headerlink" title="旧主变新从"></a>旧主变新从</h5>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h3&gt;&lt;p&gt;前文&lt;a href=&quot;https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%</summary>
+      
+    
+    
+    
+    
+    <category term="redis" scheme="https://mqrayblog.cn/tags/redis/"/>
+    
+    <category term="数据库" scheme="https://mqrayblog.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>redis之主从复制</title>
@@ -259,7 +283,7 @@
     <link href="https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
     <id>https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/</id>
     <published>2023-05-01T02:06:37.000Z</published>
-    <updated>2023-08-07T07:31:48.369Z</updated>
+    <updated>2023-08-15T23:57:58.661Z</updated>
     
     <content type="html"><![CDATA[<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.modb.pro/db/158733">1. 一文了解拦截器与拦截器链的实现</a><br><a href="https://juejin.cn/post/7026150413036421127#heading-15">2. 自定义注解实现方式解析</a><br><a href="https://www.cnblogs.com/yihuihui/p/15121300.html">3. 拦截器原理</a>  </p>]]></content>
     
@@ -271,6 +295,8 @@
     
     
     
+    
+    <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
     
   </entry>
   
