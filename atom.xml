@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-08-17T16:01:27.833Z</updated>
+  <updated>2023-08-28T15:22:18.002Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis之集群模式</title>
+    <link href="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</id>
+    <published>2023-08-28T09:44:38.000Z</published>
+    <updated>2023-08-28T15:22:18.002Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="redis-集群模式"><a href="#redis-集群模式" class="headerlink" title="redis 集群模式"></a>redis 集群模式</h2><p>Redis集群是一种通过将多个Redis节点连接在一起以实现高可用性、数据分片和负载均衡的技术。它允许Redis在不同节点上同时提供服务，提高整体性能和可靠性。</p><h3 id="redis集群的优点"><a href="#redis集群的优点" class="headerlink" title="redis集群的优点"></a>redis集群的优点</h3><ol><li>高可用： 节点故障时，能自动进行故障转移，保证服务的持续可用。</li><li>负载均衡： 工作负载能够被分发到不同的节点上，有效分摊单节点访问压力。</li><li>容灾恢复：通过主从复制、哨兵机制，节点故障时能够快速进行故障恢复</li><li>数据分片： 集群模式下，可以由多个主节点执行写入操作</li><li>易于扩展：可以根据业务需求和系统负载，动态的添加或减少节点，实现水平扩展。</li></ol><h3 id="集群模式中的主要模块"><a href="#集群模式中的主要模块" class="headerlink" title="集群模式中的主要模块"></a>集群模式中的主要模块</h3><h4 id="哈希槽"><a href="#哈希槽" class="headerlink" title="哈希槽"></a>哈希槽</h4><h4 id="请求重定向"><a href="#请求重定向" class="headerlink" title="请求重定向"></a>请求重定向</h4><h4 id="集群中常见的消息"><a href="#集群中常见的消息" class="headerlink" title="集群中常见的消息"></a>集群中常见的消息</h4><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.cnblogs.com/yidengjiagou/p/17345831.html">1. redis集群模式</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;redis-集群模式&quot;&gt;&lt;a href=&quot;#redis-集群模式&quot; class=&quot;headerlink&quot; title=&quot;redis 集群模式&quot;&gt;&lt;/a&gt;redis 集群模式&lt;/h2&gt;&lt;p&gt;Redis集群是一种通过将多个Redis节点连接在一起以实现高可用性、数据分</summary>
+      
+    
+    
+    
+    <category term="数据库" scheme="https://mqrayblog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="redis" scheme="https://mqrayblog.cn/tags/redis/"/>
+    
+    <category term="源码阅读" scheme="https://mqrayblog.cn/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java之ConcurrentHashMap</title>
+    <link href="https://mqrayblog.cn/2023/08/28/java%E4%B9%8BConcurrentHashMap/"/>
+    <id>https://mqrayblog.cn/2023/08/28/java%E4%B9%8BConcurrentHashMap/</id>
+    <published>2023-08-28T09:44:02.000Z</published>
+    <updated>2023-08-28T09:44:02.329Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>java之spring注解</title>
