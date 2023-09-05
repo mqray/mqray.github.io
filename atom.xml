@@ -101,7 +101,7 @@
     <link href="https://mqrayblog.cn/2023/08/28/java%E4%B9%8BConcurrentHashMap/"/>
     <id>https://mqrayblog.cn/2023/08/28/java%E4%B9%8BConcurrentHashMap/</id>
     <published>2023-08-28T09:44:02.000Z</published>
-    <updated>2023-08-28T16:40:21.379Z</updated>
+    <updated>2023-09-05T11:12:31.747Z</updated>
     
     <content type="html"><![CDATA[<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://juejin.cn/post/7064061605185028110">1. 一文彻底弄懂ConcurrentHashMap</a></p>]]></content>
     
@@ -113,6 +113,10 @@
     
     
     
+    <category term="coding" scheme="https://mqrayblog.cn/categories/coding/"/>
+    
+    
+    <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
     
   </entry>
   
@@ -121,7 +125,7 @@
     <link href="https://mqrayblog.cn/2023/08/17/java%E4%B9%8Bspring%E6%B3%A8%E8%A7%A3/"/>
     <id>https://mqrayblog.cn/2023/08/17/java%E4%B9%8Bspring%E6%B3%A8%E8%A7%A3/</id>
     <published>2023-08-17T15:01:54.000Z</published>
-    <updated>2023-08-17T16:01:27.833Z</updated>
+    <updated>2023-09-05T11:12:42.338Z</updated>
     
     <content type="html"><![CDATA[<h2 id><a href="#" class="headerlink" title></a></h2><ol><li>@Transactional</li><li>@TransmittableThreadLocal</li><li>@PostConstruct</li></ol><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="http://mysql.taobao.org/monthly/2021/10/02/">1. PolarDB 数据库内核月报</a><br><a href="https://www.cnblogs.com/caoyc/p/5632963.html">2. spring @Transactional注解参数详解</a><br><a href="https://juejin.cn/post/6998552093795549191">3. TransmittableThreadLocal原理解析</a><br><a href="https://blog.csdn.net/wk52525/article/details/107859685">4. TransmittableThreadLocal（TTL）实现线程变量传递的原理分析</a></p>]]></content>
     
@@ -135,6 +139,8 @@
       
     
     
+    
+    <category term="coding" scheme="https://mqrayblog.cn/categories/coding/"/>
     
     
     <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
@@ -408,16 +414,15 @@
     <link href="https://mqrayblog.cn/2023/07/05/%E9%9A%8F%E7%AC%94/"/>
     <id>https://mqrayblog.cn/2023/07/05/%E9%9A%8F%E7%AC%94/</id>
     <published>2023-07-05T11:00:13.000Z</published>
-    <updated>2023-09-05T11:08:59.255Z</updated>
+    <updated>2023-09-05T12:21:29.496Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="帕金森琐碎定律"><a href="#帕金森琐碎定律" class="headerlink" title="帕金森琐碎定律"></a>帕金森琐碎定律</h4><blockquote><p>一个组织中的成员往往会把过多的精力花费在一些琐碎的争论上。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h4 id="阿里巴巴java开发手册阅读"><a href="#阿里巴巴java开发手册阅读" class="headerlink" title="阿里巴巴java开发手册阅读"></a>阿里巴巴java开发手册阅读</h4><blockquote><p>很多编程方式客观上没有对错之分，一致性很重要，可读性很重要，团队沟通效率很重要。有一个理论叫帕金森琐碎定律: 一个组织中的成员往往会把过多的精力花费在一些琐碎的争论上。</p></blockquote>]]></content>
     
     
       
       
-    <summary type="html">&lt;h4 id=&quot;帕金森琐碎定律&quot;&gt;&lt;a href=&quot;#帕金森琐碎定律&quot; class=&quot;headerlink&quot; title=&quot;帕金森琐碎定律&quot;&gt;&lt;/a&gt;帕金森琐碎定律&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;一个组织中的成员往往会把过多的精力花费在一些琐碎的争论上。&lt;/p&gt;
-&lt;/b</summary>
+    <summary type="html">&lt;h4 id=&quot;阿里巴巴java开发手册阅读&quot;&gt;&lt;a href=&quot;#阿里巴巴java开发手册阅读&quot; class=&quot;headerlink&quot; title=&quot;阿里巴巴java开发手册阅读&quot;&gt;&lt;/a&gt;阿里巴巴java开发手册阅读&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;很多编程方式客观上</summary>
       
     
     
