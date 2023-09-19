@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-09-07T00:42:46.758Z</updated>
+  <updated>2023-09-19T14:42:53.823Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>linux之iptable</title>
+    <link href="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/"/>
+    <id>https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/</id>
+    <published>2023-09-19T14:39:54.000Z</published>
+    <updated>2023-09-19T14:42:53.823Z</updated>
+    
+    <content type="html"><![CDATA[<img src="/2023/09/19/linux%E4%B9%8Biptable/Netfilter-packet-flow.png">  ]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;img src=&quot;/2023/09/19/linux%E4%B9%8Biptable/Netfilter-packet-flow.png&quot;&gt;  
+</summary>
+      
+    
+    
+    
+    
+    <category term="linux" scheme="https://mqrayblog.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux之网络</title>
     <link href="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/"/>
     <id>https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/</id>
     <published>2023-09-05T14:29:07.000Z</published>
-    <updated>2023-09-07T00:42:46.758Z</updated>
+    <updated>2023-09-19T14:38:06.071Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">  <h4 id="四层网络"><a href="#四层网络" class="headerlink" title="四层网络"></a>四层网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_4.png">  <h4 id="linux网络"><a href="#linux网络" class="headerlink" title="linux网络"></a>linux网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_kernel.webp">  <h5 id="linux网络收发流程"><a href="#linux网络收发流程" class="headerlink" title="linux网络收发流程"></a>linux网络收发流程</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_send_receive.webp">  <h5 id="网络包的接收流程"><a href="#网络包的接收流程" class="headerlink" title="网络包的接收流程"></a>网络包的接收流程</h5><h5 id="网络包的发送流程"><a href="#网络包的发送流程" class="headerlink" title="网络包的发送流程"></a>网络包的发送流程</h5><h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><h4 id="水平触发与边缘触发"><a href="#水平触发与边缘触发" class="headerlink" title="水平触发与边缘触发"></a>水平触发与边缘触发</h4><p>水平触发(level-trggered)：<br>边缘触发(edge-triggered):</p><h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ol><li>带宽： 链路的最大传输速率，单位为b&#x2F;s。带宽和物理网卡的配置直接关联，实际带宽取决于整个网络链路中最小的一个。</li><li>时延: 网络请求发出后，一直到收到远端响应所需要的事件延迟。在不同场景下含义有所不同，比如连接建立的时间(TCP握手延时)或者一个数据包往返所需时间(rtt)</li><li>吞吐量：标识没有丢包时的最大数据传输速率，单位为b&#x2F;s。吞吐量受带宽限制。</li><li>PPS： 即packet per second的缩写，标识以网络包为单位的传输速率，通常用来评估网络的转发能力。在以linux服务器转发时，很容易受到网络包大小的影响。</li></ol><h4 id="网络性能测试"><a href="#网络性能测试" class="headerlink" title="网络性能测试"></a>网络性能测试</h4><p>linux网络基于TCP&#x2F;IP协议栈，而不同协议层的行为不同。在评估网络性能前，需要确定应用程序基于协议栈的哪一层：</p><ol><li>基于http或者https的web应用程序，属于应用层，需要测试http&#x2F;https的性能。</li><li>对于游戏服务器，为了支持更多在线人数，通常基于tcp&#x2F;udp与客户端交互，此时需要测试tcp&#x2F;udp的性能。</li><li>将linux作为软交换机或者路由器来使用，此时则更关注网络包的处理能力，特别是网络层的转发性能。</li></ol><blockquote><p>底层协议是其上各层网络协议的基础，底层的性能决定了高层的网络性能。</p></blockquote><h5 id="测试网络接口层和网络层的性能"><a href="#测试网络接口层和网络层的性能" class="headerlink" title="测试网络接口层和网络层的性能"></a>测试网络接口层和网络层的性能</h5><p>网络接口层和网络层主要负责网络包的封装、寻址、路由、发送以及接收。这两层中每秒可处理的网络包PPS即是最重要的性能指标，特别是64B小包的处理能力。</p><p>Linux 内核自带的高性能网络测试工具 pktgen</p><h5 id="tcp-udp性能测试"><a href="#tcp-udp性能测试" class="headerlink" title="tcp&#x2F;udp性能测试"></a>tcp&#x2F;udp性能测试</h5><p>iperf 和 netperf 都是最常用的网络性能测试工具</p><h5 id="http性能测试"><a href="#http性能测试" class="headerlink" title="http性能测试"></a>http性能测试</h5><p>要测试 HTTP 的性能，也有大量的工具可以使用，比如 ab、webbench 等，都是常用的 HTTP 压力测试工具。其中，ab 是 Apache 自带的 HTTP 压测工具，主要测试 HTTP 服务的每秒请求数、请求延迟、吞吐量以及请求延迟的分布情况等。</p><p>&#x2F;proc&#x2F;sys&#x2F;fs&#x2F;file-max</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://time.geekbang.org/column/article/81268">1. 极客时间-linux性能优化</a><br><a href="https://blog.csdn.net/lihao21/article/details/67631516">2. 水平触发和边缘触发</a><br><a href="https://blog.csdn.net/yolo_yyh/article/details/118367979">3. 陈硕-muduo网络库与服务模型介绍</a><br><a href="https://cloud.tencent.com/developer/article/1721171">4. linux版本查看</a></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">  <h4 id="四层网络"><a href="#四层网络" class="headerlink" title="四层网络"></a>四层网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_4.png">  <h4 id="linux网络"><a href="#linux网络" class="headerlink" title="linux网络"></a>linux网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_kernel.webp">  <h5 id="linux网络收发流程"><a href="#linux网络收发流程" class="headerlink" title="linux网络收发流程"></a>linux网络收发流程</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_send_receive.webp">  <h5 id="网络包的接收流程"><a href="#网络包的接收流程" class="headerlink" title="网络包的接收流程"></a>网络包的接收流程</h5><h5 id="网络包的发送流程"><a href="#网络包的发送流程" class="headerlink" title="网络包的发送流程"></a>网络包的发送流程</h5><h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><h4 id="水平触发与边缘触发"><a href="#水平触发与边缘触发" class="headerlink" title="水平触发与边缘触发"></a>水平触发与边缘触发</h4><p>水平触发(level-trggered)：<br>边缘触发(edge-triggered):</p><h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ol><li>带宽： 链路的最大传输速率，单位为b&#x2F;s。带宽和物理网卡的配置直接关联，实际带宽取决于整个网络链路中最小的一个。</li><li>时延: 网络请求发出后，一直到收到远端响应所需要的事件延迟。在不同场景下含义有所不同，比如连接建立的时间(TCP握手延时)或者一个数据包往返所需时间(rtt)</li><li>吞吐量：标识没有丢包时的最大数据传输速率，单位为b&#x2F;s。吞吐量受带宽限制。</li><li>PPS： 即packet per second的缩写，标识以网络包为单位的传输速率，通常用来评估网络的转发能力。在以linux服务器转发时，很容易受到网络包大小的影响。</li></ol><h4 id="网络性能测试"><a href="#网络性能测试" class="headerlink" title="网络性能测试"></a>网络性能测试</h4><p>linux网络基于TCP&#x2F;IP协议栈，而不同协议层的行为不同。在评估网络性能前，需要确定应用程序基于协议栈的哪一层：</p><ol><li>基于http或者https的web应用程序，属于应用层，需要测试http&#x2F;https的性能。</li><li>对于游戏服务器，为了支持更多在线人数，通常基于tcp&#x2F;udp与客户端交互，此时需要测试tcp&#x2F;udp的性能。</li><li>将linux作为软交换机或者路由器来使用，此时则更关注网络包的处理能力，特别是网络层的转发性能。</li></ol><blockquote><p>底层协议是其上各层网络协议的基础，底层的性能决定了高层的网络性能。</p></blockquote><h5 id="测试网络接口层和网络层的性能"><a href="#测试网络接口层和网络层的性能" class="headerlink" title="测试网络接口层和网络层的性能"></a>测试网络接口层和网络层的性能</h5><p>网络接口层和网络层主要负责网络包的封装、寻址、路由、发送以及接收。这两层中每秒可处理的网络包PPS即是最重要的性能指标，特别是64B小包的处理能力。</p><p>Linux 内核自带的高性能网络测试工具 pktgen</p><h5 id="tcp-udp性能测试"><a href="#tcp-udp性能测试" class="headerlink" title="tcp&#x2F;udp性能测试"></a>tcp&#x2F;udp性能测试</h5><p>iperf 和 netperf 都是最常用的网络性能测试工具</p><h5 id="http性能测试"><a href="#http性能测试" class="headerlink" title="http性能测试"></a>http性能测试</h5><p>要测试 HTTP 的性能，也有大量的工具可以使用，比如 ab、webbench 等，都是常用的 HTTP 压力测试工具。其中，ab 是 Apache 自带的 HTTP 压测工具，主要测试 HTTP 服务的每秒请求数、请求延迟、吞吐量以及请求延迟的分布情况等。</p><p>为了得到应用程序的实际性能，就要求性能工具本身可以模拟用户的请求负载，而 iperf、ab 这类工具就无能为力了。幸运的是，我们还可以用 wrk、TCPCopy、Jmeter 或者 LoadRunner 等实现这个目标。</p><blockquote><p>nslookup ip<br>time nslookup ip<br>ping -c3 <a href="http://www.baidu.com/">www.baidu.com</a><br>dnsmasq &#x2F;etc&#x2F;init.d&#x2F;dnsmasq start<br>dig +trace +nodnssec time.geekbang.org<br>strace</p></blockquote><p>域名劫持和规避<br>客户端：HTTPDNS</p><p>全局负载均衡（GSLB）</p><p>PTR 请求</p><p>tcpdump</p><p>iptable</p><p>traceroute<br>tracepath<br>nc</p><p>&#x2F;proc&#x2F;sys&#x2F;fs&#x2F;file-max</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://time.geekbang.org/column/article/81268">1. 极客时间-linux性能优化</a><br><a href="https://blog.csdn.net/lihao21/article/details/67631516">2. 水平触发和边缘触发</a><br><a href="https://blog.csdn.net/yolo_yyh/article/details/118367979">3. 陈硕-muduo网络库与服务模型介绍</a><br><a href="https://cloud.tencent.com/developer/article/1721171">4. linux版本查看</a><br><a href="https://plantegg.github.io/2019/01/09/nslookup-OK-but-ping-fail/">5. dns排障实例</a><br><a href="https://www.rfc-editor.org/rfc-index.html">6. rfc</a><br><a href="https://wiki.wireshark.org/TCP%204-times%20close">7. wireshark四次挥手案例</a><br><a href>8. 林沛满《Wireshark网络分析就这么简单》和《Wireshark网络分析的艺术》</a></p>]]></content>
     
     
       
@@ -473,27 +496,6 @@
     
     
     <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>专有名词</title>
-    <link href="https://mqrayblog.cn/2023/05/01/%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D/"/>
-    <id>https://mqrayblog.cn/2023/05/01/%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D/</id>
-    <published>2023-04-30T16:21:20.000Z</published>
-    <updated>2023-07-31T16:45:06.541Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h5><p>POSIX是由IEEE的一组标准组成，其目标是提供一套大体上基于Unix的可移植操作系统标准。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h5 id=&quot;POSIX&quot;&gt;&lt;a href=&quot;#POSIX&quot; class=&quot;headerlink&quot; title=&quot;POSIX&quot;&gt;&lt;/a&gt;POSIX&lt;/h5&gt;&lt;p&gt;POSIX是由IEEE的一组标准组成，其目标是提供一套大体上基于Unix的可移植操作系统标准。&lt;/p&gt;
-</summary>
-      
-    
-    
-    
     
   </entry>
   
