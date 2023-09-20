@@ -212,7 +212,7 @@
 <li>节点<code>B</code>向节点<code>A</code>发送<code>PONG</code>消息。</li>
 <li>如果节点<code>A</code>收到节点<code>B</code>发送的<code>PONG</code>消息，则节点<code>A</code>可获悉节点<code>B</code>已经收到自己发送的<code>meet</code>消息。</li>
 <li>节点<code>A</code>向节点<code>B</code>返回一条<code>PING</code>命令。</li>
-<li>如果顺利，节点<code>B</code>收到节点<code>A</code>返回的<code>PING</code>消息，以此获悉节点<code>A</code>已经成功接收到节点<code>B</code>返回的<code>PONG</code>消息。此时，握手完成。<br>节点<code>A|B</code>集群组建过程的时序图如下：<img src="/.cn//redis_cluster_meet.png"></li>
+<li>如果顺利，节点<code>B</code>收到节点<code>A</code>返回的<code>PING</code>消息，以此获悉节点<code>A</code>已经成功接收到节点<code>B</code>返回的<code>PONG</code>消息。此时，握手完成。<br>节点<code>A|B</code>集群组建过程的时序图如下：<img src="/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_meet.png"></li>
 </ol>
 <h3 id="槽分派"><a href="#槽分派" class="headerlink" title="槽分派"></a>槽分派</h3><p>redis集群通过<code>分片</code>的方式来保存数据库中的键值对，集群的整个数据库被分为<code>16384</code>个槽位，数据库中的每个键都属于这些槽中的一个，集群中的每个节点可以处理0个或者<code>16384</code>个槽位。</p>
 <p>当数据库中的<code>16384</code>个槽位都有节点在处理时，集群属于上线状态；否则，集群属于下线状态。</p>
@@ -258,7 +258,7 @@
 
 
 <h3 id="重新分片"><a href="#重新分片" class="headerlink" title="重新分片"></a>重新分片</h3><p>redis集群的重新分片是指可以将任意数量的已经指派给某个节点<code>A</code>(源节点)的槽位重新指派给节点<code>B</code>(目标节点)，并且相关槽位所属的键值对也会从源节点移动到目标节点。<br><code>重新分片</code>操作过程中集群不需要下线，且源节点和目标节点可以继续处理命令请求。</p>
-<h4 id="重新分片的实现原理"><a href="#重新分片的实现原理" class="headerlink" title="重新分片的实现原理"></a>重新分片的实现原理</h4><p>集群中的重新分配操作是由redis的集群管理软件<code>redis-trib</code>负责执行的。redis提供了进行重新分片所需要的命令，而<code>redis-trib</code>通过向源目标节点发送命令来进行重新分片。<br><code>redis-trib</code>对集群的单个槽位进行分片的过程如下：<br><img src="/.cn//redis_cluster_sharding.png"></p>
+<h4 id="重新分片的实现原理"><a href="#重新分片的实现原理" class="headerlink" title="重新分片的实现原理"></a>重新分片的实现原理</h4><p>集群中的重新分配操作是由redis的集群管理软件<code>redis-trib</code>负责执行的。redis提供了进行重新分片所需要的命令，而<code>redis-trib</code>通过向源目标节点发送命令来进行重新分片。<br><code>redis-trib</code>对集群的单个槽位进行分片的过程如下：<br><img src="/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_sharding.png"></p>
 <p>另外注意到，<code>clusterState</code>结构中记录了集群得重新分片信息。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterState</span> &#123;</span></span><br><span class="line">    clusterNode *migrating_slots_to[CLUSTER_SLOTS];</span><br><span class="line">    clusterNode *importing_slots_from[CLUSTER_SLOTS];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中，<code>migrating_slots_to</code>记录了当前节点正在迁移至其他节点的槽。而<code>importing_slots_from</code>则记录了当前节点正在从哪些节点导入槽。</p>
@@ -286,7 +286,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* This structure represent elements of node-&gt;fail_reports. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterNodeFailReport</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> *<span class="title">node</span>;</span>  <span class="comment">// 报告目标节点下线的主节点</span></span><br><span class="line">    <span class="type">mstime_t</span> time;             <span class="comment">// 最后一次从node收到下线报告的时间</span></span><br><span class="line">&#125; clusterNodeFailReport;</span><br></pre></td></tr></table></figure>
 
 <h5 id="已下线-fail"><a href="#已下线-fail" class="headerlink" title="已下线 fail"></a>已下线 fail</h5><p>如果在一个集群中，半数以上负责处理槽的主节点都将某个主节点<code>X</code>报告为疑似下线，那么这个节点<code>X</code>将被标记为<code>已下线</code>，将主节点标记为已下线的节点会向集群<code>广播</code>一条关于主节点<code>X</code>的<code>fail</code>消息，收到此消息的所有节点会立即将<code>clusterNode.nodes</code>中节点<code>X</code>的状态修改为已下线。</p>
-<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><img src="/.cn//redis_cluster_fialover.png">
+<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><img src="/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_fialover.png">
 
 <p>如果从节点检测到自己正在复制的主节点进入了下线状态，从节点将开始对下线主节点进行故障转移：</p>
 <ol>
