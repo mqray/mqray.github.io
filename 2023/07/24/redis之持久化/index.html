@@ -181,7 +181,7 @@
 <p><code>RDB</code>持久化相关的配置体现在<code>redisServer</code>中：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">redisServer</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">saveparam</span> *<span class="title">saveparams</span>;</span>   <span class="comment">// 触发rdb自动保存的配置数组</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> dirty;                <span class="comment">// 上一次save执行后，数据库表更次数</span></span><br><span class="line">    <span class="type">time_t</span> lastsave;                <span class="comment">// 上次成功执行 save的 unix时间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">saveparam</span> &#123;</span></span><br><span class="line">    <span class="type">time_t</span> seconds; <span class="comment">// 秒数</span></span><br><span class="line">    <span class="type">int</span> changes; <span class="comment">// 修改次数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="RDB文件结构"><a href="#RDB文件结构" class="headerlink" title="RDB文件结构"></a>RDB文件结构</h3><p>下图描述了一个<code>RDB</code>文件结构：<br><img src="/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/rdb-file.png"></p>
+<h3 id="RDB文件结构"><a href="#RDB文件结构" class="headerlink" title="RDB文件结构"></a>RDB文件结构</h3><p>下图描述了一个<code>RDB</code>文件结构：<br><img src="/.cn//rdb-file.png"></p>
 <ol>
 <li>文件开头保存的是二进制的<code>redis</code>，占三个字节；</li>
 <li><code>db_version</code>: 占四个字节，是字符串表示的整数，用以记录rdb文件的版本号；</li>
@@ -189,7 +189,7 @@
 <li><code>EOF</code>: 占一个字节，用以标识rdb文件中数据库状态记录的结束；</li>
 <li><code>check_sum</code>: 为8字节长度的无符号整数，保存对数据库状态的校验和；<br>其中，<code>databases</code>中每个非空数据库在<code>rdb</code>文件中都可以保存为<code>SELECTDB|db_number|key_value_pair</code>三部分。</li>
 </ol>
-<img src="/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/rdb-file-dbs.png">
+<img src="/.cn//rdb-file-dbs.png">
 
 
 <p>而每一个<code>key_value_pair</code>都保存了一个或多个键值对，如果键值对带有过期时间，则键值对中的过期时间也会被保存。<br>键值对的保存参见： <a target="_blank" rel="noopener" href="http://redisbook.com/preview/rdb/rdb_struct.html">redis设计与实现</a></p>
@@ -220,7 +220,7 @@
 <p>另外，<code>redis</code>中定义了五种子进程类型：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> CHILD_TYPE_NONE 0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CHILD_TYPE_RDB 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CHILD_TYPE_AOF 2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CHILD_TYPE_LDB 3</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CHILD_TYPE_MODULE 4</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="rdbsave-命令总结"><a href="#rdbsave-命令总结" class="headerlink" title="rdbsave 命令总结"></a>rdbsave 命令总结</h4><img src="/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/rdb-save.png">
+<h4 id="rdbsave-命令总结"><a href="#rdbsave-命令总结" class="headerlink" title="rdbsave 命令总结"></a>rdbsave 命令总结</h4><img src="/.cn//rdb-save.png">
 
 
 <h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>除了<code>rdb</code>持久化外，<code>redis</code>还提供了<code>aof， append only file</code>持久化功能，将服务器执行的命令以<code>redis的命令请求协议格式</code>记录到<code>aof</code>文件中。<br>redis中默认不开启<code>aof</code>持久化功能，可通过修改如下配置实现：</p>
