@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-09-20T07:05:11.420Z</updated>
+  <updated>2023-09-21T07:45:01.279Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis之排障</title>
+    <link href="https://mqrayblog.cn/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/"/>
+    <id>https://mqrayblog.cn/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/</id>
+    <published>2023-09-20T13:28:31.000Z</published>
+    <updated>2023-09-21T07:45:01.279Z</updated>
+    
+    <content type="html"><![CDATA[<p>扩容环境频繁出现oom，最终定位到两个原因：</p><ol><li>数据业务写入太多</li><li>bgsave导致</li></ol><p>最近有点忙，先占坑，后面梳理完再写</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://segmentfault.com/a/1190000043845458">1. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://cloud.tencent.com/developer/article/2205116">2. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://www.cnblogs.com/wshenjin/p/11431378.html">3. https://www.cnblogs.com/wshenjin/p/11431378.html</a><br><a href="https://redis.io/commands/info/">4. https://redis.io/commands/info/</a><br><a href="https://redis.io/docs/reference/eviction/">5. 键过期策略</a><br><a href="https://yuerer.com/Redis-6-%E5%89%96%E6%9E%90(%E4%BA%8C)-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">6. bgsave导致oom</a>  </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;扩容环境频繁出现oom，最终定位到两个原因：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据业务写入太多&lt;/li&gt;
+&lt;li&gt;bgsave导致&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最近有点忙，先占坑，后面梳理完再写&lt;/p&gt;
+&lt;h3 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;heade</summary>
+      
+    
+    
+    
+    
+    <category term="redis" scheme="https://mqrayblog.cn/tags/redis/"/>
+    
+    <category term="排障" scheme="https://mqrayblog.cn/tags/%E6%8E%92%E9%9A%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>linux之iptable</title>
@@ -438,7 +468,7 @@
     <link href="https://mqrayblog.cn/2023/07/15/%E5%BB%BA%E7%AB%99/"/>
     <id>https://mqrayblog.cn/2023/07/15/%E5%BB%BA%E7%AB%99/</id>
     <published>2023-07-15T05:32:21.739Z</published>
-    <updated>2023-09-20T07:42:14.294Z</updated>
+    <updated>2023-09-20T11:17:25.837Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><h4 id="排障"><a href="#排障" class="headerlink" title="排障"></a>排障</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INFO  Deleted database.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: EBUSY: resource busy or locked, rmdir &#x27;D:\blog\public&#x27;</span><br></pre></td></tr></table></figure><p>说来可笑，重启解决</p><h4 id="图片挂载"><a href="#图片挂载" class="headerlink" title="图片挂载"></a>图片挂载</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save </span><br></pre></td></tr></table></figure><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.suyuanblog.xyz/2021/10/14/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA/">1. 预部署文件渲染失败解决方案</a><br><a href="https://butterfly.js.org/posts/4aa8abbe/#%E4%BB%A3%E7%A2%BC%E9%AB%98%E5%BA%A6%E9%99%90%E5%88%B6">2. hexo butteryfly设置</a><br><a href="https://segmentfault.com/a/1190000042183952">3. 配置友链</a><br><a href="https://blog.csdn.net/qq_33384402/article/details/107200465">4. 接入博客</a><br><a href="https://blog.csdn.net/weixin_45649612/article/details/122777623">5. gitalk 未找到相关的Issues进行评论解决方法</a>  </p>]]></content>
     
@@ -473,28 +503,6 @@
     
     
     <category term="sth" scheme="https://mqrayblog.cn/tags/sth/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java之拦截器</title>
-    <link href="https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
-    <id>https://mqrayblog.cn/2023/05/01/java%E4%B9%8B%E6%8B%A6%E6%88%AA%E5%99%A8/</id>
-    <published>2023-05-01T02:06:37.000Z</published>
-    <updated>2023-09-05T10:47:17.176Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.modb.pro/db/158733">1. 一文了解拦截器与拦截器链的实现</a><br><a href="https://juejin.cn/post/7026150413036421127#heading-15">2. 自定义注解实现方式解析</a><br><a href="https://www.cnblogs.com/yihuihui/p/15121300.html">3. 拦截器原理</a><br><a href="https://blog.csdn.net/qq_41733192/article/details/124972406">4. MyBatis拦截器实现sql查询权限动态修改</a><br><a href="https://blog.csdn.net/sunxiaoju/article/details/109660493">5. 自定义一个拦截器实现打印完整sql</a><br><a href="https://juejin.cn/post/7026150413036421127#heading-0">6. 自定义注解实现方式解析</a><br><a href="https://blog.csdn.net/fly910905/article/details/118391502">7. MyBatis 分页插件 PageHelper:是如何拦截SQL进行分页</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://www.modb.pro/db/158733&quot;&gt;1. 一文了解拦截器与拦截器链的实现&lt;/a&gt;&lt;br&gt;&lt;a </summary>
-      
-    
-    
-    
-    
-    <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
     
   </entry>
   

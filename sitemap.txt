@@ -1,3 +1,4 @@
+https://mqrayblog.cn/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/
 https://mqrayblog.cn/2023/07/15/%E5%BB%BA%E7%AB%99/
 https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/
 https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/
@@ -25,6 +26,7 @@ https://mqrayblog.cn/tags/java/
 https://mqrayblog.cn/tags/linux/
 https://mqrayblog.cn/tags/redis/
 https://mqrayblog.cn/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/
+https://mqrayblog.cn/tags/%E6%8E%92%E9%9A%9C/
 https://mqrayblog.cn/tags/sth/
 https://mqrayblog.cn/categories/coding/
 https://mqrayblog.cn/categories/databases/
