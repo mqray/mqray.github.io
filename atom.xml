@@ -6,7 +6,7 @@
   <link href="https://mqrayblog.cn/atom.xml" rel="self"/>
   
   <link href="https://mqrayblog.cn/"/>
-  <updated>2023-09-21T07:45:01.279Z</updated>
+  <updated>2023-09-22T03:01:35.236Z</updated>
   <id>https://mqrayblog.cn/</id>
   
   <author>
@@ -17,13 +17,58 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>工作之工程术语</title>
+    <link href="https://mqrayblog.cn/2023/09/22/%E5%B7%A5%E4%BD%9C%E4%B9%8B%E5%B7%A5%E7%A8%8B%E6%9C%AF%E8%AF%AD/"/>
+    <id>https://mqrayblog.cn/2023/09/22/%E5%B7%A5%E4%BD%9C%E4%B9%8B%E5%B7%A5%E7%A8%8B%E6%9C%AF%E8%AF%AD/</id>
+    <published>2023-09-22T02:23:32.000Z</published>
+    <updated>2023-09-22T03:01:35.236Z</updated>
+    
+    <content type="html"><![CDATA[<p>产品线沿用了华为的管理方案，一堆主管发邮件各种专有名词，根本看不懂，特此记录：<br><code>RMT</code>：需求管理团队<br><code>RAT</code>: 需求分析团队<br><code>TSE</code>：测试系统工程师<br><code>DFX</code>: Design forX(面向产品生命周期各环节的设计)的缩写</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.ipdwiki.com/?cxkf/2251.html">1. 解读华为研发6:需求管理组织2-RMT&#x2F;RAT</a><br><a href="https://www.ipdwiki.com/?cpzhl/1129.html">2. DFX项目管理及集成产品开发（IPD）模式</a>  </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;产品线沿用了华为的管理方案，一堆主管发邮件各种专有名词，根本看不懂，特此记录：&lt;br&gt;&lt;code&gt;RMT&lt;/code&gt;：需求管理团队&lt;br&gt;&lt;code&gt;RAT&lt;/code&gt;: 需求分析团队&lt;br&gt;&lt;code&gt;TSE&lt;/code&gt;：测试系统工程师&lt;br&gt;&lt;code&gt;DFX&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="sth" scheme="https://mqrayblog.cn/tags/sth/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java之jprofile分析内存占用</title>
+    <link href="https://mqrayblog.cn/2023/09/21/java%E4%B9%8Bjprofile%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8/"/>
+    <id>https://mqrayblog.cn/2023/09/21/java%E4%B9%8Bjprofile%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8/</id>
+    <published>2023-09-21T07:53:18.000Z</published>
+    <updated>2023-09-24T23:55:39.862Z</updated>
+    
+    <content type="html"><![CDATA[<p>有点舒服，假借内存分析之名学习一波java内存优化</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.cnblogs.com/kongzhongqijing/articles/3621163.html">1. java命令–jmap命令使用</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;有点舒服，假借内存分析之名学习一波java内存优化&lt;/p&gt;
+&lt;h3 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/kong</summary>
+      
+    
+    
+    
+    
+    <category term="java" scheme="https://mqrayblog.cn/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>redis之排障</title>
     <link href="https://mqrayblog.cn/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/"/>
     <id>https://mqrayblog.cn/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/</id>
     <published>2023-09-20T13:28:31.000Z</published>
-    <updated>2023-09-21T07:45:01.279Z</updated>
+    <updated>2023-09-22T00:14:31.632Z</updated>
     
-    <content type="html"><![CDATA[<p>扩容环境频繁出现oom，最终定位到两个原因：</p><ol><li>数据业务写入太多</li><li>bgsave导致</li></ol><p>最近有点忙，先占坑，后面梳理完再写</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://segmentfault.com/a/1190000043845458">1. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://cloud.tencent.com/developer/article/2205116">2. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://www.cnblogs.com/wshenjin/p/11431378.html">3. https://www.cnblogs.com/wshenjin/p/11431378.html</a><br><a href="https://redis.io/commands/info/">4. https://redis.io/commands/info/</a><br><a href="https://redis.io/docs/reference/eviction/">5. 键过期策略</a><br><a href="https://yuerer.com/Redis-6-%E5%89%96%E6%9E%90(%E4%BA%8C)-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">6. bgsave导致oom</a>  </p>]]></content>
+    <content type="html"><![CDATA[<p>扩容环境频繁出现oom，最终定位到两个原因：</p><ol><li>数据业务写入太多</li><li>bgsave导致</li></ol><p>最近有点忙，先占坑，后面梳理完再写</p><p>什么时候选择rdb，什么时候选择 aof<br>同步策略<br>优先级<br>键过期策略<br>键驱逐策略</p><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://segmentfault.com/a/1190000043845458">1. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://cloud.tencent.com/developer/article/2205116">2. redis.conf 7.0 配置和原理全解，生产王者必备</a><br><a href="https://www.cnblogs.com/wshenjin/p/11431378.html">3. https://www.cnblogs.com/wshenjin/p/11431378.html</a><br><a href="https://redis.io/commands/info/">4. https://redis.io/commands/info/</a><br><a href="https://redis.io/docs/reference/eviction/">5. 键过期策略</a><br><a href="https://yuerer.com/Redis-6-%E5%89%96%E6%9E%90(%E4%BA%8C)-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">6. bgsave导致oom</a><br><a href="https://blog.csdn.net/ldw201510803006/article/details/126093439">7. https://blog.csdn.net/ldw201510803006/article/details/126093439</a><br><a href="https://cloud.tencent.com/developer/article/1606110">8. https://cloud.tencent.com/developer/article/1606110</a><br><a href="https://github.com/redis/redis/issues/7717">9. https://github.com/redis/redis/issues/7717</a><br><a href="https://www.cnblogs.com/xuxh120/p/14466705.html">10. https://www.cnblogs.com/xuxh120/p/14466705.html</a><br><a href="https://yuerer.com/Redis-6-%E5%89%96%E6%9E%90(%E4%BA%8C)-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/">11. https://yuerer.com/Redis-6-%E5%89%96%E6%9E%90(%E4%BA%8C)-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</a><br><a href="https://cloud.tencent.com/developer/article/1179710">12. rdb文件解析</a><br><a href="https://segmentfault.com/a/1190000039097986">13. Redis RDB 和 AOF 对比，恢复优先级</a><br><a href="https://xiaolincoding.com/redis/module/strategy.html#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5">14. Redis 过期删除策略和内存淘汰策略有什么区别？</a></p>]]></content>
     
     
       
@@ -34,7 +79,7 @@
 &lt;li&gt;bgsave导致&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;最近有点忙，先占坑，后面梳理完再写&lt;/p&gt;
-&lt;h3 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;heade</summary>
+&lt;p&gt;什么时候选择rdb，什么时候选择 aof&lt;br&gt;同步策略&lt;br&gt;优先级</summary>
       
     
     
@@ -73,9 +118,9 @@
     <link href="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/"/>
     <id>https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/</id>
     <published>2023-09-05T14:29:07.000Z</published>
-    <updated>2023-09-20T00:17:18.478Z</updated>
+    <updated>2023-09-25T00:48:40.241Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">  <h4 id="四层网络"><a href="#四层网络" class="headerlink" title="四层网络"></a>四层网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_4.png">  <h4 id="linux网络"><a href="#linux网络" class="headerlink" title="linux网络"></a>linux网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_kernel.webp">  <h5 id="linux网络收发流程"><a href="#linux网络收发流程" class="headerlink" title="linux网络收发流程"></a>linux网络收发流程</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_send_receive.webp">  <h5 id="网络包的接收流程"><a href="#网络包的接收流程" class="headerlink" title="网络包的接收流程"></a>网络包的接收流程</h5><h5 id="网络包的发送流程"><a href="#网络包的发送流程" class="headerlink" title="网络包的发送流程"></a>网络包的发送流程</h5><h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><h4 id="水平触发与边缘触发"><a href="#水平触发与边缘触发" class="headerlink" title="水平触发与边缘触发"></a>水平触发与边缘触发</h4><p>水平触发(level-trggered)：<br>边缘触发(edge-triggered):</p><h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ol><li>带宽： 链路的最大传输速率，单位为b&#x2F;s。带宽和物理网卡的配置直接关联，实际带宽取决于整个网络链路中最小的一个。</li><li>时延: 网络请求发出后，一直到收到远端响应所需要的事件延迟。在不同场景下含义有所不同，比如连接建立的时间(TCP握手延时)或者一个数据包往返所需时间(rtt)</li><li>吞吐量：标识没有丢包时的最大数据传输速率，单位为b&#x2F;s。吞吐量受带宽限制。</li><li>PPS： 即packet per second的缩写，标识以网络包为单位的传输速率，通常用来评估网络的转发能力。在以linux服务器转发时，很容易受到网络包大小的影响。</li></ol><h4 id="网络性能测试"><a href="#网络性能测试" class="headerlink" title="网络性能测试"></a>网络性能测试</h4><p>linux网络基于TCP&#x2F;IP协议栈，而不同协议层的行为不同。在评估网络性能前，需要确定应用程序基于协议栈的哪一层：</p><ol><li>基于http或者https的web应用程序，属于应用层，需要测试http&#x2F;https的性能。</li><li>对于游戏服务器，为了支持更多在线人数，通常基于tcp&#x2F;udp与客户端交互，此时需要测试tcp&#x2F;udp的性能。</li><li>将linux作为软交换机或者路由器来使用，此时则更关注网络包的处理能力，特别是网络层的转发性能。</li></ol><blockquote><p>底层协议是其上各层网络协议的基础，底层的性能决定了高层的网络性能。</p></blockquote><h5 id="测试网络接口层和网络层的性能"><a href="#测试网络接口层和网络层的性能" class="headerlink" title="测试网络接口层和网络层的性能"></a>测试网络接口层和网络层的性能</h5><p>网络接口层和网络层主要负责网络包的封装、寻址、路由、发送以及接收。这两层中每秒可处理的网络包PPS即是最重要的性能指标，特别是64B小包的处理能力。</p><p>Linux 内核自带的高性能网络测试工具 pktgen</p><h5 id="tcp-udp性能测试"><a href="#tcp-udp性能测试" class="headerlink" title="tcp&#x2F;udp性能测试"></a>tcp&#x2F;udp性能测试</h5><p>iperf 和 netperf 都是最常用的网络性能测试工具</p><h5 id="http性能测试"><a href="#http性能测试" class="headerlink" title="http性能测试"></a>http性能测试</h5><p>要测试 HTTP 的性能，也有大量的工具可以使用，比如 ab、webbench 等，都是常用的 HTTP 压力测试工具。其中，ab 是 Apache 自带的 HTTP 压测工具，主要测试 HTTP 服务的每秒请求数、请求延迟、吞吐量以及请求延迟的分布情况等。</p><p>为了得到应用程序的实际性能，就要求性能工具本身可以模拟用户的请求负载，而 iperf、ab 这类工具就无能为力了。幸运的是，我们还可以用 wrk、TCPCopy、Jmeter 或者 LoadRunner 等实现这个目标。</p><blockquote><p>nslookup ip<br>time nslookup ip<br>ping -c3 <a href="http://www.baidu.com/">www.baidu.com</a><br>dnsmasq &#x2F;etc&#x2F;init.d&#x2F;dnsmasq start<br>dig +trace +nodnssec time.geekbang.org<br>strace</p></blockquote><p>域名劫持和规避<br>客户端：HTTPDNS</p><p>全局负载均衡（GSLB）</p><p>PTR 请求</p><p>tcpdump</p><p>iptable</p><p>traceroute<br>tracepath<br>nc</p><p>&#x2F;proc&#x2F;sys&#x2F;fs&#x2F;file-max</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://time.geekbang.org/column/article/81268">1. 极客时间-linux性能优化</a><br><a href="https://blog.csdn.net/lihao21/article/details/67631516">2. 水平触发和边缘触发</a><br><a href="https://blog.csdn.net/yolo_yyh/article/details/118367979">3. 陈硕-muduo网络库与服务模型介绍</a><br><a href="https://cloud.tencent.com/developer/article/1721171">4. linux版本查看</a><br><a href="https://plantegg.github.io/2019/01/09/nslookup-OK-but-ping-fail/">5. dns排障实例</a><br><a href="https://www.rfc-editor.org/rfc-index.html">6. rfc</a><br><a href="https://wiki.wireshark.org/TCP%204-times%20close">7. wireshark四次挥手案例</a><br><a href>8. 林沛满《Wireshark网络分析就这么简单》和《Wireshark网络分析的艺术》</a></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">  <h4 id="四层网络"><a href="#四层网络" class="headerlink" title="四层网络"></a>四层网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_4.png">  <h4 id="linux网络"><a href="#linux网络" class="headerlink" title="linux网络"></a>linux网络</h4><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_kernel.webp">  <h5 id="linux网络收发流程"><a href="#linux网络收发流程" class="headerlink" title="linux网络收发流程"></a>linux网络收发流程</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_send_receive.webp">  <h5 id="网络包的接收流程"><a href="#网络包的接收流程" class="headerlink" title="网络包的接收流程"></a>网络包的接收流程</h5><h5 id="网络包的发送流程"><a href="#网络包的发送流程" class="headerlink" title="网络包的发送流程"></a>网络包的发送流程</h5><h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><h4 id="水平触发与边缘触发"><a href="#水平触发与边缘触发" class="headerlink" title="水平触发与边缘触发"></a>水平触发与边缘触发</h4><p>水平触发(level-trggered)：<br>边缘触发(edge-triggered):</p><h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ol><li>带宽： 链路的最大传输速率，单位为b&#x2F;s。带宽和物理网卡的配置直接关联，实际带宽取决于整个网络链路中最小的一个。</li><li>时延: 网络请求发出后，一直到收到远端响应所需要的事件延迟。在不同场景下含义有所不同，比如连接建立的时间(TCP握手延时)或者一个数据包往返所需时间(rtt)</li><li>吞吐量：标识没有丢包时的最大数据传输速率，单位为b&#x2F;s。吞吐量受带宽限制。</li><li>PPS： 即packet per second的缩写，标识以网络包为单位的传输速率，通常用来评估网络的转发能力。在以linux服务器转发时，很容易受到网络包大小的影响。</li></ol><h4 id="网络性能测试"><a href="#网络性能测试" class="headerlink" title="网络性能测试"></a>网络性能测试</h4><p>linux网络基于TCP&#x2F;IP协议栈，而不同协议层的行为不同。在评估网络性能前，需要确定应用程序基于协议栈的哪一层：</p><ol><li>基于http或者https的web应用程序，属于应用层，需要测试http&#x2F;https的性能。</li><li>对于游戏服务器，为了支持更多在线人数，通常基于tcp&#x2F;udp与客户端交互，此时需要测试tcp&#x2F;udp的性能。</li><li>将linux作为软交换机或者路由器来使用，此时则更关注网络包的处理能力，特别是网络层的转发性能。</li></ol><blockquote><p>底层协议是其上各层网络协议的基础，底层的性能决定了高层的网络性能。</p></blockquote><h5 id="测试网络接口层和网络层的性能"><a href="#测试网络接口层和网络层的性能" class="headerlink" title="测试网络接口层和网络层的性能"></a>测试网络接口层和网络层的性能</h5><p>网络接口层和网络层主要负责网络包的封装、寻址、路由、发送以及接收。这两层中每秒可处理的网络包PPS即是最重要的性能指标，特别是64B小包的处理能力。</p><p>Linux 内核自带的高性能网络测试工具 <code>pktgen</code></p><h5 id="tcp-udp性能测试"><a href="#tcp-udp性能测试" class="headerlink" title="tcp&#x2F;udp性能测试"></a>tcp&#x2F;udp性能测试</h5><p><code>iperf</code> 和 <code>netperf</code> 都是最常用的网络性能测试工具</p><h5 id="http性能测试"><a href="#http性能测试" class="headerlink" title="http性能测试"></a>http性能测试</h5><p>要测试 HTTP 的性能，也有大量的工具可以使用，比如 ab、webbench 等，都是常用的 HTTP 压力测试工具。其中，ab 是 Apache 自带的 HTTP 压测工具，主要测试 HTTP 服务的每秒请求数、请求延迟、吞吐量以及请求延迟的分布情况等。</p><p>为了得到应用程序的实际性能，就要求性能工具本身可以模拟用户的请求负载，而 iperf、ab 这类工具就无能为力了。幸运的是，我们还可以用 wrk、TCPCopy、Jmeter 或者 LoadRunner 等实现这个目标。</p><h3 id="网络性能优化"><a href="#网络性能优化" class="headerlink" title="网络性能优化"></a>网络性能优化</h3><h4 id="确定优化目标"><a href="#确定优化目标" class="headerlink" title="确定优化目标"></a>确定优化目标</h4><p>参考TCP&#x2F;IP分层协议簇，确定各层的性能预期。<br>除了上述描述的，针对传输层TCP&#x2F;UDP，网络包的大小会影响吞吐量(BPS)、连接数、延迟等指标。</p><h4 id="选用网络性能工具"><a href="#选用网络性能工具" class="headerlink" title="选用网络性能工具"></a>选用网络性能工具</h4><h5 id="根据指标选用工具"><a href="#根据指标选用工具" class="headerlink" title="根据指标选用工具"></a>根据指标选用工具</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_opt_tool.png">  <h5 id="根据工具查询指标"><a href="#根据工具查询指标" class="headerlink" title="根据工具查询指标"></a>根据工具查询指标</h5><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_tool_opt.webp">  <h4 id="网络性能优化-1"><a href="#网络性能优化-1" class="headerlink" title="网络性能优化"></a>网络性能优化</h4><p>在获得网络基准测试报告后，通过相关性能工具，定位出网络性能瓶颈后，就可以进行优化了。<br>参考上述 LINUX系统下的网络协议栈和网络收发流程进行网络性能优化。<br>一般来说可以从： 应用程序，套接字、传输层、网络层和链路层等角度进行优化。</p><h5 id="应用程序优化"><a href="#应用程序优化" class="headerlink" title="应用程序优化"></a>应用程序优化</h5><p>应用程序通常是通过套接字接口进行网络操作。由于网络收发比较耗时，所以应用程序的优化，主要就是对网络IO和进程自身工作模型的优化。</p><ol><li>网络IO优化：<ul><li>使用epoll替代select和poll</li><li>使用异步io。 AIO允许应用程序同时发起很多IO操作，而不用等待操作完成，等到io完成后，系统会用<code>事件通知</code>的方式告知应用程序结果。不过AIO使用比较复杂，需要小心处理很多边缘情况。</li></ul></li><li>进程模型优化：<ul><li>主进程+ 多个worker子进程。 由主进程负责管理网络连接，子进程负责处理实际业务。</li><li>监听相同端口的多进程模型： 所有进程监听相同接口，并且开启<code>SO_REUSEPORT</code>选项，由内核负责，将请求负载均衡到这些监听进程中。</li></ul></li></ol><p>另外，应用层协议的优化也很重要，有如下常见的优化手段：</p><ol><li>使用长连接取代短连接，可以显著降低TCP建立连接的成本。在每秒请求次数较多时，效果明显。</li><li>使用内存等形式缓存不常变化的数据，可以降低网络IO次数，加快应用程序响应速度。</li><li>使用<code>protocol buffer</code>等序列化方式，压缩网络io的数据量，提高应用程序的吞吐。</li><li>使用<code>DNS预存、预取、HTTPDNS</code>等方式，减少DNS解析的延迟。</li></ol><h5 id="套接字优化"><a href="#套接字优化" class="headerlink" title="套接字优化"></a>套接字优化</h5><p>套接字可以屏蔽掉linux内核中不同协议的差异，为应用程序提供统一的访问接口。每个套接字都有一个读写缓冲区。</p><ul><li>读缓冲区： 缓存远端发来的数据，如果满就不能再接收新的数据。</li><li>写缓冲区：缓存要发出去的数据，如果满，应用程序的写操作就会被阻塞。<br>故而，为了提高网络吞吐量，通常需要调整这些缓冲区大小：</li></ul><ol><li>增大每个套接字的缓冲区大小： <code>net.core.optmem_max</code></li><li>增大套接字接收缓冲区大小： <code>net.core.rmem_max</code></li><li>增大套接字发送缓冲区大小： <code>net.core.wmem_max</code></li><li>增大TCP接收缓冲区大小:  <code>net.ipv4.tcp_rmem</code></li><li>增大TCP发送缓冲区大小:  <code>net.ipv4.tcp_wmem</code><br>除此之外，套接字的内核选项如下：</li></ol><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_socket_prm.webp">  <h5 id="传输层优化"><a href="#传输层优化" class="headerlink" title="传输层优化"></a>传输层优化</h5><p>实际上是指对两种协议的优化。</p><h6 id="TCP协议优化"><a href="#TCP协议优化" class="headerlink" title="TCP协议优化"></a>TCP协议优化</h6><p>流量控制：<br>慢启动：<br>拥塞控制：<br>延迟确认：<br>状态流图：如下图<br><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_tcp_opt.webp">  </p><ol><li>请求数比较大的场景下，大量处于<code>TIME_WAIT</code>状态的连接，会占用大量内存和端口资源，此时可以优化与<code>TIME_WAIT</code>转台相关的内核选项：</li></ol><ul><li>增大处于<code>TIME_WAIT</code>状态的连接数量<code>net.ipv4.tcp_max_tw_buckets</code>,并增大连接跟踪表的大小<code>net.netfilter.nf_conntrack_max</code>。</li><li>减小<code>net.ipv4.tcp_fin_timeout</code>和 <code>net.netfilter.nf_conntrack_tcp_timeout_time_wait</code>，让系统尽快释放所占用的资源。</li><li>开启端口复用<code>net.ipv4.tcp_tw_reuse</code>，这样被<code>TIME_WAIT</code>状态占用的端口，还能用到新建的连接中。</li><li>增大本地端口范围<code>net.ipv4.ip_local_port_range</code>，这样可以支持更多的连接，提高整体的并发能力。</li><li>增大文件描述符的数量：使用<code>fs.nr_open</code>和<code>fs.file_max</code>分别增大进程和系统的最大文件描述符；或者在应用程序的<code>systemd</code>配置文件中，配置<code>limitnofile</code>设置应用程序的最大文件描述符。</li></ul><ol start="2"><li>缓解<code>syn flood</code>利用<code>tcp</code>协议特点进行攻击而引发的性能问题，可以考虑优化与<code>syn</code>状态相关的内核选项：</li></ol><ul><li><p>增大<code>tcp</code>半连接的最大数量 <code>net.ipv4.tcp_max_syn_backlog</code>，或者开启<code>TCP SYN Cookies net.ipv4.tcp_syncookies</code>，来绕开半连接数量限制问题。[连着不可同时使用]</p></li><li><p>减少<code>SYN_RECV</code>状态连接重传<code>SYN+ACK</code>包的次数<code>net.ipv4.tcp_synack_retries</code>.</p></li></ul><ol start="3"><li>在长连接的场景中，通常使用<code>keepalive</code>检测tcp连接的状态，以便对端连接断开后可以自动回收。但是<code>keepalive</code>探测间隔和重试次数一般都无法满足应用程序的性能，此时需要优化与<code>keepalive</code>相关的内核选项：</li></ol><ul><li>缩短最后一次数据包到<code>keepalive</code>探测包之间的间隔时间<code>net.ipv4.tcp_keepalive_time</code>;</li><li>缩短发送<code>keepalive</code>探测包的间隔时间<code>net.ipv4.tcp_keepalive_intvl</code></li><li>减少<code>keepalive</code>探测失败后，一直到通知应用程序前的重试次数<code>net.ipv4.tcp_keepalive_probes</code>.</li></ul><img src="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_tcp_opt_core.webp"> <p>另外，如果使用不同的优化方法，可能会产生冲突。比如服务端使用<code>nagle</code>算法，客户端开启延时确认，就很容易导致网络延时增大。<br>对于<code>NAT</code>服务器而言，如果开启<code>net.ipv4.tcp_tw_recycle</code>就很容易导致各种连接失败，已于内核的4.1版本中删除。</p><h6 id="UDP协议优化"><a href="#UDP协议优化" class="headerlink" title="UDP协议优化"></a>UDP协议优化</h6><ol><li>增大套接字缓冲区大小和<code>UDP</code>缓冲区范围；</li><li>增大本地端口号范围；</li><li>根据<code>MTU</code>大小，调整<code>UDP</code>数据包的大小，减少或者避免分片。</li></ol><h5 id="网络层优化"><a href="#网络层优化" class="headerlink" title="网络层优化"></a>网络层优化</h5><p>网络层负责网络包的封装、寻址和路由，包括IP、ICMP协议。在网络层最主要的优化是对路由、<code>IP</code>分片以及<code>ICMP</code>等进行调优。</p><ol><li>从路由和转发的角度，可以调整如下内核选项：</li></ol><ul><li>在需要转发的服务器中，比如用作<code>nat网关</code>的服务器或者使用docker容器时，设置<code>net.ipv4.ip_forward=1</code>开启<code>IP转发</code>。</li><li>调整数据包的生存周期<code>TTL</code>，比如设置<code>net.ipv4.ip-default_ttl=64</code>.[增大该值会降低系统性能]</li><li>设置<code>net.ipv4.conf.eth0.rp_filter=1</code>开启数据包的反向地址校验，防止IP欺骗减少伪造IP带来的<code>DDOS</code>问题。</li></ul><ol start="2"><li>从分片的角度，调整<code>MTU</code>大小<br>以太网标准规定，一个网络帧最大为 1518B，那么去掉以太网头部的 18B 后，剩余的 1500 就是以太网 MTU 的大小。在使用<code>VXLAN、GRE</code>等叠加网络技术后，会使原来的网络包变大，使得MTU也需要调整。<br>以VXLAN为例，它在原来报文的基础上，增加了 14B 的以太网头部、 8B 的 VXLAN 头部、8B 的 UDP 头部以及 20B 的 IP 头部。换句话说，每个包比原来增大了 50B。<br>所以就需要交换机、路由器等的<code>MTU</code>增大到1550，或者把<code>VXLAN</code>封包前的<code>MTU</code>减小为1450。<br>当然，考虑到许多网络设备都支持<code>巨帧</code>，这种情况下，可以将<code>MTU</code>调大为9000，以提高网络吞吐量。</li><li>以ICMP角度出发，为了避免ICMP主机探测、ICMP flood等各种网络问题，可以通过内核选项，限制ICMP行为。</li></ol><ul><li>设置<code>net.ipv4.icmp_echo_ignore_all=1</code>禁用<code>ICMP</code>协议，外部主机就无法通过<code>ping</code>等使用<code>ICMP</code>协议的命令来探测主机。</li><li>设置<code>net.ipv4.icmp_echo_ignore_broadcasts=1</code>禁止广播<code>ICMP</code>.</li></ul><h5 id="链路层优化"><a href="#链路层优化" class="headerlink" title="链路层优化"></a>链路层优化</h5><p>链路层负责网络包在物理网络中的传输：<code>MAC寻址</code>、错误探测、通过网卡传输网络帧。</p><ol><li>由于网卡收包之后调用的中断处理程序(特别是软中断)，需要消耗大量的CPU，所以将这些中断处理程序调度到不同的CPU上执行，就可以显著提高网络吞吐量。</li></ol><ul><li>为网卡硬中断配置CPU亲和性(smp_affinity)，或者开启<code>irqbalance</code>。</li><li>开启<code>RPS (receive packet steering)</code> 和<code>RFS (receive flow steering)</code>将应用程序和软中断的处理，调度到相同的CPU上。这样就可以增加CPU命中率，减少网络延时。</li></ul><ol start="2"><li>原来内核中通过软件处理的功能可以卸载到网卡中，通过硬件执行：</li></ol><ul><li><code>TSO(TCP Segmentation Offload) | UFO (UDP Fragmentation Offload)</code>: 在<code>TCP/UDP</code>协议中直接发送大包，<code>TCP|UDP</code>包的分段|分片功能交由网卡完成。</li><li>GSO (Generic Segmentation Offload): 网卡不支持TSO|ufo时，将分片和分段操作延迟到进入网卡前再执行。</li><li>LRO（Large Receive Offload）：在接收 TCP 分段包时，由网卡将其组装合并后，再交给上层网络处理。不过要注意，在需要 IP 转发的情况下，不能开启 LRO，因为如果多个包的头部信息不一致，LRO 合并会导致网络包的校验错误。</li><li>GRO（Generic Receive Offload）：GRO 修复了 LRO 的缺陷，并且更为通用，同时支持 TCP 和 UDP。</li><li>RSS（Receive Side Scaling）：也称为多队列接收，它基于硬件的多个接收队列，来分配网络接收进程，这样可以让多个 CPU 来处理接收到的网络包。</li><li>VXLAN 卸载：也就是让网卡来完成 VXLAN 的组包功能。</li></ul><ol start="3"><li>网络接口本身</li></ol><ul><li>开启网络接口的多队列功能，每个队列可以用不同的中断号，调度到不同的CPU上执行。</li><li>增大网络接口的缓冲区和队列长度</li><li>使用<code>traffic control</code>工具，为不同的网络流量配置<code>QOS</code></li></ul><p>另外，在单机<code>10M</code>场景下，网络协议栈的冗长流程才是最主要的性能负担。这种场景下，可以使用两种方式进行优化。</p><ul><li>使用<code>DPDK</code>技术，跳过内核协议栈，直接由用户态进程用轮询的方式，处理网络请求。同时结合大页、cpu绑定、内存对齐、流水线并发等多种机制，优化网络包处理效率。</li><li>使用内核自带的<code>XDP</code>技术，在网络包进入内核协议前就对齐进行处理。<blockquote><p>nslookup ip<br>time nslookup ip<br>ping -c3 <a href="http://www.baidu.com/">www.baidu.com</a><br>dnsmasq &#x2F;etc&#x2F;init.d&#x2F;dnsmasq start<br>dig +trace +nodnssec time.geekbang.org<br>strace</p></blockquote></li></ul><p>域名劫持和规避<br>客户端：HTTPDNS</p><p>全局负载均衡（GSLB）</p><p>PTR 请求</p><p>tcpdump</p><p>iptable</p><p>traceroute<br>tracepath<br>nc</p><p>&#x2F;proc&#x2F;sys&#x2F;fs&#x2F;file-max</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://time.geekbang.org/column/article/81268">1. 极客时间-linux性能优化</a><br><a href="https://blog.csdn.net/lihao21/article/details/67631516">2. 水平触发和边缘触发</a><br><a href="https://blog.csdn.net/yolo_yyh/article/details/118367979">3. 陈硕-muduo网络库与服务模型介绍</a><br><a href="https://cloud.tencent.com/developer/article/1721171">4. linux版本查看</a><br><a href="https://plantegg.github.io/2019/01/09/nslookup-OK-but-ping-fail/">5. dns排障实例</a><br><a href="https://www.rfc-editor.org/rfc-index.html">6. rfc</a><br><a href="https://wiki.wireshark.org/TCP%204-times%20close">7. wireshark四次挥手案例</a><br><a href>8. 林沛满《Wireshark网络分析就这么简单》和《Wireshark网络分析的艺术》</a></p>]]></content>
     
     
       
@@ -460,49 +505,6 @@
     <category term="redis" scheme="https://mqrayblog.cn/tags/redis/"/>
     
     <category term="源码阅读" scheme="https://mqrayblog.cn/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>github + hexo建站[待补充]</title>
-    <link href="https://mqrayblog.cn/2023/07/15/%E5%BB%BA%E7%AB%99/"/>
-    <id>https://mqrayblog.cn/2023/07/15/%E5%BB%BA%E7%AB%99/</id>
-    <published>2023-07-15T05:32:21.739Z</published>
-    <updated>2023-09-20T11:17:25.837Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p><h4 id="排障"><a href="#排障" class="headerlink" title="排障"></a>排障</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INFO  Deleted database.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: EBUSY: resource busy or locked, rmdir &#x27;D:\blog\public&#x27;</span><br></pre></td></tr></table></figure><p>说来可笑，重启解决</p><h4 id="图片挂载"><a href="#图片挂载" class="headerlink" title="图片挂载"></a>图片挂载</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/7ym0n/hexo-asset-image --save </span><br></pre></td></tr></table></figure><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.suyuanblog.xyz/2021/10/14/%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA/">1. 预部署文件渲染失败解决方案</a><br><a href="https://butterfly.js.org/posts/4aa8abbe/#%E4%BB%A3%E7%A2%BC%E9%AB%98%E5%BA%A6%E9%99%90%E5%88%B6">2. hexo butteryfly设置</a><br><a href="https://segmentfault.com/a/1190000042183952">3. 配置友链</a><br><a href="https://blog.csdn.net/qq_33384402/article/details/107200465">4. 接入博客</a><br><a href="https://blog.csdn.net/weixin_45649612/article/details/122777623">5. gitalk 未找到相关的Issues进行评论解决方法</a>  </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>随笔</title>
-    <link href="https://mqrayblog.cn/2023/07/05/%E9%9A%8F%E7%AC%94/"/>
-    <id>https://mqrayblog.cn/2023/07/05/%E9%9A%8F%E7%AC%94/</id>
-    <published>2023-07-05T11:00:13.000Z</published>
-    <updated>2023-09-05T12:21:29.496Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="阿里巴巴java开发手册阅读"><a href="#阿里巴巴java开发手册阅读" class="headerlink" title="阿里巴巴java开发手册阅读"></a>阿里巴巴java开发手册阅读</h4><blockquote><p>很多编程方式客观上没有对错之分，一致性很重要，可读性很重要，团队沟通效率很重要。有一个理论叫帕金森琐碎定律: 一个组织中的成员往往会把过多的精力花费在一些琐碎的争论上。</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;阿里巴巴java开发手册阅读&quot;&gt;&lt;a href=&quot;#阿里巴巴java开发手册阅读&quot; class=&quot;headerlink&quot; title=&quot;阿里巴巴java开发手册阅读&quot;&gt;&lt;/a&gt;阿里巴巴java开发手册阅读&lt;/h4&gt;&lt;blockquote&gt;
-&lt;p&gt;很多编程方式客观上</summary>
-      
-    
-    
-    
-    
-    <category term="sth" scheme="https://mqrayblog.cn/tags/sth/"/>
     
   </entry>
   
