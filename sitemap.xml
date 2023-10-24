@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://mqrayblog.cn/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/</loc>
-    
-    <lastmod>2023-10-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://mqrayblog.cn/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/</loc>
     
     <lastmod>2023-10-24</lastmod>
@@ -65,7 +56,16 @@
   </url>
   
   <url>
-    <loc>https://mqrayblog.cn/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/</loc>
+    <loc>https://mqrayblog.cn/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mqrayblog.cn/2023/07/19/redis%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2023-10-24</lastmod>
     
@@ -110,34 +110,7 @@
   </url>
   
   <url>
-    <loc>https://mqrayblog.cn/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
-    
-    <lastmod>2023-10-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</loc>
-    
-    <lastmod>2023-10-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://mqrayblog.cn/2023/07/19/redis%E5%9F%BA%E7%A1%80/</loc>
-    
-    <lastmod>2023-10-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://mqrayblog.cn/2023/07/31/redis%E4%B9%8B%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</loc>
     
     <lastmod>2023-10-24</lastmod>
     
@@ -174,6 +147,24 @@
   
   <url>
     <loc>https://mqrayblog.cn/2023/08/05/redis%E4%B9%8B%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mqrayblog.cn/2023/07/24/redis%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mqrayblog.cn/2023/07/31/redis%E4%B9%8B%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8/</loc>
     
     <lastmod>2023-10-24</lastmod>
     
