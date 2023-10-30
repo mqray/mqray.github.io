@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mqray's blog | mqray's blog</title><meta name="author" content="mqray"><meta name="copyright" content="mqray"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是ioc?IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。 123456789class A &amp;#123;&amp;#125;class B &amp;#123;    &#x2F;&#x2F; B需要将A的实例new出来，也就是我们说的控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mqray&#39;s blog">
+<meta property="og:url" content="https://mqrayblog.cn/2023/10/31/spring%E4%B9%8Bioc/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="什么是ioc?IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。 123456789class A &amp;#123;&amp;#125;class B &amp;#123;    &#x2F;&#x2F; B需要将A的实例new出来，也就是我们说的控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mqrayblog.cn/img/avatar.png">
+<meta property="article:published_time" content="2023-10-30T17:18:43.157Z">
+<meta property="article:modified_time" content="2023-10-30T17:18:43.157Z">
+<meta property="article:author" content="mqray">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mqrayblog.cn/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://mqrayblog.cn/2023/10/31/spring%E4%B9%8Bioc/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: mqray","link":"链接: ","source":"来源: mqray's blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mqray\'s blog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-31 01:18:43'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 编程</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/java/"><span> java</span></a></li><li><a class="site-page child" href="/tags/go/"><span> go</span></a></li><li><a class="site-page child" href="/tags/python/"><span> python</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/databases"><span> 数据库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/middleware"><span> 中间件</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw native cloud"></i><span> 云原生</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/docker/"><span> docker</span></a></li><li><a class="site-page child" href="/tags/k8s/"><span> k8s</span></a></li><li><a class="site-page child" href="/tags/linux/"><span> linux</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw source"></i><span> 源码阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/redis/"><span> redis</span></a></li><li><a class="site-page child" href="/tags/kafka/"><span> kafka</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw more"></i><span> 更多</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/sth"><span> 随笔</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="mqray's blog"><span class="site-name">mqray's blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 编程</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/java/"><span> java</span></a></li><li><a class="site-page child" href="/tags/go/"><span> go</span></a></li><li><a class="site-page child" href="/tags/python/"><span> python</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/categories/databases"><span> 数据库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/middleware"><span> 中间件</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw native cloud"></i><span> 云原生</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/docker/"><span> docker</span></a></li><li><a class="site-page child" href="/tags/k8s/"><span> k8s</span></a></li><li><a class="site-page child" href="/tags/linux/"><span> linux</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw source"></i><span> 源码阅读</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/redis/"><span> redis</span></a></li><li><a class="site-page child" href="/tags/kafka/"><span> kafka</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw more"></i><span> 更多</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/sth"><span> 随笔</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-30T17:18:43.157Z" title="发表于 2023-10-31 01:18:43">2023-10-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-30T17:18:43.157Z" title="更新于 2023-10-31 01:18:43">2023-10-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h4 id="什么是ioc"><a href="#什么是ioc" class="headerlink" title="什么是ioc?"></a>什么是ioc?</h4><p>IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="comment">// B需要将A的实例new出来，也就是我们说的控制</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(a);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A自行控制将自己作为bean注入ioc容器中</span></span><br><span class="line"><span class="meta">@conponent</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="comment">// B根据需要从ioc容器中注入A, B 能注入A 的前提是A将自己暴露出去了</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> A a;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个例子中，例子一中，类B中想使用A new一个对象即可，而例子二中，类B中想使用A需要A将自己作为bean提前注入IOC容器中，以此实现控制反转。</p>
+<h5 id="ioc的优点"><a href="#ioc的优点" class="headerlink" title="ioc的优点"></a>ioc的优点</h5><ol>
+<li>使用者并不关心引入bean的实现，无需关注该bean的构造器参数等。</li>
+<li>多个使用者不需要重复创建bean。</li>
+<li>使用者无需感知bean的修改。</li>
+</ol>
+<h5 id="spring-的-ioc"><a href="#spring-的-ioc" class="headerlink" title="spring 的 ioc"></a>spring 的 ioc</h5><p>spring的ioc，是ioc思想的一种实现方式。在容器启动的时候，会依据每个bean的定义将bean注入到spring容器中。如果bean之间有依赖关系，则会将依赖的bean先注入。如果依赖的bean已注入，泽直接从容器中获取使用。</p>
+<h4 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP?"></a>什么是AOP?</h4><p>AOP(Aspect-Oriented Programming)，即⾯向切⾯编程，即把公共的逻辑抽出来，<br>让开发者可以更专注于业务逻辑开发。</p>
+<h3 id="spring-如何处理循环引用问题"><a href="#spring-如何处理循环引用问题" class="headerlink" title="spring 如何处理循环引用问题"></a>spring 如何处理循环引用问题</h3><p>在Spring框架中，循环依赖是指两个或多个bean之间相互依赖，形成了⼀个循环引⽤的情况。如<br>果不加以处理，这种情况会导致应⽤程序启动失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ServiceA&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ServiceB serviceB;</span><br><span class="line">&#125;</span><br><span class="line">@Service</span><br><span class="line">public class ServiceB&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ServiceA serviceA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么是三级缓存？"><a href="#什么是三级缓存？" class="headerlink" title="什么是三级缓存？"></a>什么是三级缓存？</h4><p>在Spring的<code>BeanFactory</code>体系中，<code>BeanFactory</code>是<code>Spring IoC</code>容器的基础接⼝,<code>DefaultSingletonBeanRegistry</code>类实现了<br><code>BeanFactory</code>接⼝，并且维护了三级缓存:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="comment">// 缓存从bean name 到 单例bean实例</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Cache of singleton factories: bean name to ObjectFactory. */</span></span><br><span class="line"><span class="comment">// 缓存 bean name到 bean 单例工厂</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Cache of early singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="comment">// 缓存 bean 名称到 ealy单例实例</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<p>其中，</p>
+<ul>
+<li><code>singletonObjects</code>是一级缓存，缓存完整创建好的单例bean对象；在创建bean对象时，会尝试从<code>singletonObjects</code>中获取该bean实例，如果能获取到，则直接返回该实例；否则继续创建该实例。</li>
+<li><code>earlySingletonObjects</code>是二级缓存，存储的是尚未完全创建好的单例bean对象；在创建单例bean时，如果发现该bean存在循环依赖，则会先创建bean的 半成品 对象，并将它存储到<code>earlySingletonObjects</code>中。当循环依赖的bean创建完成后，spring会将完整的bean实例存储到<code>singletonObjects</code>中，并将<code>earlySingletonObjects</code>中存储的代理对象替换为完整的bean实例对象。以防止在单例bean的创建过程中出现循环依赖问题。</li>
+<li><code>singletonFactories</code>是三级缓存，存储的是单例bean的创建工厂。当一个单例bean被创建时，spring会先将该bean的创建工厂存储到<code>singletonFactories</code>中，在执行创建工厂的<code>getobject()</code>方法，生成该bean的实例对象，在该bean被其他bean引用时，spring会从<code>singletonFactories</code>中获取该bean的创建工厂，创建出该bean的实例对象，并将该bean的实例对象存储到<code>singletonFactories</code>中。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Nullable</span></span><br><span class="line">	<span class="keyword">public</span> Object <span class="title function_">getSingleton</span><span class="params">(String beanName)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> getSingleton(beanName, <span class="literal">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Return the (raw) singleton object registered under the given name.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;Checks already instantiated singletons and also allows for an early</span></span><br><span class="line"><span class="comment">	 * reference to a currently created singleton (resolving a circular reference).</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> beanName the name of the bean to look for</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> allowEarlyReference whether early references should be created or not</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the registered singleton object, or &#123;<span class="doctag">@code</span> null&#125; if none found</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Nullable</span></span><br><span class="line">	<span class="keyword">protected</span> Object <span class="title function_">getSingleton</span><span class="params">(String beanName, <span class="type">boolean</span> allowEarlyReference)</span> &#123;</span><br><span class="line">		<span class="type">Object</span> <span class="variable">singletonObject</span> <span class="operator">=</span> <span class="built_in">this</span>.singletonObjects.get(beanName);</span><br><span class="line">		<span class="keyword">if</span> (singletonObject == <span class="literal">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (<span class="built_in">this</span>.singletonObjects) &#123;</span><br><span class="line">				singletonObject = <span class="built_in">this</span>.earlySingletonObjects.get(beanName);</span><br><span class="line">				<span class="keyword">if</span> (singletonObject == <span class="literal">null</span> &amp;&amp; allowEarlyReference) &#123;</span><br><span class="line">					ObjectFactory&lt;?&gt; singletonFactory = <span class="built_in">this</span>.singletonFactories.get(beanName);</span><br><span class="line">					<span class="keyword">if</span> (singletonFactory != <span class="literal">null</span>) &#123;</span><br><span class="line">						singletonObject = singletonFactory.getObject();</span><br><span class="line">						<span class="built_in">this</span>.earlySingletonObjects.put(beanName, singletonObject);</span><br><span class="line">						<span class="built_in">this</span>.singletonFactories.remove(beanName);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> singletonObject;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>spring解决循环引用的方式就是引入了三级缓存。<br>但是要注意的是，spring解决三级缓存是有条件的</p>
+<ol>
+<li>相互依赖的bean必须是单例的</li>
+<li>依赖注入的方式不能都是构造函数注入的</li>
+</ol>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="">1. </a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="mqray">mqray</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mqrayblog.cn/2023/10/31/spring%E4%B9%8Bioc/">https://mqrayblog.cn/2023/10/31/spring之ioc/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mqrayblog.cn" target="_blank">mqray's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/31/%E5%BB%BA%E7%AB%99/" title="github + hexo建站[待补充]"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">github + hexo建站[待补充]</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">mqray</div><div class="author-info__description">明日复明日，明日何其多？</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mqray"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFioc"><span class="toc-number">1.</span> <span class="toc-text">什么是ioc?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ioc%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">ioc的优点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#spring-%E7%9A%84-ioc"><span class="toc-number">1.2.</span> <span class="toc-text">spring 的 ioc</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAOP"><span class="toc-number">2.</span> <span class="toc-text">什么是AOP?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#spring-%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">spring 如何处理循环引用问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是三级缓存？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">引用</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/31/spring%E4%B9%8Bioc/" title="无题">无题</a><time datetime="2023-10-30T17:18:43.157Z" title="发表于 2023-10-31 01:18:43">2023-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/31/%E5%BB%BA%E7%AB%99/" title="github + hexo建站[待补充]">github + hexo建站[待补充]</a><time datetime="2023-10-30T17:18:43.157Z" title="发表于 2023-10-31 01:18:43">2023-10-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/" title="springboot源码之启动流程3">springboot源码之启动流程3</a><time datetime="2023-10-17T00:54:15.000Z" title="发表于 2023-10-17 08:54:15">2023-10-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/" title="springboot源码之启动流程2">springboot源码之启动流程2</a><time datetime="2023-10-12T00:12:15.000Z" title="发表于 2023-10-12 08:12:15">2023-10-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/" title="springboot源码之启动流程1">springboot源码之启动流程1</a><time datetime="2023-10-10T08:05:35.000Z" title="发表于 2023-10-10 16:05:35">2023-10-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2023 By mqray</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">mqray's website</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const initGitalk = () => {
+    const gitalk = new Gitalk(Object.assign({
+      clientID: '8ecec252629429565e5d',
+      clientSecret: 'c0e21bd6dccb5470afcdcf519eb3aea73988a427',
+      repo: 'mqray.github.io',
+      owner: 'mqray',
+      admin: ['mqray'],
+      id: 'c5ca2191dd0479b4aaeaa12713bcc9de',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  const loadGitalk = async() => {
+    if (typeof Gitalk === 'function') initGitalk()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js')
+      initGitalk()
+    }
+  }
+  
+  const commentCount = n => {
+    const isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+    if (isCommentCount) {
+      isCommentCount.textContent= n
+    }
+  }
+
+  if ('Gitalk' === 'Gitalk' || !false) {
+    if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+    else loadGitalk()
+  } else {
+    window.loadOtherComment = loadGitalk
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
