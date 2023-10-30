@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>redis之集群模式 | mqray&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="redis 集群模式redis集群是redis提供的分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。 redis集群的优点 高可用： 节点故障时，能自动进行故障转移，保证服务的持续可用。 负载均衡： 工作负载能够被分发到不同的节点上，有效分摊单节点访问压力。 容灾恢复：通过主从复制、哨兵机制，节点故障时能够快速进行故障恢复 数据分片： 集群模式下，可以由多个主节点执行写入操">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis之集群模式">
+<meta property="og:url" content="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="redis 集群模式redis集群是redis提供的分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。 redis集群的优点 高可用： 节点故障时，能自动进行故障转移，保证服务的持续可用。 负载均衡： 工作负载能够被分发到不同的节点上，有效分摊单节点访问压力。 容灾恢复：通过主从复制、哨兵机制，节点故障时能够快速进行故障恢复 数据分片： 集群模式下，可以由多个主节点执行写入操">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_meet.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_sharding.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_fialover.png">
+<meta property="article:published_time" content="2023-08-28T09:44:38.000Z">
+<meta property="article:modified_time" content="2023-10-30T16:15:39.967Z">
+<meta property="article:author" content="mqray">
+<meta property="article:tag" content="redis">
+<meta property="article:tag" content="源码阅读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/redis_cluster_meet.png">
+  
+    <link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mqray&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mqrayblog.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-redis之集群模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-28T09:44:38.000Z" itemprop="datePublished">2023-08-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/databases/">databases</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      redis之集群模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="redis-集群模式"><a href="#redis-集群模式" class="headerlink" title="redis 集群模式"></a>redis 集群模式</h2><p>redis集群是redis提供的分布式数据库方案，集群通过分片来进行数据共享，并提供复制和故障转移功能。</p>
+<h3 id="redis集群的优点"><a href="#redis集群的优点" class="headerlink" title="redis集群的优点"></a>redis集群的优点</h3><ol>
+<li>高可用： 节点故障时，能自动进行故障转移，保证服务的持续可用。</li>
+<li>负载均衡： 工作负载能够被分发到不同的节点上，有效分摊单节点访问压力。</li>
+<li>容灾恢复：通过主从复制、哨兵机制，节点故障时能够快速进行故障恢复</li>
+<li>数据分片： 集群模式下，可以由多个主节点执行写入操作</li>
+<li>易于扩展：可以根据业务需求和系统负载，动态的添加或减少节点，实现水平扩展。</li>
+</ol>
+<h2 id="集群的实现原理"><a href="#集群的实现原理" class="headerlink" title="集群的实现原理"></a>集群的实现原理</h2><p>一个redis集群通常由多个节点组成。在集群建立前，每个节点都是相互独立的，都处于一个只包含自己的集群中。在组件集群时，需要将每个独立的节点连接起来，构成一个包含多个节点的集群。</p>
+<h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><p>一个节点就是一个运行在集群模式下的redis服务器，服务器在启动时回一句<code>cluster-enabled</code>配置来决定是否开启服务器的集群模式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./src/redis-server --cluster-enabled <span class="built_in">yes</span> <span class="comment"># 开启集群模式</span></span><br></pre></td></tr></table></figure>
+
+<p>运行在集群模式下的服务器，会继续使用所有在单机模式中使用的服务器组件。例如：</p>
+<ol>
+<li>使用文件事件处理器来处理命令请求和返回命令回复。</li>
+<li>使用时间事件处理器执行<code>serverCron</code>函数，在集群模式下继续调用<code>clusterCron</code>函数执行集群模式下的常规操作。</li>
+<li>继续使用数据库保存键值对数据。</li>
+<li>继续使用<code>rdb</code>和<code>aof</code>进行持久化。</li>
+<li>继续使用发布订阅机制执行<code>publish、subscribe</code>命令。</li>
+<li>继续使用复制模块进行节点的复制工作。</li>
+<li>使用<code>lua</code>脚本环境来执行客户端输入的<code>lua</code>脚本。</li>
+</ol>
+<h3 id="集群创建"><a href="#集群创建" class="headerlink" title="集群创建"></a>集群创建</h3><p>在节点<code>A</code>上执行<code>cluster meet ip port</code>，其中<code>ip|port</code>指向节点<code>B</code>，可以让节点<code>A</code>向节点<code>B</code>进行握手，当握手成功时，节点<code>A</code>就会将<code>B</code>节点添加到<code>A</code>节点所在的集群中。</p>
+<p>假设目前有<code>A|B|C</code>三个节点，分别对应<code>&lt;ip_a|port_a&gt;、&lt;ip_b|port_b&gt;、&lt;ip_c|port_c&gt;</code>，在未组建集群前，可以理解为三个集群。如果此时需要将三个节点组成一个集群，则需要执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip_a:port_a&gt;cluster meet ip_b port_b #将b节点加入到a节点所在集群中</span><br><span class="line">ip_a:port_a&gt;cluster meet ip_c port_c #将c节点加入到a节点所在集群中</span><br></pre></td></tr></table></figure>
+
+<p>在客户端中，可以通过<code>cluster nodes</code>获取当前集群的节点信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.167.98.52:6379&gt; cluster nodes</span><br><span class="line">c87ec22247436ee75969a2a524a82cec4d0be9c6 192.167.240.46:6379@16379 master - 0 1693237335871 2 connected 5461-10922</span><br><span class="line">a1520d54c3f1093ba701283cc2a61405776168f2 192.167.98.52:6379@16379 myself,master - 0 1693237334000 3 connected 10923-16383</span><br><span class="line">1e50e943a3ebf1fc955922fff55df6d372861f4b 192.167.76.255:6379@16379 master - 0 1693237334863 1 connected 0-5460</span><br></pre></td></tr></table></figure>
+
+<h4 id="集群数据结构"><a href="#集群数据结构" class="headerlink" title="集群数据结构"></a>集群数据结构</h4><h5 id="clusterNode"><a href="#clusterNode" class="headerlink" title="clusterNode"></a>clusterNode</h5><p>每一个节点都会使用一个<code>clusterNode</code>结构记录自身状态，并为集群中的其他节点创建一个相应的<code>clusterNode</code>结构，以此记录其他节点的状态。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> &#123;</span></span><br><span class="line">    <span class="type">mstime_t</span> ctime; <span class="comment">// 节点创建时间</span></span><br><span class="line">    <span class="type">char</span> name[CLUSTER_NAMELEN]; <span class="comment">// 节点名称</span></span><br><span class="line">    <span class="type">char</span> shard_id[CLUSTER_NAMELEN]; <span class="comment">// 分片id</span></span><br><span class="line">    <span class="type">int</span> flags;      <span class="comment">// 节点标识</span></span><br><span class="line">    <span class="type">uint64_t</span> configEpoch; <span class="comment">// 配置纪元</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> slots[CLUSTER_SLOTS/<span class="number">8</span>]; <span class="comment">// 当前节点负责哈希槽</span></span><br><span class="line">    <span class="type">uint16_t</span> *slot_info_pairs; <span class="comment">/* Slots info represented as (start/end) pair (consecutive index). */</span></span><br><span class="line">    <span class="type">int</span> slot_info_pairs_count; <span class="comment">/* Used number of slots in slot_info_pairs */</span></span><br><span class="line">    <span class="type">int</span> numslots;   <span class="comment">// 当前节点负责处理的槽位数量</span></span><br><span class="line">    <span class="type">int</span> numslaves;  <span class="comment">// 如果当前节点是主节点，记录其从节点数量</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> **<span class="title">slaves</span>;</span> <span class="comment">// 指向 从节点 的指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> *<span class="title">slaveof</span>;</span> <span class="comment">// 如果当前节点是从节点，则指向其主节点</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> last_in_ping_gossip; <span class="comment">/* The number of the last carried in the ping gossip section */</span></span><br><span class="line">    <span class="type">mstime_t</span> ping_sent;      <span class="comment">// 此节点上次发送 ping 消息的时间</span></span><br><span class="line">    <span class="type">mstime_t</span> pong_received;  <span class="comment">// 上次收到 pong 消息的时间</span></span><br><span class="line">    <span class="type">mstime_t</span> data_received;  <span class="comment">/* Unix time we received any data */</span></span><br><span class="line">    <span class="type">mstime_t</span> fail_time;      <span class="comment">// 上次 fail 的时间</span></span><br><span class="line">    <span class="type">mstime_t</span> voted_time;     <span class="comment">/* Last time we voted for a slave of this master */</span></span><br><span class="line">    <span class="type">mstime_t</span> repl_offset_time;  <span class="comment">// 上次 接收到 offset 的时间</span></span><br><span class="line">    <span class="type">mstime_t</span> orphaned_time;     <span class="comment">/* Starting time of orphaned master condition */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> repl_offset;      <span class="comment">// 上次接收到的 offset 值</span></span><br><span class="line">    <span class="type">char</span> ip[NET_IP_STR_LEN];    <span class="comment">// 节点上次使用的 ip</span></span><br><span class="line">    sds hostname;               <span class="comment">// hostname</span></span><br><span class="line">    sds human_nodename;         <span class="comment">/* The known human readable nodename for this node */</span></span><br><span class="line">    <span class="type">int</span> tcp_port;               <span class="comment">// 客户端tcp端口</span></span><br><span class="line">    <span class="type">int</span> tls_port;               <span class="comment">// 客户端 tls 使用的端口</span></span><br><span class="line">    <span class="type">int</span> cport;                  <span class="comment">// 节点暴露的端口</span></span><br><span class="line">    clusterLink *link;          <span class="comment">// 连接节点所需要的信息，比如套接字描述符、输入输出缓冲区</span></span><br><span class="line">    clusterLink *inbound_link;  <span class="comment">/* TCP/IP link accepted from this node */</span></span><br><span class="line">    <span class="built_in">list</span> *fail_reports;         <span class="comment">// 记录其他节点的下线报告</span></span><br><span class="line">&#125; clusterNode;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="clusterNodeFailReport"><a href="#clusterNodeFailReport" class="headerlink" title="clusterNodeFailReport"></a>clusterNodeFailReport</h5><p>用于记录与当前节点握手过的其他节点的下线报告。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterNodeFailReport</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> *<span class="title">node</span>;</span>  <span class="comment">/* Node reporting the failure condition. */</span></span><br><span class="line">    <span class="type">mstime_t</span> time;             <span class="comment">/* Time of the last report from this node. */</span></span><br><span class="line">&#125; clusterNodeFailReport;</span><br></pre></td></tr></table></figure>
+
+<h5 id="clusterState"><a href="#clusterState" class="headerlink" title="clusterState"></a>clusterState</h5><p><code>clusterState</code>结构则记录了在当前节点视角下，集群目前所处的状态。如，集群状态、集群节点数量、分片</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterState</span> &#123;</span></span><br><span class="line">    clusterNode *myself;  <span class="comment">// 当前节点</span></span><br><span class="line">    <span class="type">uint64_t</span> currentEpoch;</span><br><span class="line">    <span class="type">int</span> state;            <span class="comment">// 集群状态</span></span><br><span class="line">    <span class="type">int</span> size;             <span class="comment">// 主节点数量</span></span><br><span class="line">    dict *nodes;          <span class="comment">// 记录 name -&gt; clusterNode的哈希表</span></span><br><span class="line">    dict *shards;         <span class="comment">// 记录 shard_id -&gt; list(nodes) 的哈希表</span></span><br><span class="line">    dict *nodes_black_list; <span class="comment">/* Nodes we don&#x27;t re-add for a few seconds. */</span></span><br><span class="line">    clusterNode *migrating_slots_to[CLUSTER_SLOTS];</span><br><span class="line">    clusterNode *importing_slots_from[CLUSTER_SLOTS];</span><br><span class="line">    clusterNode *slots[CLUSTER_SLOTS];</span><br><span class="line">    rax *slots_to_channels;</span><br><span class="line">    <span class="comment">/* The following fields are used to take the slave state on elections. */</span></span><br><span class="line">    <span class="type">mstime_t</span> failover_auth_time; <span class="comment">/* Time of previous or next election. */</span></span><br><span class="line">    <span class="type">int</span> failover_auth_count;    <span class="comment">/* Number of votes received so far. */</span></span><br><span class="line">    <span class="type">int</span> failover_auth_sent;     <span class="comment">/* True if we already asked for votes. */</span></span><br><span class="line">    <span class="type">int</span> failover_auth_rank;     <span class="comment">/* This slave rank for current auth request. */</span></span><br><span class="line">    <span class="type">uint64_t</span> failover_auth_epoch; <span class="comment">/* Epoch of the current election. */</span></span><br><span class="line">    <span class="type">int</span> cant_failover_reason;   <span class="comment">/* Why a slave is currently not able to</span></span><br><span class="line"><span class="comment">                                   failover. See the CANT_FAILOVER_* macros. */</span></span><br><span class="line">    <span class="comment">/* Manual failover state in common. */</span></span><br><span class="line">    <span class="type">mstime_t</span> mf_end;            <span class="comment">/* Manual failover time limit (ms unixtime).</span></span><br><span class="line"><span class="comment">                                   It is zero if there is no MF in progress. */</span></span><br><span class="line">    <span class="comment">/* Manual failover state of master. */</span></span><br><span class="line">    clusterNode *mf_slave;      <span class="comment">/* Slave performing the manual failover. */</span></span><br><span class="line">    <span class="comment">/* Manual failover state of slave. */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mf_master_offset; <span class="comment">/* Master offset the slave needs to start MF</span></span><br><span class="line"><span class="comment">                                   or -1 if still not received. */</span></span><br><span class="line">    <span class="type">int</span> mf_can_start;           <span class="comment">/* If non-zero signal that the manual failover</span></span><br><span class="line"><span class="comment">                                   can start requesting masters vote. */</span></span><br><span class="line">    <span class="comment">/* The following fields are used by masters to take state on elections. */</span></span><br><span class="line">    <span class="type">uint64_t</span> lastVoteEpoch;     <span class="comment">/* Epoch of the last vote granted. */</span></span><br><span class="line">    <span class="type">int</span> todo_before_sleep; <span class="comment">/* Things to do in clusterBeforeSleep(). */</span></span><br><span class="line">    <span class="comment">/* Stats */</span></span><br><span class="line">    <span class="comment">/* Messages received and sent by type. */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> stats_bus_messages_sent[CLUSTERMSG_TYPE_COUNT];</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> stats_bus_messages_received[CLUSTERMSG_TYPE_COUNT];</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> stats_pfail_nodes;    <span class="comment">/* Number of nodes in PFAIL status,</span></span><br><span class="line"><span class="comment">                                       excluding nodes without address. */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> stat_cluster_links_buffer_limit_exceeded;  <span class="comment">/* Total number of cluster links freed due to exceeding buffer limit */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Bit map for slots that are no longer claimed by the owner in cluster PING</span></span><br><span class="line"><span class="comment">     * messages. During slot migration, the owner will stop claiming the slot after</span></span><br><span class="line"><span class="comment">     * the ownership transfer. Set the bit corresponding to the slot when a node</span></span><br><span class="line"><span class="comment">     * stops claiming the slot. This prevents spreading incorrect information (that</span></span><br><span class="line"><span class="comment">     * source still owns the slot) using UPDATE messages. */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> owner_not_claiming_slot[CLUSTER_SLOTS / <span class="number">8</span>];</span><br><span class="line">&#125; clusterState;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="cluster-meet-命令执行过程"><a href="#cluster-meet-命令执行过程" class="headerlink" title="cluster meet 命令执行过程"></a>cluster meet 命令执行过程</h4><p>通过向节点<code>A</code>发送<code>cluster meet &lt;ip_b&gt; &lt;port_b&gt;</code>，可以将节点<code>B</code>纳入到节点<code>A</code>所在的集群中。<br>节点<code>A</code>收到命令后，将与节点<code>B</code>进行握手以确定彼此存在，并继续执行如下操作：</p>
+<ol>
+<li>节点<code>A</code>为节点<code>B</code>创建一个<code>clusterNode</code>结构，并将该结构保存至自己的<code>clusterState.nodes</code>字典中。</li>
+<li>节点<code>A</code>依据<code>cluster meet &lt;ip_b&gt; &lt;port_b&gt;</code>命令中的IP地址和端口号向节点<code>B</code>发送一条<code>MEET消息</code>。(后续会介绍消息格式)</li>
+<li>如果一切顺利，节点<code>B</code>接收到节点<code>A</code>发送的<code>meet</code>消息，节点<code>B</code>会为节点<code>A</code>创建一个<code>clusterNode</code>结构，并将此结构添加到自己的<code>clusterState.nodes</code>字典中。</li>
+<li>节点<code>B</code>向节点<code>A</code>发送<code>PONG</code>消息。</li>
+<li>如果节点<code>A</code>收到节点<code>B</code>发送的<code>PONG</code>消息，则节点<code>A</code>可获悉节点<code>B</code>已经收到自己发送的<code>meet</code>消息。</li>
+<li>节点<code>A</code>向节点<code>B</code>返回一条<code>PING</code>命令。</li>
+<li>如果顺利，节点<code>B</code>收到节点<code>A</code>返回的<code>PING</code>消息，以此获悉节点<code>A</code>已经成功接收到节点<code>B</code>返回的<code>PONG</code>消息。此时，握手完成。<br>节点<code>A|B</code>集群组建过程的时序图如下：<img src="./redis之集群模式/redis_cluster_meet.png"></li>
+</ol>
+<h3 id="槽分派"><a href="#槽分派" class="headerlink" title="槽分派"></a>槽分派</h3><p>redis集群通过<code>分片</code>的方式来保存数据库中的键值对，集群的整个数据库被分为<code>16384</code>个槽位，数据库中的每个键都属于这些槽中的一个，集群中的每个节点可以处理0个或者<code>16384</code>个槽位。</p>
+<p>当数据库中的<code>16384</code>个槽位都有节点在处理时，集群属于上线状态；否则，集群属于下线状态。</p>
+<p>集群创建完毕后，可以使用如下命令将槽分配给节点a：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip_a:port_a&gt;cluster addslots &lt;slot&gt; [slot ...]</span><br></pre></td></tr></table></figure>
+<p>当<code>16384</code>个槽位都有相应节点处理时，集群进入上线状态。可以使用<code>cluster info</code>查看集群状态。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">192.167.98.52:6379&gt; cluster info</span><br><span class="line">cluster_state:ok</span><br><span class="line">cluster_slots_assigned:16384</span><br><span class="line">cluster_slots_ok:16384</span><br><span class="line">cluster_slots_pfail:0</span><br><span class="line">cluster_slots_fail:0</span><br><span class="line">cluster_known_nodes:3</span><br><span class="line">cluster_size:3</span><br><span class="line">cluster_current_epoch:3</span><br><span class="line">cluster_my_epoch:3</span><br><span class="line">cluster_stats_messages_ping_sent:849247</span><br><span class="line">cluster_stats_messages_pong_sent:834979</span><br><span class="line">cluster_stats_messages_fail_sent:1</span><br><span class="line">cluster_stats_messages_publish_sent:224</span><br><span class="line">cluster_stats_messages_sent:1684451</span><br><span class="line">cluster_stats_messages_ping_received:834979</span><br><span class="line">cluster_stats_messages_pong_received:849246</span><br><span class="line">cluster_stats_messages_fail_received:1</span><br><span class="line">cluster_stats_messages_publish_received:57273</span><br><span class="line">cluster_stats_messages_received:1741499</span><br></pre></td></tr></table></figure>
+
+<h4 id="相关命令实现原理"><a href="#相关命令实现原理" class="headerlink" title="相关命令实现原理"></a>相关命令实现原理</h4><h5 id="cluster-addslots"><a href="#cluster-addslots" class="headerlink" title="cluster addslots"></a>cluster addslots</h5><p>该命令的实现可以理解为对<code>clusterNode.slots</code>和<code>clusterState.slots</code>的更新标注。</p>
+<h5 id="执行命令过程"><a href="#执行命令过程" class="headerlink" title="执行命令过程"></a>执行命令过程</h5><p>当客户端向节点发送与数据库有关的命令时，接收命令的节点会计算出命令要处理的数据库键属于哪个槽位，并检查该槽位是否由当前节点处理。</p>
+<ol>
+<li>如果键所在槽位指派给当前节点，当前节点直接执行命令。</li>
+<li>否则，节点向客户端返回<code>MOVED</code>错误，指引客户端重定向到正确的节点，并再次发送待执行的命令。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.167.98.52:6379&gt; <span class="built_in">set</span> mqray181162 hh</span><br><span class="line">-&gt; Redirected to slot [2196] located at 192.167.76.255:6379</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>cluster keyslot</code>可以查阅键所属的槽位：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.167.76.255:6379&gt; cluster keyslot mqray181162</span><br><span class="line">(<span class="built_in">integer</span>) 2196</span><br></pre></td></tr></table></figure>
+<p>前面通过<code>cluster nodes</code>已获悉当前节点处理的槽位信息，可以看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">192.167.76.255:6379&gt; cluster nodes</span><br><span class="line">a1520d54c3f1093ba701283cc2a61405776168f2 192.167.98.52:6379@16379 master - 0 1693270395063 3 connected 10923-16383</span><br><span class="line">c87ec22247436ee75969a2a524a82cec4d0be9c6 192.167.240.46:6379@16379 master - 0 1693270396071 2 connected 5461-10922</span><br><span class="line">1e50e943a3ebf1fc955922fff55df6d372861f4b 192.167.76.255:6379@16379 myself,master - 0 1693270394000 1 connected 0-5460</span><br></pre></td></tr></table></figure>
+<p>可以看到，<code>192.167.98.52:6379</code>节点负责处理的槽位区间为<code>10923-16383</code>，接收到命令时，检测到当前命令操作的键所指向的节点为<code>192.167.76.255:6379</code>后，返回了<code>MOVED</code>错误，重定向后重新执行该命令。<br>实际上，一个集群客户端通常会维护多个节点的套接字连接，而所谓的重定向只是换一个套接字来发送命令。</p>
+<h5 id="key对应槽位的计算方式"><a href="#key对应槽位的计算方式" class="headerlink" title="key对应槽位的计算方式"></a>key对应槽位的计算方式</h5><p>使用<code>cluster keyslot key</code>可以获取键所属槽位，其计算公式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slot  = CRC16(key) % 16384</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="节点如何记录槽位"><a href="#节点如何记录槽位" class="headerlink" title="节点如何记录槽位"></a>节点如何记录槽位</h4><h5 id="clusterNode-slots"><a href="#clusterNode-slots" class="headerlink" title="clusterNode.slots"></a>clusterNode.slots</h5><p><code>clusterNode</code>中通过如下两个属性记录该节点负责处理的槽位：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> slots[CLUSTER_SLOTS/<span class="number">8</span>]; <span class="comment">// 当前节点负责哈希槽</span></span><br><span class="line">    <span class="type">uint16_t</span> *slot_info_pairs; <span class="comment">/* Slots info represented as (start/end) pair (consecutive index). */</span></span><br><span class="line">    <span class="type">int</span> numslots;   <span class="comment">// 当前节点负责处理的槽位数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>slots</code>是一个二进制位数组，数组长度为<code>16384/8=2048</code>字节。<br>reis以0为起始索引，对<code>slots</code>数组中的<code>16384</code>个二进制位进行编号，根据索引上的二进制位来判断当前节点是否需要处理槽<code>i</code>。</p>
+<blockquote>
+<p>对于一个节点而言，检查具体某一个槽位是否被当前节点处理的时间复杂度是O(1)。<br>而<code>numslots</code>即为这个二进制数组中1的个数。</p>
+</blockquote>
+<h5 id="clusterState-slots"><a href="#clusterState-slots" class="headerlink" title="clusterState.slots"></a>clusterState.slots</h5><p>一个节点除了将自己所负责的槽位记录在<code>slots</code>数组中，还会将自己的<code>slots</code>数组通过消息的方式发送给集群中的其他节点，以通知其他节点，当前节点负责处理哪些槽位。<br>集群中的其他节点收到此消息，会更新该节点视角下的<code>clusterState.nodes</code>更新其中传递该消息的节点所负责的槽位分配情况。<br>因此，集群中的每个节点都知道数据库中<code>16384</code>个槽位的分配情况。</p>
+<h4 id="集群槽位分配记录"><a href="#集群槽位分配记录" class="headerlink" title="集群槽位分配记录"></a>集群槽位分配记录</h4><p><code>clusterState</code>结构中记录了如下信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterState</span> &#123;</span></span><br><span class="line">    clusterNode *slots[CLUSTER_SLOTS];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>slots</code>数组长达<code>16384</code>，记录了每个槽位被分配的节点<code>clusterNode</code>的指针。<br>如果<code>slots[i]==null</code>，则表示当前槽位尚未分配；如果指向某个<code>clusterNode</code>，则表示当前槽位被分配给该节点。</p>
+<h4 id="为什么需要将节点槽位信息存储在-clusterNode中又需要存在-clusterState中？"><a href="#为什么需要将节点槽位信息存储在-clusterNode中又需要存在-clusterState中？" class="headerlink" title="为什么需要将节点槽位信息存储在 clusterNode中又需要存在 clusterState中？"></a>为什么需要将节点槽位信息存储在 clusterNode中又需要存在 clusterState中？</h4><p>如果只在<code>clusterNode.slots</code>中记录，则无法高效处理如下情况：</p>
+<ol>
+<li>检测槽位<code>i</code>是否被分配&#x2F;检测槽位<code>i</code>被分配给了哪个节点： 这两种场景需要遍历集群中的每个节点的<code>clusterNode.slots</code>数组，直到找到该槽位被分配的节点。时间复杂度为<code>O(N)</code>。而如果<code>clusterState.slots</code>存储了，则时间复杂度为<code>O(1)</code>。</li>
+</ol>
+<p>那么是否可以只将槽位分派信息记录在<code>clusterNode.slots</code>中呢？<br>由于redis槽位分配中，某节点的槽位分配会通过消息传递给集群中的其他节点，传递消息时只需要将<code>clusterNode.slots</code>传递出去即可。而如果只存在<code>clusterState.slots</code>中，那么每次传播槽位分派信息时，需要遍历<code>clusterState.slots</code>以获取当前的槽位分派信息。</p>
+<h3 id="节点数据库的实现"><a href="#节点数据库的实现" class="headerlink" title="节点数据库的实现"></a>节点数据库的实现</h3><p>节点和单机服务器在数据方面的区别是： 节点只能使用0号数据库，而单机服务器则没有此限制。<br>除了将键值对保存在数据库中，还会用<code>clusterState。slots_to_keys</code>记录槽位和键之间的关系。注意，在当前版本中，这一结构被移动到<code>clusterInit.slotToKeyInit</code>函数中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Initialize slots-keys map of given db. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">slotToKeyInit</span><span class="params">(redisDb *db)</span> &#123;</span><br><span class="line">    db-&gt;slots_to_keys = zcalloc(<span class="keyword">sizeof</span>(clusterSlotToKeyMapping));</span><br><span class="line">    clusterDictMetadata *dictmeta = dictMetadata(db-&gt;dict);</span><br><span class="line">    dictmeta-&gt;db = db;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Slot to keys mapping for all slots, opaque outside this file. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">clusterSlotToKeyMapping</span> &#123;</span></span><br><span class="line">    slotToKeys by_slot[CLUSTER_SLOTS];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Slot to keys for a single slot. The keys in the same slot are linked together</span></span><br><span class="line"><span class="comment"> * using dictEntry metadata. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">slotToKeys</span> &#123;</span></span><br><span class="line">    <span class="type">uint64_t</span> count;             <span class="comment">/* Number of keys in the slot. */</span></span><br><span class="line">    dictEntry *head;            <span class="comment">/* The first key-value entry in the slot. */</span></span><br><span class="line">&#125; slotToKeys;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="重新分片"><a href="#重新分片" class="headerlink" title="重新分片"></a>重新分片</h3><p>redis集群的重新分片是指可以将任意数量的已经指派给某个节点<code>A</code>(源节点)的槽位重新指派给节点<code>B</code>(目标节点)，并且相关槽位所属的键值对也会从源节点移动到目标节点。<br><code>重新分片</code>操作过程中集群不需要下线，且源节点和目标节点可以继续处理命令请求。</p>
+<h4 id="重新分片的实现原理"><a href="#重新分片的实现原理" class="headerlink" title="重新分片的实现原理"></a>重新分片的实现原理</h4><p>集群中的重新分配操作是由redis的集群管理软件<code>redis-trib</code>负责执行的。redis提供了进行重新分片所需要的命令，而<code>redis-trib</code>通过向源目标节点发送命令来进行重新分片。<br><code>redis-trib</code>对集群的单个槽位进行分片的过程如下：<br><img src="./redis之集群模式/redis_cluster_sharding.png"></p>
+<p>另外注意到，<code>clusterState</code>结构中记录了集群得重新分片信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterState</span> &#123;</span></span><br><span class="line">    clusterNode *migrating_slots_to[CLUSTER_SLOTS];</span><br><span class="line">    clusterNode *importing_slots_from[CLUSTER_SLOTS];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>migrating_slots_to</code>记录了当前节点正在迁移至其他节点的槽。而<code>importing_slots_from</code>则记录了当前节点正在从哪些节点导入槽。</p>
+<h4 id="ASK错误"><a href="#ASK错误" class="headerlink" title="ASK错误"></a>ASK错误</h4><p>重新分片过程中，可能存在这样一种场景：<br>待迁移的槽位中键值对部分存在于源节点中，另一部分被存储在目标节点中。<br>当客户端向源节点发送一个于数据库键有关的命令，并且命令要处理的数据库键恰好属于正在被迁移的槽时：</p>
+<ol>
+<li>源节点会先在自己的数据库中查找键，找到则执行客户端命令；</li>
+<li>如果未找到，则该键有可能已经被迁移到了目标节点，源节点将向客户端返回一个<code>ASK错误</code>，指引这个客户端重定向到正在导入槽的目标节点，并再次发送之前想要执行的命令。(查看<code>clusterState.migrating_slots_to[i]</code>已检查是否在进行迁移，如果指向不为null，则重定向到指针指向的节点)</li>
+</ol>
+<h4 id="ASKING"><a href="#ASKING" class="headerlink" title="ASKING"></a>ASKING</h4><p>打开发送该命令的客户端的<code>redis_asking</code>标识，以使得客户端在遇到moved错误时能够破例在当前节点中执行关于槽i的命令一次。注意该标识是一次性的，当节点执行了一个带有<code>redis_asking</code>标识的客户端发送的命令后，该标志位将被移除。</p>
+<h4 id="ASK错误-和-MOVED-错误"><a href="#ASK错误-和-MOVED-错误" class="headerlink" title="ASK错误 和 MOVED 错误"></a>ASK错误 和 MOVED 错误</h4><ul>
+<li>MOVED错误： 槽的指派关系发生变化，使得客户端需要从 MOVED错误返回的 ip port 中获取到最新的槽位负责节点然后执行命令</li>
+<li>ASK错误：是两个节点在迁移槽的过程中的临时措施，当客户端收到关于槽i的<code>ASK错误</code>后，客户端只会在接下来的一次命令请求中将关于槽i的命令请求发送至发生<code>ASK错误</code>所指示的节点。但对该客户端之后的命令请求无效。</li>
+</ul>
+<h3 id="复制与故障转移"><a href="#复制与故障转移" class="headerlink" title="复制与故障转移"></a>复制与故障转移</h3><p>集群模式中，节点分为主节点和从节点，主节点负责处理槽，从节点负责复制某个主节点，并在被复制的主节点下线时，代替下线主节点继续处理命令请求。</p>
+<p>集群中有节点<code>A|b|c</code>，各有三个从节点，此时节点<code>A</code>下线，则将由<code>B|C</code>负责从节点<code>A</code>的从节点中选出一个作为新的主节点，由这个被选中的节点负责处理原先节点<code>A</code>负责的槽位，并继续处理客户端的命令请求。</p>
+<h4 id="配置从节点"><a href="#配置从节点" class="headerlink" title="配置从节点"></a>配置从节点</h4><p>在前文中，集群架构还只是顶层的多个主节点。集群模式当然是支持为节点分配从节点的。使用如下命令可以让接收命令的节点成为<code>node_id</code>所指定的从节点，并开始对主节点进行复制。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster replicate &lt;node_id &gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从节点如何复制主节点"><a href="#从节点如何复制主节点" class="headerlink" title="从节点如何复制主节点"></a>从节点如何复制主节点</h4><ol>
+<li>收到命令的节点从<code>clusterNode.nodes</code>中找到<code>noed_id</code>对应节点的<code>clusterNode</code>结构，并且将自己的<code>clusterState.myself.slaveof</code>指向该节点，以记录当前正在复制的主节点。另外，将<code>clusterState.myself.flags</code>修改为<code>REDIS_NODE_slave</code>，以标识当前是从节点。</li>
+<li>根据<code>clusterState.myself.slaveof</code>指向的<code>clusterNode</code>中保存的<code>IP|port</code>对主节点进行复制。<br><code>slaveof ip pport</code></li>
+<li>一个节点成为从节点，并且开始复制主节点这一信息会<code>通过消息</code>发送给集群中的其他节点<br>，最终所有节点都会知道这一消息。</li>
+</ol>
+<h4 id="故障检测"><a href="#故障检测" class="headerlink" title="故障检测"></a>故障检测</h4><h5 id="疑似下线-pfail"><a href="#疑似下线-pfail" class="headerlink" title="疑似下线 pfail"></a>疑似下线 pfail</h5><p>集群中的每个节点都会定期向集群中的其他节点发送<code>ping</code>消息，以此检测对方是否在线，如果该命令没有在规定时间内响应，那么发送消息的节点会将收到消息的节点标记为<code>pfail， 疑似下线</code>。<br>同理，集群中的各个节点会通过互相发消息的方式来交换集群中各个节点的状态信息。<br>如果主节点<code>A</code>通过消息得知主节点<code>B</code>认为主节点<code>C</code>进入疑似下线状态，则主节点<code>a</code>会将<code>clusterNode.nodes</code>中找到节点<code>C</code>，并将节点<code>B</code>报告的下线报告加入到<code>clusterNode.fail_reports</code>链表中。<br>每个下线报告中记录了如下信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* This structure represent elements of node-&gt;fail_reports. */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">clusterNodeFailReport</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">clusterNode</span> *<span class="title">node</span>;</span>  <span class="comment">// 报告目标节点下线的主节点</span></span><br><span class="line">    <span class="type">mstime_t</span> time;             <span class="comment">// 最后一次从node收到下线报告的时间</span></span><br><span class="line">&#125; clusterNodeFailReport;</span><br></pre></td></tr></table></figure>
+
+<h5 id="已下线-fail"><a href="#已下线-fail" class="headerlink" title="已下线 fail"></a>已下线 fail</h5><p>如果在一个集群中，半数以上负责处理槽的主节点都将某个主节点<code>X</code>报告为疑似下线，那么这个节点<code>X</code>将被标记为<code>已下线</code>，将主节点标记为已下线的节点会向集群<code>广播</code>一条关于主节点<code>X</code>的<code>fail</code>消息，收到此消息的所有节点会立即将<code>clusterNode.nodes</code>中节点<code>X</code>的状态修改为已下线。</p>
+<h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><img src="./redis之集群模式/redis_cluster_fialover.png">
+
+<p>如果从节点检测到自己正在复制的主节点进入了下线状态，从节点将开始对下线主节点进行故障转移：</p>
+<ol>
+<li>复制下线节点的所有从节点中选出一个。</li>
+<li>被选中的从节点执行<code>slaveof no one</code>，成为主节点</li>
+<li>原先指派给下线主节点的槽位重新指派给当前节点。</li>
+<li>向集群广播一条<code>pong</code>消息，通知集群中的其他节点，当前节点已成为主节点，并且负责接管下线节点所负责的槽位。</li>
+<li>新的主节点开始接收和自己负责槽位相关的命令请求，故障转移完成。</li>
+</ol>
+<h5 id="集群选主"><a href="#集群选主" class="headerlink" title="集群选主"></a>集群选主</h5><p>从节点检测到主节点下线后如何进行选主？</p>
+<ol>
+<li>集群中的某个节点开始一次故障转移操作时，集群的配置纪元<code>+1</code>.</li>
+<li>在每个配置纪元中，集群中每个负责处理槽的主节点拥有一次投票机会，第一个向此主节点请求投票的节点将获得投票。</li>
+<li>从节点发现复制的主节点下线时，将广播<code>CLUSTERMSG_TYPE_FAILOVER_AUTH_REQUEST</code>消息，要求所有收到消息且具有投票权的主节点进行投票。</li>
+<li>具有投票权且尚未投票的主节点，将返回消息<code>CLUSTERMSG_TYPE_FAILOVER_AUTH_ACK</code>。</li>
+<li>每个从节点统计自己获取的投票数量，如果得票数大于等于<code>N/2+1</code>，则此从节点将当选成为新的主节点。N是集群中具有投票权的主节点数量。</li>
+<li>如果一个配置纪元中无法选出主节点，则将进行下一次选举。</li>
+</ol>
+<h3 id="消息"><a href="#消息" class="headerlink" title="消息"></a>消息</h3><p>节点发送的消息主要有如下五种：</p>
+<ol>
+<li><code>MEET</code>： 发送者通过客户端向接受者发送，标识请</li>
+<li><code>PING</code>: 集群中的每个节点默认每隔一秒从已知的节点列表中随机选出<code>5</code>个节点，对最长时间没有发送过<code>ping</code>消息的节点发送<code>ping</code>消息，以此检测被选中的节点是否在线。如果节点<code>a</code>最后一次收到节点<code>b</code>发送的<code>PONG</code>消息的时间距当前时间已超出节点<code>a</code>设置的<code>cluster-node-timeout</code>的一般，那么节点<code>a</code>也会向节点<code>B</code>发送<code>ping</code>消息。</li>
+<li><code>PONG</code>：接收者回复<code>meet|ping</code>命令；或者向节点广播<code>PONG</code>命令以通知其他节点当前节点状态变化。</li>
+<li><code>FAIL</code>：主节点<code>A</code>判断主节点<code>B</code>进入<code>Fail</code>状态，节点<code>A</code>会向集群广播一条关于节点<code>B</code>fail的消息，所有收到此消息的节点都会立即将节点<code>B</code>标记为已下线。</li>
+<li><code>publish</code>： 节点收到<code>publish</code>命令时，节点会执行命令，并向集群广播一条<code>publish</code>消息，所有接收到此消息的节点都会执行相同的<code>publish</code>命令。</li>
+</ol>
+<h4 id="gossip协议"><a href="#gossip协议" class="headerlink" title="gossip协议"></a>gossip协议</h4><h3 id="扩容-缩容"><a href="#扩容-缩容" class="headerlink" title="扩容 缩容"></a>扩容 缩容</h3><h4 id="扩容方案"><a href="#扩容方案" class="headerlink" title="扩容方案"></a>扩容方案</h4><ol>
+<li>将新节点纳入集群， 使用<code>cluster meet</code>或者 <code>redis-trib add node</code></li>
+<li>确定 加入的新节点 所负责的槽位， 同时查询<code>clusterState.slots</code>查询该槽位的原先被指派的主节点。</li>
+<li>遍历 所有槽位， 将每个槽位关联的节点中的 键值对 迁移到 新加入的节点中。</li>
+<li>该主节点负责的槽位全部迁移完毕，向集群广播当前的节点状态，负责迁移后槽位，以及相关命令的执行。</li>
+</ol>
+<h4 id="缩容方案"><a href="#缩容方案" class="headerlink" title="缩容方案"></a>缩容方案</h4><ol>
+<li>是否是主节点。</li>
+<li>是主节点，有无被分派的槽位。</li>
+<li>有分配的槽位，先将当前负责的槽位分配到其他节点。</li>
+<li>所有槽位完成重新指派并完成数据库键值对的迁移后，广播当前节点准备下线。</li>
+<li>原先该主节点的从节点下线。</li>
+</ol>
+<h3 id="思考？"><a href="#思考？" class="headerlink" title="思考？"></a>思考？</h3><h4 id="为什么redis支持16384个槽位？"><a href="#为什么redis支持16384个槽位？" class="headerlink" title="为什么redis支持16384个槽位？"></a>为什么redis支持16384个槽位？</h4><p>前面我们提到过，redis中计算一个键所对应的槽位的计算方式是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slot  = CRC16(key) % <span class="number">16384</span></span><br></pre></td></tr></table></figure>
+<p>而CRC16能够获得65535个值，那为什么redis只支持16384个呢？<br>原因在于，redis的各种检测命令、广播命令中，都会将携带<code>slots</code>信息。两者的开销分别是 <code>2^16/8=8KB</code>和<code>2^14/8=2KB</code>。<br>而redis集群模式最多支持<code>1000</code>个分片，故而选择16384相对65535是更合理的选择。</p>
+<h5 id="为什么要传全量的slot状态？"><a href="#为什么要传全量的slot状态？" class="headerlink" title="为什么要传全量的slot状态？"></a>为什么要传全量的slot状态？</h5><p>因为分布式场景，基于状态的设计更合理，状态的传播具有幂等性</p>
+<h6 id="为什么不考虑压缩？"><a href="#为什么不考虑压缩？" class="headerlink" title="为什么不考虑压缩？"></a>为什么不考虑压缩？</h6><p>集群规模较小的场景下，每个分片负责大量的slot，很难压缩。</p>
+<p>详见<a target="_blank" rel="noopener" href="https://github.com/redis/redis/issues/2576">https://github.com/redis/redis/issues/2576</a></p>
+<h4 id="为什么-集群模式中不适用-发布订阅"><a href="#为什么-集群模式中不适用-发布订阅" class="headerlink" title="为什么 集群模式中不适用 发布订阅"></a>为什么 集群模式中不适用 发布订阅</h4><p>所有的publish命令都会向所有节点（包括从节点）进行广播，造成每条publish数据都会在集群内所有节点传播一次，加重了带宽负担，对于在有大量节点的集群中频繁使用pub，会严重消耗带宽。</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yidengjiagou/p/17345831.html">1. redis集群模式</a><br><a target="_blank" rel="noopener" href="https://pdai.tech/md/db/nosql-redis/db-redis-x-cluster.html#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E5%8F%8A%E7%BB%B4%E6%8A%A4">2. 状态检测及维护</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mqrayblog.cn/2023/08/28/redis%E4%B9%8B%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/" data-id="clod3qsxl001ckyor5jzd4uhq" data-title="redis之集群模式" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/04/redis%E4%B9%8B%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          redis之发布订阅
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/28/java%E4%B9%8BConcurrentHashMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">java之ConcurrentHashMap</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/databases/">databases</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sth/" rel="tag">sth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag">排障</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/redis/" style="font-size: 20px;">redis</a> <a href="/tags/spring/" style="font-size: 14px;">spring</a> <a href="/tags/sth/" style="font-size: 12px;">sth</a> <a href="/tags/%E6%8E%92%E9%9A%9C/" style="font-size: 10px;">排障</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 16px;">源码阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/31/spring%E4%B9%8Bioc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/">github + hexo建站[待补充]</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/">springboot源码之启动流程3</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/">springboot源码之启动流程2</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/">springboot源码之启动流程1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 mqray<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
