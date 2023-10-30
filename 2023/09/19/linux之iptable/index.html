@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux之iptable | mqray&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="网络延迟是最核心的网络性能指标。由于网络传输、网络包处理等各种因素影响，网络延迟不可避免，但过大的延迟会直接影响用户体验。发现网络延时增大后，可以从路由、网络包的收发、网络包的处理，再到应用程序等，从各个层级分析网络延迟，待找到网络延时的来源层级后，再深入定位瓶颈所在。 NAT(network address translation) 网络地址转换也是一个可能导致网络延迟的因素。 NAT原理NAT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux之iptable">
+<meta property="og:url" content="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="网络延迟是最核心的网络性能指标。由于网络传输、网络包处理等各种因素影响，网络延迟不可避免，但过大的延迟会直接影响用户体验。发现网络延时增大后，可以从路由、网络包的收发、网络包的处理，再到应用程序等，从各个层级分析网络延迟，待找到网络延时的来源层级后，再深入定位瓶颈所在。 NAT(network address translation) 网络地址转换也是一个可能导致网络延迟的因素。 NAT原理NAT">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/linux%E4%B9%8Biptable/linux_nat_demo.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/linux%E4%B9%8Biptable/Netfilter-packet-flow.png">
+<meta property="article:published_time" content="2023-09-19T14:39:54.000Z">
+<meta property="article:modified_time" content="2023-10-30T16:03:26.325Z">
+<meta property="article:author" content="mqray">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/linux%E4%B9%8Biptable/linux_nat_demo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mqray&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mqrayblog.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux之iptable" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/19/linux%E4%B9%8Biptable/" class="article-date">
+  <time class="dt-published" datetime="2023-09-19T14:39:54.000Z" itemprop="datePublished">2023-09-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux之iptable
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>网络延迟是最核心的网络性能指标。由于网络传输、网络包处理等各种因素影响，网络延迟不可避免，但过大的延迟会直接影响用户体验。<br>发现网络延时增大后，可以从路由、网络包的收发、网络包的处理，再到应用程序等，从各个层级分析网络延迟，待找到网络延时的来源层级后，再深入定位瓶颈所在。</p>
+<p>NAT(network address translation) 网络地址转换也是一个可能导致网络延迟的因素。</p>
+<h3 id="NAT原理"><a href="#NAT原理" class="headerlink" title="NAT原理"></a>NAT原理</h3><p>NAT技术可以重写IP数据包的源ip或者目的ip，被广泛用于解决公网ip地址短缺的问题。其只要原理是，网络中的多台主机，通过共享一个公网ip，访问外网资源。同时由于nat屏蔽了内网网络，也为局域网机器提供了安全隔离。</p>
+<h4 id="NAT的实现"><a href="#NAT的实现" class="headerlink" title="NAT的实现"></a>NAT的实现</h4><p>既可以在支持网络地址转换的路由器(NAT网关)中配置NAT，也可以在linux服务器中配置NAT。<br>根据实现方式的不同，NAT分作如下三类：</p>
+<ul>
+<li>静态NAT， 即内网IP与公网IP一一对应。</li>
+<li>动态NAT，内网IP从公网IP池中动态选择一个进行映射。</li>
+<li>网络地址端口转换NAPT (network address and port translation)， 即把内网ip映射到公网ip的不同端口上，让多个内网ip可以共享一个公网ip地址。</li>
+</ul>
+<p>其中<code>NAPT</code>是最流行的<code>NAT</code>类型，在linux中配置的nat也是这个类型。而根据转换方式的不同，又可以将<code>NAPT</code>分作三类：</p>
+<ul>
+<li>SNAT: 即目的地址不变，只替换源IP或者源端口，主要用于多个内网ip共享访问一个公网ip，来访问外网资源的场景。</li>
+<li>DNAT： 即源IP不变，只替换目的ip或端口。通过公网ip的不同端口，来访问内网的多种服务，同时隐藏后端服务器的真实ip地址。</li>
+<li>双向地址转换，接收到网络包时，执行<code>DNAT</code>，将目的IP转化为内网ip；发送网络包时，使用<code>SNAT</code>将源IP转化为外部IP。</li>
+</ul>
+<img src="./linux之iptable/linux_nat_demo.png">  
+
+<p>如图是一个网络拓扑<br>当内网IP<code>192.168.0.2</code>访问外网百度时，发出的网络包，经过<code>NAT网关</code>时，会使用<code>SNAT</code>将源ip地址转化为<code>NAT</code>网关的ip地址，百度接收网络包时，该包的源IP为<code>100.100.100.100</code>；<br>而百度返回的包在经过<code>NAT网关</code>时，则执行<code>DNAT</code>通过查找路由表将目的IP转化为内网的真实IP，即<code>192.168.0.2</code>。</p>
+<h3 id="iptables与nat"><a href="#iptables与nat" class="headerlink" title="iptables与nat"></a>iptables与nat</h3><p>linux内核提供的<code>netfilter</code>框架，允许对网络数据包进行修改，比如<code>NAT</code>和过滤(比如防火墙)。在此基础上，<code>iptables、ip6tables、ebtables</code>等工具，又提供了更易用的命令行接口，以便系统管理员配置和管理<code>NAT</code>、防火墙规则。</p>
+<p>要掌握<code>iptables</code>的原理和使用方法，其核心是弄清楚网络数据包通过<code>netfilter</code>时的工作流向，如下图：<br><img src="./linux之iptable/Netfilter-packet-flow.png"> </p>
+<h4 id="tables"><a href="#tables" class="headerlink" title="tables"></a>tables</h4><p>图中绿色方框即为表，用来管理链。linux中支持四种表，包括<code>filter、nat、mangle和raw</code>，其作用分别为：</p>
+<ul>
+<li><code>filter</code>： 用于过滤数据包</li>
+<li><code>nat</code>： 用于网络地址转换</li>
+<li><code>mangle</code>：用于修改分组数据</li>
+<li><code>raw</code>：用于原始数据包</li>
+</ul>
+<h4 id="chain"><a href="#chain" class="headerlink" title="chain"></a>chain</h4><p>与table一期的白色方框即为链，用来管理具体的<code>iptables规则</code>，每个表中可以包含多条链。</p>
+<p>以<code>NAT表</code>为例，它内置了三条链：</p>
+<ul>
+<li><code>prerouting</code>， 用于路由判断前所执行的规则，比如对接收到的网络数据包进行<code>DNAT</code></li>
+<li><code>postrouting</code>，用于路由判断后所执行的规则，比如对发送或者转发的数据包进行<code>SNAT</code>或者<code>MASQUERADE</code></li>
+<li><code>output</code>：类似prerouting，只处理本机发送出去的包。</li>
+</ul>
+<h4 id="conntrack"><a href="#conntrack" class="headerlink" title="conntrack"></a>conntrack</h4><p>灰色的<code>conntrack</code>，标识连接跟踪模块，他通过内核中的连接跟踪表(哈希表)，记录了网络连接的状态，是<code>iptables</code>状态过滤(-m state)和<code>nat</code>的实现基础。<br><code>iptables</code>的所有规则，都会放到这些表和链中，并按照图中的顺序和规则优先级顺序来执行。</p>
+<p>[如何理解规则优先级？]</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问题1：Linux的NAT时给予内核的连接跟踪模块实现，保留了源IP、源端口、目的IP、目的端口之间的关系，多个内网IP地址的端口相同，但是IP不同，再nf_conntrack中对应不同的记录，所以MASQUERADE可以正常工作。</p>
+<p>问题2：NAT方式所有流量都要经过NAT服务器，所以NAT服务器本身的软中断导致CPU负载、网络流量、文件句柄、端口号上限、nf_conntrack table full都可能是性能瓶颈</p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/83189">1. 极客时间-如何优化nat性能</a><br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hk/Iptables#/media/File:Netfilter-packet-flow.svg">2. Netfilter-packet-flow.svg</a><br><a target="_blank" rel="noopener" href="http://www.apelearn.com/study_v2/chapter16.html#id3">2. linux系统日常管理</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VYBs8iqf0HsNg9WAxktzYQ">4. 记一次Docker&#x2F;Kubernetes上无法解释的连接超时原因探寻之旅</a>  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mqrayblog.cn/2023/09/19/linux%E4%B9%8Biptable/" data-id="clod3av7a000bmiq14ypj0j78" data-title="linux之iptable" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/20/redis%E4%B9%8B%E6%8E%92%E9%9A%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          redis之排障
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">linux之网络</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/databases/">databases</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sth/" rel="tag">sth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag">排障</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/redis/" style="font-size: 20px;">redis</a> <a href="/tags/spring/" style="font-size: 14px;">spring</a> <a href="/tags/sth/" style="font-size: 12px;">sth</a> <a href="/tags/%E6%8E%92%E9%9A%9C/" style="font-size: 10px;">排障</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 16px;">源码阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/31/spring%E4%B9%8Bioc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/">github + hexo建站[待补充]</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/">springboot源码之启动流程3</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/">springboot源码之启动流程2</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/">springboot源码之启动流程1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 mqray<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

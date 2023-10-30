@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>mqray&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="什么是ioc?IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。 123456789class A &amp;#123;&amp;#125;class B &amp;#123;    &#x2F;&#x2F; B需要将A的实例new出来，也就是我们说的控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mqray&#39;s blog">
+<meta property="og:url" content="https://mqrayblog.cn/2023/10/31/spring%E4%B9%8Bioc/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="什么是ioc?IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。 123456789class A &amp;#123;&amp;#125;class B &amp;#123;    &#x2F;&#x2F; B需要将A的实例new出来，也就是我们说的控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-30T16:03:26.345Z">
+<meta property="article:modified_time" content="2023-10-30T16:03:26.345Z">
+<meta property="article:author" content="mqray">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mqray&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mqrayblog.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-spring之ioc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/31/spring%E4%B9%8Bioc/" class="article-date">
+  <time class="dt-published" datetime="2023-10-30T16:03:26.345Z" itemprop="datePublished">2023-10-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是ioc"><a href="#什么是ioc" class="headerlink" title="什么是ioc?"></a>什么是ioc?</h4><p>IOC（inversion of control），就是控制反转的意思。何为控制反转？根据字⾯意思理解，就是对于某个东⻄A，原来的控制权在使⽤⽅B，B想⽤就能⽤，不想⽤就不⽤。现在把控制权交还给了A，只有A给了才能⽤，这样就是控制反转了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="comment">// B需要将A的实例new出来，也就是我们说的控制</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(a);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A自行控制将自己作为bean注入ioc容器中</span></span><br><span class="line"><span class="meta">@conponent</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> &#123;</span><br><span class="line">    <span class="comment">// B根据需要从ioc容器中注入A, B 能注入A 的前提是A将自己暴露出去了</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> A a;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">()</span> &#123;</span><br><span class="line">    System.out.print(a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个例子中，例子一中，类B中想使用A new一个对象即可，而例子二中，类B中想使用A需要A将自己作为bean提前注入IOC容器中，以此实现控制反转。</p>
+<h5 id="ioc的优点"><a href="#ioc的优点" class="headerlink" title="ioc的优点"></a>ioc的优点</h5><ol>
+<li>使用者并不关心引入bean的实现，无需关注该bean的构造器参数等。</li>
+<li>多个使用者不需要重复创建bean。</li>
+<li>使用者无需感知bean的修改。</li>
+</ol>
+<h5 id="spring-的-ioc"><a href="#spring-的-ioc" class="headerlink" title="spring 的 ioc"></a>spring 的 ioc</h5><p>spring的ioc，是ioc思想的一种实现方式。在容器启动的时候，会依据每个bean的定义将bean注入到spring容器中。如果bean之间有依赖关系，则会将依赖的bean先注入。如果依赖的bean已注入，泽直接从容器中获取使用。</p>
+<h4 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP?"></a>什么是AOP?</h4><p>AOP(Aspect-Oriented Programming)，即⾯向切⾯编程，即把公共的逻辑抽出来，<br>让开发者可以更专注于业务逻辑开发。</p>
+<h3 id="spring-如何处理循环引用问题"><a href="#spring-如何处理循环引用问题" class="headerlink" title="spring 如何处理循环引用问题"></a>spring 如何处理循环引用问题</h3><p>在Spring框架中，循环依赖是指两个或多个bean之间相互依赖，形成了⼀个循环引⽤的情况。如<br>果不加以处理，这种情况会导致应⽤程序启动失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ServiceA&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ServiceB serviceB;</span><br><span class="line">&#125;</span><br><span class="line">@Service</span><br><span class="line">public class ServiceB&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ServiceA serviceA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="什么是三级缓存？"><a href="#什么是三级缓存？" class="headerlink" title="什么是三级缓存？"></a>什么是三级缓存？</h4><p>在Spring的<code>BeanFactory</code>体系中，<code>BeanFactory</code>是<code>Spring IoC</code>容器的基础接⼝,<code>DefaultSingletonBeanRegistry</code>类实现了<br><code>BeanFactory</code>接⼝，并且维护了三级缓存:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Cache of singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="comment">// 缓存从bean name 到 单例bean实例</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="number">256</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Cache of singleton factories: bean name to ObjectFactory. */</span></span><br><span class="line"><span class="comment">// 缓存 bean name到 bean 单例工厂</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ObjectFactory&lt;?&gt;&gt; singletonFactories = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Cache of early singleton objects: bean name to bean instance. */</span></span><br><span class="line"><span class="comment">// 缓存 bean 名称到 ealy单例实例</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; earlySingletonObjects = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<p>其中，</p>
+<ul>
+<li><code>singletonObjects</code>是一级缓存，缓存完整创建好的单例bean对象；在创建bean对象时，会尝试从<code>singletonObjects</code>中获取该bean实例，如果能获取到，则直接返回该实例；否则继续创建该实例。</li>
+<li><code>earlySingletonObjects</code>是二级缓存，存储的是尚未完全创建好的单例bean对象；在创建单例bean时，如果发现该bean存在循环依赖，则会先创建bean的 半成品 对象，并将它存储到<code>earlySingletonObjects</code>中。当循环依赖的bean创建完成后，spring会将完整的bean实例存储到<code>singletonObjects</code>中，并将<code>earlySingletonObjects</code>中存储的代理对象替换为完整的bean实例对象。以防止在单例bean的创建过程中出现循环依赖问题。</li>
+<li><code>singletonFactories</code>是三级缓存，存储的是单例bean的创建工厂。当一个单例bean被创建时，spring会先将该bean的创建工厂存储到<code>singletonFactories</code>中，在执行创建工厂的<code>getobject()</code>方法，生成该bean的实例对象，在该bean被其他bean引用时，spring会从<code>singletonFactories</code>中获取该bean的创建工厂，创建出该bean的实例对象，并将该bean的实例对象存储到<code>singletonFactories</code>中。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="meta">@Nullable</span></span><br><span class="line">	<span class="keyword">public</span> Object <span class="title function_">getSingleton</span><span class="params">(String beanName)</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> getSingleton(beanName, <span class="literal">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Return the (raw) singleton object registered under the given name.</span></span><br><span class="line"><span class="comment">	 * &lt;p&gt;Checks already instantiated singletons and also allows for an early</span></span><br><span class="line"><span class="comment">	 * reference to a currently created singleton (resolving a circular reference).</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> beanName the name of the bean to look for</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> allowEarlyReference whether early references should be created or not</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the registered singleton object, or &#123;<span class="doctag">@code</span> null&#125; if none found</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Nullable</span></span><br><span class="line">	<span class="keyword">protected</span> Object <span class="title function_">getSingleton</span><span class="params">(String beanName, <span class="type">boolean</span> allowEarlyReference)</span> &#123;</span><br><span class="line">		<span class="type">Object</span> <span class="variable">singletonObject</span> <span class="operator">=</span> <span class="built_in">this</span>.singletonObjects.get(beanName);</span><br><span class="line">		<span class="keyword">if</span> (singletonObject == <span class="literal">null</span> &amp;&amp; isSingletonCurrentlyInCreation(beanName)) &#123;</span><br><span class="line">			<span class="keyword">synchronized</span> (<span class="built_in">this</span>.singletonObjects) &#123;</span><br><span class="line">				singletonObject = <span class="built_in">this</span>.earlySingletonObjects.get(beanName);</span><br><span class="line">				<span class="keyword">if</span> (singletonObject == <span class="literal">null</span> &amp;&amp; allowEarlyReference) &#123;</span><br><span class="line">					ObjectFactory&lt;?&gt; singletonFactory = <span class="built_in">this</span>.singletonFactories.get(beanName);</span><br><span class="line">					<span class="keyword">if</span> (singletonFactory != <span class="literal">null</span>) &#123;</span><br><span class="line">						singletonObject = singletonFactory.getObject();</span><br><span class="line">						<span class="built_in">this</span>.earlySingletonObjects.put(beanName, singletonObject);</span><br><span class="line">						<span class="built_in">this</span>.singletonFactories.remove(beanName);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> singletonObject;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>spring解决循环引用的方式就是引入了三级缓存。<br>但是要注意的是，spring解决三级缓存是有条件的</p>
+<ol>
+<li>相互依赖的bean必须是单例的</li>
+<li>依赖注入的方式不能都是构造函数注入的</li>
+</ol>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="">1. </a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mqrayblog.cn/2023/10/31/spring%E4%B9%8Bioc/" data-id="clod3av7w002amiq13noc8gyd" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">github + hexo建站[待补充]</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/databases/">databases</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sth/" rel="tag">sth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag">排障</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/redis/" style="font-size: 20px;">redis</a> <a href="/tags/spring/" style="font-size: 14px;">spring</a> <a href="/tags/sth/" style="font-size: 12px;">sth</a> <a href="/tags/%E6%8E%92%E9%9A%9C/" style="font-size: 10px;">排障</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 16px;">源码阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/31/spring%E4%B9%8Bioc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/">github + hexo建站[待补充]</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/">springboot源码之启动流程3</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/">springboot源码之启动流程2</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/">springboot源码之启动流程1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 mqray<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

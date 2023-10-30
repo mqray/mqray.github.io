@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>linux之网络 | mqray&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="网络模型OSI七层网络模型     四层网络     linux网络    linux网络收发流程    网络包的接收流程 当一个网络帧到达网卡时，网卡通过DMA方式把网络包放到收包队列中，然后通过硬中断，告知中断处理程序已经接收到网络包。 网卡中断处理程序为网络帧分配内核数据结构sk_buff，并将其拷贝到sk_buff缓冲区，然后通过软中断，通知内核收到了新的网络帧。 内核协议栈从缓冲区中取出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux之网络">
+<meta property="og:url" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="网络模型OSI七层网络模型     四层网络     linux网络    linux网络收发流程    网络包的接收流程 当一个网络帧到达网卡时，网卡通过DMA方式把网络包放到收包队列中，然后通过硬中断，告知中断处理程序已经接收到网络包。 网卡中断处理程序为网络帧分配内核数据结构sk_buff，并将其拷贝到sk_buff缓冲区，然后通过软中断，通知内核收到了新的网络帧。 内核协议栈从缓冲区中取出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_4.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_kernel.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_send_receive.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_opt_tool.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_tool_opt.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_net_socket_prm.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_tcp_opt.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_tcp_opt_core.webp">
+<meta property="article:published_time" content="2023-09-05T14:29:07.000Z">
+<meta property="article:modified_time" content="2023-10-30T16:03:26.325Z">
+<meta property="article:author" content="mqray">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/linux_network_arch.png">
+  
+    <link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mqray&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mqrayblog.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux之网络" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/" class="article-date">
+  <time class="dt-published" datetime="2023-09-05T14:29:07.000Z" itemprop="datePublished">2023-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux之网络
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h4 id="OSI七层网络模型"><a href="#OSI七层网络模型" class="headerlink" title="OSI七层网络模型"></a>OSI七层网络模型</h4><img src="./linux之网络/linux_network_arch.png">  
+
+
+<h4 id="四层网络"><a href="#四层网络" class="headerlink" title="四层网络"></a>四层网络</h4><img src="./linux之网络/linux_network_4.png">  
+
+
+<h4 id="linux网络"><a href="#linux网络" class="headerlink" title="linux网络"></a>linux网络</h4><img src="./linux之网络/linux_network_kernel.webp">  
+
+<h5 id="linux网络收发流程"><a href="#linux网络收发流程" class="headerlink" title="linux网络收发流程"></a>linux网络收发流程</h5><img src="./linux之网络/linux_network_send_receive.webp">  
+
+<h5 id="网络包的接收流程"><a href="#网络包的接收流程" class="headerlink" title="网络包的接收流程"></a>网络包的接收流程</h5><ol>
+<li>当一个网络帧到达网卡时，网卡通过DMA方式把网络包放到收包队列中，然后通过硬中断，告知中断处理程序已经接收到网络包。</li>
+<li>网卡中断处理程序为网络帧分配内核数据结构<code>sk_buff</code>，并将其拷贝到<code>sk_buff</code>缓冲区，然后通过软中断，通知内核收到了新的网络帧。</li>
+<li>内核协议栈从缓冲区中取出网络帧，并通过网络协议栈从下往上逐层处理这个网络帧。<br>内核协议栈处理网络帧的过程如下：</li>
+</ol>
+<ul>
+<li>在数据链路层检查报文的合法性，检查上层协议类型(IPV4&#x2F;6)，去掉数据链路层帧头、帧尾，交给网络层</li>
+<li>网络层取出IP头，判断网络包的下一步去向，比如交由上层处理或者转发。如果是确认该网络包交由本机则取出上层协议类型(TCP&#x2F;UDP)，去掉IP头，交由传输层。</li>
+<li>传输层取出TCP头或者UDP头后，根据<code>&lt;源ip、源端口、目的ip、目的端口&gt;</code>四元组作为标识，找到对应的<code>socket</code>，并将数据拷贝到<code>socket</code>的接收缓冲区中。<br>应用程序就可以使用<code>socket</code>接口读取到最新的数据了。</li>
+</ul>
+<h6 id="相关缓冲区"><a href="#相关缓冲区" class="headerlink" title="相关缓冲区"></a>相关缓冲区</h6><ol>
+<li>网卡收发网络包是，通过<code>DMA</code>方式交互的环形缓冲区： 涉及<code>DMA</code>和网卡交互，属于网卡设备驱动范围。</li>
+<li>网卡中断处理程序为网络帧分配的内核数据结构<code>sk_buff</code>缓冲区。</li>
+<li>应用程序通过网络套接字与网络协议栈交互的套接字缓冲区。<br>这些缓冲区都处于内核管理的内存中。</li>
+</ol>
+<h5 id="网络包的发送流程"><a href="#网络包的发送流程" class="headerlink" title="网络包的发送流程"></a>网络包的发送流程</h5><ol>
+<li>应用程序调用<code>socket api</code>发送网络包</li>
+<li>套接字层会把数据包放到<code>socket</code>发送缓冲区中</li>
+<li>网络协议栈从<code>socket</code>发送缓冲区中取出数据包，按照TCP&#x2F;IP协议栈，从上到下逐层处理。</li>
+<li>传输层：增加TCP&#x2F;IP头； 网络层：执行路由查找并确认下一跳的IP，并且按照MTU大小进行分片；网络接口层进行物理寻址，找到下一跳的MAC地址，然后添加帧头和帧尾，放到发包队列中</li>
+<li>软中断通知驱动程序告知有新的网络帧需要发送</li>
+<li>驱动程序通过<code>DMA</code>从发包队列中读取网络帧，并通过物理网卡将其发送出去。</li>
+</ol>
+<p>名词有点多，一个一个来看：</p>
+<ul>
+<li>DMA: Direct Memory Access，译作直接存储器访问，将数据从一个地址空间复制到另一个地址空间，提供外设和存储器之间或者存储器与存储器之间的高速素具传递</li>
+<li>硬中断：</li>
+<li>软中断：软中断处理，有专门的内核线程 <code>ksoftirqd</code>。每个 CPU 都会绑定一个 <code>ksoftirqd</code>内核线程。</li>
+<li><code>sk_buff</code>：一个维护网络帧结构的双向链表，链表中的每一个元素都是一个网络帧<code>Packet</code>。</li>
+</ul>
+<h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><h4 id="水平触发与边缘触发"><a href="#水平触发与边缘触发" class="headerlink" title="水平触发与边缘触发"></a>水平触发与边缘触发</h4><p>水平触发(level-trggered)：<br>边缘触发(edge-triggered):</p>
+<h3 id="网络性能指标"><a href="#网络性能指标" class="headerlink" title="网络性能指标"></a>网络性能指标</h3><ol>
+<li>带宽： 链路的最大传输速率，单位为b&#x2F;s。带宽和物理网卡的配置直接关联，实际带宽取决于整个网络链路中最小的一个。</li>
+<li>时延: 网络请求发出后，一直到收到远端响应所需要的事件延迟。在不同场景下含义有所不同，比如连接建立的时间(TCP握手延时)或者一个数据包往返所需时间(rtt)</li>
+<li>吞吐量：标识没有丢包时的最大数据传输速率，单位为b&#x2F;s。吞吐量受带宽限制。</li>
+<li>PPS： 即packet per second的缩写，标识以网络包为单位的传输速率，通常用来评估网络的转发能力。在以linux服务器转发时，很容易受到网络包大小的影响。</li>
+</ol>
+<h4 id="网络性能测试"><a href="#网络性能测试" class="headerlink" title="网络性能测试"></a>网络性能测试</h4><p>linux网络基于TCP&#x2F;IP协议栈，而不同协议层的行为不同。在评估网络性能前，需要确定应用程序基于协议栈的哪一层：</p>
+<ol>
+<li>基于http或者https的web应用程序，属于应用层，需要测试http&#x2F;https的性能。</li>
+<li>对于游戏服务器，为了支持更多在线人数，通常基于tcp&#x2F;udp与客户端交互，此时需要测试tcp&#x2F;udp的性能。</li>
+<li>将linux作为软交换机或者路由器来使用，此时则更关注网络包的处理能力，特别是网络层的转发性能。</li>
+</ol>
+<blockquote>
+<p>底层协议是其上各层网络协议的基础，底层的性能决定了高层的网络性能。</p>
+</blockquote>
+<h5 id="测试网络接口层和网络层的性能"><a href="#测试网络接口层和网络层的性能" class="headerlink" title="测试网络接口层和网络层的性能"></a>测试网络接口层和网络层的性能</h5><p>网络接口层和网络层主要负责网络包的封装、寻址、路由、发送以及接收。这两层中每秒可处理的网络包PPS即是最重要的性能指标，特别是64B小包的处理能力。</p>
+<p>Linux 内核自带的高性能网络测试工具 <code>pktgen</code></p>
+<h5 id="tcp-udp性能测试"><a href="#tcp-udp性能测试" class="headerlink" title="tcp&#x2F;udp性能测试"></a>tcp&#x2F;udp性能测试</h5><p><code>iperf</code> 和 <code>netperf</code> 都是最常用的网络性能测试工具</p>
+<h5 id="http性能测试"><a href="#http性能测试" class="headerlink" title="http性能测试"></a>http性能测试</h5><p>要测试 HTTP 的性能，也有大量的工具可以使用，比如 ab、webbench 等，都是常用的 HTTP 压力测试工具。其中，ab 是 Apache 自带的 HTTP 压测工具，主要测试 HTTP 服务的每秒请求数、请求延迟、吞吐量以及请求延迟的分布情况等。</p>
+<p>为了得到应用程序的实际性能，就要求性能工具本身可以模拟用户的请求负载，而 iperf、ab 这类工具就无能为力了。幸运的是，我们还可以用 wrk、TCPCopy、Jmeter 或者 LoadRunner 等实现这个目标。</p>
+<h3 id="网络性能优化"><a href="#网络性能优化" class="headerlink" title="网络性能优化"></a>网络性能优化</h3><h4 id="确定优化目标"><a href="#确定优化目标" class="headerlink" title="确定优化目标"></a>确定优化目标</h4><p>参考TCP&#x2F;IP分层协议簇，确定各层的性能预期。<br>除了上述描述的，针对传输层TCP&#x2F;UDP，网络包的大小会影响吞吐量(BPS)、连接数、延迟等指标。</p>
+<h4 id="选用网络性能工具"><a href="#选用网络性能工具" class="headerlink" title="选用网络性能工具"></a>选用网络性能工具</h4><h5 id="根据指标选用工具"><a href="#根据指标选用工具" class="headerlink" title="根据指标选用工具"></a>根据指标选用工具</h5><img src="./linux之网络/linux_net_opt_tool.png">  
+
+<h5 id="根据工具查询指标"><a href="#根据工具查询指标" class="headerlink" title="根据工具查询指标"></a>根据工具查询指标</h5><img src="./linux之网络/linux_net_tool_opt.webp">  
+
+<h4 id="网络性能优化-1"><a href="#网络性能优化-1" class="headerlink" title="网络性能优化"></a>网络性能优化</h4><p>在获得网络基准测试报告后，通过相关性能工具，定位出网络性能瓶颈后，就可以进行优化了。<br>参考上述 LINUX系统下的网络协议栈和网络收发流程进行网络性能优化。<br>一般来说可以从： 应用程序，套接字、传输层、网络层和链路层等角度进行优化。</p>
+<h5 id="应用程序优化"><a href="#应用程序优化" class="headerlink" title="应用程序优化"></a>应用程序优化</h5><p>应用程序通常是通过套接字接口进行网络操作。由于网络收发比较耗时，所以应用程序的优化，主要就是对网络IO和进程自身工作模型的优化。</p>
+<ol>
+<li>网络IO优化：<ul>
+<li>使用epoll替代select和poll</li>
+<li>使用异步io。 AIO允许应用程序同时发起很多IO操作，而不用等待操作完成，等到io完成后，系统会用<code>事件通知</code>的方式告知应用程序结果。不过AIO使用比较复杂，需要小心处理很多边缘情况。</li>
+</ul>
+</li>
+<li>进程模型优化：<ul>
+<li>主进程+ 多个worker子进程。 由主进程负责管理网络连接，子进程负责处理实际业务。</li>
+<li>监听相同端口的多进程模型： 所有进程监听相同接口，并且开启<code>SO_REUSEPORT</code>选项，由内核负责，将请求负载均衡到这些监听进程中。</li>
+</ul>
+</li>
+</ol>
+<p>另外，应用层协议的优化也很重要，有如下常见的优化手段：</p>
+<ol>
+<li>使用长连接取代短连接，可以显著降低TCP建立连接的成本。在每秒请求次数较多时，效果明显。</li>
+<li>使用内存等形式缓存不常变化的数据，可以降低网络IO次数，加快应用程序响应速度。</li>
+<li>使用<code>protocol buffer</code>等序列化方式，压缩网络io的数据量，提高应用程序的吞吐。</li>
+<li>使用<code>DNS预存、预取、HTTPDNS</code>等方式，减少DNS解析的延迟。</li>
+</ol>
+<h5 id="套接字优化"><a href="#套接字优化" class="headerlink" title="套接字优化"></a>套接字优化</h5><p>套接字可以屏蔽掉linux内核中不同协议的差异，为应用程序提供统一的访问接口。每个套接字都有一个读写缓冲区。</p>
+<ul>
+<li>读缓冲区： 缓存远端发来的数据，如果满就不能再接收新的数据。</li>
+<li>写缓冲区：缓存要发出去的数据，如果满，应用程序的写操作就会被阻塞。<br>故而，为了提高网络吞吐量，通常需要调整这些缓冲区大小：</li>
+</ul>
+<ol>
+<li>增大每个套接字的缓冲区大小： <code>net.core.optmem_max</code></li>
+<li>增大套接字接收缓冲区大小： <code>net.core.rmem_max</code></li>
+<li>增大套接字发送缓冲区大小： <code>net.core.wmem_max</code></li>
+<li>增大TCP接收缓冲区大小:  <code>net.ipv4.tcp_rmem</code></li>
+<li>增大TCP发送缓冲区大小:  <code>net.ipv4.tcp_wmem</code><br>除此之外，套接字的内核选项如下：</li>
+</ol>
+<img src="./linux之网络/linux_net_socket_prm.webp">  
+
+
+<h5 id="传输层优化"><a href="#传输层优化" class="headerlink" title="传输层优化"></a>传输层优化</h5><p>实际上是指对两种协议的优化。</p>
+<h6 id="TCP协议优化"><a href="#TCP协议优化" class="headerlink" title="TCP协议优化"></a>TCP协议优化</h6><p>流量控制：<br>慢启动：<br>拥塞控制：<br>延迟确认：<br>状态流图：如下图<br><img src="./linux之网络/linux_tcp_opt.webp">  </p>
+<ol>
+<li>请求数比较大的场景下，大量处于<code>TIME_WAIT</code>状态的连接，会占用大量内存和端口资源，此时可以优化与<code>TIME_WAIT</code>转台相关的内核选项：</li>
+</ol>
+<ul>
+<li>增大处于<code>TIME_WAIT</code>状态的连接数量<code>net.ipv4.tcp_max_tw_buckets</code>,并增大连接跟踪表的大小<code>net.netfilter.nf_conntrack_max</code>。</li>
+<li>减小<code>net.ipv4.tcp_fin_timeout</code>和 <code>net.netfilter.nf_conntrack_tcp_timeout_time_wait</code>，让系统尽快释放所占用的资源。</li>
+<li>开启端口复用<code>net.ipv4.tcp_tw_reuse</code>，这样被<code>TIME_WAIT</code>状态占用的端口，还能用到新建的连接中。</li>
+<li>增大本地端口范围<code>net.ipv4.ip_local_port_range</code>，这样可以支持更多的连接，提高整体的并发能力。</li>
+<li>增大文件描述符的数量：使用<code>fs.nr_open</code>和<code>fs.file_max</code>分别增大进程和系统的最大文件描述符；或者在应用程序的<code>systemd</code>配置文件中，配置<code>limitnofile</code>设置应用程序的最大文件描述符。</li>
+</ul>
+<ol start="2">
+<li>缓解<code>syn flood</code>利用<code>tcp</code>协议特点进行攻击而引发的性能问题，可以考虑优化与<code>syn</code>状态相关的内核选项：</li>
+</ol>
+<ul>
+<li><p>增大<code>tcp</code>半连接的最大数量 <code>net.ipv4.tcp_max_syn_backlog</code>，或者开启<code>TCP SYN Cookies net.ipv4.tcp_syncookies</code>，来绕开半连接数量限制问题。[连着不可同时使用]</p>
+</li>
+<li><p>减少<code>SYN_RECV</code>状态连接重传<code>SYN+ACK</code>包的次数<code>net.ipv4.tcp_synack_retries</code>.</p>
+</li>
+</ul>
+<ol start="3">
+<li>在长连接的场景中，通常使用<code>keepalive</code>检测tcp连接的状态，以便对端连接断开后可以自动回收。但是<code>keepalive</code>探测间隔和重试次数一般都无法满足应用程序的性能，此时需要优化与<code>keepalive</code>相关的内核选项：</li>
+</ol>
+<ul>
+<li>缩短最后一次数据包到<code>keepalive</code>探测包之间的间隔时间<code>net.ipv4.tcp_keepalive_time</code>;</li>
+<li>缩短发送<code>keepalive</code>探测包的间隔时间<code>net.ipv4.tcp_keepalive_intvl</code></li>
+<li>减少<code>keepalive</code>探测失败后，一直到通知应用程序前的重试次数<code>net.ipv4.tcp_keepalive_probes</code>.</li>
+</ul>
+<img src="./linux之网络/linux_tcp_opt_core.webp"> 
+
+<p>另外，如果使用不同的优化方法，可能会产生冲突。比如服务端使用<code>nagle</code>算法，客户端开启延时确认，就很容易导致网络延时增大。<br>对于<code>NAT</code>服务器而言，如果开启<code>net.ipv4.tcp_tw_recycle</code>就很容易导致各种连接失败，已于内核的4.1版本中删除。</p>
+<h6 id="UDP协议优化"><a href="#UDP协议优化" class="headerlink" title="UDP协议优化"></a>UDP协议优化</h6><ol>
+<li>增大套接字缓冲区大小和<code>UDP</code>缓冲区范围；</li>
+<li>增大本地端口号范围；</li>
+<li>根据<code>MTU</code>大小，调整<code>UDP</code>数据包的大小，减少或者避免分片。</li>
+</ol>
+<h5 id="网络层优化"><a href="#网络层优化" class="headerlink" title="网络层优化"></a>网络层优化</h5><p>网络层负责网络包的封装、寻址和路由，包括IP、ICMP协议。在网络层最主要的优化是对路由、<code>IP</code>分片以及<code>ICMP</code>等进行调优。</p>
+<ol>
+<li>从路由和转发的角度，可以调整如下内核选项：</li>
+</ol>
+<ul>
+<li>在需要转发的服务器中，比如用作<code>nat网关</code>的服务器或者使用docker容器时，设置<code>net.ipv4.ip_forward=1</code>开启<code>IP转发</code>。</li>
+<li>调整数据包的生存周期<code>TTL</code>，比如设置<code>net.ipv4.ip-default_ttl=64</code>.[增大该值会降低系统性能]</li>
+<li>设置<code>net.ipv4.conf.eth0.rp_filter=1</code>开启数据包的反向地址校验，防止IP欺骗减少伪造IP带来的<code>DDOS</code>问题。</li>
+</ul>
+<ol start="2">
+<li>从分片的角度，调整<code>MTU</code>大小<br>以太网标准规定，一个网络帧最大为 1518B，那么去掉以太网头部的 18B 后，剩余的 1500 就是以太网 MTU 的大小。在使用<code>VXLAN、GRE</code>等叠加网络技术后，会使原来的网络包变大，使得MTU也需要调整。<br>以VXLAN为例，它在原来报文的基础上，增加了 14B 的以太网头部、 8B 的 VXLAN 头部、8B 的 UDP 头部以及 20B 的 IP 头部。换句话说，每个包比原来增大了 50B。<br>所以就需要交换机、路由器等的<code>MTU</code>增大到1550，或者把<code>VXLAN</code>封包前的<code>MTU</code>减小为1450。<br>当然，考虑到许多网络设备都支持<code>巨帧</code>，这种情况下，可以将<code>MTU</code>调大为9000，以提高网络吞吐量。</li>
+<li>以ICMP角度出发，为了避免ICMP主机探测、ICMP flood等各种网络问题，可以通过内核选项，限制ICMP行为。</li>
+</ol>
+<ul>
+<li>设置<code>net.ipv4.icmp_echo_ignore_all=1</code>禁用<code>ICMP</code>协议，外部主机就无法通过<code>ping</code>等使用<code>ICMP</code>协议的命令来探测主机。</li>
+<li>设置<code>net.ipv4.icmp_echo_ignore_broadcasts=1</code>禁止广播<code>ICMP</code>.</li>
+</ul>
+<h5 id="链路层优化"><a href="#链路层优化" class="headerlink" title="链路层优化"></a>链路层优化</h5><p>链路层负责网络包在物理网络中的传输：<code>MAC寻址</code>、错误探测、通过网卡传输网络帧。</p>
+<ol>
+<li>由于网卡收包之后调用的中断处理程序(特别是软中断)，需要消耗大量的CPU，所以将这些中断处理程序调度到不同的CPU上执行，就可以显著提高网络吞吐量。</li>
+</ol>
+<ul>
+<li>为网卡硬中断配置CPU亲和性(smp_affinity)，或者开启<code>irqbalance</code>。</li>
+<li>开启<code>RPS (receive packet steering)</code> 和<code>RFS (receive flow steering)</code>将应用程序和软中断的处理，调度到相同的CPU上。这样就可以增加CPU命中率，减少网络延时。</li>
+</ul>
+<ol start="2">
+<li>原来内核中通过软件处理的功能可以卸载到网卡中，通过硬件执行：</li>
+</ol>
+<ul>
+<li><code>TSO(TCP Segmentation Offload) | UFO (UDP Fragmentation Offload)</code>: 在<code>TCP/UDP</code>协议中直接发送大包，<code>TCP|UDP</code>包的分段|分片功能交由网卡完成。</li>
+<li>GSO (Generic Segmentation Offload): 网卡不支持TSO|ufo时，将分片和分段操作延迟到进入网卡前再执行。</li>
+<li>LRO（Large Receive Offload）：在接收 TCP 分段包时，由网卡将其组装合并后，再交给上层网络处理。不过要注意，在需要 IP 转发的情况下，不能开启 LRO，因为如果多个包的头部信息不一致，LRO 合并会导致网络包的校验错误。</li>
+<li>GRO（Generic Receive Offload）：GRO 修复了 LRO 的缺陷，并且更为通用，同时支持 TCP 和 UDP。</li>
+<li>RSS（Receive Side Scaling）：也称为多队列接收，它基于硬件的多个接收队列，来分配网络接收进程，这样可以让多个 CPU 来处理接收到的网络包。</li>
+<li>VXLAN 卸载：也就是让网卡来完成 VXLAN 的组包功能。</li>
+</ul>
+<ol start="3">
+<li>网络接口本身</li>
+</ol>
+<ul>
+<li>开启网络接口的多队列功能，每个队列可以用不同的中断号，调度到不同的CPU上执行。</li>
+<li>增大网络接口的缓冲区和队列长度</li>
+<li>使用<code>traffic control</code>工具，为不同的网络流量配置<code>QOS</code></li>
+</ul>
+<p>另外，在单机<code>10M</code>场景下，网络协议栈的冗长流程才是最主要的性能负担。这种场景下，可以使用两种方式进行优化。</p>
+<ul>
+<li>使用<code>DPDK</code>技术，跳过内核协议栈，直接由用户态进程用轮询的方式，处理网络请求。同时结合大页、cpu绑定、内存对齐、流水线并发等多种机制，优化网络包处理效率。</li>
+<li>使用内核自带的<code>XDP</code>技术，在网络包进入内核协议前就对齐进行处理。<blockquote>
+<p>nslookup ip<br>time nslookup ip<br>ping -c3 <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a><br>dnsmasq &#x2F;etc&#x2F;init.d&#x2F;dnsmasq start<br>dig +trace +nodnssec time.geekbang.org<br>strace</p>
+</blockquote>
+</li>
+</ul>
+<p>域名劫持和规避<br>客户端：HTTPDNS</p>
+<p>全局负载均衡（GSLB）</p>
+<p>PTR 请求</p>
+<p>tcpdump</p>
+<p>iptable</p>
+<p>traceroute<br>tracepath<br>nc</p>
+<p>&#x2F;proc&#x2F;sys&#x2F;fs&#x2F;file-max</p>
+<ol>
+<li>最大连接数是不是受限于65535个端口？<br>无论TCP&#x2F;UDP，端口号只占16位，最大值为65535，是不是说如果使用TCP协议，单台机器、单个IP地址，并发连接数最大也只有65535个呢？<br>[困扰许久的问题]<br>linux中，通过<code>协议、源ip、源端口、目的ip、目的端口</code>这个五元组来标识一个连接。</li>
+</ol>
+<ul>
+<li>客户端，对于客户端而言，每个请求都需要耗费一个本地端口去连接远程服务器，由于本地端口是独占的，所以客户端最多只能发起65535个连接。</li>
+<li>服务器，其通常是监听在固定端口上，等待客户端连接。由于客户端的源ip、源端口是可变的。极限情况下，服务器端的理论最大连接数可以达到2^48<br>服务器端是支持海量连接数的，当然还受到linux协议栈本身的性能、各种物理和软件的资源限制，实际情况会低很多C10M.</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/81268">1. 极客时间-linux性能优化</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/lihao21/article/details/67631516">2. 水平触发和边缘触发</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yolo_yyh/article/details/118367979">3. 陈硕-muduo网络库与服务模型介绍</a><br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1721171">4. linux版本查看</a><br><a target="_blank" rel="noopener" href="https://plantegg.github.io/2019/01/09/nslookup-OK-but-ping-fail/">5. dns排障实例</a><br><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc-index.html">6. rfc</a><br><a target="_blank" rel="noopener" href="https://wiki.wireshark.org/TCP%204-times%20close">7. wireshark四次挥手案例</a><br><a href="">8. 林沛满《Wireshark网络分析就这么简单》和《Wireshark网络分析的艺术》</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138573828">9. DMA原理介绍</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mqrayblog.cn/2023/09/05/linux%E4%B9%8B%E7%BD%91%E7%BB%9C/" data-id="clod3av7b000dmiq13t91ayet" data-title="linux之网络" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/19/linux%E4%B9%8Biptable/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          linux之iptable
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/05/redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">redis之事务</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/databases/">databases</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sth/" rel="tag">sth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag">排障</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/redis/" style="font-size: 20px;">redis</a> <a href="/tags/spring/" style="font-size: 14px;">spring</a> <a href="/tags/sth/" style="font-size: 12px;">sth</a> <a href="/tags/%E6%8E%92%E9%9A%9C/" style="font-size: 10px;">排障</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 16px;">源码阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/31/spring%E4%B9%8Bioc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/">github + hexo建站[待补充]</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/">springboot源码之启动流程3</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/">springboot源码之启动流程2</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/">springboot源码之启动流程1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 mqray<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
