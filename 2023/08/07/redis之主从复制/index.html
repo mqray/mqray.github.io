@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>redis之主从复制 | mqray&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="主从模式主从结构是常用的计算机系统架构，通常被用于分布式系统中，其中一个节点master拥有最新的数据，其他节点slave复制并同步主节点的数据。   主从结构中，主节点负责写入数据，并将这些数据同步到从节点中；从节点只能读取数据。主从节点键通过网络连接，完成数据同步。   主从模式也常被用于数据库系统中，提供高可用能力。当主节点发生故障或者失效时，从节点可以被选举为新的主节点，保证系统的可用性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis之主从复制">
+<meta property="og:url" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/index.html">
+<meta property="og:site_name" content="mqray&#39;s blog">
+<meta property="og:description" content="主从模式主从结构是常用的计算机系统架构，通常被用于分布式系统中，其中一个节点master拥有最新的数据，其他节点slave复制并同步主节点的数据。   主从结构中，主节点负责写入数据，并将这些数据同步到从节点中；从节点只能读取数据。主从节点键通过网络连接，完成数据同步。   主从模式也常被用于数据库系统中，提供高可用能力。当主节点发生故障或者失效时，从节点可以被选举为新的主节点，保证系统的可用性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis_master_slave_arch.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/master_slave_copy.png">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/master_slave_1_copy.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/master-_slave_second_copy.webp">
+<meta property="og:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/master_slave_slave.jpg">
+<meta property="article:published_time" content="2023-08-07T15:13:18.000Z">
+<meta property="article:modified_time" content="2023-10-30T16:35:07.229Z">
+<meta property="article:author" content="mqray">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/redis_master_slave_arch.png">
+  
+    <link rel="alternate" href="/atom.xml" title="mqray's blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mqray&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://mqrayblog.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-redis之主从复制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="article-date">
+  <time class="dt-published" datetime="2023-08-07T15:13:18.000Z" itemprop="datePublished">2023-08-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/databases/">databases</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      redis之主从复制
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h2><p>主从结构是常用的计算机系统架构，通常被用于分布式系统中，其中一个节点<code>master</code>拥有最新的数据，其他节点<code>slave</code>复制并同步主节点的数据。  </p>
+<p>主从结构中，主节点负责写入数据，并将这些数据同步到从节点中；从节点只能读取数据。主从节点键通过网络连接，完成数据同步。  </p>
+<p>主从模式也常被用于数据库系统中，提供高可用能力。当主节点发生故障或者失效时，从节点可以被选举为新的主节点，保证系统的可用性。 </p>
+<img src="./redis之主从复制/redis_master_slave_arch.png">  
+
+<h3 id="主从模式的优点"><a href="#主从模式的优点" class="headerlink" title="主从模式的优点"></a>主从模式的优点</h3><ol>
+<li>负载均衡：读写分离：提高服务器的性能。</li>
+<li>数据冗余：主从复制实现了数据的热备份，是持久化之外的数据冗余手段。</li>
+<li>高可用基石：主从模式是哨兵模式和集群模式的基础。</li>
+</ol>
+<h3 id="主从模式的缺点？"><a href="#主从模式的缺点？" class="headerlink" title="主从模式的缺点？"></a>主从模式的缺点？</h3><ol>
+<li>主从模式不具备自动容错和恢复功能，主节点故障，集群无法工作，可用性较低。从节点升为主节点需要人工手动干预。</li>
+</ol>
+<h2 id="为什么redis要使用主从模式？"><a href="#为什么redis要使用主从模式？" class="headerlink" title="为什么redis要使用主从模式？"></a>为什么redis要使用主从模式？</h2><p>在了解<code>redis</code>主从结构的原理前，先来了解一下分布式系统的理论基石 <code>CAP</code>原理：</p>
+<ol>
+<li>C, Consistent, 即一致性；</li>
+<li>A, Availability, 即可用性；</li>
+<li>P, Partition， 即分区容忍性。</li>
+</ol>
+<p>redis复制过程主从节点之间网络故障时，不能满足强一致性，故而只能满足AP。</p>
+<h3 id="如何使用主从复制？"><a href="#如何使用主从复制？" class="headerlink" title="如何使用主从复制？"></a>如何使用主从复制？</h3><p><code>redis 2.8</code>对主从复制功能进行了优化，早先的版本主从复制功能的实现包含两个步骤：</p>
+<ol>
+<li>同步： 用于将从服务器的服务器状态更新至主服务器当前的数据库状态。</li>
+<li>命令传播：用于将 主从同步过程中发生的主服务器的修改命令同步至从服务器，以防止主从数据库状态不一致的情况。</li>
+</ol>
+<p>slave of ip port<br>该命令的作用？</p>
+<h3 id="复制过程"><a href="#复制过程" class="headerlink" title="复制过程"></a>复制过程</h3><h4 id="主从服务器建立链接"><a href="#主从服务器建立链接" class="headerlink" title="主从服务器建立链接"></a>主从服务器建立链接</h4><p>从服务器作为客户端向主服务器发送<code>slaveof  master_ip master_port</code></p>
+<h4 id="旧版本复制功能的实现？"><a href="#旧版本复制功能的实现？" class="headerlink" title="旧版本复制功能的实现？"></a>旧版本复制功能的实现？</h4><p>旧版本主从复制包含<code>同步</code>和<code>命令传播</code>两个部分，如下是整体流程：<br><img src="./redis之主从复制/master_slave_copy.png"></p>
+<h4 id="旧版复制的缺陷？"><a href="#旧版复制的缺陷？" class="headerlink" title="旧版复制的缺陷？"></a>旧版复制的缺陷？</h4><p>主从复制过程有如下两个场景：</p>
+<ol>
+<li>初次复制： slave未同步过任何master，或者当前待复制的主服务器和上一次复制的主服务器不同</li>
+<li>断线后复制：处于命令传播阶段主从服务器因为网络故障而中断，而后网络恢复后继续同步数据库状态。<br>在旧版复制功能中，主从服务器发生网络故障后，主从服务器之间数据库状态不一致，slave会向主服务器发送<code>sync</code>命令，主服务器再次生成包含当前数据库状态的<code>rdb</code>文件，而后发送给从服务器，从服务器载入<code>rbd</code>文件后继续执行主服务器发来的写命令。<br>上述过程的缺陷是，已经同步过的主从节点断联之后，再次连接时需要主服务器生成包含其当前数据库状态的<code>rdb</code>文件，更为关键的是，此网络故障期间，主节点可能只执行了少数写命令，而需要付出全量更新的开销。</li>
+</ol>
+<h4 id="sync命令的开销"><a href="#sync命令的开销" class="headerlink" title="sync命令的开销"></a>sync命令的开销</h4><p><code>sync</code>命令，主从服务器需要执行以下动作：</p>
+<ol>
+<li>主服务器需要执行<code>bgsave</code>命令生成<code>rdb</code>文件，此操作会耗费主服务器的大量cpu、内存和磁盘io资源。</li>
+<li>主服务器将生成的<code>RDB</code>文件发送给从服务器，此操作耗费主从服务器的大量网络资源，并对主服务器的命令响应事件产生影响。</li>
+<li>从服务器载入收到的<code>rdb</code>文件前，无法处理读请求。</li>
+</ol>
+<h4 id="全量复制过程？"><a href="#全量复制过程？" class="headerlink" title="全量复制过程？"></a>全量复制过程？</h4><p>redis 2.8之前?</p>
+<p>sync</p>
+<h4 id="旧版本复制的缺陷？"><a href="#旧版本复制的缺陷？" class="headerlink" title="旧版本复制的缺陷？"></a>旧版本复制的缺陷？</h4><p>为了解决旧版本复制功能在处理断线重复复制时的低效问题，<code>redis 2.8</code>之后使用<code>psync</code>命令代替<code>sync</code>来执行复制时的同步操作。<br><code>psync</code>命令提供两种模式：</p>
+<ol>
+<li>完整重同步： 主服务器创建并发送rdb文件，向从服务器发送保存在缓冲区中的写命令进行同步。</li>
+<li>部分重同步：用于处理断线后的复制情况。断线重连后，如果情况允许，主服务器将主从断联期间执行的写命令发送给从服务器，从服务器接收并执行写命令，完成数据库状态同步。</li>
+</ol>
+<p>那么，<code>psync</code>的改进即是感知主从是断联场景，这是如何实现的呢？</p>
+<h3 id="部分重同步的实现？"><a href="#部分重同步的实现？" class="headerlink" title="部分重同步的实现？"></a>部分重同步的实现？</h3><p>部分重同步功能的实现依赖三个结构：</p>
+<ol>
+<li>主从服务器的复制偏移量 和从服务器的 复制偏移量。</li>
+<li>主服务器的复制积压缓冲区。</li>
+<li>服务器的运行id。<br>相应的定义在<code>server.h</code>，注意到，在<code>server</code>中，与主从复制相关的结构定义包含两部分，分别是主服务器配置和从服务器配置。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Replication (master) */</span></span><br><span class="line">    <span class="type">char</span> replid[CONFIG_RUN_ID_SIZE+<span class="number">1</span>];  <span class="comment">/* My current replication ID. */</span></span><br><span class="line">    <span class="type">char</span> replid2[CONFIG_RUN_ID_SIZE+<span class="number">1</span>]; <span class="comment">/* replid inherited from master*/</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> master_repl_offset;   <span class="comment">/* My current replication offset */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> second_replid_offset; <span class="comment">/* Accept offsets up to this for replid2. */</span></span><br><span class="line">    redisAtomic <span class="type">long</span> <span class="type">long</span> fsynced_reploff_pending;<span class="comment">/* Largest replication offset to</span></span><br><span class="line"><span class="comment">                                     * potentially have been fsynced, applied to</span></span><br><span class="line"><span class="comment">                                       fsynced_reploff only when AOF state is AOF_ON</span></span><br><span class="line"><span class="comment">                                       (not during the initial rewrite) */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> fsynced_reploff;      <span class="comment">/* Largest replication offset that has been confirmed to be fsynced */</span></span><br><span class="line">    <span class="type">int</span> slaveseldb;                 <span class="comment">/* Last SELECTed DB in replication output */</span></span><br><span class="line">    <span class="type">int</span> repl_ping_slave_period;     <span class="comment">/* Master pings the slave every N seconds */</span></span><br><span class="line">    replBacklog *repl_backlog;      <span class="comment">/* Replication backlog for partial syncs */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> repl_backlog_size;    <span class="comment">/* Backlog circular buffer size */</span></span><br><span class="line">    <span class="type">time_t</span> repl_backlog_time_limit; <span class="comment">/* Time without slaves after the backlog</span></span><br><span class="line"><span class="comment">                                       gets released. */</span></span><br><span class="line">    <span class="type">time_t</span> repl_no_slaves_since;    <span class="comment">/* We have no slaves since that time.</span></span><br><span class="line"><span class="comment">                                       Only valid if server.slaves len is 0. */</span></span><br><span class="line">    <span class="type">int</span> repl_min_slaves_to_write;   <span class="comment">/* Min number of slaves to write. */</span></span><br><span class="line">    <span class="type">int</span> repl_min_slaves_max_lag;    <span class="comment">/* Max lag of &lt;count&gt; slaves to write. */</span></span><br><span class="line">    <span class="type">int</span> repl_good_slaves_count;     <span class="comment">/* Number of slaves with lag &lt;= max_lag. */</span></span><br><span class="line">    <span class="type">int</span> repl_diskless_sync;         <span class="comment">/* Master send RDB to slaves sockets directly. */</span></span><br><span class="line">    <span class="type">int</span> repl_diskless_load;         <span class="comment">/* Slave parse RDB directly from the socket.</span></span><br><span class="line"><span class="comment">                                     * see REPL_DISKLESS_LOAD_* enum */</span></span><br><span class="line">    <span class="type">int</span> repl_diskless_sync_delay;   <span class="comment">/* Delay to start a diskless repl BGSAVE. */</span></span><br><span class="line">    <span class="type">int</span> repl_diskless_sync_max_replicas;<span class="comment">/* Max replicas for diskless repl BGSAVE</span></span><br><span class="line"><span class="comment">                                         * delay (start sooner if they all connect). */</span></span><br><span class="line">    <span class="type">size_t</span> repl_buffer_mem;         <span class="comment">/* The memory of replication buffer. */</span></span><br><span class="line">    <span class="built_in">list</span> *repl_buffer_blocks;       <span class="comment">/* Replication buffers blocks list</span></span><br><span class="line"><span class="comment">                                     * (serving replica clients and repl backlog) */</span></span><br></pre></td></tr></table></figure>
+
+<p>从服务器配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Replication (slave) */</span></span><br><span class="line">    <span class="type">char</span> *masteruser;               <span class="comment">/* AUTH with this user and masterauth with master */</span></span><br><span class="line">    sds masterauth;                 <span class="comment">/* AUTH with this password with master */</span></span><br><span class="line">    <span class="type">char</span> *masterhost;               <span class="comment">/* Hostname of master */</span></span><br><span class="line">    <span class="type">int</span> masterport;                 <span class="comment">/* Port of master */</span></span><br><span class="line">    <span class="type">int</span> repl_timeout;               <span class="comment">/* Timeout after N seconds of master idle */</span></span><br><span class="line">    client *master;     <span class="comment">/* Client that is master for this slave */</span></span><br><span class="line">    client *cached_master; <span class="comment">/* Cached master to be reused for PSYNC. */</span></span><br><span class="line">    <span class="type">int</span> repl_syncio_timeout; <span class="comment">/* Timeout for synchronous I/O calls */</span></span><br><span class="line">    <span class="type">int</span> repl_state;          <span class="comment">/* Replication status if the instance is a slave */</span></span><br><span class="line">    <span class="type">off_t</span> repl_transfer_size; <span class="comment">/* Size of RDB to read from master during sync. */</span></span><br><span class="line">    <span class="type">off_t</span> repl_transfer_read; <span class="comment">/* Amount of RDB read from master during sync. */</span></span><br><span class="line">    <span class="type">off_t</span> repl_transfer_last_fsync_off; <span class="comment">/* Offset when we fsync-ed last time. */</span></span><br><span class="line">    connection *repl_transfer_s;     <span class="comment">/* Slave -&gt; Master SYNC connection */</span></span><br><span class="line">    <span class="type">int</span> repl_transfer_fd;    <span class="comment">/* Slave -&gt; Master SYNC temp file descriptor */</span></span><br><span class="line">    <span class="type">char</span> *repl_transfer_tmpfile; <span class="comment">/* Slave-&gt; master SYNC temp file name */</span></span><br><span class="line">    <span class="type">time_t</span> repl_transfer_lastio; <span class="comment">/* Unix time of the latest read, for timeout */</span></span><br><span class="line">    <span class="type">int</span> repl_serve_stale_data; <span class="comment">/* Serve stale data when link is down? */</span></span><br><span class="line">    <span class="type">int</span> repl_slave_ro;          <span class="comment">/* Slave is read only? */</span></span><br><span class="line">    <span class="type">int</span> repl_slave_ignore_maxmemory;    <span class="comment">/* If true slaves do not evict. */</span></span><br><span class="line">    <span class="type">time_t</span> repl_down_since; <span class="comment">/* Unix time at which link with master went down */</span></span><br><span class="line">    <span class="type">int</span> repl_disable_tcp_nodelay;   <span class="comment">/* Disable TCP_NODELAY after SYNC? */</span></span><br><span class="line">    <span class="type">int</span> slave_priority;             <span class="comment">/* Reported in INFO and used by Sentinel. */</span></span><br><span class="line">    <span class="type">int</span> replica_announced;          <span class="comment">/* If true, replica is announced by Sentinel */</span></span><br><span class="line">    <span class="type">int</span> slave_announce_port;        <span class="comment">/* Give the master this listening port. */</span></span><br><span class="line">    <span class="type">char</span> *slave_announce_ip;        <span class="comment">/* Give the master this ip address. */</span></span><br><span class="line">    <span class="type">int</span> propagation_error_behavior; <span class="comment">/* Configures the behavior of the replica</span></span><br><span class="line"><span class="comment">                                     * when it receives an error on the replication stream */</span></span><br><span class="line">    <span class="type">int</span> repl_ignore_disk_write_error;   <span class="comment">/* Configures whether replicas panic when unable to</span></span><br><span class="line"><span class="comment">                                         * persist writes to AOF. */</span></span><br><span class="line">    <span class="comment">/* The following two fields is where we store master PSYNC replid/offset</span></span><br><span class="line"><span class="comment">     * while the PSYNC is in progress. At the end we&#x27;ll copy the fields into</span></span><br><span class="line"><span class="comment">     * the server-&gt;master client structure. */</span></span><br><span class="line">    <span class="type">char</span> master_replid[CONFIG_RUN_ID_SIZE+<span class="number">1</span>];  <span class="comment">/* Master PSYNC runid. */</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> master_initial_offset;           <span class="comment">/* Master PSYNC offset. */</span></span><br><span class="line">    <span class="type">int</span> repl_slave_lazy_flush;          <span class="comment">/* Lazy FLUSHALL before loading DB? */</span></span><br><span class="line">    <span class="comment">/* Synchronous replication. */</span></span><br><span class="line">    <span class="built_in">list</span> *clients_waiting_acks;         <span class="comment">/* Clients waiting in WAIT or WAITAOF. */</span></span><br><span class="line">    <span class="type">int</span> get_ack_from_slaves;            <span class="comment">/* If true we send REPLCONF GETACK. */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="复制偏移量"><a href="#复制偏移量" class="headerlink" title="复制偏移量"></a>复制偏移量</h4><p>执行复制的双方分别维护一个复制偏移量。[主服务器应当维护多个？]</p>
+<ul>
+<li>主服务器每次向从服务器传播N个字节的数据时，就将自己的复制偏移量+N </li>
+<li>从服务器每次收到主服务器的N个字节的数据时，将自身的复制偏移量+N<br>通过对比主从服务器的复制偏移量，可以得出主从节点是否处于一致状态。<br>如果偏移量一致，则主从服务器处于抑制状态；否则处于非一致状态。<br>注意，主服务器配置中复制偏移量为<code>master_repl_offset</code>，而从服务器中，</li>
+</ul>
+<p>关于下笔时的问题，主服务器中是否应当维护多个复制偏移量，答案是否定的，在源码定义中未找到对应的定义。可以理解为，一主多从时，服务器会将当前数据库状态传递给多个从服务器，并同步复制偏移量。<br>而<code>redis 4.0</code>之后，所有的从服务器都会从主服务器接收完全相同的复制量，但是由每队主从之间的网络不一定相同，所以需要从服务器自身维护其当前的复制偏移量。那么问题来了，如何保障下一次同步呢？<br>这里从节点之间的不一致会影响集群同步状态，主节点向从节点发送主从差别状态时就会变得繁琐。</p>
+<h4 id="复制积压缓冲区"><a href="#复制积压缓冲区" class="headerlink" title="复制积压缓冲区"></a>复制积压缓冲区</h4><p>复制积压缓冲区是由主服务器维护的一个<code>固定长度的FIFO</code>队列，默认大小为<code>1MB</code>。<br>当主服务器进行命令传播时，不仅仅会将写命令发送给从服务器，还会讲命令写入到复制积压缓冲区中。复制积压缓冲区会记录每个字节记记录相对应的复制偏移量。</p>
+<p>如果主从断联一段时间后，从服务器重新连上主服务器，则从服务器会通过<code>PSYNC</code>命令将自己的复制偏移量发送给主服务器，主服务器根据从服务器的复制偏移量决定接下来该如何同步。</p>
+<ol>
+<li>如果offset偏移量之后的数据依然存在于复制积压缓冲区中，那么主服务器将对从服务器执行部分重同步操作，即主服务器向从节点发送断联期间执行的命令。 <code>CONTINUE</code></li>
+<li>如果offset之后逇数据不存在复制积压缓冲区中，则主服务器对当前的从服务器执行完整的重同步操作。</li>
+</ol>
+<h5 id="复制积压缓冲区大小？"><a href="#复制积压缓冲区大小？" class="headerlink" title="复制积压缓冲区大小？"></a>复制积压缓冲区大小？</h5><p>默认为<code>1MB</code>，如果主服务器需要执行大量写命令或者主从断联时间较长，则可能需要考虑设置合理的复制积压缓冲区大小。<br>有这样的计算公式： <code>second * write_size_per_second</code><br>即对每秒写入数据量和主从断联恢复时长有一定的预估。<br>为了安全期间，还需要将复制积压缓冲区的大小进行<code>double</code>处理。</p>
+<h5 id="复制积压缓冲区实现"><a href="#复制积压缓冲区实现" class="headerlink" title="复制积压缓冲区实现"></a>复制积压缓冲区实现</h5><p>复制积压缓冲区由一个环形队列实现。的相关定义包含两部分:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">replBacklog *repl_backlog;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> repl_backlog_size;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>repl_backlog_size</code>： 指定复制积压缓冲区的大小；</li>
+<li><code>replBacklog *repl_backlog</code>: 所有从服务器共享的复制积压缓冲区。</li>
+</ol>
+<h4 id="服务器运行ID"><a href="#服务器运行ID" class="headerlink" title="服务器运行ID"></a>服务器运行ID</h4><p>实现部分重同步的过程需要用到服务器运行ID</p>
+<ul>
+<li>每个服务器(主从)都有自己的运行ID</li>
+<li>运行ID在服务器启动时生成，由40位随机十六进制的字符串组成。</li>
+</ul>
+<p>主从服务器初次进行同步时，主服务器将自身的运行ID传递给从服务器，从服务器将其保存至<br><code>master_replid</code>中，同时保存初次同步的<code>offset</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">主服务器配置</span><br><span class="line"><span class="type">char</span> replid[CONFIG_RUN_ID_SIZE+<span class="number">1</span>];  <span class="comment">/* My current replication ID. */</span></span><br><span class="line"><span class="type">char</span> replid2[CONFIG_RUN_ID_SIZE+<span class="number">1</span>]; <span class="comment">/* replid inherited from master*/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">从服务器配置</span><br><span class="line"><span class="type">char</span> master_replid[CONFIG_RUN_ID_SIZE+<span class="number">1</span>];  <span class="comment">/* Master PSYNC runid. */</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> master_initial_offset;           <span class="comment">/* Master PSYNC offset. */</span></span><br></pre></td></tr></table></figure>
+<p>主从重连时，从服务器向当前连接的主服务器发送之前保存的运行ID，如果匹配且offset任保存在主服务器的复制积压缓冲区中，则执行部分重同步。若不再则执行完整重同步；否则执行完整重同步操作。</p>
+<h3 id="PSYNC实现"><a href="#PSYNC实现" class="headerlink" title="PSYNC实现"></a>PSYNC实现</h3><h4 id="PSYNC的调用方式"><a href="#PSYNC的调用方式" class="headerlink" title="PSYNC的调用方式"></a>PSYNC的调用方式</h4><ol>
+<li>从服务器未复制过任何主服务器，或者执行过<code>slave no one</code>，则从服务器再执行第一次复制时将向主服务器发送<code>PSYNC ? -1</code>，主动向主服务器请求完整重同步。</li>
+<li>已复制过，则开始新的复制时向主服务器发送<code>PSYNC &lt;runid&gt; &lt;offset&gt;</code>， 主服务器判断进行何种操作。</li>
+</ol>
+<p>主服务器有三种响应：</p>
+<ol>
+<li>返回<code>+FULLSYNC &lt;runid&gt; &lt;offset&gt;</code> 回复，则表示主从服务器之间将进行完整重同步过程；</li>
+<li>返回<code>+CONTINUE</code>，则主从服务器之间将执行部分重同步操作，从服务器将等待主服务器发送复制积压缓冲区中堆积的写命令，接收后执行即可。</li>
+<li>返回<code>-ERR</code>，则表示主服务器版本低于<code>redis 2.8</code>无法识别<code>PSYNC</code>命令。从服务器将向主服务器发送<code>SYNC</code>命令，执行完整同步过程。</li>
+</ol>
+<h4 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h4><img src="./redis之主从复制/master_slave_1_copy.webp">
+<img src="./redis之主从复制/master-_slave_second_copy.webp">
+
+
+<h4 id="心跳检测"><a href="#心跳检测" class="headerlink" title="心跳检测"></a>心跳检测</h4><p>心跳检测是指，在命令传播阶段，从服务器会以默认每秒一次的频率向服务器发送命令：<br><code>replconf ack &lt;replication_offset&gt;</code>， <code>replication_offset</code>是从服务器当前的复制偏移量。<br>上述命令包含三个作用：</p>
+<ol>
+<li>检测主从服务器之间的网络连接状态。</li>
+<li>辅助实现<code>min-slaves</code>选项。</li>
+<li>检测命令丢失。</li>
+</ol>
+<h5 id="检测主从网络连接状态"><a href="#检测主从网络连接状态" class="headerlink" title="检测主从网络连接状态"></a>检测主从网络连接状态</h5><p>如果主服务器超过一秒钟未收到从服务器发来的<code>replconf ack</code>命令，那么服务器则知道两者的网络连接出问题了。<br>在主服务器上执行<code>info replication</code>命令，tag栏能反映出当前从服务器最后一次向主服务器发送<code>replconf ack</code>距此时过了多久：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">182.168.106.129:6379&gt; info replication</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Replication</span></span><br><span class="line">role:master</span><br><span class="line">connected_slaves:0</span><br><span class="line">master_failover_state:no-failover</span><br><span class="line">master_replid:637b9e49e28c5c17d2a4d43abd7cea4434cc91ae</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:0</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:0</span><br><span class="line">repl_backlog_histlen:0</span><br></pre></td></tr></table></figure>
+<p>注意上述返回中从节点数为0是因为本人所使用的redis的模式为集群模式。在后续内容中将补充redis的架构模式。</p>
+<h5 id="辅助实现min-slaves选项"><a href="#辅助实现min-slaves选项" class="headerlink" title="辅助实现min-slaves选项"></a>辅助实现<code>min-slaves</code>选项</h5><p>redis中如下两个配置可以防止主服务器在不安全的情况下执行写命令。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">min-slaves-to-write <span class="number">3</span></span><br><span class="line">min-slaves-max-lag <span class="number">10</span></span><br></pre></td></tr></table></figure>
+<p>分别对应<code>server</code>中的配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> repl_min_slaves_to_write;   <span class="comment">/* Min number of slaves to write. */</span></span><br><span class="line">   <span class="type">int</span> repl_min_slaves_max_lag;</span><br></pre></td></tr></table></figure>
+<p>其含义为：在从服务器少于3个或者三个从服务器的延迟大于等于10秒时，主服务器将拒绝少执行命令。</p>
+<h5 id="检测命令丢失"><a href="#检测命令丢失" class="headerlink" title="检测命令丢失"></a>检测命令丢失</h5><p>如果因为网络故障，主服务器传播给从服务器的写命令半路丢失，那么当从服务器向主服务器发送<code>replconf ack</code>时，主服务器将识别到主从之间的复制偏移量存在差异，而后主服务器就根据从服务器提交的偏移量，在复制积压缓冲区中找到从服务器缺少的数据，讲这些数据重新发给从服务器。</p>
+<p>乍看起来，这个过程和部分重同步非常相似，但是两者还是有些差异：<br>补发缺失数据操作在主从服务器之间没有断线时执行；而部分重同步发生在断线重连之后。</p>
+<p>注意到 <code>redis 2.8</code>之前没有<code>replconf ack</code>和 <code>复制积压缓冲区</code>，即使命令在传播过程中丢失，主从都不会意识到,主服务器也不会向从服务器补发丢失的数据。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><h4 id="无盘复制是什么？"><a href="#无盘复制是什么？" class="headerlink" title="无盘复制是什么？"></a>无盘复制是什么？</h4><p><code>redis</code>默认是磁盘复制，但是如果使用低速磁盘，复制操作会给主服务器带来较大压力。所以<code>redis 2.8.18</code>后开始支持<code>无盘复制</code>。在这种模式下，子进程直接将<code>rdb</code>文件通过网络发送给从服务器，不适用磁盘作为中间存储。</p>
+<h4 id="redis主从复制过程为什么选择rdb，而非aof"><a href="#redis主从复制过程为什么选择rdb，而非aof" class="headerlink" title="redis主从复制过程为什么选择rdb，而非aof"></a>redis主从复制过程为什么选择rdb，而非aof</h4><ul>
+<li><code>rdb</code>文件内容是经过压缩的二进制数据，同时<code>redis</code>针对不同的数据类型做了针对性优化，文件较小。而<code>aof</code>文件记录的是每一次写操作的命令，写操作越多文件越大，而且包含对重复key的冗余操作。在主从全量同步时，传输<code>rdb</code>文件可以降低对主从服务器的网络带宽开销。从库在加载<code>RDB</code>文件时，文件小，读取快。同时从库按照rdb协议解析还原数据即可。而<code>aof</code>需要依次重放每个写命令，恢复速度比<code>rdb</code>慢很多。</li>
+<li>假设使用<code>AOF</code>做全量复制，则服务器必须打开<code>aof</code>功能，必须选择文件刷盘的策略，选择不当会严重影响<code>redis</code>性能。而<code>RDB</code>只有在需要定时备份和主从全量复制时才会触发，生成快照。在很多丢失数据不敏感的业务场景，其实是不需要开启<code>AOF</code>的。</li>
+</ul>
+<h4 id="如何理解主-从-从模式"><a href="#如何理解主-从-从模式" class="headerlink" title="如何理解主-从-从模式"></a>如何理解主-从-从模式</h4><p>如果是主从模式，一主多从的情况下，如果多个从服务器向主服务器请求全量复制，在主库中需要完成多次<code>fork</code>子进程生成<code>RDB</code>文件，进行全量复制，fork操作会阻塞主线程处理正常请求。另外传输<code>RDB</code>文件也会占用主库网络带宽。<br>可以通过主-从-从模式建立多级主从模式，以缓解顶级主服务器的压力。<br><img src="./redis之主从复制/master_slave_slave.jpg">  </p>
+<h4 id="如何理解redis的高可用"><a href="#如何理解redis的高可用" class="headerlink" title="如何理解redis的高可用"></a>如何理解redis的高可用</h4><ol>
+<li>数据不能丢失或尽量减少丢失。</li>
+<li>redis服务不中断。<br>相对应的，第一点由<code>持久化机制aof和rdb</code>保障；第二点则要求<code>redis</code>不能单点部署。</li>
+</ol>
+<h4 id="主从不一致的原因？"><a href="#主从不一致的原因？" class="headerlink" title="主从不一致的原因？"></a>主从不一致的原因？</h4><ol>
+<li>主从网络时延大&#x2F;断联</li>
+<li>从库收到主库发来的命令，但从库正在执行阻塞式命令，如<code>hgetall</code>。</li>
+</ol>
+<h3 id="redis-主从模式如何选主？"><a href="#redis-主从模式如何选主？" class="headerlink" title="redis 主从模式如何选主？"></a>redis 主从模式如何选主？</h3><p>在主从模式中，主节点故障后，需要人工干预将从节点设置为主节点，同时还需要通知应用方更新主节点地址。故而有了另一种架构模式：<code>哨兵模式</code></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a target="_blank" rel="noopener" href="https://pdai.tech/md/db/nosql-redis/db-redis-x-copy.html">1. redis复制</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/better-farther-world2099/articles/16159844.html">2. 详解Redis 主从复制原理</a><br><a target="_blank" rel="noopener" href="https://www.51cto.com/article/640170.html">3. </a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/John_Like_Girl/article/details/107161725">4. Redis主从模式的优缺点</a><br><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2018/07/cap.html">5. CAP 定理的含义</a><br><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/272852">6. 极客时间：主从库如何实现数据一致</a><br><a target="_blank" rel="noopener" href="https://z.itpub.net/article/detail/61F53FE9A1487984804DB48AAB9EF262">7. redis主从</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mqrayblog.cn/2023/08/07/redis%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" data-id="clod4fl1w000kofove0795kto" data-title="redis之主从复制" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/17/redis%E4%B9%8B%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          redis之哨兵机制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/05/redis%E4%B9%8B%E5%AE%A2%E6%88%B7%E7%AB%AF/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">redis之客户端</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/coding/">coding</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/databases/">databases</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sth/" rel="tag">sth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E9%9A%9C/" rel="tag">排障</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">源码阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/redis/" style="font-size: 20px;">redis</a> <a href="/tags/spring/" style="font-size: 14px;">spring</a> <a href="/tags/sth/" style="font-size: 12px;">sth</a> <a href="/tags/%E6%8E%92%E9%9A%9C/" style="font-size: 10px;">排障</a> <a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 16px;">源码阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/31/spring%E4%B9%8Bioc/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/31/%E5%BB%BA%E7%AB%99/">github + hexo建站[待补充]</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/17/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B3/">springboot源码之启动流程3</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/12/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B2/">springboot源码之启动流程2</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/10/springboot%E6%BA%90%E7%A0%81%E4%B9%8B%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B1/">springboot源码之启动流程1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 mqray<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
